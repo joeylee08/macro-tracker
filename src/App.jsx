@@ -3,27 +3,22 @@ import Home from './pages/home';
 import Today from './pages/today';
 import Menu from './pages/menu';
 import History from './pages/history';
+import Friends from './pages/friends';
 import Error from './pages/error';
 
 function App() {
 
-  const routes = (
-    <>
-      <Route path='/' element={<Home />} />
-      <Route path='/today' element={<Today />} />
-      <Route path='/menu' element={<Menu />} />
-      <Route path='/history' element={<History />} />
-      <Route path='/friends' element={<Friends />} />
-    </>
-  )
-
   return (
-    <>
+    <BrowserRouter>
       <Routes>
-        {routes}
-        <Route path="/:error" element={<Error />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/today' element={<Today />} />
+        <Route path='/menu' element={<Menu />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/friends' element={<Friends />} />
+        <Route path="*" element={<Error />} />
       </Routes>
-    </>
+    </BrowserRouter>
   )
 }
 
