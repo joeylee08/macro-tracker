@@ -36,5 +36,6 @@ function validateData(data, modelType) {
 //if they keep all the macros but don't enter anything, it will be initialized to 0
 
 //the empty ingredients array will be there independently of user interaction
+//ingredient structure will be validated as they are added
 
 export { validateData };
