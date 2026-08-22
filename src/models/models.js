@@ -44,8 +44,9 @@ const userFoodModel = {
 }
 
 const ingredientModel = {
-  foodId: 'number',
-  quantity: 'number'
+    foodType: 'string',
+    foodId: 'number',
+    quantity: 'number'
 }
 
 export { userModel, mealModel, globalFoodModel, userFoodModel, ingredientModel }
