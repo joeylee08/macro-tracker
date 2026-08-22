@@ -1,0 +1,10 @@
+Users will have a collection of pinned items
+
+pinnedItems: [
+  { type: 'meal', id: 2 },
+  { type: 'meal', id: 5 },
+  { type: 'globalFood', id: 3 },
+  { type: 'userFood', id: 7 }
+]
+
+This will function as a join table user_pins
