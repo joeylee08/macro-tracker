@@ -1,25 +1,24 @@
-import { foods, meals } from "../data/dummy";
-import FoodCard from "../components/foodcard"
+import { foods } from "../data/dummy";
+import PinnedFoods from "../components/pinned"
+import MyCollection from "../components/mycollection"
+import CreateFoodForm from "../components/createfoodform"
+import { useState } from "react";
+
 
 const currentUserId = 1
 
 const Menu = () => {
-    const myFoods = foods
-                        .filter(item => item.userId === currentUserId)
-                        .map(item => <FoodCard key={item.id} food={item}/>)
+    const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUserId))
+    const handleSetMyFoods = (newFood) => {
+        setMyFoods([...myFoods, newFood])
+    }
+
     return (
         <div id='menuPage'>
             <h1>Your Personalized Menu</h1>
-            <p>Here are all of your foods.</p>
-            <div className='myFoods' id='pinned'>
-                PENIS
-            </div>
-            <div className='myFoods'>
-                {myFoods}
-            </div>
-            <div className='createEntry'>
-                ENTRY FORM HERE.
-            </div>
+            <PinnedFoods/>
+            <MyCollection myFoods={myFoods} />
+            <CreateFoodForm onAddFood={handleSetMyFoods}/>
         </div>
     )
 }
