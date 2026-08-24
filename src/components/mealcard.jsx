@@ -9,23 +9,31 @@ const MealCard = ({ meal, myFoods }) => {
         sodium: 0
     }
 
-    const calculateMacros = (meal) => {
-        for (const item in ingredients) {
-            const currentFoodId = ingredients[item].foodId
-            const quantity = ingredients[item].quantity
-            const food = myFoods.find(food => food.id === currentFoodId)
-            
+    const calculateMacros = () => {
+        for (const { foodId, quantity } of ingredients) {
+            const food = myFoods.find(food => food.id === foodId)
+
+            if (!food) {
+                console.error('Food not found.')
+                return
+            }
+
+            for (const macro in macros) {
+                macros[macro] += (food[macro] * quantity)
+            }
         }
     }
+
+    calculateMacros()
 
     return (
         <div className='foodCard'>
             <h3>{meal.name}</h3>
-            <p>{meal.cal} Calories</p>
-            <p>{meal.protein}g Protein</p>
-            <p>{meal.carb}g Carbs</p>
-            <p>{meal.fat}g Fat</p>
-            <p>{meal.sodium}mg Sodium</p>
+            <p>{macros.cal} Calories</p>
+            <p>{macros.protein}g Protein</p>
+            <p>{macros.carb}g Carbs</p>
+            <p>{macros.fat}g Fat</p>
+            <p>{macros.sodium}mg Sodium</p>
         </div>
     )
 }
