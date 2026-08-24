@@ -21,7 +21,7 @@ const Menu = () => {
     return (
         <div id='menuPage'>
             <h1>Your Personalized Menu</h1>
-            <Meals myMeals={myMeals} onAddMeal={handleSetMyMeals}/>
+            <Meals currentUserId={currentUserId} myMeals={myMeals} onAddMeal={handleSetMyMeals}/>
             <MyCollection myFoods={myFoods} />
             <CreateFoodForm onAddFood={handleSetMyFoods}/>
         </div>
