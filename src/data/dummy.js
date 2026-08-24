@@ -30,7 +30,7 @@ const foods= [
     {id: 9, userId: 1, name: 'Avocado', servingSize: 1, servingUnit: 'piece', cal: 240, protein: 3, carb: 13, fat: 22, sodium: 10},
     {id: 10, userId: 1, name: 'Quinoa', servingSize: 0.5, servingUnit: 'cup', cal: 111, protein: 4.1, carb: 19.7, fat: 1.8, sodium: 7},
     {id: 11, userId: 1, name: 'Wheat Tortilla', servingSize: 1, servingUnit: 'piece', cal: 120, protein: 4, carb: 21, fat: 3.5, sodium: 420},
-    {id: 12, userId: 1, ame: 'Corn Tortilla', servingSize: 1, servingUnit: 'piece', cal: 80, protein: 2, carb: 16, fat: 0.5, sodium: 35},
+    {id: 12, userId: 1, name: 'Corn Tortilla', servingSize: 1, servingUnit: 'piece', cal: 80, protein: 2, carb: 16, fat: 0.5, sodium: 35},
     {id: 13, userId: 1, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
     {id: 14, userId: 1, name: 'Tofu', servingSize: 3, servingUnit: 'oz', cal: 60, protein: 6, carb: 2, fat: 3, sodium: 10},
 ]

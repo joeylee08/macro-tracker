@@ -57,25 +57,46 @@ p {
 #menuPage {
   margin: 0 auto;
   width: 90%;
-  border: black;
-  background-color: gray;
+  border: 5px solid black;
 }
 
 .myFoods {
   width: 95%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
 
 .foodCard {
-  width: 120px;
-  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 170px;
+  height: 185px;
   border: 5px solid black;
+  border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.foodCard h3 {
+  line-height: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0.2rem;
+}
+
+.foodCard p {
+  line-height: 1.2rem;
+  font-size: 0.9rem;
+  margin: 0.15rem 0.2rem;
+}
+
 #bannerbox {
-  background-color: #3a3a3a;
+  background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,20 +119,6 @@ p {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-}
-
-#submit {
-  border: 1px solid #080808;
-  font-size: 1.1rem;
-  height: 2.2rem;
-  width: 8rem;
-  background-color: white;
-  border-radius: 5px;
-}
-
-#submit:hover {
-  background-color: RGBA(0, 128, 0, 0.4);
-  color: white;
 }
 
 .footer {
