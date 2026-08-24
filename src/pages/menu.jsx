@@ -11,6 +11,9 @@ const Menu = () => {
         <div id='menuPage'>
             <h1>Your Personalized Menu</h1>
             <p>Here are all of your foods.</p>
+            <div className='myFoods' id='pinned'>
+                PENIS
+            </div>
             <div className='myFoods'>
                 {myFoods}
             </div>
