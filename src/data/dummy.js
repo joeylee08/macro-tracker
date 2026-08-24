@@ -18,25 +18,22 @@ const meals = [
     {id: 6, name: 'Turkey Breakfast Burrito', userId: 1, ingredients: []},
 ]
 
-const globalFoods = [
-    {id: 1, name: 'Chicken Breast', servingSize: 4, servingUnit: 'oz', cal: 187, protein: 35, carb: 0, fat: 4, sodium: 84},
-    {id: 2, name: 'Canned Salmon', servingSize: 3, servingUnit: 'oz', cal: 90, protein: 18, carb: 0, fat: 2, sodium: 230},
-    {id: 3, name: 'Egg', servingSize: 1, servingUnit: 'piece', cal: 72, protein: 6.3, carb: 0.4, fat: 4.8, sodium: 71},
-    {id: 4, name: '2% Milk', servingSize: 8, servingUnit: 'oz', cal: 122, protein: 8.1, carb: 12, fat: 4.6, sodium: 115},
-    {id: 5, name: 'Oatmeal', servingSize: 0.5, servingUnit: 'cup', cal: 150, protein: 5, carb: 27, fat: 2.5, sodium: 0},
-    {id: 6, name: 'Peanut Butter', servingSize: 2, servingUnit: 'tbsp', cal: 180, protein: 8, carb: 7, fat: 16, sodium: 70},
-    {id: 7, name: 'Honey', servingSize: 1, servingUnit: 'tbsp', cal: 70, protein: 0, carb: 17, fat: 0, sodium: 0},
-    {id: 8, name: 'Banana', servingSize: 1, servingUnit: 'piece', cal: 105, protein: 1.3, carb: 27, fat: 0.4, sodium: 1},
-    {id: 9, name: 'Avocado', servingSize: 1, servingUnit: 'piece', cal: 240, protein: 3, carb: 13, fat: 22, sodium: 10},
-    {id: 10, name: 'Quinoa', servingSize: 0.5, servingUnit: 'cup', cal: 111, protein: 4.1, carb: 19.7, fat: 1.8, sodium: 7},
-    {id: 11, name: 'Wheat Tortilla', servingSize: 1, servingUnit: 'piece', cal: 120, protein: 4, carb: 21, fat: 3.5, sodium: 420},
-    {id: 12, name: 'Corn Tortilla', servingSize: 1, servingUnit: 'piece', cal: 80, protein: 2, carb: 16, fat: 0.5, sodium: 35},
-    {id: 13, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
-    {id: 14, name: 'Tofu', servingSize: 3, servingUnit: 'oz', cal: 60, protein: 6, carb: 2, fat: 3, sodium: 10},
+const foods= [
+    {id: 1, userId: 1, name: 'Chicken Breast', servingSize: 4, servingUnit: 'oz', cal: 187, protein: 35, carb: 0, fat: 4, sodium: 84},
+    {id: 2, userId: 1, name: 'Canned Salmon', servingSize: 3, servingUnit: 'oz', cal: 90, protein: 18, carb: 0, fat: 2, sodium: 230},
+    {id: 3, userId: 1, name: 'Egg', servingSize: 1, servingUnit: 'piece', cal: 72, protein: 6.3, carb: 0.4, fat: 4.8, sodium: 71},
+    {id: 4, userId: 1, name: '2% Milk', servingSize: 8, servingUnit: 'oz', cal: 122, protein: 8.1, carb: 12, fat: 4.6, sodium: 115},
+    {id: 5, userId: 1, name: 'Oatmeal', servingSize: 0.5, servingUnit: 'cup', cal: 150, protein: 5, carb: 27, fat: 2.5, sodium: 0},
+    {id: 6, userId: 1, name: 'Peanut Butter', servingSize: 2, servingUnit: 'tbsp', cal: 180, protein: 8, carb: 7, fat: 16, sodium: 70},
+    {id: 7, userId: 1, name: 'Honey', servingSize: 1, servingUnit: 'tbsp', cal: 70, protein: 0, carb: 17, fat: 0, sodium: 0},
+    {id: 8, userId: 1, name: 'Banana', servingSize: 1, servingUnit: 'piece', cal: 105, protein: 1.3, carb: 27, fat: 0.4, sodium: 1},
+    {id: 9, userId: 1, name: 'Avocado', servingSize: 1, servingUnit: 'piece', cal: 240, protein: 3, carb: 13, fat: 22, sodium: 10},
+    {id: 10, userId: 1, name: 'Quinoa', servingSize: 0.5, servingUnit: 'cup', cal: 111, protein: 4.1, carb: 19.7, fat: 1.8, sodium: 7},
+    {id: 11, userId: 1, name: 'Wheat Tortilla', servingSize: 1, servingUnit: 'piece', cal: 120, protein: 4, carb: 21, fat: 3.5, sodium: 420},
+    {id: 12, userId: 1, ame: 'Corn Tortilla', servingSize: 1, servingUnit: 'piece', cal: 80, protein: 2, carb: 16, fat: 0.5, sodium: 35},
+    {id: 13, userId: 1, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
+    {id: 14, userId: 1, name: 'Tofu', servingSize: 3, servingUnit: 'oz', cal: 60, protein: 6, carb: 2, fat: 3, sodium: 10},
 ]
 
-const userFoods = [
 
-]
-
-export { users, meals, globalFoods, userFoods }
+export { users, meals, foods }
