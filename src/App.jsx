@@ -4,7 +4,7 @@ import Menu from './pages/menu';
 import History from './pages/history';
 import Friends from './pages/friends';
 import Error from './pages/error';
-import NavBar from "../components/NavBar"
+import NavBar from "./components/NavBar"
 
 function App() {
 
