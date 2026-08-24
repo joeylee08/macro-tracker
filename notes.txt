@@ -9,3 +9,6 @@ pinnedItems: [
 
 This will function as a join table user_pins
 This also allows the 'pinned' status to live with the user, not the ingredient
+
+All ingredients should be sorted alphabetically
+

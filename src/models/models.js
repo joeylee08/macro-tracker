@@ -44,7 +44,6 @@ const userFoodModel = {
 }
 
 const ingredientModel = {
-    foodType: 'string',
     foodId: 'number',
     quantity: 'number'
 }

@@ -10,12 +10,11 @@ const users = [
 ]
 
 const meals = [
-    {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: []},
-    {id: 2, name: 'Chicken Avocado Wrap', userId: 1, ingredients: []},
-    {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: []},
-    {id: 4, name: 'Salmon Quinoa Kimchi Bowl', userId: 1, ingredients: []},
-    {id: 5, name: 'Chicken Teriyaki Bowl', userId: 1, ingredients: []},
-    {id: 6, name: 'Turkey Breakfast Burrito', userId: 1, ingredients: []},
+    {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 5, quantity: 1}, {foodId: 6, quantity: 1}, {foodId: 7, quantity: 1}]},
+    {id: 2, name: 'Chicken Avocado Wrap', userId: 1, ingredients: [{foodId: 1, quantity: 0.675}, {foodId: 9, quantity: 0.167}, {foodId: 12, quantity: 2}]},
+    {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, quantity: 2}, {foodId: 9, quantity: 0.167}, {foodId: 12, quantity: 2}]},
+    {id: 4, name: 'Salmon Quinoa Kimchi Bowl', userId: 1, ingredients: [{foodId: 2, quantity: 2}, {foodId: 10, quantity: 1}, {foodId: 15, quantity: 1}]},
+    {id: 5, name: 'Chicken Teriyaki Bowl', userId: 1, ingredients: [{foodId: 1, quantity: 0.675}, {foodId: 10, quantity: 1}]},
 ]
 
 const foods= [
@@ -33,6 +32,7 @@ const foods= [
     {id: 12, userId: 1, name: 'Corn Tortilla', servingSize: 1, servingUnit: 'piece', cal: 80, protein: 2, carb: 16, fat: 0.5, sodium: 35},
     {id: 13, userId: 1, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
     {id: 14, userId: 1, name: 'Tofu', servingSize: 3, servingUnit: 'oz', cal: 60, protein: 6, carb: 2, fat: 3, sodium: 10},
+    {id: 15, userId: 1, name: 'Kimchi', servingSize: 0.5, servingUnit: 'cup', cal: 20, protein: 1, carb: 3, fat: 0, sodium: 300},
 ]
 
 
