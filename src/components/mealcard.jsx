@@ -11,6 +11,7 @@ const MealCard = ({ meal, myFoods }) => {
 
     const calculateMacros = () => {
         for (const { foodId, quantity } of ingredients) {
+   
             const food = myFoods.find(food => food.id === foodId)
 
             if (!food) {
@@ -29,11 +30,11 @@ const MealCard = ({ meal, myFoods }) => {
     return (
         <div className='foodCard'>
             <h3>{meal.name}</h3>
-            <p>{macros.cal} Calories</p>
-            <p>{macros.protein}g Protein</p>
-            <p>{macros.carb}g Carbs</p>
-            <p>{macros.fat}g Fat</p>
-            <p>{macros.sodium}mg Sodium</p>
+            <p>{macros.cal.toFixed(1)} Calories</p>
+            <p>{macros.protein.toFixed(1)}g Protein</p>
+            <p>{macros.carb.toFixed(1)}g Carbs</p>
+            <p>{macros.fat.toFixed(1)}g Fat</p>
+            <p>{macros.sodium.toFixed(1)}mg Sodium</p>
         </div>
     )
 }
