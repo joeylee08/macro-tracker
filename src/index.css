@@ -65,7 +65,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   gap: 1rem;
 }
 
@@ -76,7 +76,7 @@ p {
   margin: 0.5rem;
   padding: 0.5rem;
   width: 170px;
-  height: 185px;
+  height: 170px;
   border: 5px solid black;
   border-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
@@ -86,13 +86,13 @@ p {
   line-height: 1.2rem;
   font-size: 1.2rem;
   font-weight: bold;
-  margin: 0 0 0.5rem 0.2rem;
+  margin: 0.2rem 0 0.4rem 0.2rem;
 }
 
 .foodCard p {
   line-height: 1.2rem;
   font-size: 0.9rem;
-  margin: 0.15rem 0.2rem;
+  margin: 0.1rem 0.2rem;
 }
 
 #bannerbox {
