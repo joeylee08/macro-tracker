@@ -74,11 +74,11 @@ p {
   flex-direction: column;
   justify-content: center;
   margin: 0.5rem;
-  padding: 0.5rem;
-  width: 170px;
-  height: 170px;
+  padding: 0.4rem;
+  width: 165px;
+  height: 165px;
   border: 5px solid black;
-  border-radius: 10px;
+  border-radius: 15px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
