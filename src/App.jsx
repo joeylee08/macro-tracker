@@ -4,11 +4,13 @@ import Menu from './pages/menu';
 import History from './pages/history';
 import Friends from './pages/friends';
 import Error from './pages/error';
+import NavBar from "../components/NavBar"
 
 function App() {
 
   return (
     <BrowserRouter>
+      <NavBar/>
       <Routes>
         <Route path='/' element={<Today />} />
         <Route path='/menu' element={<Menu />} />
