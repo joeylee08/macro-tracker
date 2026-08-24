@@ -8,8 +8,13 @@ const Meals = ({ myMeals, myFoods, onAddMeal, currentUserId }) => {
                             
     return (
         <div className='myFoods' id='pinned'>
-                <button className='createMealBtn' onClick={onAddMeal}>Create New Meal</button>
+            <div className='myFoods' id='buttonDiv'>
+                <button className='createBtn' id='createMealBtn' onClick={onAddMeal}>CREATE NEW MEAL</button>
+                <button className='createBtn' id='addItemBtn' onClick={() => console.log('penis')}>ADD FOOD ITEM</button>
+            </div>
+            <div className='myFoods' id='mealsDiv'>
                 {renderedMeals}
+            </div>
         </div>
     )
 }
