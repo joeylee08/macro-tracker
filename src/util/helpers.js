@@ -1,10 +1,9 @@
-import { userModel, mealModel, globalFoodModel, userFoodModel, ingredientModel } from '../models/models.js';
+import { userModel, mealModel, foodModel, ingredientModel } from '../models/models.js';
 
 const modelObj = {
     'user': userModel,
     'meal': mealModel,
-    'globalFood': globalFoodModel,
-    'userFood': userFoodModel,
+    'food': foodModel,
     'ingredient': ingredientModel
 }
 
@@ -30,7 +29,7 @@ function validateData(data, modelType) {
     return true
 }
 
-//when creating a new entry for globalFood or userFood, the user will have the 
+//when creating a new entry for globalFood or food, the user will have the 
 //option of simply not entering macros they don't want to log
 
 //if they keep all the macros but don't enter anything, it will be initialized to 0

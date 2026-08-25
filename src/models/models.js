@@ -18,19 +18,7 @@ const mealModel = {
     ingredients: 'object'
 }
 
-const globalFoodModel = {
-    id: 'number',
-    name: 'string',
-    servingSize: 'number',
-    servingUnit: 'string',
-    cal: 'number',
-    protein: 'number',
-    carb: 'number',
-    fat: 'number',
-    sodium: 'number'
-}
-
-const userFoodModel = {
+const foodModel = {
     id: 'number',
     name: 'string',
     userId: 'number',
@@ -48,4 +36,4 @@ const ingredientModel = {
     quantity: 'number'
 }
 
-export { userModel, mealModel, globalFoodModel, userFoodModel, ingredientModel }
+export { userModel, mealModel, foodModel, ingredientModel }

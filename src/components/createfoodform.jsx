@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUserId }) => {
+const CreateFoodForm = ({ onAddFood, currentUserId, nextIndex }) => {
     const [formData, setFormData] = useState({
-        id: '',
+        id: nextIndex,
         name: '',
-        userId: '',
+        userId: currentUserId,
         servingSize: '',
         servingUnit: '',
         cal: '',
@@ -26,14 +27,31 @@ const CreateFoodForm = ({ onAddFood, currentUserId }) => {
     function handleSubmit(event) {
         event.preventDefault()
         //event.target.value gives number values as strings so convert
-        onAddFood(newFood)
+        const toNumbers = {
+            id: +formData.id,
+            name: formData.name,
+            userId: +formData.userId,
+            servingSize: +formData.servingSize,
+            servingUnit: formData.servingUnit,
+            cal: +formData.cal,
+            protein: +formData.protein,
+            carb: +formData.carb,
+            fat: +formData.fat,
+            sodium: +formData.sodium
+        }
+
+        const isValid = validateData(toNumbers, 'foodModel')
+        if (!isValid) return
+
+        onAddFood(toNumbers)
     }
+
     return (
         <form className='form' onChange={handleChange} onSubmit={handleSubmit}>
             <label htmlFor='name'>Name</label>
-            <input type='text' id='name' name='name' value={formData.name}></input>
+            <input type='text' id='name' name='name' value={formData.name} required minLength='1' maxLength='26'></input>
             <label htmlFor='servingSize'>Serving Size</label>
-            <input type='number' id='servingSize' name='servingSize' value={formData.servingSize}></input>
+            <input type='number' id='servingSize' name='servingSize' value={formData.servingSize} required min='.01' step='any'></input>
             <label htmlFor='servingUnit'>Serving Unit</label>
             <select id='servingUnit' name='servingUnit' value={formData.servingUnit}>
                 <option value='oz'>oz</option>
@@ -44,15 +62,18 @@ const CreateFoodForm = ({ onAddFood, currentUserId }) => {
                 <option value='piece'>piece</option>
             </select>
             <label htmlFor='cal'>Calories</label>
-            <input type='number' id='cal' name='cal' value={formData.cal}></input>
+            <input type='number' id='cal' name='cal' value={formData.cal} min='0' step='any'></input>
             <label htmlFor='protein'>Protein (g)</label>
-            <input type='number' id='protein' name='protein' value={formData.protein}></input>
+            <input type='number' id='protein' name='protein' value={formData.protein} min='0' step='any'></input>
             <label htmlFor='carb'>Carbs (g)</label>
-            <input type='number' id='carb' name='carb' value={formData.carb}></input>
+            <input type='number' id='carb' name='carb' value={formData.carb} min='0' step='any'></input>
             <label htmlFor='fat'>Fat (g)</label>
-            <input type='number' id='fat' name='fat' value={formData.fat}></input>
+            <input type='number' id='fat' name='fat' value={formData.fat} min='0' step='any'></input>
             <label htmlFor='sodium'>Sodium (mg)</label>
-            <input type='number' id='sodium' name='sodium' value={formData.sodium}></input>
+            <input type='number' id='sodium' name='sodium' value={formData.sodium} min='0' step='any'></input>
+            <button className='submitBtn'>
+                SUBMIT
+            </button>
         </form>
     )
 }
