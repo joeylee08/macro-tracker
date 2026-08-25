@@ -130,13 +130,41 @@ p {
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: fixed;
+  background-color: 	#faf0e6;
   left: calc(50% - 10rem);
   top: calc(50% - 15rem);
-  width: 20rem;
+  width: 18rem;
   height: 30rem;
-  border: 2px solid black;
+  border: 2px solid #d9b99b;
   border-radius: 15px;
+  
+}
+
+.form input {
+  width: 12rem;
+  border: 2px solid black;
+  margin-bottom: 0.5rem;
+}
+
+.form label {
+  width: 12rem;
+  align-self: flex-start;
+  margin-left: 2.7rem;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+.form select {
+  width: 8rem;
+  align-self: flex-start;
+  margin-left: 2.7rem;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
 }
 
 #bannerbox {
