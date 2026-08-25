@@ -10,7 +10,7 @@ const MealCard = ({ meal, myFoods }) => {
     }
 
     const calculateMacros = () => {
-        for (const { foodId, quantity } of ingredients) {
+        for (const { foodId, units } of ingredients) {
    
             const food = myFoods.find(food => food.id === foodId)
 
@@ -20,7 +20,7 @@ const MealCard = ({ meal, myFoods }) => {
             }
 
             for (const macro in macros) {
-                macros[macro] += (food[macro] * quantity)
+                macros[macro] += (food[macro] * units)
             }
         }
     }

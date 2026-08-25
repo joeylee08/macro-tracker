@@ -10,20 +10,20 @@ const users = [
 ]
 
 const meals = [
-    {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 5, quantity: 1}, {foodId: 6, quantity: 1}, {foodId: 7, quantity: 1}]},
-    {id: 2, name: 'Chicken Avocado Wrap', userId: 1, ingredients: [{foodId: 1, quantity: 0.675}, {foodId: 9, quantity: 0.167}, {foodId: 12, quantity: 2}]},
-    {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, quantity: 2}, {foodId: 9, quantity: 0.167}, {foodId: 12, quantity: 2}]},
-    {id: 4, name: 'Salmon Quinoa Kimchi Bowl', userId: 1, ingredients: [{foodId: 2, quantity: 2}, {foodId: 10, quantity: 1}, {foodId: 15, quantity: 1}]},
-    {id: 5, name: 'Chicken Teriyaki Bowl', userId: 1, ingredients: [{foodId: 1, quantity: 0.675}, {foodId: 10, quantity: 1}]},
+    {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 5, units: 1}, {foodId: 6, units: 2}, {foodId: 7, units: 1}]},
+    {id: 2, name: 'Chicken Avocado Wrap', userId: 1, ingredients: [{foodId: 1, units: 0.675}, {foodId: 9, units: 0.167}, {foodId: 12, units: 2}]},
+    {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, units: 2}, {foodId: 9, units: 0.167}, {foodId: 12, units: 2}]},
+    {id: 4, name: 'Salmon Quinoa Kimchi Bowl', userId: 1, ingredients: [{foodId: 2, units: 2}, {foodId: 10, units: 1}, {foodId: 15, units: 1}]},
+    {id: 5, name: 'Chicken Teriyaki Bowl', userId: 1, ingredients: [{foodId: 1, units: 0.675}, {foodId: 10, units: 1}]},
 ]
 
 const foods= [
-    {id: 1, userId: 1, name: 'Chicken Breast', servingSize: 4, servingUnit: 'oz', cal: 187, protein: 35, carb: 0, fat: 4, sodium: 84},
-    {id: 2, userId: 1, name: 'Canned Salmon', servingSize: 3, servingUnit: 'oz', cal: 90, protein: 18, carb: 0, fat: 2, sodium: 230},
+    {id: 1, userId: 1, name: 'Chicken Breast', servingSize: 1, servingUnit: 'oz', cal: 46.75, protein: 8.75, carb: 0, fat: 1, sodium: 21},
+    {id: 2, userId: 1, name: 'Canned Salmon', servingSize: 1, servingUnit: 'oz', cal: 30, protein: 6, carb: 0, fat: 0.67, sodium: 76.67},
     {id: 3, userId: 1, name: 'Egg', servingSize: 1, servingUnit: 'piece', cal: 72, protein: 6.3, carb: 0.4, fat: 4.8, sodium: 71},
     {id: 4, userId: 1, name: '2% Milk', servingSize: 8, servingUnit: 'oz', cal: 122, protein: 8.1, carb: 12, fat: 4.6, sodium: 115},
     {id: 5, userId: 1, name: 'Oatmeal', servingSize: 0.5, servingUnit: 'cup', cal: 150, protein: 5, carb: 27, fat: 2.5, sodium: 0},
-    {id: 6, userId: 1, name: 'Peanut Butter', servingSize: 2, servingUnit: 'tbsp', cal: 180, protein: 8, carb: 7, fat: 16, sodium: 70},
+    {id: 6, userId: 1, name: 'Peanut Butter', servingSize: 1, servingUnit: 'tbsp', cal: 90, protein: 4, carb: 3.5, fat: 8, sodium: 35},
     {id: 7, userId: 1, name: 'Honey', servingSize: 1, servingUnit: 'tbsp', cal: 70, protein: 0, carb: 17, fat: 0, sodium: 0},
     {id: 8, userId: 1, name: 'Banana', servingSize: 1, servingUnit: 'piece', cal: 105, protein: 1.3, carb: 27, fat: 0.4, sodium: 1},
     {id: 9, userId: 1, name: 'Avocado', servingSize: 1, servingUnit: 'piece', cal: 240, protein: 3, carb: 13, fat: 22, sodium: 10},
@@ -31,7 +31,7 @@ const foods= [
     {id: 11, userId: 1, name: 'Wheat Tortilla', servingSize: 1, servingUnit: 'piece', cal: 120, protein: 4, carb: 21, fat: 3.5, sodium: 420},
     {id: 12, userId: 1, name: 'Corn Tortilla', servingSize: 1, servingUnit: 'piece', cal: 80, protein: 2, carb: 16, fat: 0.5, sodium: 35},
     {id: 13, userId: 1, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
-    {id: 14, userId: 1, name: 'Tofu', servingSize: 3, servingUnit: 'oz', cal: 60, protein: 6, carb: 2, fat: 3, sodium: 10},
+    {id: 14, userId: 1, name: 'Tofu', servingSize: 1, servingUnit: 'oz', cal: 20, protein: 2, carb: 0.67, fat: 1, sodium: 3.33},
     {id: 15, userId: 1, name: 'Kimchi', servingSize: 0.5, servingUnit: 'cup', cal: 20, protein: 1, carb: 3, fat: 0, sodium: 300},
 ]
 
