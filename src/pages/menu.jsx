@@ -2,6 +2,7 @@ import { foods, meals } from "../data/dummy";
 import Meals from "../components/meals"
 import MyCollection from "../components/mycollection"
 import CreateFoodForm from "../components/createfoodform"
+import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
 
 
@@ -23,7 +24,8 @@ const Menu = () => {
             <h1>Your Personalized Menu</h1>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} onAddMeal={handleSetMyMeals}/>
             <MyCollection myFoods={myFoods} />
-            <CreateFoodForm onAddFood={handleSetMyFoods}/>
+            <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId}/>
+            <CreateMealForm onAddMeal={handleSetMyFoods} currentUserId={currentUserId}/>
         </div>
     )
 }

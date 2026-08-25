@@ -129,6 +129,16 @@ p {
   margin: 0.1rem 0.2rem;
 }
 
+.form {
+  position: fixed;
+  left: calc(50% - 10rem);
+  top: calc(50% - 15rem);
+  width: 20rem;
+  height: 30rem;
+  border: 2px solid black;
+  border-radius: 15px;
+}
+
 #bannerbox {
   background-color: white;
   display: flex;
