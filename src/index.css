@@ -128,7 +128,7 @@ p {
 .form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: fixed;
   background-color: 	#faf0e6;
@@ -138,7 +138,7 @@ p {
   height: 30rem;
   border: 2px solid #d9b99b;
   border-radius: 15px;
-  
+  padding-top: 1.8rem;
 }
 
 .form input {

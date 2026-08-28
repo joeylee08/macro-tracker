@@ -17,7 +17,6 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
 
     function handleChange(event) {
         const { name, value } = event.target
-
         setFormData(previousData => ({
             ...previousData,
             [name]: value

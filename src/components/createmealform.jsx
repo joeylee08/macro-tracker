@@ -8,28 +8,46 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         ingredients: []
     })
 
+    //use to set meal name only
     function handleMealChange(event) {
         const { name, value } = event.target
-        setMeal(meal)
+        setMeal(previousData => ({
+            ...previousData,
+            [name]: value
+        }))
     }
 
+    //ingredient model
     const [ingredient, setIngredient] = useState({
         foodId: null,
         units: 1
     })
 
+    //use to adjust ingredient parameters
     function handleIngredientChange(event) {
-        
+        const { name, value } = event.target
+        setIngredient(previous => ({
+            ...previous,
+            [name]: value
+        }))
     }
 
-    function handleSetIngredient(event) {
-        setIngredient(ingredient)
+    //set the meal with updated ingredients
+    function handleAddIngredient() {
+        const newIngredient = {
+            foodId: +ingredient.foodId,
+            units: +ingredient.units
+        }
+        setMeal(previous => ({
+            ...previous,
+            ingredients: [...previous.ingredients, newIngredient]
+        }))
     }
 
+    //submit completed meal
     function handleSubmit(event) {
         event.preventDefault()
-        onAddMeal()
-
+        onAddMeal(meal)
     }
 
     const ingredients = myFoods.map(food => 
@@ -46,8 +64,8 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
             </select>
             <label htmlFor='units'>Units</label>
             <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
-            <button className='formBtn'>Add Ingredient</button>
-            <button className='formBtn'>Save New Meal</button>
+            <button type='button' className='formBtn' onClick={handleAddIngredient}>Add Ingredient</button>
+            <button type='submit' className='formBtn'>Save New Meal</button>
         </form>
     )
 }
