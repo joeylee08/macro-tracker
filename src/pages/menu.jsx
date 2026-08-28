@@ -12,11 +12,13 @@ const Menu = () => {
     const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUserId))
     const handleSetMyFoods = (newFood) => {
         setMyFoods([...myFoods, newFood])
+        handleToggleFoodForm()
     }
 
     const [myMeals, setMyMeals] = useState(meals.filter(item => item.userId === currentUserId))
     const handleSetMyMeals = (newMeal) => {
         setMyMeals([...myMeals, newMeal])
+        handleToggleMealForm()
     }
 
     const [toggleFoodForm, setToggleFoodForm] = useState(false)
@@ -34,8 +36,8 @@ const Menu = () => {
             <h1>Your Personalized Menu</h1>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleFoodForm={handleToggleFoodForm} handleToggleMealForm={handleToggleMealForm} onAddMeal={handleSetMyMeals}/>
             <MyCollection myFoods={myFoods} />
-            {toggleFoodForm && <CreateFoodForm handleToggleFoodForm={handleToggleFoodForm} onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={myFoods.length - 1}/>}
-            {toggleMealForm && <CreateMealForm handleToggleMealForm={handleToggleMealForm} onAddMeal={handleSetMyMeals} currentUserId={currentUserId}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={myFoods.length - 1}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} currentUserId={currentUserId}/>}
         </div>
     )
 }

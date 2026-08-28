@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUserId, nextIndex }) => {
+const CreateFoodForm = ({ onAddFood, currentUserId, nextIndex, handleToggleFoodForm }) => {
     const [formData, setFormData] = useState({
         id: nextIndex,
         name: '',
