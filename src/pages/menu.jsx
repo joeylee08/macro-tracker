@@ -19,13 +19,23 @@ const Menu = () => {
         setMyMeals([...myMeals, newMeal])
     }
 
+    const [toggleFoodForm, setToggleFoodForm] = useState(false)
+    const handleToggleFoodForm = () => {
+        setToggleFoodForm(bool => !bool)
+    }
+
+    const [toggleMealForm, setToggleMealForm] = useState(false)
+    const handleToggleMealForm = () => {
+        setToggleMealForm(bool => !bool)
+    }
+
     return (
         <div id='menuPage'>
             <h1>Your Personalized Menu</h1>
-            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} onAddMeal={handleSetMyMeals}/>
+            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleFoodForm={handleToggleFoodForm} handleToggleMealForm={handleToggleMealForm} onAddMeal={handleSetMyMeals}/>
             <MyCollection myFoods={myFoods} />
-            <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={myFoods.length - 1}/>
-            <CreateMealForm onAddMeal={handleSetMyFoods} currentUserId={currentUserId}/>
+            {toggleFoodForm && <CreateFoodForm handleToggleFoodForm={handleToggleFoodForm} onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={myFoods.length - 1}/>}
+            {toggleMealForm && <CreateMealForm handleToggleMealForm={handleToggleMealForm} onAddMeal={handleSetMyMeals} currentUserId={currentUserId}/>}
         </div>
     )
 }

@@ -40,7 +40,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextIndex }) => {
             sodium: +formData.sodium
         }
 
-        const isValid = validateData(toNumbers, 'foodModel')
+        const isValid = validateData(toNumbers, 'food')
         if (!isValid) return
 
         onAddFood(toNumbers)
