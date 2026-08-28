@@ -10,7 +10,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
 
     function handleMealChange(event) {
         const { name, value } = event.target
-
+        setMeal(meal)
     }
 
     const [ingredient, setIngredient] = useState({
@@ -19,7 +19,11 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     })
 
     function handleIngredientChange(event) {
+        
+    }
 
+    function handleSetIngredient(event) {
+        setIngredient(ingredient)
     }
 
     function handleSubmit(event) {
@@ -33,15 +37,15 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     )
 
     return (
-        <form className='form' onChange={handleMealChange} onSubmit={handleSubmit}>
+        <form className='form' onSubmit={handleSubmit}>
             <label htmlFor='name'>Meal Name</label>
-            <input type='text' id='name' name='name' value={meal.name} required minLength='1' maxLength='26'></input>
+            <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='26'></input>
             <label htmlFor='ingredients'>Ingredients</label>
-            <select id='ingredients' name='ingredients'>
+            <select id='ingredients' name='foodId' value={ingredient.foodId} onChange={handleIngredientChange}>
                 {ingredients}
             </select>
             <label htmlFor='units'>Units</label>
-            <input type='number' id='units' name='units' required min='0.1' step='any'></input>
+            <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
         </form>
     )
 }
