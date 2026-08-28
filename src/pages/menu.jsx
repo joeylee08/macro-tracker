@@ -31,12 +31,14 @@ const Menu = () => {
         setToggleMealForm(bool => !bool)
     }
 
+    const nextIndex = Math.max(...myFoods.map(food => food.id), 0) + 1
+
     return (
         <div id='menuPage'>
             <h1>Your Personalized Menu</h1>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleFoodForm={handleToggleFoodForm} handleToggleMealForm={handleToggleMealForm} onAddMeal={handleSetMyMeals}/>
             <MyCollection myFoods={myFoods} />
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={myFoods.length - 1}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={nextIndex}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} currentUserId={currentUserId}/>}
         </div>
     )
