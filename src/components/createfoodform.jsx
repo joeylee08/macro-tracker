@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUserId, nextIndex }) => {
+const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
     const [formData, setFormData] = useState({
-        id: nextIndex,
+        id: nextFoodIndex,
         name: '',
         userId: currentUserId,
         servingSize: '',

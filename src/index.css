@@ -155,8 +155,16 @@ p {
   font-weight: bold;
 }
 
-.form select {
-  width: 8rem;
+.form select#servingUnit {
+  width: 6rem;
+  align-self: flex-start;
+  margin-left: 2.7rem;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+.form select#ingredients {
+  width: 12.5rem;
   align-self: flex-start;
   margin-left: 2.7rem;
   margin-bottom: 0.2rem;

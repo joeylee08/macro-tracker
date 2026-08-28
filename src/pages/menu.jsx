@@ -12,34 +12,34 @@ const Menu = () => {
     const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUserId))
     const handleSetMyFoods = (newFood) => {
         setMyFoods([...myFoods, newFood])
-        handleToggleFoodForm()
+        handleToggleForm('food')
     }
 
     const [myMeals, setMyMeals] = useState(meals.filter(item => item.userId === currentUserId))
     const handleSetMyMeals = (newMeal) => {
         setMyMeals([...myMeals, newMeal])
-        handleToggleMealForm()
+        handleToggleForm('meal')
     }
 
     const [toggleFoodForm, setToggleFoodForm] = useState(false)
-    const handleToggleFoodForm = () => {
-        setToggleFoodForm(bool => !bool)
-    }
-
     const [toggleMealForm, setToggleMealForm] = useState(false)
-    const handleToggleMealForm = () => {
-        setToggleMealForm(bool => !bool)
+
+    const handleToggleForm = (formType) => {
+        if (formType === 'food') setToggleFoodForm(bool => !bool)
+        else if (formType === 'meal') setToggleMealForm(bool => !bool)
     }
 
-    const nextIndex = Math.max(...myFoods.map(food => food.id), 0) + 1
+    //for manually assigning DB IDs to dummy data
+    const nextFoodIndex = Math.max(...myFoods.map(food => food.id), 0) + 1
+    const nextMealIndex = Math.max(...myMeals.map(meal => meal.id), 0) + 1
 
     return (
         <div id='menuPage'>
             <h1>Your Personalized Menu</h1>
-            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleFoodForm={handleToggleFoodForm} handleToggleMealForm={handleToggleMealForm} onAddMeal={handleSetMyMeals}/>
+            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm}/>
             <MyCollection myFoods={myFoods} />
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextIndex={nextIndex}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} currentUserId={currentUserId}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} currentUserId={currentUserId} nextMealIndex={nextMealIndex} myFoods={myFoods}/>}
         </div>
     )
 }
