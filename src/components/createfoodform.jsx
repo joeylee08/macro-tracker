@@ -71,7 +71,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
             <input type='number' id='fat' name='fat' value={formData.fat} min='0' step='any'></input>
             <label htmlFor='sodium'>Sodium (mg)</label>
             <input type='number' id='sodium' name='sodium' value={formData.sodium} min='0' step='any'></input>
-            <button className='submitBtn'>
+            <button className='formBtn'>
                 SUBMIT
             </button>
         </form>

@@ -171,6 +171,18 @@ p {
   font-weight: bold;
 }
 
+.formBtn {
+  width: 8rem;
+  height: 2em;
+  border-color: #d9b99b;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.formBtn:hover {
+  border-color: black;
+}
+
 #bannerbox {
   background-color: white;
   display: flex;

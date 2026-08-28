@@ -46,6 +46,8 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
             </select>
             <label htmlFor='units'>Units</label>
             <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
+            <button className='formBtn'>Add Ingredient</button>
+            <button className='formBtn'>Save New Meal</button>
         </form>
     )
 }
