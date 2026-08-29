@@ -20,7 +20,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     //ingredient model
     const [ingredient, setIngredient] = useState({
         foodId: 0,
-        units: 0
+        units: 1
     })
 
     //use to adjust ingredient parameters
@@ -56,13 +56,20 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         <option key={food.id} value={food.id}>{food.name} ({food.servingSize} {food.servingUnit})</option>
     )
 
-    // const dashboard = meal.ingredients.map(item => {
-    //     const food = myFoods.find(food => food.id === item.foodId)
+    const dashboard = meal.ingredients.map((item, index) => {
+        const food = myFoods.find(food => food.id === item.foodId)
 
-    //     return (
-    //         <p>{food.name} {food.servingSize} {food.servingUnit}</p>
-    //     )
-    // })
+        if (!food) {
+            console.error(`Food not found for foodId ${item.foodId}.`)
+            return null
+        }
+
+        //find another key instead of using index... 
+        //prevent multiple of the same item from being added twice
+        return (
+            <p key={index}>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
+        )
+    })
 
     return (
         <form className='form' onSubmit={handleSubmit}>
@@ -77,9 +84,9 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
             <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
             <button type='button' className='formBtn' onClick={handleAddIngredient}>Add Ingredient</button>
             <button type='submit' className='formBtn'>Save New Meal</button>
-            {/* <div id='dashboard'>
+            <div id='dashboard'>
                 {dashboard}
-            </div> */}
+            </div>
             
         </form>
     )
