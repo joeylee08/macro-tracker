@@ -5,7 +5,6 @@ import CreateFoodForm from "../components/createfoodform"
 import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
 
-
 const currentUserId = 1
 
 const Menu = () => {
