@@ -143,6 +143,8 @@ p {
 
 .form input {
   width: 12rem;
+  height: 1.1rem;
+  font-size: 1rem;
   border: 2px solid black;
   margin-bottom: 0.5rem;
 }
@@ -157,6 +159,8 @@ p {
 
 .form select#servingUnit {
   width: 6rem;
+  height: 1.1rem;
+  font-size: 1rem;
   align-self: flex-start;
   margin-left: 2.7rem;
   margin-bottom: 0.2rem;
@@ -165,15 +169,46 @@ p {
 
 .form select#ingredients {
   width: 12.5rem;
+  height: 1.6rem;
+  font-size: 1rem;
   align-self: flex-start;
   margin-left: 2.7rem;
   margin-bottom: 0.2rem;
   font-weight: bold;
 }
 
+#dashboard {
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.thumbnail {
+  display: flex;
+  align-items: center;
+  width: 14rem;
+  height: 2rem;
+  border: 2px solid #d9b99b;
+  border-radius: 5px;
+}
+
+.thumbnail p {
+  font-size: 1rem;
+  margin: 0 auto;
+  line-height: 1rem;
+}
+
+#btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
 .formBtn {
-  width: 8rem;
-  height: 2em;
+  width: 7rem;
+  height: 2rem;
   border-color: #d9b99b;
   border-radius: 5px;
   background-color: white;
