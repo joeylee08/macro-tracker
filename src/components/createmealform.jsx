@@ -36,6 +36,18 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     function handleAddIngredient() {       
         if (ingredient.foodId === 0 || +ingredient.units <= 0) return
 
+        if (meal.ingredients.find(item => item.foodId === +ingredient.foodId)) {
+            const adjustedForDuplicate = meal.ingredients.map(item => 
+                item.foodId !== +ingredient.foodId ? item : {...item, units: +ingredient.units}
+            )
+            setMeal(previous => ({
+                ...previous,
+                ingredients: adjustedForDuplicate
+            }))
+            console.log('Adjusted ingredient amount.')
+            return
+        }
+
         const newIngredient = {
             foodId: +ingredient.foodId,
             units: +ingredient.units
@@ -56,8 +68,9 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         <option key={food.id} value={food.id}>{food.name} ({food.servingSize} {food.servingUnit})</option>
     )
 
-    const dashboard = meal.ingredients.map((item, index) => {
+    const dashboard = meal.ingredients.map((item) => {
         const food = myFoods.find(food => food.id === item.foodId)
+
 
         if (!food) {
             console.error(`Food not found for foodId ${item.foodId}.`)
@@ -67,7 +80,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         //find another key instead of using index... 
         //prevent multiple of the same item from being added twice
         return (
-            <p key={index}>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
+            <p key={food.id}>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
         )
     })
 

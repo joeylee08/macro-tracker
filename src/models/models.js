@@ -33,7 +33,7 @@ const foodModel = {
 
 const ingredientModel = {
     foodId: 'number',
-    quantity: 'number'
+    units: 'number'
 }
 
 export { userModel, mealModel, foodModel, ingredientModel }
