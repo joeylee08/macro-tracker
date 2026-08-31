@@ -65,7 +65,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     }
 
     //close temporary thumbnail on dashboard
-    function closeThumbnail(event) {
+    function closeThumbnail(foodID) {
 
     }
 
@@ -87,7 +87,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         return (
             <div key={food.id} className='thumbnail'>
                 <p id='thumbnailText'>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
-                <p id='removeX'>×</p>
+                <p id='removeX' onClick={() => closeThumbnail(food.id)}>×</p>
             </div>
             
         )
