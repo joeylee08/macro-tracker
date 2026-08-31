@@ -64,6 +64,11 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         onAddMeal(meal)
     }
 
+    //close temporary thumbnail on dashboard
+    function closeThumbnail(event) {
+
+    }
+
     const ingredients = myFoods.map(food => 
         <option key={food.id} value={food.id}>{food.name} ({food.servingSize} {food.servingUnit})</option>
     )
@@ -81,7 +86,8 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
         //prevent multiple of the same item from being added twice
         return (
             <div key={food.id} className='thumbnail'>
-                <p>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
+                <p id='thumbnailText'>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
+                <p id='removeX'>×</p>
             </div>
             
         )
