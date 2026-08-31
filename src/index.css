@@ -135,7 +135,7 @@ p {
   left: calc(50% - 10rem);
   top: calc(50% - 15rem);
   width: 18rem;
-  height: 30rem;
+  height: 31rem;
   border: 2px solid #d9b99b;
   border-radius: 15px;
   padding-top: 1.8rem;
@@ -146,24 +146,24 @@ p {
   height: 1.1rem;
   font-size: 1rem;
   border: 2px solid black;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .form label {
   width: 12rem;
   align-self: flex-start;
   margin-left: 2.7rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.1rem;
   font-weight: bold;
 }
 
 .form select#servingUnit {
-  width: 6rem;
-  height: 1.1rem;
+  width: 12.5rem;
+  height: 1.5rem;
   font-size: 1rem;
   align-self: flex-start;
   margin-left: 2.7rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.6rem;
   font-weight: bold;
 }
 
@@ -227,7 +227,16 @@ p {
   margin-top: 0.5rem;
 }
 
-.formBtn {
+#formBtnFood {
+  width: 7rem;
+  height: 2rem;
+  margin-top: 0.7rem;
+  border-color: #d9b99b;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#formBtnMeal {
   width: 7rem;
   height: 2rem;
   border-color: #d9b99b;

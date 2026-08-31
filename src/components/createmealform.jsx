@@ -87,14 +87,11 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
             return null
         }
 
-        //find another key instead of using index... 
-        //prevent multiple of the same item from being added twice
         return (
             <div key={food.id} className='thumbnail'>
                 <p id='thumbnailText'>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
                 <p id='removeX' onClick={() => closeThumbnail(food.id)}>×</p>
             </div>
-            
         )
     })
 
@@ -110,8 +107,8 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
             <label htmlFor='units'>Units</label>
             <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
             <div id='btnContainer'>
-                <button type='button' className='formBtn' onClick={handleAddIngredient}>Add Ingredient</button>
-                <button type='submit' className='formBtn'>Save New Meal</button>
+                <button type='button' id='formBtnMeal' onClick={handleAddIngredient}>Add Ingredient</button>
+                <button type='submit' id='formBtnMeal'>Save New Meal</button>
             </div>
             <div id='dashboard'>
                 {dashboard}

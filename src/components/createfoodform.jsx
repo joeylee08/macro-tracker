@@ -25,6 +25,12 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
 
     function handleSubmit(event) {
         event.preventDefault()
+
+        if (formData.servingUnit === '') {
+            console.error('Please specify units.')
+            return null
+        }
+
         //event.target.value gives number values as strings so convert
         const toNumbers = {
             id: +formData.id,
@@ -53,6 +59,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
             <input type='number' id='servingSize' name='servingSize' value={formData.servingSize} required min='.01' step='any'></input>
             <label htmlFor='servingUnit'>Serving Unit</label>
             <select id='servingUnit' name='servingUnit' value={formData.servingUnit}>
+                <option value=''>Select Unit</option>
                 <option value='oz'>oz</option>
                 <option value='g'>g</option>
                 <option value='tbsp'>tbsp</option>
@@ -70,7 +77,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
             <input type='number' id='fat' name='fat' value={formData.fat} min='0' step='any'></input>
             <label htmlFor='sodium'>Sodium (mg)</label>
             <input type='number' id='sodium' name='sodium' value={formData.sodium} min='0' step='any'></input>
-            <button className='formBtn'>
+            <button id='formBtnFood'>
                 SUBMIT
             </button>
         </form>
