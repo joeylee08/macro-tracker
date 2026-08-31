@@ -11,10 +11,10 @@ const users = [
 
 const meals = [
     {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 5, units: 1}, {foodId: 6, units: 2}, {foodId: 7, units: 1}]},
-    {id: 2, name: 'Chicken Avocado Wrap', userId: 1, ingredients: [{foodId: 1, units: 2.7}, {foodId: 9, units: 0.167}, {foodId: 12, units: 2}]},
+    {id: 2, name: 'Chicken Avo Wrap', userId: 1, ingredients: [{foodId: 1, units: 2.7}, {foodId: 9, units: 0.167}, {foodId: 12, units: 2}]},
     {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, units: 2}, {foodId: 9, units: 0.167}, {foodId: 12, units: 2}]},
-    {id: 4, name: 'Salmon Quinoa Kimchi Bowl', userId: 1, ingredients: [{foodId: 2, units: 6}, {foodId: 10, units: 1}, {foodId: 15, units: 1}]},
-    {id: 5, name: 'Chicken Teriyaki Bowl', userId: 1, ingredients: [{foodId: 1, units: 2.7}, {foodId: 10, units: 1}]},
+    {id: 4, name: 'Sal Quinoa Bowl', userId: 1, ingredients: [{foodId: 2, units: 6}, {foodId: 10, units: 1}, {foodId: 15, units: 1}]},
+    {id: 5, name: 'Ch Teriyaki Bowl', userId: 1, ingredients: [{foodId: 1, units: 2.7}, {foodId: 10, units: 1}]},
 ]
 
 const foods= [

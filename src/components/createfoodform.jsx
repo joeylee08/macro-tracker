@@ -54,7 +54,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
     return (
         <form className='form' onChange={handleChange} onSubmit={handleSubmit}>
             <label htmlFor='name'>Name</label>
-            <input type='text' id='name' name='name' value={formData.name} required minLength='1' maxLength='26'></input>
+            <input type='text' id='name' name='name' value={formData.name} required minLength='1' maxLength='19'></input>
             <label htmlFor='servingSize'>Serving Size</label>
             <input type='number' id='servingSize' name='servingSize' value={formData.servingSize} required min='.01' step='any'></input>
             <label htmlFor='servingUnit'>Serving Unit</label>

@@ -98,7 +98,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     return (
         <form className='form' onSubmit={handleSubmit}>
             <label htmlFor='name'>Meal Name</label>
-            <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='26'></input>
+            <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
             <label htmlFor='ingredients'>Ingredients</label>
             <select id='ingredients' name='foodId' value={ingredient.foodId} onChange={handleIngredientChange}>
                 <option value='0'>Select An Ingredient</option>
