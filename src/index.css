@@ -79,6 +79,7 @@ p {
   font-size: 1.2rem;
   border: 3px solid #d9b99b;
   border-radius: 10px;
+  transition: border-color 0.5s ease;
 }
 
 .createBtn:hover {
