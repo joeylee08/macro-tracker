@@ -9,8 +9,8 @@ const Meals = ({ myMeals, myFoods, handleToggleForm, currentUserId }) => {
     return (
         <div className='myFoods' id='pinned'>
             <div className='myFoods' id='buttonDiv'>
-                <button className='createBtn' id='createMealBtn' onClick={() => handleToggleForm('meal')}>CREATE NEW MEAL</button>
-                <button className='createBtn' id='addItemBtn' onClick={() => handleToggleForm('food')}>ADD FOOD ITEM</button>
+                <button className='createBtn' id='createMealBtn' onClick={() => handleToggleForm('meal')}>Create New Meal</button>
+                <button className='createBtn' id='addItemBtn' onClick={() => handleToggleForm('food')}>Add Ingredient</button>
             </div>
             <div className='myFoods' id='mealsDiv'>
                 {renderedMeals}
