@@ -65,8 +65,14 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
     }
 
     //close temporary thumbnail on dashboard
-    function closeThumbnail(foodID) {
-
+    function closeThumbnail(foodId) {
+        const filtered = meal.ingredients.filter(item => 
+            item.foodId !== foodId
+        )
+        setMeal(previous => ({
+            ...previous,
+            ingredients: filtered
+        }))
     }
 
     const ingredients = myFoods.map(food => 
@@ -75,7 +81,6 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
 
     const dashboard = meal.ingredients.map((item) => {
         const food = myFoods.find(food => food.id === item.foodId)
-
 
         if (!food) {
             console.error(`Food not found for foodId ${item.foodId}.`)
