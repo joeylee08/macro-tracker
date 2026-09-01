@@ -45,6 +45,8 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
                 ingredients: adjustedForDuplicate
             }))
             console.log('Adjusted ingredient amount.')
+            //reset ingredient / units
+            setIngredient({ foodId: 0, units: 1 })
             return
         }
 
@@ -56,13 +58,8 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
             ...previous,
             ingredients: [...previous.ingredients, newIngredient]
         }))
-
-  
-        setIngredient(previous => ({
-            ...previous,
-            foodId: 0,
-            units: 1
-        }))
+        //reset ingredient / units
+        setIngredient({ foodId: 0, units: 1 })
     }
 
     //submit completed meal
