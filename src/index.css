@@ -114,7 +114,7 @@ p {
   margin: 0.5rem;
   padding: 0.4rem;
   width: 165px;
-  height: 142px;
+  height: 135px;
   border: 5px solid #d9b99b;
   border-radius: 15px;
   font-family: Arial, Helvetica, sans-serif;
@@ -130,7 +130,7 @@ p {
   line-height: 1.5rem;
   font-size: 1rem;
   font-weight: bold;
-  margin: 0.2rem 0 0.4rem 0.2rem;
+  margin: 0.1rem 0 0rem 0.2rem;
 }
 
 .foodCard p {
