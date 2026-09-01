@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) => {
+const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, handleToggleForm }) => {
     const [meal, setMeal] = useState({
         id: nextMealIndex,
         name: '',
@@ -97,6 +97,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods }) =>
 
     return (
         <form className='form' onSubmit={handleSubmit}>
+            <button className='closeForm' onClick={() => handleToggleForm('meal')}>×</button>
             <label htmlFor='name'>Meal Name</label>
             <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
             <label htmlFor='ingredients'>Ingredients</label>

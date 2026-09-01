@@ -37,8 +37,8 @@ const Menu = () => {
             <h1>Your Personalized Menu</h1>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm}/>
             <MyCollection myFoods={myFoods} />
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} currentUserId={currentUserId} nextMealIndex={nextMealIndex} myFoods={myFoods}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} myFoods={myFoods}/>}
         </div>
     )
 }

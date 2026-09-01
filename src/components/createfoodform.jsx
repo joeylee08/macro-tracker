@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
+const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleForm }) => {
     const [formData, setFormData] = useState({
         id: nextFoodIndex,
         name: '',
@@ -53,6 +53,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex }) => {
 
     return (
         <form className='form' onChange={handleChange} onSubmit={handleSubmit}>
+            <button className='closeForm' onClick={() => handleToggleForm('food')}>×</button>
             <label htmlFor='name'>Name</label>
             <input type='text' id='name' name='name' value={formData.name} required minLength='1' maxLength='19'></input>
             <label htmlFor='servingSize'>Serving Size</label>
