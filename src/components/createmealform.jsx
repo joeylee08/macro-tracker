@@ -56,6 +56,13 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
             ...previous,
             ingredients: [...previous.ingredients, newIngredient]
         }))
+
+  
+        setIngredient(previous => ({
+            ...previous,
+            foodId: 0,
+            units: 1
+        }))
     }
 
     //submit completed meal
