@@ -24,8 +24,8 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
-  font-weight:400;
+  font-size: 2.2rem;
+  font-weight: 400;
   color: #362312;
 }
 
@@ -66,10 +66,10 @@ p {
 }
 
 #menuPage {
-  margin: 2rem auto;
+  margin: 0 auto;
   width: 90%;
   min-width: 45rem;
-  padding: 2rem;
+  padding: 2.5rem 0 0 0;
 }
 
 .createBtn {
