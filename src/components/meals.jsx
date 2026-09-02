@@ -15,6 +15,7 @@ const Meals = ({ myMeals, myFoods, handleToggleForm, currentUserId }) => {
             <div className='myFoodsChild'>
                 {renderedMeals}
             </div>
+            <hr className='dividerLine'></hr>
         </div>
     )
 }
