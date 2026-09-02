@@ -7,12 +7,12 @@ const Meals = ({ myMeals, myFoods, handleToggleForm, currentUserId }) => {
                             .map(item => <MealCard key={item.id} meal={item} myFoods={myFoods}/>)
                             
     return (
-        <div className='myFoods' id='pinned'>
-            <div className='myFoods' id='buttonDiv'>
+        <div className='myFoods'>
+            <div id='buttonDiv'>
                 <button className='createBtn' id='createMealBtn' onClick={() => handleToggleForm('meal')}>Create New Meal</button>
                 <button className='createBtn' id='addItemBtn' onClick={() => handleToggleForm('food')}>Add Ingredient</button>
             </div>
-            <div className='myFoods' id='mealsDiv'>
+            <div className='myFoodsChild'>
                 {renderedMeals}
             </div>
         </div>

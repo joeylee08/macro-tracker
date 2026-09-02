@@ -1,6 +1,9 @@
-/* border colors #d9b99b */
-/* dark border color #2b1700 */
-/* form color #faf0e6 */
+/* very dark brown #362312 */
+/* dark border color #8a7b6a */
+/* border colors #cbb59b */
+/* medium #e6d5be */
+/* lighter #f2e7d5*/
+/* off white #faf7f0 */
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -13,24 +16,30 @@ body {
   height: 100%;
 }
 
+.headerBox {
+  width: 95%;
+  height: 2.7rem;
+  min-width: 40rem;
+  margin: 0 auto;
+}
+
 h1 {
   font-size: 2rem;
   font-weight:400;
-  color: red;
-  margin-bottom: 0;
-  margin-left: 1rem;
+  color: #362312;
 }
 
 p {
   font-size: 1.2rem;
   line-height: 1.55rem;
   margin-bottom: 0;
+  color: #362312;
 }
 
 .navbar {
   width: 100%;
   height: 100px;
-  background-color: #2b1700;;
+  background-color: #cbb59b;;
   margin: 0px;
   display: flex;
   justify-content: center;
@@ -42,10 +51,10 @@ p {
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
+  list-style-type: none;
 }
 
 .linksList a {
-  list-style-type: none;
   font-size: 1.5rem;
   font-weight: 400;
   text-decoration: none;
@@ -60,16 +69,7 @@ p {
   margin: 2rem auto;
   width: 90%;
   min-width: 45rem;
-  border: 2px solid gray;
-  border-radius: 15px;
   padding: 2rem;
-}
-
-.myFoods #buttonDiv {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  min-width: 40rem;
 }
 
 .createBtn {
@@ -87,25 +87,42 @@ p {
   border-color: green;
 }
 
-.myFoods #mealsDiv {
-  margin: 0;
-}
-
 .myFoods {
+  margin: auto auto;
   width: 95%;
+  min-width: 40rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: left;
+  justify-content: center;
   gap: 1rem;
-  border: 2px solid gray;
+  padding: 1rem 0 0 0;
+}
+
+.myFoods #buttonDiv {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  width: 100%;
+  min-width: 40rem;
+  gap: 1.5rem;
+  border: 3px solid #cbb59b;
   border-radius: 10px;
-  margin: 1rem;
+  background-color: #faf7f0;
   padding: 1rem;
 }
 
-.myFoods #pinned {
-  height: 500px;
+.myFoodsChild {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  gap: 0.1rem;
+  border: 3px solid #cbb59b;
+  border-radius: 10px;
+  background-color: #faf7f0;
+  min-width: 40rem;
+  width: 100%;
+  padding: 1rem;
 }
 
 .foodCard {
@@ -118,6 +135,7 @@ p {
   height: 135px;
   border: 5px solid #d9b99b;
   border-radius: 15px;
+  background-color: white;
   font-family: Arial, Helvetica, sans-serif;
   transition: border-color 0.5s ease;
 }
@@ -127,7 +145,7 @@ p {
 }
 
 .foodCard h3 {
-  color: #2b1700;;
+  color: #362312;
   line-height: 1.5rem;
   font-size: 1rem;
   font-weight: bold;

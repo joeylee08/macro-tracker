@@ -7,7 +7,9 @@ const MyCollection = ({ myFoods }) => {
     
     return (
         <div className='myFoods'>
+            <div className='myFoodsChild'>
                 {renderedFoods}
+            </div>
         </div>
     )
 }

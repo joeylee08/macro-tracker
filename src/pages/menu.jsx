@@ -34,7 +34,9 @@ const Menu = () => {
 
     return (
         <div id='menuPage'>
-            <h1>Your Personalized Menu</h1>
+            <div className='headerBox'>
+                <h1>Your Personalized Menu</h1>
+            </div>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm}/>
             <MyCollection myFoods={myFoods} />
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex}/>}
