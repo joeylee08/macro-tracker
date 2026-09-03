@@ -28,6 +28,13 @@ const Menu = () => {
         else if (formType === 'meal') setToggleMealForm(bool => !bool)
     }
 
+    const [editing, isEditing] = useState(false)
+    const handleIsEditing = (formType, editState) => {
+        handleToggleForm(formType)
+        isEditing(editState)
+        console.log(editing)
+    }
+
     //for manually assigning DB IDs to dummy data
     const nextFoodIndex = Math.max(...myFoods.map(food => food.id), 0) + 1
     const nextMealIndex = Math.max(...myMeals.map(meal => meal.id), 0) + 1
@@ -41,10 +48,10 @@ const Menu = () => {
                 <button className='createBtn' id='createMealBtn' onClick={() => handleToggleForm('meal')}>Create New Meal</button>
                 <button className='createBtn' id='addItemBtn' onClick={() => handleToggleForm('food')}>Add Ingredient</button>
             </div>
-            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm}/>
-            <Foods myFoods={myFoods} />
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} myFoods={myFoods}/>}
+            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing}/>
+            <Foods myFoods={myFoods} handleIsEditing={handleIsEditing}/>
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex} isEditing={isEditing}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} isEditing={isEditing} myFoods={myFoods}/>}
         </div>
     )
 }

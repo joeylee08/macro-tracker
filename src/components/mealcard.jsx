@@ -1,4 +1,4 @@
-const MealCard = ({ meal, myFoods }) => {
+const MealCard = ({ meal, myFoods, handleIsEditing }) => {
     const ingredients = meal.ingredients
 
     const macros = {
@@ -26,7 +26,7 @@ const MealCard = ({ meal, myFoods }) => {
     calculateMacros()
 
     return (
-        <div className='foodCard'>
+        <div className='foodCard' onClick={() => handleIsEditing('meal', true)}>
             <h3>{meal.name}</h3>
             <p>{Math.round(macros.cal)} Calories</p>
             <p>{Math.round(macros.protein)}g Protein</p>
