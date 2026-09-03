@@ -1,19 +1,24 @@
 import { useState } from 'react'
 import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleForm }) => {
-    const [formData, setFormData] = useState({
-        id: nextFoodIndex,
-        name: '',
-        userId: currentUserId,
-        servingSize: '',
-        servingUnit: '',
-        cal: '',
-        protein: '',
-        carb: '',
-        fat: '',
-        sodium: ''
-    })
+const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleForm, isEditing, selectedItem }) => {
+    const [formData, setFormData] = useState(
+        isEditing 
+            ? selectedItem
+            : {
+                id: nextFoodIndex,
+                name: '',
+                userId: currentUserId,
+                servingSize: '',
+                servingUnit: '',
+                cal: '',
+                protein: '',
+                carb: '',
+                fat: '',
+                sodium: ''
+            }
+    )
+
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -79,7 +84,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
             <label htmlFor='sodium'>Sodium (mg)</label>
             <input type='number' id='sodium' name='sodium' value={formData.sodium} onChange={handleChange} min='0' step='any'></input>
             <button id='formBtnFood'>
-                SUBMIT
+                {isEditing ? 'SAVE EDIT' : 'SUBMIT'}
             </button>
         </form>
     )

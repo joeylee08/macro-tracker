@@ -26,7 +26,7 @@ const MealCard = ({ meal, myFoods, handleIsEditing }) => {
     calculateMacros()
 
     return (
-        <div className='foodCard' onClick={() => handleIsEditing('meal', true)}>
+        <div className='foodCard' onClick={() => handleIsEditing('meal', true, meal.id)}>
             <h3>{meal.name}</h3>
             <p>{Math.round(macros.cal)} Calories</p>
             <p>{Math.round(macros.protein)}g Protein</p>

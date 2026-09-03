@@ -1,6 +1,6 @@
 const FoodCard = ({ food, handleIsEditing }) => {
     return (
-        <div className='foodCard' onClick={() => handleIsEditing('food', true)}>
+        <div className='foodCard' onClick={() => handleIsEditing('food', true, food.id)}>
             <h3>{food.name}</h3>
             <p></p>
             <p>{food.cal} Calories / {food.servingSize} {food.servingUnit}</p>

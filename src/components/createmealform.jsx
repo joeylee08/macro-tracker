@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, handleToggleForm }) => {
+const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, handleToggleForm, isEditing, selectedItem}) => {
     const [meal, setMeal] = useState({
         id: nextMealIndex,
         name: '',

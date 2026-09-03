@@ -10,12 +10,26 @@ const currentUserId = 1
 const Menu = () => {
     const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUserId))
     const handleSetMyFoods = (newFood) => {
+        if (isEditing) {
+            const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
+            setMyFoods(editedFoods)
+            setIsEditing(false)
+            handleToggleForm('food')
+            return
+        }
         setMyFoods([...myFoods, newFood])
         handleToggleForm('food')
     }
 
     const [myMeals, setMyMeals] = useState(meals.filter(item => item.userId === currentUserId))
     const handleSetMyMeals = (newMeal) => {
+        if (isEditing) {
+            const editedMeals = myMeals.map(item => item.id === newMeal.id ? newMeal : item)
+            setMyFoods(editedMeals)
+            setIsEditing(false)
+            handleToggleForm('meal')
+            return
+        }
         setMyMeals([...myMeals, newMeal])
         handleToggleForm('meal')
     }
@@ -28,11 +42,15 @@ const Menu = () => {
         else if (formType === 'meal') setToggleMealForm(bool => !bool)
     }
 
-    const [editing, isEditing] = useState(false)
-    const handleIsEditing = (formType, editState) => {
+    const [selectedItem, setSelectedItem] = useState(null)
+
+    const [isEditing, setIsEditing] = useState(false)
+    const handleIsEditing = (formType, editState, itemId) => {
         handleToggleForm(formType)
-        isEditing(editState)
-        console.log(editing)
+        setIsEditing(editState)
+
+        const itemToEdit = formType === 'food' ? myFoods.find(item => item.id === itemId) : myMeals.find(item => item.id === itemId)
+        setSelectedItem(itemToEdit)
     }
 
     //for manually assigning DB IDs to dummy data
@@ -50,8 +68,8 @@ const Menu = () => {
             </div>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing}/>
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing}/>
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex} isEditing={isEditing}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} isEditing={isEditing} myFoods={myFoods}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
         </div>
     )
 }
