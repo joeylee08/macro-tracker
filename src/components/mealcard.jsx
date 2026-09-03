@@ -1,4 +1,4 @@
-const MealCard = ({ meal, myFoods, handleIsEditing }) => {
+const MealCard = ({ meal, myFoods, handleIsEditing, handleDelete }) => {
     const ingredients = meal.ingredients
 
     const macros = {
@@ -27,6 +27,7 @@ const MealCard = ({ meal, myFoods, handleIsEditing }) => {
 
     return (
         <div className='foodCard' onClick={() => handleIsEditing('meal', true, meal.id)}>
+            <button type='button' className='deleteBtn' onClick={(event) => handleDelete(event, 'meal', meal.id)}>x</button>
             <h3>{meal.name}</h3>
             <p>{Math.round(macros.cal)} Calories</p>
             <p>{Math.round(macros.protein)}g Protein</p>

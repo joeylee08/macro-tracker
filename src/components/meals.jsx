@@ -1,10 +1,10 @@
 import MealCard from "./mealcard"
 
-const Meals = ({ myMeals, myFoods, currentUserId, handleIsEditing }) => {
+const Meals = ({ myMeals, myFoods, currentUserId, handleIsEditing, handleDelete }) => {
     const renderedMeals = myMeals
                             .filter(item => item.userId === currentUserId)
                             .sort((a, b) => a.name.localeCompare(b.name))
-                            .map(item => <MealCard key={item.id} meal={item} myFoods={myFoods} handleIsEditing={handleIsEditing}/>)
+                            .map(item => <MealCard key={item.id} meal={item} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>)
                             
     return (
         <div className='myFoods'>
