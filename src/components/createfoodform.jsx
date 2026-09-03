@@ -84,7 +84,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
             <label htmlFor='sodium'>Sodium (mg)</label>
             <input type='number' id='sodium' name='sodium' value={formData.sodium} onChange={handleChange} min='0' step='any'></input>
             <button id='formBtnFood'>
-                {isEditing ? 'SAVE EDIT' : 'SUBMIT'}
+                {isEditing ? 'Save Edit' : 'Submit'}
             </button>
         </form>
     )
