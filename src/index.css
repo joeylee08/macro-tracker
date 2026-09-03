@@ -192,13 +192,17 @@ p {
   align-items: center;
   position: fixed;
   background-color: white;
-  left: calc(50% - 10rem);
-  top: calc(50% - 15rem);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: 18rem;
-  height: 31rem;
+  height: auto;
+  min-height: 31rem;
+  max-height: 90vh;
+  overflow-y: auto;
   border: 2px solid #cbb59b;
   border-radius: 8px;
-  padding-top: 1.8rem;
+  padding: 1.8rem 0 1rem 0;
   z-index: 20;
 }
 
@@ -290,7 +294,7 @@ p {
 #formBtnFood {
   width: 7rem;
   height: 2rem;
-  margin-top: 0.7rem;
+  margin-top: 1rem;
   border-color: #cbb59b;
   border-radius: 5px;
   background-color: white;
@@ -299,6 +303,7 @@ p {
 #formBtnMeal {
   width: 7.5rem;
   height: 2.5rem;
+  margin: 0.15rem 0;
   border-color: #cbb59b;
   border-radius: 5px;
   background-color: white;
