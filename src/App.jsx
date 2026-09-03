@@ -4,7 +4,8 @@ import Menu from './pages/menu';
 import History from './pages/history';
 import Friends from './pages/friends';
 import Error from './pages/error';
-import NavBar from "./components/navbar"
+import NavBar from './components/navbar';
+import Footer from './components/footer';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/friends' element={<Friends />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer/>
     </BrowserRouter>
   )
 }
