@@ -73,6 +73,13 @@ p {
   padding: 2.5rem 0 0 0;
 }
 
+#screenBlock {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 10;
+}
+
 .createBtn {
   width: 16rem;
   height: 3.2rem;
@@ -192,6 +199,7 @@ p {
   border: 2px solid #cbb59b;
   border-radius: 8px;
   padding-top: 1.8rem;
+  z-index: 20;
 }
 
 .form input {

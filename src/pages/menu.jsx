@@ -75,6 +75,7 @@ const Menu = () => {
 
     return (
         <div id='menuPage'>
+            {(toggleFoodForm || toggleMealForm) && <div id='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Personalized Menu</h1>
             </div>
