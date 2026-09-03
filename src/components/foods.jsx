@@ -1,6 +1,6 @@
 import FoodCard from "./foodcard"
 
-const MyCollection = ({ myFoods }) => {
+const Foods = ({ myFoods }) => {
     const renderedFoods = myFoods
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map(item => <FoodCard key={item.id} food={item}/>)
@@ -14,4 +14,4 @@ const MyCollection = ({ myFoods }) => {
     )
 }
 
-export default MyCollection
+export default Foods

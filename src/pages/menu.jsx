@@ -1,6 +1,6 @@
 import { foods, meals } from "../data/dummy";
 import Meals from "../components/meals"
-import MyCollection from "../components/mycollection"
+import Foods from "../components/foods"
 import CreateFoodForm from "../components/createfoodform"
 import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
@@ -38,7 +38,7 @@ const Menu = () => {
                 <h1>Your Personalized Menu</h1>
             </div>
             <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm}/>
-            <MyCollection myFoods={myFoods} />
+            <Foods myFoods={myFoods} />
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} myFoods={myFoods}/>}
         </div>
