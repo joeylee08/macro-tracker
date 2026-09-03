@@ -93,11 +93,11 @@ p {
   min-width: 40rem;
 }
 
-.myFoods #buttonDiv {
+#buttonDiv {
   display: flex;
   justify-content: center;
   margin: 1rem auto;
-  width: 100%;
+  width: 95%;
   min-width: 40rem;
   gap: 2rem;
   border: 3px solid #f2e7d5;
@@ -297,32 +297,6 @@ p {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-}
-
-#bannerbox {
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 100%;
-}
-
-#banner {
-  max-width: 850px;
-  min-width: 850px;
-}
-
-.content {
-  background-color: white;
-  padding: 2rem;
-  width: 85%;
-  margin: auto;
-  margin-top: 0.4rem;
-  margin-bottom: 1.5rem;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
 }
 
 .footer {
