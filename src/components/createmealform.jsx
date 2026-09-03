@@ -101,7 +101,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
 
     return (
         <form className='form' onSubmit={handleSubmit}>
-            <button className='closeForm' onClick={() => handleToggleForm('meal')}>×</button>
+            <button type='button' className='closeForm' onClick={() => handleToggleForm('meal')}>×</button>
             <label htmlFor='name'>Meal Name</label>
             <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
             <label htmlFor='ingredients'>Ingredients</label>
