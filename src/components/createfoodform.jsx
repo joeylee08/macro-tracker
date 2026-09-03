@@ -17,7 +17,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
                 fat: '',
                 sodium: ''
             }
-    )
+        )
 
 
     function handleChange(event) {

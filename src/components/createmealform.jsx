@@ -1,12 +1,16 @@
 import { useState } from 'react'
 
 const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, handleToggleForm, isEditing, selectedItem}) => {
-    const [meal, setMeal] = useState({
-        id: nextMealIndex,
-        name: '',
-        userId: currentUserId,
-        ingredients: []
-    })
+    const [meal, setMeal] = useState(
+        isEditing  
+            ? selectedItem
+            : {
+                id: nextMealIndex,
+                name: '',
+                userId: currentUserId,
+                ingredients: []
+            }
+        )
 
     //use to set meal name only
     function handleMealChange(event) {
@@ -113,7 +117,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
             <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
             <div id='btnContainer'>
                 <button type='button' id='formBtnMeal' onClick={handleAddIngredient}>Add Ingredient</button>
-                <button type='submit' id='formBtnMeal'>Save New Meal</button>
+                <button type='submit' id='formBtnMeal'>{isEditing ? 'Save Edit' : 'Save New Meal'}</button>
             </div>
             <div id='dashboard'>
                 {dashboard}

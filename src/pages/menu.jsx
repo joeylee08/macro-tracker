@@ -26,7 +26,7 @@ const Menu = () => {
     const handleSetMyMeals = (newMeal) => {
         if (isEditing) {
             const editedMeals = myMeals.map(item => item.id === newMeal.id ? newMeal : item)
-            setMyFoods(editedMeals)
+            setMyMeals(editedMeals)
             setIsEditing(false)
             handleToggleForm('meal')
             setSelectedItem(null)
@@ -40,6 +40,8 @@ const Menu = () => {
     const [toggleMealForm, setToggleMealForm] = useState(false)
 
     const handleToggleForm = (formType) => {
+        if (isEditing) setIsEditing(false)
+
         if (formType === 'food') setToggleFoodForm(bool => !bool)
         else if (formType === 'meal') setToggleMealForm(bool => !bool)
     }
