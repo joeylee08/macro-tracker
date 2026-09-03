@@ -15,6 +15,7 @@ const Menu = () => {
             setMyFoods(editedFoods)
             setIsEditing(false)
             handleToggleForm('food')
+            setSelectedItem(null)
             return
         }
         setMyFoods([...myFoods, newFood])
@@ -28,6 +29,7 @@ const Menu = () => {
             setMyFoods(editedMeals)
             setIsEditing(false)
             handleToggleForm('meal')
+            setSelectedItem(null)
             return
         }
         setMyMeals([...myMeals, newMeal])
