@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { mealEntries } from "../data/dummy";
-import Meals from "../components/meals"
-import Foods from "../components/foods"
 import MacroChart from "../components/macrochart";
 
 const currentUserId = 1
