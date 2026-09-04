@@ -1,9 +1,15 @@
+import { foods, meals } from "../data/dummy";
+import Meals from "../components/meals"
+import Foods from "../components/foods"
+import { useState } from "react";
+
 const Today = () => {
     return (
-        <>
-            <h1>Your Daily Totals</h1>
-            <p>What have you had today?</p>
-        </>
+        <div className='mainPage'>
+            <div className='headerBox'>
+                <h1>Your Daily Totals</h1>
+            </div>
+        </div>
     )
 }
 

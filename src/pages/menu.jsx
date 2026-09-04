@@ -74,7 +74,7 @@ const Menu = () => {
     const nextMealIndex = Math.max(...myMeals.map(meal => meal.id), 0) + 1
 
     return (
-        <div id='menuPage'>
+        <div className='mainPage'>
             {(toggleFoodForm || toggleMealForm) && <div id='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Personalized Menu</h1>

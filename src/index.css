@@ -66,7 +66,7 @@ p {
   text-decoration: underline;
 }
 
-#menuPage {
+.mainPage {
   margin: 0 auto;
   width: 90%;
   min-width: 45rem;
