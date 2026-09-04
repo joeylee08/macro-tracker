@@ -16,6 +16,10 @@ body {
   height: 100%;
 }
 
+.mainPage {
+  max-width: 65rem;
+}
+
 .headerBox {
   width: 95%;
   height: 2.7rem;
@@ -102,13 +106,36 @@ p {
 
 .myGoalsChild {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 100%;
-  min-width: 40rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 30rem;
+  min-width: 20rem;
   margin: 1.7rem auto;
-  gap: 1rem;
   background-color: white;
+  border: 2px solid #cbb59b;
+  border-radius: 8px;
+}
+
+h2.meterLabel {
+  font-size: 1.2rem;
+  font-weight: 500;
+  width: 6rem;
+}
+
+.meterAndLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.macroMeter {
+  width: 15rem;
+  height: 1.5rem;
+  border: 2px solid #cbb59b;
+  border-radius: 5px;
+  justify-self: flex-end;
 }
 
 .myFoods {
