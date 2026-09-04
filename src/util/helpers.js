@@ -1,10 +1,11 @@
-import { userModel, mealModel, foodModel, ingredientModel } from '../models/models.js';
+import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel } from '../models/models.js';
 
 const modelObj = {
     'user': userModel,
     'meal': mealModel,
     'food': foodModel,
-    'ingredient': ingredientModel
+    'ingredient': ingredientModel,
+    'mealEntry': mealEntryModel
 }
 
 function validateData(data, modelType) {

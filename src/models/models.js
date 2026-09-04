@@ -36,4 +36,12 @@ const ingredientModel = {
     units: 'number'
 }
 
-export { userModel, mealModel, foodModel, ingredientModel }
+const mealEntryModel = {
+    id: 'number',
+    userId: 'number',
+    mealId: 'number',
+    servings: 'number',
+    dateAndTime: 'string'
+}
+
+export { userModel, mealModel, foodModel, ingredientModel, mealEntryModel }

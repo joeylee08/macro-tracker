@@ -5,9 +5,8 @@ import CreateFoodForm from "../components/createfoodform"
 import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
 
-const currentUserId = 1
 
-const Menu = () => {
+const Menu = ({ currentUserId }) => {
     const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUserId))
     const handleSetMyFoods = (newFood) => {
         if (isEditing) {

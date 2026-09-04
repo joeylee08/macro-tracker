@@ -28,5 +28,11 @@ const foods= [
     {id: 9, userId: 1, name: 'Quinoa', servingSize: 0.5, servingUnit: 'cup', cal: 111, protein: 4.1, carb: 19.7, fat: 1.8, sodium: 7},
 ]
 
+const mealEntries = [
+    {id: 1, userId: 1, mealId: 1, servings: 1, dateAndTime: "2026-09-04T08:47:00"},
+    {id: 2, userId: 1, mealId: 3, servings: 1, dateAndTime: "2026-09-04T10:23:00"},
+    {id: 3, userId: 1, mealId: 2, servings: 1, dateAndTime: "2026-09-04T16:02:00"},
+]
 
-export { users, meals, foods }
+
+export { users, meals, foods, mealEntries }

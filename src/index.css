@@ -94,10 +94,38 @@ p {
   border-color: green;
 }
 
+.myGoals {
+  margin: auto auto;
+  width: 95%;
+  min-width: 40rem;
+}
+
+.myGoalsChild {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 40rem;
+  margin: 1.7rem auto;
+  gap: 1rem;
+  background-color: white;
+}
+
 .myFoods {
   margin: auto auto;
   width: 95%;
   min-width: 40rem;
+}
+
+.myFoodsChild {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 40rem;
+  margin: 1.7rem auto;
+  gap: 1rem;
+  background-color: white;
 }
 
 #buttonDiv {
@@ -119,17 +147,6 @@ p {
   width: 100%;
   min-width: 40rem;
   border: 2px solid #f2e7d5;
-}
-
-.myFoodsChild {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 100%;
-  min-width: 40rem;
-  margin: 1.7rem auto;
-  gap: 1rem;
-  background-color: white;
 }
 
 .foodCard {
