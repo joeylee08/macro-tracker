@@ -15,7 +15,7 @@ const Today = ({ currentUserId }) => {
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>
             </div>
-            <MacroChart myMealEntries={myMealEntries}/>
+            <MacroChart myMeals={myMeals} myMealEntries={myMealEntries}/>
         </div>
     )
 }

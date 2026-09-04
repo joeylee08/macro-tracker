@@ -8,7 +8,7 @@ const modelObj = {
     'mealEntry': mealEntryModel
 }
 
-function validateData(data, modelType) {
+const validateData = (data, modelType) => {
     if (!(modelType in modelObj)) {
         alert('Not a valid model type.')
         return false
@@ -30,6 +30,29 @@ function validateData(data, modelType) {
     return true
 }
 
+const calculateMacros = (myFoods, meal) => {
+    const ingredients = meal.ingredients
+    const macros = {
+        cal: 0,
+        protein: 0,
+        carb: 0,
+        fat: 0,
+        sodium: 0
+    }
+
+    for (const { foodId, units } of ingredients) {
+        const food = myFoods.find(food => food.id === foodId)
+        if (!food) {
+            console.error('Food not found.')
+            continue
+        }
+        for (const macro in macros) {
+            macros[macro] += (food[macro] * units)
+        }
+    }
+    return macros
+}
+
 //when creating a new entry for globalFood or food, the user will have the 
 //option of simply not entering macros they don't want to log
 
@@ -38,4 +61,4 @@ function validateData(data, modelType) {
 //the empty ingredients array will be there independently of user interaction
 //ingredient structure will be validated as they are added
 
-export { validateData };
+export { validateData, calculateMacros };
