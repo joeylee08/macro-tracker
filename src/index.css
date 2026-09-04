@@ -185,6 +185,8 @@ p {
     opacity: 1;
 }
 
+/* FIX CSS WHEN SCROLLBAR APPEARS ON FORM! EVERYTHING GETS FUCKED UP! */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -210,7 +212,7 @@ p {
   width: 12rem;
   height: 1.1rem;
   font-size: 1rem;
-  border: 2px solid cbb59b;
+  border: 2px solid #cbb59b;
   margin-bottom: 0.6rem;
 }
 
