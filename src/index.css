@@ -112,40 +112,48 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* width: 35rem; */
   width: 100%;
   margin: 1.7rem auto;
   background-color: white;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
+  padding: 1rem 0;
 }
 
 h2.meterLabel {
   font-size: 1.1rem;
   font-weight: 500;
-  width: 5rem;
-  border: 1px solid red;
+  min-width: 8rem;
+  max-width: 8rem;
 }
 
 .meterAndLabel {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 2rem;
+  width: 85%;
 }
 
 .macroMeter {
-  width: 15rem;
+  width: 75%;
   height: 1.2rem;
   border: 2px solid #cbb59b;
   border-radius: 5px;
   justify-self: flex-end;
 }
 
+.macroMeterFill {
+  background-color: green;
+  width: 60%;
+  height: 100%;
+}
+
 h2.stats {
-  width: 9.5rem;
+  min-width: 9rem;
+  max-width: 9rem;
   font-size: 1rem;
   font-weight: 100;
-  border: 1px solid red;
   margin-left: 0.5rem;
 }
 
