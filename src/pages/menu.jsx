@@ -6,8 +6,7 @@ import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
 
 
-const Menu = ({ currentUserId }) => {
-    const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUserId))
+const Menu = ({ currentUserId, myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const handleSetMyFoods = (newFood) => {
         if (isEditing) {
             const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
@@ -20,8 +19,7 @@ const Menu = ({ currentUserId }) => {
         setMyFoods([...myFoods, newFood])
         handleToggleForm('food')
     }
-
-    const [myMeals, setMyMeals] = useState(meals.filter(item => item.userId === currentUserId))
+   
     const handleSetMyMeals = (newMeal) => {
         if (isEditing) {
             const editedMeals = myMeals.map(item => item.id === newMeal.id ? newMeal : item)

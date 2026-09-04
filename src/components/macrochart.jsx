@@ -1,30 +1,24 @@
 import { useState } from 'react'
+import { calculateMacros } from '../util/helpers'
 
+const MacroChart = ({ myFoods, myMeals, myMealEntries }) => {
 
-const MacroChart = ({ myMeals, myMealEntries }) => {
-    const [macroTotals, setMacroTotals] = useState({
-        cal: 0,
-        protein: 0,
-        carb: 0,
-        fat: 0,
-        sodium: 0
-    })
+    const macroTotals = myMealEntries.reduce((totals, entry) => {
+        const meal = myMeals.find(item => item.id === entry.mealId)
+        const mealMacros = calculateMacros(myFoods, meal)
 
-    const handleSetTotals = () => {
+        }, { cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0 })
 
-    }
+    //calculate from consolidated macros object
+    const macroRows = 
 
-    const renderedMealEntries = myMealEntries.map(item => item.mealId)
-
-    // const macroRows = 
-
-                // <div className='meterAndLabel'>
-                //     <h2 className='meterLabel'>Calories (kcal)</h2>
-                //     <div className='macroMeter'>
-                //         <div className='macroMeterFill' id='calories'></div>
-                //     </div>
-                //     <h2 className='stats'>2,300 of 2,300 total</h2>
-                // </div>
+                <div className='meterAndLabel'>
+                    <h2 className='meterLabel'>Calories (kcal)</h2>
+                    <div className='macroMeter'>
+                        <div className='macroMeterFill' id='calories'></div>
+                    </div>
+                    <h2 className='stats'>2,300 of 2,300 total</h2>
+                </div>
 
     return (
         <div className='myGoals'>
