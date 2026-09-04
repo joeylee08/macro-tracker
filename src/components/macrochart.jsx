@@ -1,11 +1,13 @@
 import { useState } from 'react'
 
 
-const MacroChart = () => {
+const MacroChart = ({ myMealEntries }) => {
+    const renderedMealEntries = myMealEntries.map(item => item.mealId)
+
     return (
         <div id='myGoals'>
             <div id='myGoalsChild'>
-                "PENIS"
+                {renderedMealEntries}
             </div>
         </div>
     )
