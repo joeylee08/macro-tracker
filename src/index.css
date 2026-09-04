@@ -17,13 +17,16 @@ body {
 }
 
 .mainPage {
+  margin: 0 auto;
+  width: 90%;
   max-width: 65rem;
+  min-width: 38.4rem;
+  padding: 2.5rem 0 0 0;
 }
 
 .headerBox {
   width: 95%;
   height: 2.7rem;
-  min-width: 40rem;
   margin: 0 auto;
 }
 
@@ -70,13 +73,6 @@ p {
   text-decoration: underline;
 }
 
-.mainPage {
-  margin: 0 auto;
-  width: 90%;
-  min-width: 45rem;
-  padding: 2.5rem 0 0 0;
-}
-
 #screenBlock {
   position: fixed;
   inset: 0;
@@ -101,7 +97,6 @@ p {
 .myGoals {
   margin: auto auto;
   width: 95%;
-  min-width: 40rem;
 }
 
 .myGoalsChild {
@@ -110,7 +105,6 @@ p {
   align-items: flex-start;
   justify-content: center;
   width: 30rem;
-  min-width: 20rem;
   margin: 1.7rem auto;
   background-color: white;
   border: 2px solid #cbb59b;
@@ -141,7 +135,6 @@ h2.meterLabel {
 .myFoods {
   margin: auto auto;
   width: 95%;
-  min-width: 40rem;
 }
 
 .myFoodsChild {
@@ -149,7 +142,6 @@ h2.meterLabel {
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 100%;
-  min-width: 40rem;
   margin: 1.7rem auto;
   gap: 1rem;
   background-color: white;
@@ -160,7 +152,6 @@ h2.meterLabel {
   justify-content: center;
   margin: 1rem auto;
   width: 95%;
-  min-width: 40rem;
   gap: 2rem;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
@@ -172,7 +163,6 @@ h2.meterLabel {
 .dividerLine {
   margin: 1rem auto;
   width: 100%;
-  min-width: 40rem;
   border: 2px solid #f2e7d5;
 }
 
@@ -383,7 +373,6 @@ h2.meterLabel {
 .footer {
   display: flex;
   width: 100%;
-  min-width: 40rem;
   height: 170px;
   background-color: #f2e7d5;
 }
