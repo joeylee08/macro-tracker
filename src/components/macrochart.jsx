@@ -37,13 +37,8 @@ const MacroChart = ({ myFoods, myMeals, myMealEntries }) => {
     })
 
     return (
-        <div className='myGoals'>
-            <div className ='myGoalsChild'>
-                {macroRows}
-            </div>
-            <div className='myGoalsChild'>
-
-            </div>
+        <div id='macroChart'>
+            {macroRows}
         </div>
     )
 }

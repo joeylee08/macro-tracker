@@ -107,7 +107,7 @@ p {
   width: 95%;
 }
 
-.myGoalsChild {
+#macroChart {
   display: flex;
   flex-direction: column;
   align-items: center;
