@@ -6,7 +6,7 @@ import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
 
 
-const Menu = ({ currentUserId, myFoods, myMeals, setMyFoods, setMyMeals }) => {  
+const Menu = ({ currentUser, myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const handleSetMyFoods = (newFood) => {
         if (isEditing) {
             const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
@@ -80,10 +80,10 @@ const Menu = ({ currentUserId, myFoods, myMeals, setMyFoods, setMyMeals }) => {
                 <button className='createBtn' id='createMealBtn' onClick={() => handleToggleForm('meal')}>Create New Meal</button>
                 <button className='createBtn' id='addItemBtn' onClick={() => handleToggleForm('food')}>Add Ingredient</button>
             </div>
-            <Meals currentUserId={currentUserId} myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
+            <Meals currentUser={currentUser} myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUserId={currentUserId} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
         </div>
     )
 }
