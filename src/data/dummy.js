@@ -1,12 +1,12 @@
 const users = [
-    { id: 1, username: 'joeylee08', firstName: 'Joseph', lastName: 'Lee', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 2, username: 'demonslayer666', firstName: 'Bobert', lastName: 'Smith', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 3, username: 'wildgirl69', firstName: 'Katie', lastName: 'Contreras', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 4, username: 'littlekidlover', firstName: 'Michael', lastName: 'Scott', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 5, username: 'prisonbuddy', firstName: 'Ablaham', lastName: 'Rincon', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 6, username: 'oregondude12', firstName: 'Taylor', lastName: 'Treehugger', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 7, username: 'therealbobhope', firstName: 'Bob', lastName: 'Hope', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
-    { id: 8, username: 'ibench405', firstName: 'Yeah', lastName: 'Bruh', dateJoined: '', calGoal: 0, proteinGoal: 0, carbGoal: 0, fatGoal: 0, sodiumGoal: 0},
+    { id: 1, username: 'joeylee08', firstName: 'Joseph', lastName: 'Lee', dateJoined: '', macroGoals: {cal: 2200, protein: 120, carb: 200, fat: 80, sodium: 1800}},
+    { id: 2, username: 'demonslayer666', firstName: 'Bobert', lastName: 'Smith', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 3, username: 'wildgirl69', firstName: 'Katie', lastName: 'Contreras', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 4, username: 'littlekidlover', firstName: 'Michael', lastName: 'Scott', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 5, username: 'prisonbuddy', firstName: 'Ablaham', lastName: 'Rincon', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 6, username: 'oregondude12', firstName: 'Taylor', lastName: 'Treehugger', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 7, username: 'therealbobhope', firstName: 'Bob', lastName: 'Hope', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 8, username: 'ibench405', firstName: 'Yeah', lastName: 'Bruh', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
 ]
 
 const meals = [

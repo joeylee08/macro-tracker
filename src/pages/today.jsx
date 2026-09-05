@@ -2,10 +2,8 @@ import { useState } from "react";
 import { mealEntries } from "../data/dummy";
 import MacroChart from "../components/macrochart";
 
-const currentUserId = 1
-
-const Today = ({ currentUserId, myFoods, myMeals }) => {
-    const [myMealEntries, setMealEntries] = useState(mealEntries.filter(item => item.userId === currentUserId))
+const Today = ({ currentUser, myFoods, myMeals }) => {
+    const [myMealEntries, setMealEntries] = useState(mealEntries.filter(item => item.userId === currentUser.id))
 
     return (
         <div className='mainPage'>
@@ -13,9 +11,9 @@ const Today = ({ currentUserId, myFoods, myMeals }) => {
                 <h1>Your Daily Totals</h1>
             </div>
             <div className='myGoals'>
-                <MacroChart myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries}/>
+                <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries}/>
                 <div className='myGoalsChild'>
-                    
+
                 </div>
             </div>
         </div>
