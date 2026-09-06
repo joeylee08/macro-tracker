@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { mealEntries } from "../data/dummy";
 import MacroChart from "../components/macrochart";
+import MealSelect from "../components/mealselect";
 
 const Today = ({ currentUser, myFoods, myMeals }) => {
     const [myMealEntries, setMealEntries] = useState(mealEntries.filter(item => item.userId === currentUser.id))
@@ -16,8 +17,8 @@ const Today = ({ currentUser, myFoods, myMeals }) => {
             <div className='headerBox'>
                 <h1>Your Daily Dashboard</h1>
             </div>
-            <div className='myGoals2'>
-                PENIS PENIS
+            <div className='myGoals2' id='mealsDash'>
+                <MealSelect myMeals={myMeals} myMealEntries={myMealEntries} />
             </div>
         </div>
     )
