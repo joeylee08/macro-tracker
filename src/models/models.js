@@ -40,7 +40,6 @@ const mealEntryModel = {
     id: 'number',
     userId: 'number',
     mealId: 'number',
-    servings: 'number',
     dateAndTime: 'string'
 }
 
