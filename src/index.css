@@ -404,6 +404,7 @@ h2.stats {
   border-color: #cbb59b;
   border-radius: 5px;
   background-color: white;
+  transition: border-color 0.5s ease;
 }
 
 #formBtnMeal {
@@ -413,6 +414,7 @@ h2.stats {
   border-color: #cbb59b;
   border-radius: 5px;
   background-color: white;
+  transition: border-color 0.5s ease;
 }
 
 #formBtnFood:hover {
