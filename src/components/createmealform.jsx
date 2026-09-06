@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import FoodThumb from './foodthumb'
 
 const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, handleToggleForm, isEditing, selectedItem}) => {
     const [meal, setMeal] = useState(
@@ -96,10 +97,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
         }
 
         return (
-            <div key={food.id} className='thumbnail'>
-                <p id='thumbnailText'>{food.name} {+food.servingSize * +item.units} {food.servingUnit}</p>
-                <p id='removeX' onClick={() => closeThumbnail(food.id)}>×</p>
-            </div>
+            <FoodThumb food={food} item={item} closeThumbnail={closeThumbnail} />
         )
     })
 
