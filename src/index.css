@@ -121,6 +121,18 @@ p {
   padding: 1rem 0;
 }
 
+.myGoals3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto auto;
+  width: 95%;
+  margin: 1.7rem auto;
+  gap: 1rem;
+  background-color: white;
+}
+
 #macroChart {
   display: flex;
   flex-direction: column;
@@ -173,7 +185,6 @@ h2.stats {
 }
 
 #selectorBox {
-  border: 2px solid red;
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -181,21 +192,22 @@ h2.stats {
 }
 
 #mealSelect {
+  height: 2rem;
   width: 15rem;
-  height: 3rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 #addDailyBtn {
   width: 8rem;
-  height: 3rem;
-  font-size: 1.2rem;
+  height: 2rem;
+  font-size: 1rem;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
   background-color: white;
   transition: border-color 0.5s ease;
+  box-sizing: border-box;
 }
 
 #addDailyBtn:hover {
