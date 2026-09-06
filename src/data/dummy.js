@@ -32,6 +32,7 @@ const mealEntries = [
     {id: 1, userId: 1, mealId: 1, servings: 1, dateAndTime: "2026-09-04T08:47:00"},
     {id: 2, userId: 1, mealId: 3, servings: 1, dateAndTime: "2026-09-04T10:23:00"},
     {id: 3, userId: 1, mealId: 2, servings: 1, dateAndTime: "2026-09-04T16:02:00"},
+    {id: 4, userId: 1, mealId: 3, servings: 1, dateAndTime: "2026-09-04T20:23:00"}
 ]
 
 

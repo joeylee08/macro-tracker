@@ -1,9 +1,8 @@
 const MealSelect = ({ myMeals, myMealEntries}) => {
-    const options = myMealEntries.map(item => {
-        const meal = myMeals.find (selected => selected.id === item.mealId)
-
-        return <option key={meal.id}>{meal.name}</option>
+    const options = myMeals.map(meal => {
+        return <option key={meal.id} name=''>{meal.name}</option>
     })
+    
     return (
         <div id='selectorBox'>
             <select id='mealSelect'>
