@@ -1,12 +1,12 @@
 import { calculateMacros } from "../util/helpers"
 
-const DailyMealCard = ({ meal, myFoods }) => {
+const DailyMealCard = ({ entryId, meal, myFoods, handleMealEntries }) => {
     
     const macros = calculateMacros(myFoods, meal)
 
     return (
         <div className='foodCard'>
-            <button type='button' className='deleteBtn'>×</button>
+            <button type='button' className='deleteBtn' onClick={() => handleMealEntries(entryId, 'delete')}>×</button>
             <h3>{meal.name}</h3>
             <p>{Math.round(macros.cal)} Calories</p>
             <p>{Math.round(macros.protein)}g Protein</p>

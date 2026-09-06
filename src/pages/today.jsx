@@ -7,7 +7,7 @@ import DailyMealCard from "../components/dailymealcard";
 const Today = ({ currentUser, myFoods, myMeals }) => {
     const [myMealEntries, setMealEntries] = useState(mealEntries.filter(entry => entry.userId === currentUser.id))
     
-    const handleMealEntries = (mealId, action) => {
+    const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
             const nextEntryIndex = myMealEntries.length
                                     ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
@@ -16,16 +16,16 @@ const Today = ({ currentUser, myFoods, myMeals }) => {
             const newMealEntry = {
                     id: nextEntryIndex,
                     userId: currentUser.id,
-                    mealId: mealId,
+                    mealId: mealOrEntryId,
                     consumedAt: new Date().toISOString()
             }
-            
+
             setMealEntries(previous => ([
                 ...previous,
                 newMealEntry
             ]))
         } else if (action === 'delete') {
-            const updatedEntries = myMealEntries.filter(entry => entry.mealId !== mealId)
+            const updatedEntries = myMealEntries.filter(entry => entry.id !== mealOrEntryId)
             setMealEntries(updatedEntries)
         }
     }
@@ -35,7 +35,7 @@ const Today = ({ currentUser, myFoods, myMeals }) => {
 
         if (!selectedMeal) return null
 
-        return <DailyMealCard key={entry.id} meal={selectedMeal} myFoods={myFoods} handleMealEntries={handleMealEntries}/>
+        return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} handleMealEntries={handleMealEntries}/>
     })
 
     return (
