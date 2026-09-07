@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import FoodThumb from './foodthumb'
 
-const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, handleToggleForm, isEditing, selectedItem}) => {
+const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handleToggleForm, isEditing, selectedItem}) => {
     const [meal, setMeal] = useState(
         isEditing  
             ? selectedItem
             : {
                 id: nextMealIndex,
                 name: '',
-                userId: currentUserId,
+                userId: currentUser.id,
                 ingredients: []
             }
         )
@@ -115,7 +115,7 @@ const CreateMealForm = ({ onAddMeal, currentUserId, nextMealIndex, myFoods, hand
             <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
             <div id='btnContainer'>
                 <button type='button' id='formBtnMeal' onClick={handleAddIngredient}>Add Ingredient</button>
-                <button type='submit' id='formBtnMeal'>{isEditing ? 'Save Edit' : 'Save New Meal'}</button>
+                <button type='submit' id='formBtnMeal' onClick={handleSubmit}>{isEditing ? 'Save Edit' : 'Save New Meal'}</button>
             </div>
             <div id='dashboard'>
                 {dashboard}
