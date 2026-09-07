@@ -5,12 +5,17 @@ import MealSelect from "../components/mealselect";
 import DailyMealCard from "../components/dailymealcard";
 
 const Today = ({ currentUser, myFoods, myMeals }) => {
+    const todaysDate = new Date().toLocaleDateString('en-GB', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric'})
+
     const [myMealEntries, setMealEntries] = useState(mealEntries.filter(entry => entry.userId === currentUser.id))
     
     const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
             if (mealOrEntryId === 0) return
-            
+
             const nextEntryIndex = myMealEntries.length
                                     ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
                                     : 1
@@ -42,6 +47,9 @@ const Today = ({ currentUser, myFoods, myMeals }) => {
 
     return (
         <div className='mainPage'>
+            <div id='dateAndTime'>
+                <h1>{todaysDate}</h1>
+            </div>
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>
             </div>
