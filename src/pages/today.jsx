@@ -9,6 +9,8 @@ const Today = ({ currentUser, myFoods, myMeals }) => {
     
     const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
+            if (mealOrEntryId === 0) return
+            
             const nextEntryIndex = myMealEntries.length
                                     ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
                                     : 1
