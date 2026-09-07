@@ -108,6 +108,7 @@ p {
   width: 95%;
   height: 2.5rem;
   margin: 0 auto;
+  margin-top: -0.4rem;
 }
 
 #dateAndTime h1 {
