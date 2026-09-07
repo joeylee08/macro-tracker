@@ -127,10 +127,20 @@ p {
   align-items: center;
   justify-content: flex-start;
   margin: auto auto;
+  min-height: 9.7rem;
   width: 95%;
   margin: 1.7rem auto;
   gap: 1rem;
   background-color: white;
+}
+
+h1#dashboardPlaceholder {
+  font-size: 2.5rem;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  color: #cbb59b;
+  margin-top: -1.5rem;
 }
 
 #macroChart {
