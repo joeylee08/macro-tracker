@@ -11,10 +11,10 @@ const users = [
 
 const meals = [
     {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 4, units: 1}, {foodId: 5, units: 1}, {foodId: 6, units: 1}, {foodId: 7, units: 1}]},
-    {id: 2, name: 'Ch. Avocado Wrap', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 8, units: 0.125}, {foodId: 2, units: 3}, {foodId: 14, units: 1}, {foodId: 11, units: 2}, {foodId: 13, units: 0.5}]},
-    {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, units: 2}, {foodId: 8, units: 0.125}, {foodId: 2, units: 3}, {foodId: 14, units: 1}, {foodId: 13, units: 0.5}]},
-    {id: 4, name: 'Orange Ch. Bowl', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 0.5}]},
-    {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 4, units: 1}, {foodId: 5, units: 2}, {foodId: 6, units: 1}, {foodId: 7, units: 1}]}
+    {id: 2, name: 'Ch. Avocado Wrap', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 8, units: 0.125}, {foodId: 2, units: 3}, {foodId: 14, units: 1}, {foodId: 11, units: 2}, {foodId: 13, units: 1}]},
+    {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, units: 2}, {foodId: 8, units: 0.125}, {foodId: 2, units: 3}, {foodId: 14, units: 1}, {foodId: 13, units: 1}]},
+    {id: 4, name: 'Orange Ch. Bowl', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
+    {id: 5, name: 'Prison Tostadas', userId: 1, ingredients: [{foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 10, units: 1}, {foodId: 11, units: 1}]}
 ]
 
 const foods= [
@@ -30,7 +30,7 @@ const foods= [
     {id: 10, userId: 1, name: 'Chili Garlic Sauce', servingSize: 1, servingUnit: 'tsp', cal: 0, protein: 0, carb: 0, fat: 0, sodium: 75},
     {id: 11, userId: 1, name: 'Southwest Salsa', servingSize: 1, servingUnit: 'tbsp', cal: 7.5, protein: 0, carb: 1.5, fat: 0, sodium: 65},
     {id: 12, userId: 1, name: 'Orange Sauce', servingSize: 1, servingUnit: 'tbsp', cal: 22, protein: 0, carb: 5.5, fat: 0, sodium: 121},
-    {id: 13, userId: 1, name: 'Olive Oil', servingSize: 1, servingUnit: 'tsp', cal: 40, protein: 0, carb: 0, fat: 4.67, sodium: 0},
+    {id: 13, userId: 1, name: 'Olive Oil', servingSize: 0.5, servingUnit: 'tsp', cal: 20, protein: 0, carb: 0, fat: 2.34, sodium: 0},
     {id: 14, userId: 1, name: 'Hotel Seasoning', servingSize: 0.5, servingUnit: 'tsp', cal: 0, protein: 0, carb: 0, fat: 0, sodium: 61},
     {id: 15, userId: 1, name: 'Cabbage Mix', servingSize: 0.5, servingUnit: 'cup', cal: 15, protein: 0.5, carb: 0, fat: 0, sodium: 12},
 ]
