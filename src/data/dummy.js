@@ -10,11 +10,13 @@ const users = [
 ]
 
 const meals = [
-    {id: 1, name: 'Prison Oatmeal', userId: 1, ingredients: [{foodId: 4, units: 1}, {foodId: 5, units: 1}, {foodId: 6, units: 1}, {foodId: 7, units: 1}]},
+    {id: 1, name: 'OSP Oatmeal', userId: 1, ingredients: [{foodId: 4, units: 1}, {foodId: 5, units: 1}, {foodId: 6, units: 1}, {foodId: 7, units: 1}]},
     {id: 2, name: 'Ch. Avocado Wrap', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 8, units: 0.125}, {foodId: 2, units: 3}, {foodId: 14, units: 1}, {foodId: 11, units: 2}, {foodId: 13, units: 1}]},
     {id: 3, name: 'Egg Avocado Wrap', userId: 1, ingredients: [{foodId: 3, units: 2}, {foodId: 8, units: 0.125}, {foodId: 2, units: 3}, {foodId: 14, units: 1}, {foodId: 13, units: 1}]},
     {id: 4, name: 'Orange Ch. Bowl', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
-    {id: 5, name: 'Prison Tostadas', userId: 1, ingredients: [{foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 10, units: 1}, {foodId: 11, units: 1}]}
+    {id: 5, name: 'OSP Tostadas Ch.', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 10, units: 1}, {foodId: 11, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
+    {id: 6, name: 'Orange Pork Bowl', userId: 1, ingredients: [{foodId: 16, units: 4.4}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
+    {id: 7, name: 'OSP Tostadas Pork', userId: 1, ingredients: [{foodId: 16, units: 4.4}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 10, units: 1}, {foodId: 11, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]}
 ]
 
 const foods= [
@@ -33,6 +35,7 @@ const foods= [
     {id: 13, userId: 1, name: 'Olive Oil', servingSize: 0.5, servingUnit: 'tsp', cal: 20, protein: 0, carb: 0, fat: 2.34, sodium: 0},
     {id: 14, userId: 1, name: 'Hotel Seasoning', servingSize: 0.5, servingUnit: 'tsp', cal: 0, protein: 0, carb: 0, fat: 0, sodium: 61},
     {id: 15, userId: 1, name: 'Cabbage Mix', servingSize: 0.5, servingUnit: 'cup', cal: 15, protein: 0.5, carb: 0, fat: 0, sodium: 12},
+    {id: 16, userId: 1, name: 'Pork Chop', servingSize: 1, servingUnit: 'oz', cal: 45, protein: 6, carb: 0, fat: 2, sodium: 14}
 ]
 
 const mealEntries = [
