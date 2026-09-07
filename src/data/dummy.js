@@ -16,7 +16,8 @@ const meals = [
     {id: 4, name: 'Orange Ch. Bowl', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
     {id: 5, name: 'OSP Tostadas Ch.', userId: 1, ingredients: [{foodId: 1, units: 4.5}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
     {id: 6, name: 'Orange Pork Bowl', userId: 1, ingredients: [{foodId: 16, units: 4.4}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
-    {id: 7, name: 'OSP Tostadas Pork', userId: 1, ingredients: [{foodId: 16, units: 4.4}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]}
+    {id: 7, name: 'OSP Tostadas Pork', userId: 1, ingredients: [{foodId: 16, units: 4.4}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
+    {id: 8, name: 'Avocado Tostadas', userId: 1, ingredients: [{foodId: 2, units: 3}, {foodId: 8, units: 0.25}, {foodId: 11, units: 2}]}
 ]
 
 const foods= [
