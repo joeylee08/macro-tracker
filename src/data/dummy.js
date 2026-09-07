@@ -26,7 +26,7 @@ const foods= [
     {id: 6, userId: 1, name: 'Honey', servingSize: 1, servingUnit: 'tbsp', cal: 70, protein: 0, carb: 17, fat: 0, sodium: 0},
     {id: 7, userId: 1, name: 'Banana', servingSize: 1, servingUnit: 'piece', cal: 105, protein: 1.3, carb: 27, fat: 0.4, sodium: 1},
     {id: 8, userId: 1, name: 'Avocado', servingSize: 1, servingUnit: 'piece', cal: 240, protein: 3, carb: 13, fat: 22, sodium: 10},
-    {id: 9, userId: 1, name: 'White Rice', servingSize: 0.5, servingUnit: 'cup', cal: 170, protein: 4, carb: 138, fat: 0, sodium: 0},
+    {id: 9, userId: 1, name: 'White Rice', servingSize: 0.5, servingUnit: 'cup', cal: 170, protein: 4, carb: 38, fat: 0, sodium: 0},
     {id: 10, userId: 1, name: 'Chili Garlic Sauce', servingSize: 1, servingUnit: 'tsp', cal: 0, protein: 0, carb: 0, fat: 0, sodium: 75},
     {id: 11, userId: 1, name: 'Southwest Salsa', servingSize: 1, servingUnit: 'tbsp', cal: 7.5, protein: 0, carb: 1.5, fat: 0, sodium: 65},
     {id: 12, userId: 1, name: 'Orange Sauce', servingSize: 1, servingUnit: 'tbsp', cal: 22, protein: 0, carb: 5.5, fat: 0, sodium: 121},
