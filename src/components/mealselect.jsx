@@ -22,10 +22,10 @@ const MealSelect = ({ myMeals, handleMealEntries }) => {
     return (
         <div id='selectorBox'>
             <select id='mealSelect' value={selectedMealId} onChange={handleChange}>
-                <option value={0}>Add Daily Meal</option>
+                <option value={0}>Select a Meal</option>
                 {options}
             </select>
-            <button type='button' id='addDailyBtn' onClick={() => addAndClear('add')}>Add Item</button>
+            <button type='button' id='addDailyBtn' onClick={() => addAndClear('add')}>Log Meal</button>
         </div>
         
     )
