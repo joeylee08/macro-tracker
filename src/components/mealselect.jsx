@@ -8,9 +8,11 @@ const MealSelect = ({ myMeals, handleMealEntries }) => {
         setSelectedMealId(mealId)
     }
  
-    const options = myMeals.map(meal => {
-        return <option key={meal.id} value={meal.id}>{meal.name}</option>
-    })
+    const options = myMeals
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map(meal => {
+                        return <option key={meal.id} value={meal.id}>{meal.name}</option>
+                    })
 
     const addAndClear = (selectedMealId, action) => {
         handleMealEntries(selectedMealId, action)
