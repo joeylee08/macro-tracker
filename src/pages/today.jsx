@@ -1,16 +1,11 @@
 import { useState } from "react";
-import { mealEntries } from "../data/dummy";
 import MacroChart from "../components/macrochart";
 import MealSelect from "../components/mealselect";
 import DailyMealCard from "../components/dailymealcard";
+import { getFormattedDate } from "../util/helpers";
 
-const Today = ({ currentUser, myFoods, myMeals }) => {
-    const todaysDate = new Date().toLocaleDateString('en-GB', {
-                            month: 'long',
-                            day: 'numeric',
-                            year: 'numeric'})
-
-    const [myMealEntries, setMealEntries] = useState(mealEntries.filter(entry => entry.userId === currentUser.id))
+const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries }) => {
+    const todaysDate = getFormattedDate(new Date())
     
     const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
@@ -32,12 +27,15 @@ const Today = ({ currentUser, myFoods, myMeals }) => {
                 newMealEntry
             ]))
         } else if (action === 'delete') {
-            const updatedEntries = myMealEntries.filter(entry => entry.id !== mealOrEntryId)
-            setMealEntries(updatedEntries)
+            setMealEntries(previous => previous.filter(entry => entry.id !== mealOrEntryId))
         }
     }
 
-    const dailyMealCards = myMealEntries.map(entry => {
+    // dateAndTime: "2026-09-04T08:47:00-07:00"
+
+    const todaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === todaysDate)
+
+    const dailyMealCards = todaysEntries.map(entry => {
         const selectedMeal = myMeals.find(meal => meal.id === +entry.mealId)
 
         if (!selectedMeal) return null

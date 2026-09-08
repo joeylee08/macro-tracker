@@ -53,6 +53,13 @@ const calculateMacros = (myFoods, meal) => {
     return macros
 }
 
+const getFormattedDate = (date) => {
+    return new Date(date).toLocaleDateString('en-GB', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'})
+}
+
 //when creating a new entry for globalFood or food, the user will have the 
 //option of simply not entering macros they don't want to log
 
@@ -61,4 +68,4 @@ const calculateMacros = (myFoods, meal) => {
 //the empty ingredients array will be there independently of user interaction
 //ingredient structure will be validated as they are added
 
-export { validateData, calculateMacros };
+export { validateData, calculateMacros, getFormattedDate };

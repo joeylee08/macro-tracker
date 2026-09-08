@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { foods, meals, users } from './data/dummy';
+import { foods, meals, users, mealEntries } from './data/dummy';
 import { useState } from 'react'
 import Today from './pages/today';
 import Menu from './pages/menu';
@@ -14,14 +14,15 @@ const currentUser = users[0]
 function App() {
   const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUser.id))
   const [myMeals, setMyMeals] = useState(meals.filter(item => item.userId === currentUser.id))
+  const [myMealEntries, setMealEntries] = useState(mealEntries.filter(entry => entry.userId === currentUser.id))
 
   return (
     <BrowserRouter>
       <NavBar/>
       <Routes>
-        <Route path='/' element={<Today currentUser={currentUser} myFoods={myFoods} myMeals={myMeals}/>} />
+        <Route path='/' element={<Today currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
         <Route path='/menu' element={<Menu currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
-        <Route path='/history' element={<History currentUser={currentUser}/>} />
+        <Route path='/history' element={<History currentUser={currentUser} myMealEntries={myMealEntries}/>} />
         <Route path='/friends' element={<Friends currentUser={currentUser}/>} />
         <Route path="*" element={<Error />} />
       </Routes>
