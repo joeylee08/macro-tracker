@@ -60,6 +60,10 @@ const getFormattedDate = (date) => {
                         year: 'numeric'})
 }
 
+const getMonthYear = (isoFormat) => {
+    return isoFormat.slice(0, 7)
+}
+
 //when creating a new entry for globalFood or food, the user will have the 
 //option of simply not entering macros they don't want to log
 
@@ -68,4 +72,4 @@ const getFormattedDate = (date) => {
 //the empty ingredients array will be there independently of user interaction
 //ingredient structure will be validated as they are added
 
-export { validateData, calculateMacros, getFormattedDate };
+export { validateData, calculateMacros, getFormattedDate, getMonthYear };
