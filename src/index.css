@@ -164,6 +164,7 @@ h1#dashboardPlaceholder {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.2rem;
   width: 100%;
   margin: 1.7rem auto;
   background-color: white;
@@ -180,7 +181,7 @@ h2.meterLabel {
 
 .meterAndLabel {
   display: grid;
-  grid-template-columns: 8.5rem 1fr 9rem 2rem;
+  grid-template-columns: 7.6rem 1fr 9rem 2rem;
   gap: 0.8rem;
   align-items: center;
   align-content: center;
@@ -190,7 +191,7 @@ h2.meterLabel {
 }
 
 .macroMeter {
-  height: 1.2rem;
+  height: 1.3rem;
   border: 2px solid #cbb59b;
   box-sizing: border-box;
   border-radius: 5px;
