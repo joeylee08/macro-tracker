@@ -211,6 +211,13 @@ h2.stats {
   margin-left: 0.5rem;
 }
 
+#remaining {
+  margin-right: -1rem;
+  color: green;
+  font-size: 1rem;
+  align-self: right;
+}
+
 #selectorBox {
   display: flex;
   gap: 2rem;
