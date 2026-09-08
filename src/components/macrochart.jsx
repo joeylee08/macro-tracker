@@ -37,7 +37,7 @@ const MacroChart = ({ currentUser, myFoods, myMeals, myMealEntries }) => {
                     <div className='macroMeterFill' id={macro} style={{ width: `${Math.min(percentage, 100)}%`}}></div>
                 </div>
                 <h2 className='stats' style={{ color: percentage > 100 ? 'red' : 'inherit' }}>{Math.round(value)} / {userGoals[macro]} [{percentage}%]</h2>
-                <h3 id='remaining'>{remainder}</h3>
+                <h3 id='remaining' style={{ color: percentage > 100 ? 'red' : 'green' }}>{percentage <= 100 ? remainder : `+${Math.abs(remainder)}`}</h3>
             </div>
         )
     })
