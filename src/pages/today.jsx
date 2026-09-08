@@ -19,7 +19,7 @@ const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries })
                     id: nextEntryIndex,
                     userId: currentUser.id,
                     mealId: mealOrEntryId,
-                    consumedAt: new Date().toISOString()
+                    dateAndTime: new Date().toISOString()
             }
 
             setMealEntries(previous => ([
@@ -30,8 +30,6 @@ const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries })
             setMealEntries(previous => previous.filter(entry => entry.id !== mealOrEntryId))
         }
     }
-
-    // dateAndTime: "2026-09-04T08:47:00-07:00"
 
     const todaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === todaysDate)
 

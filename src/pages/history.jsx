@@ -1,4 +1,5 @@
-const History = () => {
+const History = ({ myMealEntries}) => {
+    
     return (
         <div className='mainPage'>
             <h1>Your Dietary History</h1>
