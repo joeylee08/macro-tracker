@@ -504,12 +504,17 @@ h2.stats {
   border: 3px solid #cbb59b;
   border-radius: 8px;
   gap: 1rem;
-  width: 37rem;
-  height: 25rem;
+  width: 32rem;
+  height: 26rem;
   margin: 0 auto;
   margin-top: 1.4rem;
   padding: 2rem 0;
   box-sizing: border-box;
+}
+
+#emptyDayTile {
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
 #dayTile {
