@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { calculateMacros } from '../util/helpers'
 
-const MacroChart = ({ currentUser, myFoods, myMeals, myMealEntries }) => {
+const MacroChart = ({ currentUser, myFoods, myMeals, todaysEntries }) => {
 
-    const macroTotals = myMealEntries.reduce((totals, entry) => {
+    const macroTotals = todaysEntries.reduce((totals, entry) => {
         const meal = myMeals.find(item => item.id === entry.mealId)
 
         if (!meal) return totals

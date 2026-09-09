@@ -50,7 +50,7 @@ const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries })
                 <h1>Your Daily Totals</h1>
             </div>
             <div className='myGoals'>
-                <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries}/>
+                <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={todaysEntries}/>
             </div>
             <div className='headerBox'>
                 <h1>Your Daily Dashboard</h1>
