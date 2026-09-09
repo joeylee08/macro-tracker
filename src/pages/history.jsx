@@ -1,14 +1,20 @@
 import { getFormattedDate, getMonthYear } from "../util/helpers"
+import MonthChart from "../components/monthchart"
+import { useState } from "react"
 
-const History = ({ myMealEntries}) => {
+const History = ({ myMealEntries, myMeals }) => {
     const now = new Date()
-    const currentYearMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
-    const thisMonthsEntries = myMealEntries.filter(entry => getMonthYear(entry.dateAndTime) === currentYearMonth)
-    
+
+    const [currentYearMonth, setCurrentYearMonth] = useState(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`)
+
     return (
         <div className='mainPage'>
-            <h1>Your Dietary History</h1>
-            <p>What have you eaten?</p>
+            <div className='headerBox'>
+                <h1>Your Dietary History</h1>
+            </div>
+            <div className='myHistory'>
+                <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} />
+            </div>
         </div>
     )
 }

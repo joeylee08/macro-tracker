@@ -490,6 +490,18 @@ h2.stats {
   border-radius: 5px;
 }
 
+.myHistory {
+  margin: auto auto;
+  width: 95%;
+  border: 2px solid red;
+  box-sizing: border-box;
+}
+
+#monthChart {
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
+}
+
 .footer {
   display: flex;
   width: 100%;
