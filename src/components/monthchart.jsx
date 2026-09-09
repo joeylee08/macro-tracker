@@ -4,7 +4,7 @@ const MonthChart = ({ currentYearMonth, myMealEntries }) => {
     const thisMonthsEntries = myMealEntries.filter(entry => entry.dateAndTime.slice(0, 7) === currentYearMonth)    
 
     const days = Array(dayCount).fill(0).map((entry, index) => 
-        <button key={index + 1} type='button' id='dayTile'>Penis {index + 1} of {dayCount}</button>
+        <button key={index + 1} type='button' id='dayTile'>{index + 1}</button>
     )
 
     return (
