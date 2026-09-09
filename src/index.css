@@ -493,13 +493,32 @@ h2.stats {
 .myHistory {
   margin: auto auto;
   width: 95%;
-  border: 2px solid red;
   box-sizing: border-box;
 }
 
 #monthChart {
-  border: 3px solid #f2e7d5;
+  display: grid;
+  grid-template-columns: repeat(7, 3rem);
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #cbb59b;
   border-radius: 8px;
+  gap: 1rem;
+  width: 37rem;
+  height: 25rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 2rem 0;
+  box-sizing: border-box;
+}
+
+#dayTile {
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 2px solid #d9b99b;
+  border-radius: 3px;
+  background-color: white;
+
 }
 
 .footer {
