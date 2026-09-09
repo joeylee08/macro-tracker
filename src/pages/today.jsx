@@ -43,11 +43,11 @@ const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries })
 
     return (
         <div className='mainPage'>
-            <div id='dateAndTime'>
-                <h1>{todaysDate}</h1>
-            </div>
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>
+            </div>
+            <div className='dateHeader'>
+                <h1>{todaysDate}</h1>
             </div>
             <div className='myGoals'>
                 <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={todaysEntries}/>
