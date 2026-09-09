@@ -498,28 +498,23 @@ h2.stats {
 
 #monthChart {
   display: grid;
-  grid-template-columns: repeat(7, 3rem);
+  grid-template-columns: repeat(7, 3.5rem);
   justify-content: center;
   align-items: center;
-  border: 3px solid #cbb59b;
-  border-radius: 8px;
+  border: 2px solid red;
   gap: 1rem;
-  width: 32rem;
-  height: 26rem;
-  margin: 0 auto;
-  margin-top: 1.4rem;
-  padding: 2rem 0;
+  margin: 1rem auto;
   box-sizing: border-box;
 }
 
 #emptyDayTile {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 100%;
+  aspect-ratio: 1;
 }
 
 #dayTile {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 100%;
+  aspect-ratio: 1;
   border: 2px solid #d9b99b;
   border-radius: 3px;
   background-color: white;

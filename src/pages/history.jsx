@@ -6,7 +6,7 @@ const History = ({ myMealEntries, myMeals }) => {
     const now = new Date()
 
     const [currentYearMonth, setCurrentYearMonth] = useState(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`)
-   
+    // const currentYearMonth = '2027-05'
     const [year, month] = currentYearMonth.split('-')
     const formattedMonth = new Date(year, month - 1).toLocaleDateString('en-US', {
                                                         month: 'long',
