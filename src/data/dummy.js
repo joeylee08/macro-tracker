@@ -31,7 +31,7 @@ const foods= [
     {id: 8, userId: 1, name: 'Avocado', servingSize: 1, servingUnit: 'piece', cal: 240, protein: 3, carb: 13, fat: 22, sodium: 10},
     {id: 9, userId: 1, name: 'White Rice', servingSize: 0.5, servingUnit: 'cup', cal: 170, protein: 4, carb: 38, fat: 0, sodium: 0},
     {id: 10, userId: 1, name: 'Chili Garlic Sauce', servingSize: 1, servingUnit: 'tsp', cal: 0, protein: 0, carb: 0, fat: 0, sodium: 75},
-    {id: 11, userId: 1, name: 'Southwest Salsa', servingSize: 1, servingUnit: 'tbsp', cal: 7.5, protein: 0, carb: 1.5, fat: 0, sodium: 65},
+    {id: 11, userId: 1, name: 'Tapatio Salsa', servingSize: 1, servingUnit: 'tbsp', cal: 5, protein: 0, carb: 1.5, fat: 0, sodium: 62.5},
     {id: 12, userId: 1, name: 'Orange Sauce', servingSize: 1, servingUnit: 'tbsp', cal: 22, protein: 0, carb: 5.5, fat: 0, sodium: 121},
     {id: 13, userId: 1, name: 'Olive Oil', servingSize: 0.5, servingUnit: 'tsp', cal: 20, protein: 0, carb: 0, fat: 2.34, sodium: 0},
     {id: 14, userId: 1, name: 'Hotel Seasoning', servingSize: 0.5, servingUnit: 'tsp', cal: 0, protein: 0, carb: 0, fat: 0, sodium: 61},
