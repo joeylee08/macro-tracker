@@ -8,6 +8,7 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
     
     // calendar stuff
     const now = new Date()
+
     const [currentYearMonth, setCurrentYearMonth] = useState(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`)
     const [year, month] = currentYearMonth.split('-')
     const formattedMonth = new Date(year, month - 1).toLocaleDateString('en-US', {
@@ -18,8 +19,14 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
 
-    const [selectedDay, setSelectedDay] = useState(getFormattedDate(yesterday))                                                 
+    const [selectedDay, setSelectedDay] = useState(getFormattedDate(yesterday))   
+    const handleSelectDay = (dayNumber) => {
+        const newDay = new Date(+year, +month - 1, dayNumber)
+        setSelectedDay(getFormattedDate(newDay))
+    }            
+                                      
     const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
+
 
     const dailyMealCards = selectedDaysEntries.map(entry => {
         const selectedMeal = myMeals.find(meal => meal.id === +entry.mealId)
@@ -39,7 +46,7 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
-                <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} />
+                <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
                 <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>

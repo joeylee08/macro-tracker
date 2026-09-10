@@ -561,6 +561,7 @@ h2.stats {
 
 #dayTile:hover {
   border-color: green;
+  cursor: pointer;
 }
 
 .footer {
