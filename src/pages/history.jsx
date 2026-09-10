@@ -21,7 +21,12 @@ const History = ({ myMealEntries, myMeals }) => {
                 <h1>{formattedMonth}</h1>
             </div>
             <div className='myHistory'>
+                <hr className='dividerLine'/>
                 <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} />
+                <hr className='dividerLine'/>
+            </div>
+            <div className='myHistory2'>
+
             </div>
         </div>
     )

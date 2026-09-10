@@ -273,7 +273,7 @@ h2.stats {
 }
 
 .dividerLine {
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   width: 100%;
   border: 2px solid #f2e7d5;
 }
@@ -500,9 +500,8 @@ h2.stats {
   grid-template-columns: repeat(7, 3.5rem);
   justify-content: center;
   align-items: center;
-  /* border: 2px solid red; */
   gap: 1rem;
-  margin: 1rem auto;
+  margin: 2rem auto;
   box-sizing: border-box;
 }
 
