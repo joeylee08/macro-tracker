@@ -291,8 +291,8 @@ h2.stats {
   transition: border-color 0.5s ease;
 }
 
-.foodCard:hover {
-  border: 3px solid green;
+.foodCard:not(.readOnly):hover {
+    border-color: green;
 }
 
 .foodCard h3 {
@@ -499,6 +499,19 @@ h2.stats {
   margin: auto auto;
   width: 95%;
   box-sizing: border-box;
+}
+
+.myHistory3 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin: auto auto;
+  min-height: 9.7rem;
+  width: 95%;
+  margin: 1.7rem auto;
+  gap: 1rem;
+  background-color: white;
 }
 
 

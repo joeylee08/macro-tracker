@@ -1,6 +1,7 @@
 import { getFormattedDate, getMonthYear } from "../util/helpers"
 import MonthChart from "../components/monthchart"
 import MacroChart from "../components/macrochart"
+import DailyMealCard from "../components/dailymealcard"
 import { useState } from "react"
 
 const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
@@ -19,6 +20,14 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
 
     const [selectedDay, setSelectedDay] = useState(getFormattedDate(yesterday))                                                 
     const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
+
+    const dailyMealCards = selectedDaysEntries.map(entry => {
+        const selectedMeal = myMeals.find(meal => meal.id === +entry.mealId)
+
+        if (!selectedMeal) return null
+
+        return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} readOnly={true}/>
+    })
     
     return (
         <div className='mainPage'>
@@ -35,6 +44,9 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
             </div>
             <div className='myHistory2'>
                 <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={selectedDaysEntries}/>
+            </div>
+            <div className='myHistory3'>
+                {dailyMealCards}
             </div>
         </div>
     )

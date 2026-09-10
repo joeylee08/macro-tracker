@@ -38,7 +38,7 @@ const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries })
 
         if (!selectedMeal) return null
 
-        return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} handleMealEntries={handleMealEntries}/>
+        return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} handleMealEntries={handleMealEntries} readOnly={false}/>
     })
 
     return (
