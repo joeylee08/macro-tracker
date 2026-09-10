@@ -38,9 +38,9 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
                 <h1>{formattedMonth}</h1>
             </div>
             <div className='myHistory'>
-                <hr className='dividerLine'/>
+                <hr className='dividerLine2'/>
                 <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} />
-                <hr className='dividerLine'/>
+                <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>
                 <h1>Past Daily Summary</h1>

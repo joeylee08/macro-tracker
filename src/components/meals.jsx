@@ -11,7 +11,7 @@ const Meals = ({ myMeals, myFoods, currentUser, handleIsEditing, handleDelete })
             <div className='myFoodsChild'>
                 {renderedMeals}
             </div>
-            <hr className='dividerLine'></hr>
+            <hr className='dividerLine1'></hr>
         </div>
     )
 }
