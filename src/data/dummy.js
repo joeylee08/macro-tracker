@@ -40,10 +40,10 @@ const foods= [
 ]
 
 const mealEntries = [
-    {id: 1, userId: 1, mealId: 1, dateAndTime: "2026-09-08T08:47:00-07:00"},
-    {id: 2, userId: 1, mealId: 3, dateAndTime: "2026-09-08T10:23:00-07:00"},
-    {id: 3, userId: 1, mealId: 2, dateAndTime: "2026-09-08T16:02:00-07:00"},
-    {id: 4, userId: 1, mealId: 3, dateAndTime: "2026-09-08T20:23:00-07:00"}
+    {id: 1, userId: 1, mealId: 1, dateAndTime: "2026-09-09T08:47:00-07:00"},
+    {id: 2, userId: 1, mealId: 3, dateAndTime: "2026-09-09T10:23:00-07:00"},
+    {id: 3, userId: 1, mealId: 2, dateAndTime: "2026-09-09T16:02:00-07:00"},
+    {id: 4, userId: 1, mealId: 3, dateAndTime: "2026-09-09T20:23:00-07:00"}
 ]
 
 
