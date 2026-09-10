@@ -46,7 +46,7 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
                 <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>
-                <h1>Past Daily Summary</h1>
+                <h1>Daily Summary</h1>
             </div>
             <div className='dateHeader'>
                 <h1>{selectedDay}</h1>
