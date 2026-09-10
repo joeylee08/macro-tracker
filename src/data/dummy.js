@@ -40,10 +40,21 @@ const foods= [
 ]
 
 const mealEntries = [
-    {id: 1, userId: 1, mealId: 1, dateAndTime: "2026-09-09T08:47:00-07:00"},
-    {id: 2, userId: 1, mealId: 3, dateAndTime: "2026-09-10T10:23:00-07:00"},
-    {id: 3, userId: 1, mealId: 2, dateAndTime: "2026-09-10T16:02:00-07:00"},
-    {id: 4, userId: 1, mealId: 3, dateAndTime: "2026-09-10T20:23:00-07:00"}
+    {id: 1, userId: 1, mealId: 1, dateAndTime: "2026-09-06T08:47:00-07:00"},
+    {id: 2, userId: 1, mealId: 3, dateAndTime: "2026-09-07T10:23:00-07:00"},
+    {id: 3, userId: 1, mealId: 3, dateAndTime: "2026-09-07T16:02:00-07:00"},
+    {id: 4, userId: 1, mealId: 1, dateAndTime: "2026-09-07T20:23:00-07:00"},
+    {id: 5, userId: 1, mealId: 4, dateAndTime: "2026-09-08T08:47:00-07:00"},
+    {id: 6, userId: 1, mealId: 2, dateAndTime: "2026-09-08T10:23:00-07:00"},
+    {id: 7, userId: 1, mealId: 3, dateAndTime: "2026-09-09T16:02:00-07:00"},
+    {id: 8, userId: 1, mealId: 3, dateAndTime: "2026-09-09T20:23:00-07:00"},
+    {id: 9, userId: 1, mealId: 1, dateAndTime: "2026-09-09T08:47:00-07:00"},
+    {id: 10, userId: 1, mealId: 1, dateAndTime: "2026-09-09T10:23:00-07:00"},
+    {id: 11, userId: 1, mealId: 2, dateAndTime: "2026-09-10T16:02:00-07:00"},
+    {id: 12, userId: 1, mealId: 3, dateAndTime: "2026-09-10T20:23:00-07:00"},
+    {id: 13, userId: 1, mealId: 1, dateAndTime: "2026-09-10T08:47:00-07:00"},
+    {id: 14, userId: 1, mealId: 1, dateAndTime: "2026-09-10T10:23:00-07:00"},
+    {id: 15, userId: 1, mealId: 1, dateAndTime: "2026-09-10T08:47:00-07:00"},
 ]
 
 
