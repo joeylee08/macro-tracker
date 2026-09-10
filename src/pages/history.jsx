@@ -5,7 +5,6 @@ import DailyMealCard from "../components/dailymealcard"
 import { useState } from "react"
 
 const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
-    
     // calendar stuff
     const now = new Date()
 
@@ -15,7 +14,7 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
                                                         month: 'long',
                                                         year: 'numeric'
                                                     })
-    // macrochart stuff   
+    // macrochart and readOnly meal tiles   
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
 
@@ -24,15 +23,12 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
         const newDay = new Date(+year, +month - 1, dayNumber)
         setSelectedDay(getFormattedDate(newDay))
     }            
-                                      
-    const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
 
+    const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
 
     const dailyMealCards = selectedDaysEntries.map(entry => {
         const selectedMeal = myMeals.find(meal => meal.id === +entry.mealId)
-
         if (!selectedMeal) return null
-
         return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} readOnly={true}/>
     })
     
@@ -46,7 +42,7 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
-                <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
+                <MonthChart currentYearMonth={currentYearMonth} currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
                 <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>
