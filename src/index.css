@@ -497,7 +497,7 @@ h2.stats {
 
 .myHistory2 {
   margin: auto auto;
-  width: 95%;
+  width: 36.5rem;
   box-sizing: border-box;
 }
 
@@ -508,7 +508,7 @@ h2.stats {
   justify-content: flex-start;
   margin: auto auto;
   min-height: 9.7rem;
-  width: 95%;
+  width: 36.5rem;
   margin: 1.7rem auto;
   gap: 1rem;
   background-color: white;

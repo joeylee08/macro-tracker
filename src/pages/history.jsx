@@ -42,6 +42,12 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
                 <MonthChart currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} />
                 <hr className='dividerLine'/>
             </div>
+            <div className='headerBox'>
+                <h1>Past Daily Summary</h1>
+            </div>
+            <div className='dateHeader'>
+                <h1>{selectedDay}</h1>
+            </div>
             <div className='myHistory2'>
                 <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={selectedDaysEntries}/>
             </div>
