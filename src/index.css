@@ -570,7 +570,7 @@ h2.stats {
   width: 100%;
   aspect-ratio: 1;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1.5px solid gray;
   align-content: center;
   font-size: 1.4rem;
