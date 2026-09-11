@@ -278,13 +278,13 @@ h2.stats {
 }
 
 .dividerLine2 {
-  margin: 1.5rem auto;
+  margin: 1.6rem auto 2rem auto;
   width: 100%;
   border: 2px solid #f2e7d5;
 }
 
 .dividerLine3 {
-  margin: 1.5rem auto 2.2rem auto;
+  margin: 2rem auto 2.3rem auto;
   width: 100%;
   border: 2px solid #f2e7d5;
 }
@@ -532,7 +532,7 @@ h2.stats {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin: 2.2rem auto;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
