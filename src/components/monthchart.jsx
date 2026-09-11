@@ -70,7 +70,7 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myFoods, m
                                       onClick={() => handleSelectDay(dayNumber)} 
                                       style={logged 
                                                 ? { backgroundColor: `hsl(${hue}, 60%, 70%)`} 
-                                                : null}>{dayNumber} {dayNumber === today ? <span id='todayDot'/> : null}</button>
+                                                : null}>{dayNumber === today ? <span id='todayBox'>{dayNumber}</span> : dayNumber}</button>
                         })
 
     return (

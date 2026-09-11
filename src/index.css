@@ -544,6 +544,7 @@ h2.stats {
 #dayTile {
   width: 100%;
   aspect-ratio: 1;
+  position: relative;
 
   display: flex;
   align-items: center;
@@ -553,10 +554,11 @@ h2.stats {
   border-radius: 5px;
   background-color: white;
 
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
   transition: border-color 0.5s ease;
+  padding: 0.25rem;
 }
 
 #dayTile:hover {
@@ -564,11 +566,22 @@ h2.stats {
   cursor: pointer;
 }
 
-#todayDot {
-    width: 0.4rem;
-    height: 0.4rem;
-    background-color: white;
-    border-radius: 50%;
+#todayBox {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: white;
+  border-radius: 5px;
+  border: 1.5px solid gray;
+  align-content: center;
+  font-size: 1.4rem;
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  transition: border-color 0.5s ease;
+}
+
+#todayBox:hover {
+  border-color: green;
+  cursor: pointer;
 }
 
 .footer {
