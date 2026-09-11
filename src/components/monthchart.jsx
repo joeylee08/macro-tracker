@@ -4,8 +4,9 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myFoods, m
     const [year, month] = currentYearMonth.split('-')
     const dayCount = new Date(year, month, 0).getDate()
     const startDay = new Date(year, month - 1, 1).getDay()
+    const today = new Date().getDate()
 
-
+    console.log(today)
     const goals = currentUser.macroGoals
     
     const getDailyOffset = (entriesOfDay, myFoods) => {
@@ -69,7 +70,7 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myFoods, m
                                       onClick={() => handleSelectDay(dayNumber)} 
                                       style={logged 
                                                 ? { backgroundColor: `hsl(${hue}, 60%, 70%)`} 
-                                                : null}>{dayNumber}</button>
+                                                : null}>{dayNumber} {dayNumber === today ? <span id='todayDot'/> : null}</button>
                         })
 
     return (
