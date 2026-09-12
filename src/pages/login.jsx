@@ -10,7 +10,7 @@ const Login = () => {
 
   if (isLogin) {
     return (
-      <>
+      <div className='loginPage'>
         <form className='form loginForm' onSubmit={console.log('penis')}>
             <button className='formBtnLogin' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Sign Up' : 'to Login'}</button>
             <h1>Macro Tracker Login</h1>
@@ -24,11 +24,11 @@ const Login = () => {
                 <button className='formBtnLogin' type='submit'>LOGIN</button>
             </div>
         </form>
-      </>
+      </div>
     )
   } else {
     return (
-      <>
+      <div className='loginPage'>
         <form className='form loginForm' onSubmit={console.log('penis')}>
             <button className='formBtnLogin' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Sign Up' : 'to Login'}</button>
             <h1>Macro Tracker Sign Up</h1>
@@ -46,7 +46,7 @@ const Login = () => {
                 <button className='formBtnLogin' type='submit'>SIGNUP</button>
             </div>
         </form>
-      </>
+      </div>
     )
   }
   

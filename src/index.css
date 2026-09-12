@@ -88,6 +88,11 @@ p {
   z-index: 10;
 }
 
+.loginPage {
+  height: 100vh;
+  background-color: #f2e7d5;
+}
+
 .form.loginForm {
   height: 27.5rem;
   min-height: 27.5rem;
@@ -112,6 +117,7 @@ p {
   font-size: 1.4rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
+  color: #362312;
 }
 
 .loginFormField {
@@ -121,6 +127,7 @@ p {
 
 .form .loginFormField label {
   margin-left: 0;
+  color: #362312;
 }
 
 .createBtn {
@@ -212,6 +219,7 @@ h1#dashboardPlaceholder {
 h2.meterLabel {
   font-size: 1.1rem;
   font-weight: 500;
+  color: #362312;
 }
 
 .meterAndLabel {
@@ -243,6 +251,7 @@ h2.stats {
   font-size: 1rem;
   font-weight: 400;
   border-right: 1px solid #cbb59b;
+  color: #362312;
 }
 
 #remaining {
@@ -350,6 +359,7 @@ h2.stats {
 }
 
 .foodCard p {
+  color: #362312;
   position: relative;
   line-height: 1.2rem;
   font-size: 0.9rem;
@@ -407,9 +417,11 @@ h2.stats {
   border: 2px solid #cbb59b;
   border-radius: 5px;
   margin-bottom: 0.6rem;
+  color: #362312;
 }
 
 .form label {
+  color: #362312;
   width: 12rem;
   align-self: flex-start;
   margin-left: 2.7rem;
@@ -427,6 +439,7 @@ h2.stats {
   margin-left: 2.7rem;
   margin-bottom: 0.6rem;
   font-weight: bold;
+  color: #362312;
 }
 
 .form select#ingredients {
@@ -439,6 +452,7 @@ h2.stats {
   margin-left: 2.7rem;
   margin-bottom: 0.7rem;
   font-weight: bold;
+  color: #362312;
 }
 
 #dashboard {
@@ -463,6 +477,7 @@ h2.stats {
   margin: auto 0;
   margin-left: 0.5rem;
   padding-top: 0.1rem;
+  color: #362312;
 }
 
 .foodThumb #removeX {
@@ -585,10 +600,11 @@ h2.stats {
   align-items: center;
   justify-content: center;
 
-  border: 2px solid gray;
+  border: 2px solid #8a7b6a;
   border-radius: 5px;
   background-color: white;
 
+  color: #362312;
   font-size: 1.4rem;
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
@@ -606,7 +622,7 @@ h2.stats {
   aspect-ratio: 1;
   background-color: white;
   border-radius: 4px;
-  border: 1.5px solid gray;
+  border: 1.5px solid #8a7b6a;
   align-content: center;
   font-size: 1.4rem;
   font-family: "Archivo", sans-serif;
