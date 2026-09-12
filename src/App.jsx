@@ -12,7 +12,7 @@ import NavBar from './components/navbar';
 import Footer from './components/footer';
 
 
-const currentUser = users[0]
+const currentUser = false
 
 function App() {
   const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUser.id))
