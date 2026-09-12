@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { foods, meals, users, mealEntries } from './data/dummy';
 import { useState } from 'react'
+import { Navigate } from "react-router-dom";
+import Login from './pages/login'
 import Today from './pages/today';
 import Menu from './pages/menu';
 import History from './pages/history';
@@ -9,7 +11,8 @@ import Error from './pages/error';
 import NavBar from './components/navbar';
 import Footer from './components/footer';
 
-const currentUser = users[0]
+
+const currentUser = false
 
 function App() {
   const [myFoods, setMyFoods] = useState(foods.filter(item => item.userId === currentUser.id))
@@ -18,15 +21,23 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar/>
-      <Routes>
-        <Route path='/' element={<Today currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
-        <Route path='/menu' element={<Menu currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
-        <Route path='/history' element={<History currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries}/>} />
-        <Route path='/friends' element={<Friends currentUser={currentUser}/>} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer/>
+      {currentUser && <NavBar/>}
+        <Routes>
+          {currentUser 
+            ? (<>
+                <Route path='/' element={<Today currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
+                <Route path='/menu' element={<Menu currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
+                <Route path='/history' element={<History currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries}/>} />
+                <Route path='/friends' element={<Friends currentUser={currentUser}/>} />
+                <Route path="*" element={<Error />} />
+              </>)
+            : (<>
+                <Route path='/login' element={<Login/>} />
+                <Route path="*" element={<Navigate to='/login' replace />} />
+              </>
+            )}
+        </Routes>
+      {currentUser && <Footer/>}
     </BrowserRouter>
   )
 }

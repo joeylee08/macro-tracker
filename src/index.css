@@ -88,6 +88,41 @@ p {
   z-index: 10;
 }
 
+.form.loginForm {
+  height: 27.5rem;
+  min-height: 27.5rem;
+}
+
+.formBtnLogin {
+  width: 9rem;
+  height: 2rem;
+  margin: 1.5rem auto 1.5rem auto;
+  border: 2px solid #cbb59b;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  background-color: white;
+  transition: border-color 0.5s ease;
+}
+
+.formBtnLogin:hover {
+  border-color: green;
+}
+
+.form h1 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.loginFormField {
+  display: flex;
+  flex-direction: column;
+}
+
+.form .loginFormField label {
+  margin-left: 0;
+}
+
 .createBtn {
   width: 16rem;
   height: 3.2rem;
