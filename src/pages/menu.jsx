@@ -61,6 +61,14 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         event.stopPropagation()
   
         if (itemType === 'food') {
+            const linkedMeals = myMeals.filter(meal => meal.ingredients.find(item => item.foodId === itemId))
+            if (linkedMeals.length > 0) {
+                const mealNames = linkedMeals
+                                        .map(meal => meal.name)
+                                        .join('\n• ')
+                alert(`Cannot delete ingredient.\n\nCurrently being used in:\n\n• ${mealNames}`)
+                return
+            }
             const modified = myFoods.filter(item => item.id !== itemId)
             setMyFoods(modified)
         } else if (itemType === 'meal') {

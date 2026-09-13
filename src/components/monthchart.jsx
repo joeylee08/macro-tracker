@@ -11,6 +11,7 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myFoods, m
     
     const getDailyOffset = (entriesOfDay, myFoods) => {
         if (entriesOfDay.length === 0) return null
+        if (myMeals.length === 0 ) return null
         const entriesMacros = entriesOfDay.map(entry => calculateMacros(myFoods, myMeals.find(meal => entry.mealId === meal.id)))
         const dailyTotal = entriesMacros.reduce((start, entry) => {
             start.cal += entry.cal

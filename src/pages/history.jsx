@@ -59,7 +59,7 @@ const History = ({ myMealEntries, myFoods, myMeals }) => {
                 <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={selectedDaysEntries}/>
             </div>
             <div className='myHistory3'>
-                {dailyMealCards}
+                {dailyMealCards.length === 0 ? <h1 id='dashboardPlaceholder'>No logged meals for this day.</h1> : dailyMealCards}
             </div>
         </div>
     )
