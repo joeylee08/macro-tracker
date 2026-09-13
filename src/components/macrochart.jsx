@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { calculateMacros } from '../util/helpers'
 
 const MacroChart = ({ currentUser, myFoods, myMeals, todaysEntries }) => {

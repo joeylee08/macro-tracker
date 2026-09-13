@@ -1,10 +1,14 @@
-import { getFormattedDate, getMonthYear } from "../util/helpers"
+import { getFormattedDate } from "../util/helpers"
 import MonthChart from "../components/monthchart"
 import MacroChart from "../components/macrochart"
 import DailyMealCard from "../components/dailymealcard"
 import { useState } from "react"
+import { useContext } from 'react'
+import { UserContext } from '../context/usercontext'
 
-const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
+const History = ({ myMealEntries, myFoods, myMeals }) => {
+    const { currentUser } = useContext(UserContext)
+
     // calendar stuff
     const now = new Date()
 
@@ -42,7 +46,7 @@ const History = ({ currentUser, myMealEntries, myFoods, myMeals }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
-                <MonthChart currentYearMonth={currentYearMonth} currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
+                <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
                 <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>

@@ -1,6 +1,10 @@
 import MealCard from "./mealcard"
+import { useContext } from 'react'
+import { UserContext } from '../context/usercontext'
 
 const Meals = ({ myMeals, myFoods, currentUser, handleIsEditing, handleDelete }) => {
+    const { currentUser } = useContext(UserContext)
+    
     const renderedMeals = myMeals
                             .filter(item => item.userId === currentUser.id)
                             .sort((a, b) => a.name.localeCompare(b.name))

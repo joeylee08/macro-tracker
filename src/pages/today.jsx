@@ -1,10 +1,13 @@
-import { useState } from "react";
 import MacroChart from "../components/macrochart";
 import MealSelect from "../components/mealselect";
 import DailyMealCard from "../components/dailymealcard";
 import { getFormattedDate } from "../util/helpers";
+import { useContext } from 'react'
+import { UserContext } from '../context/usercontext'
 
-const Today = ({ currentUser, myFoods, myMeals, myMealEntries, setMealEntries }) => {
+const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
+    const { currentUser } = useContext(UserContext)
+
     const todaysDate = getFormattedDate(new Date())
     
     const handleMealEntries = (mealOrEntryId, action) => {

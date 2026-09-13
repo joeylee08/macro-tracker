@@ -1,12 +1,15 @@
-import { foods, meals } from "../data/dummy";
 import Meals from "../components/meals"
 import Foods from "../components/foods"
 import CreateFoodForm from "../components/createfoodform"
 import CreateMealForm from "../components/createmealform"
 import { useState } from "react";
+import { useContext } from 'react'
+import { UserContext } from '../context/usercontext'
 
 
-const Menu = ({ currentUser, myFoods, myMeals, setMyFoods, setMyMeals }) => {  
+const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
+    const { currentUser } = useContext(UserContext)
+
     const handleSetMyFoods = (newFood) => {
         if (isEditing) {
             const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
@@ -80,7 +83,7 @@ const Menu = ({ currentUser, myFoods, myMeals, setMyFoods, setMyMeals }) => {
                 <button className='createBtn' id='createMealBtn' onClick={() => handleToggleForm('meal')}>Create New Meal</button>
                 <button className='createBtn' id='addItemBtn' onClick={() => handleToggleForm('food')}>Add Ingredient</button>
             </div>
-            <Meals currentUser={currentUser} myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
+            <Meals myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
