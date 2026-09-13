@@ -2,7 +2,7 @@ import MealCard from "./mealcard"
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
 
-const Meals = ({ myMeals, myFoods, currentUser, handleIsEditing, handleDelete }) => {
+const Meals = ({ myMeals, myFoods, handleIsEditing, handleDelete }) => {
     const { currentUser } = useContext(UserContext)
     
     const renderedMeals = myMeals
@@ -13,7 +13,7 @@ const Meals = ({ myMeals, myFoods, currentUser, handleIsEditing, handleDelete })
     return (
         <div className='myFoods'>
             <div className='myFoodsChild'>
-                {renderedMeals}
+                {renderedMeals.length === 0 ? <h1 id='dashboardPlaceholder'>Create your first meal.</h1> : renderedMeals}
             </div>
             <hr className='dividerLine1'></hr>
         </div>

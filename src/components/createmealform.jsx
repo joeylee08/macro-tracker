@@ -105,15 +105,17 @@ const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handle
     return (
         <form className='form' onSubmit={handleSubmit}>
             <button type='button' className='closeForm' onClick={() => handleToggleForm('meal')}>×</button>
-            <label htmlFor='name'>Meal Name</label>
-            <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
-            <label htmlFor='ingredients'>Ingredients</label>
-            <select id='ingredients' name='foodId' value={ingredient.foodId} onChange={handleIngredientChange}>
-                <option value='0'>Select An Ingredient</option>
-                {ingredients}
-            </select>
-            <label htmlFor='units'>Units</label>
-            <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
+            <div className='foodFormField'>
+                <label htmlFor='name'>Meal Name</label>
+                <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
+                <label htmlFor='ingredients'>Ingredients</label>
+                <select id='ingredients' name='foodId' value={ingredient.foodId} onChange={handleIngredientChange}>
+                    <option value='0'>Select An Ingredient</option>
+                    {ingredients}
+                </select>
+                <label htmlFor='units'>Units</label>
+                <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
+            </div>
             <div id='btnContainer'>
                 <button type='button' id='formBtnMeal' onClick={handleAddIngredient}>Add Ingredient</button>
                 <button type='submit' id='formBtnMeal' onClick={handleSubmit}>{isEditing ? 'Save Edit' : 'Save New Meal'}</button>
