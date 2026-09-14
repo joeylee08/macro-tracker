@@ -41,7 +41,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                     dateAndTime: new Date().toISOString(),
                     ingredients: ingredients
             }
-            console.log(newMealEntry)
+            
             setMealEntries(previous => ([
                 ...previous,
                 newMealEntry
@@ -53,12 +53,10 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
     const todaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === todaysDate)
 
-    const dailyMealCards = todaysEntries.map(entry => {
-        const selectedMeal = myMeals.find(meal => meal.id === +entry.mealId)
+    const dailyMealCards = todaysEntries.map(mealEntry => {
+        if (!mealEntry) return null
 
-        if (!selectedMeal) return null
-
-        return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} handleMealEntries={handleMealEntries} readOnly={false}/>
+        return <DailyMealCard key={mealEntry.id} entryId={mealEntry.id} mealEntry={mealEntry} handleMealEntries={handleMealEntries} readOnly={false}/>
     })
 
     return (

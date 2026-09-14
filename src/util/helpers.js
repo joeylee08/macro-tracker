@@ -53,6 +53,25 @@ const calculateMacros = (myFoods, meal) => {
     return macros
 }
 
+const calculateEntryMacros = (mealEntry) => {
+    const ingredients = mealEntry.ingredients
+
+    const macros = ingredients.reduce((total, item) => {
+        for (const macro in total) {
+            total[macro] += (item[macro] * item.units)
+        }
+        return total
+    }, {
+        cal: 0,
+        protein: 0,
+        carb: 0,
+        fat: 0,
+        sodium: 0
+        })
+    
+    return macros
+}
+
 const getFormattedDate = (date) => {
     return new Date(date).toLocaleDateString('en-GB', {
                         month: 'long',
@@ -72,4 +91,4 @@ const getMonthYear = (isoFormat) => {
 //the empty ingredients array will be there independently of user interaction
 //ingredient structure will be validated as they are added
 
-export { validateData, calculateMacros, getFormattedDate, getMonthYear };
+export { validateData, calculateMacros, calculateEntryMacros, getFormattedDate, getMonthYear };
