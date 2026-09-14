@@ -39,6 +39,7 @@ const ingredientModel = {
 const mealEntryModel = {
     id: 'number',
     userId: 'number',
+    name: 'string',
     dateAndTime: 'string',
     ingredients: [
         {
