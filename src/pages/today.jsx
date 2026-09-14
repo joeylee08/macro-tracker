@@ -51,9 +51,9 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
         }
     }
 
-    const todaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === todaysDate)
+    const userMealEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === todaysDate)
 
-    const dailyMealCards = todaysEntries.map(mealEntry => {
+    const dailyMealCards = userMealEntries.map(mealEntry => {
         if (!mealEntry) return null
 
         return <DailyMealCard key={mealEntry.id} entryId={mealEntry.id} mealEntry={mealEntry} handleMealEntries={handleMealEntries} readOnly={false}/>
@@ -68,7 +68,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                 <h1>{todaysDate}</h1>
             </div>
             <div className='myGoals'>
-                <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={todaysEntries}/>
+                <MacroChart currentUser={currentUser} userMealEntries={userMealEntries}/>
             </div>
             <div className='headerBox'>
                 <h1>Your Daily Dashboard</h1>
