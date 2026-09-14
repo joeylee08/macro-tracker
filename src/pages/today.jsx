@@ -41,12 +41,11 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                     dateAndTime: new Date().toISOString(),
                     ingredients: ingredients
             }
-            
+            console.log(newMealEntry)
             setMealEntries(previous => ([
                 ...previous,
                 newMealEntry
             ]))
-            console.log(myMealEntries)
         } else if (action === 'delete') {
             setMealEntries(previous => previous.filter(entry => entry.id !== mealOrEntryId))
         }
