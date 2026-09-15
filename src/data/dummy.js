@@ -40,21 +40,66 @@ const foods= [
 ]
 
 const mealEntries = [
-    {id: 1, userId: 1, mealId: 1, dateAndTime: "2026-09-06T08:47:00-07:00"},
-    {id: 2, userId: 1, mealId: 3, dateAndTime: "2026-09-07T10:23:00-07:00"},
-    {id: 3, userId: 1, mealId: 3, dateAndTime: "2026-09-07T16:02:00-07:00"},
-    {id: 4, userId: 1, mealId: 1, dateAndTime: "2026-09-07T20:23:00-07:00"},
-    {id: 5, userId: 1, mealId: 4, dateAndTime: "2026-09-08T08:47:00-07:00"},
-    {id: 6, userId: 1, mealId: 2, dateAndTime: "2026-09-08T10:23:00-07:00"},
-    {id: 7, userId: 1, mealId: 3, dateAndTime: "2026-09-09T16:02:00-07:00"},
-    {id: 8, userId: 1, mealId: 3, dateAndTime: "2026-09-09T20:23:00-07:00"},
-    {id: 9, userId: 1, mealId: 1, dateAndTime: "2026-09-09T08:47:00-07:00"},
-    {id: 10, userId: 1, mealId: 1, dateAndTime: "2026-09-09T10:23:00-07:00"},
-    {id: 11, userId: 1, mealId: 2, dateAndTime: "2026-09-10T16:02:00-07:00"},
-    {id: 12, userId: 1, mealId: 3, dateAndTime: "2026-09-10T20:23:00-07:00"},
-    {id: 13, userId: 1, mealId: 1, dateAndTime: "2026-09-11T08:47:00-07:00"},
-    {id: 14, userId: 1, mealId: 1, dateAndTime: "2026-09-11T10:23:00-07:00"},
-    {id: 15, userId: 1, mealId: 1, dateAndTime: "2026-09-11T08:47:00-07:00"},
+    {
+        id: 1,
+        userId: 1,
+        name: 'Chicken Penis Bowl',
+        dateAndTime: '2026-09-14T18:42:31.123Z',
+        ingredients: [
+            {
+                name: 'Chicken Breast',
+                servingSize: 1,
+                servingUnit: 'oz',
+                units: 5,
+                cal: 35,
+                protein: 14,
+                carb: 0,
+                fat: 0.5,
+                sodium: 38
+            },
+            {
+                name: 'White Rice',
+                servingSize: 0/5,
+                servingUnit: 'cup',
+                units: 1,
+                cal: 170,
+                protein: 2,
+                carb: 28,
+                fat: 0.5,
+                sodium: 10
+            },
+        ]
+    },
+    {
+        id: 2,
+        userId: 1,
+        name: 'Poo Salad 3',
+        dateAndTime: '2026-09-14T18:42:31.123Z',
+        ingredients: [
+            {
+                name: 'Poo Cubes',
+                servingSize: 1,
+                servingUnit: 'oz',
+                units: 5,
+                cal: 55,
+                protein: 14,
+                carb: 0,
+                fat: 0.5,
+                sodium: 40
+            },
+            {
+                name: 'Cabbage Mix',
+                servingSize: 2,
+                servingUnit: 'cup',
+                units: 1,
+                cal: 40,
+                protein: 2,
+                carb: 12,
+                fat: 0,
+                sodium: 10
+            },
+        ]
+    }
 ]
 
 

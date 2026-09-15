@@ -39,7 +39,7 @@ function App() {
             ? (<>
                 <Route path='/' element={<Today myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
                 <Route path='/menu' element={<Menu myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
-                <Route path='/history' element={<History myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries}/>} />
+                <Route path='/history' element={<History myFoods={myFoods} myMealEntries={myMealEntries}/>} />
                 <Route path='/friends' element={<Friends/>} />
                 <Route path="/login" element={<Navigate to='/' replace />} />
                 <Route path="*" element={<Error />} />

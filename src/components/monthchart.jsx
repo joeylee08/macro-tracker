@@ -1,18 +1,17 @@
-import { calculateMacros, getFormattedDate } from "../util/helpers"
+import { calculateEntryMacros, getFormattedDate } from "../util/helpers"
 
-const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myFoods, myMeals, myMealEntries }) => {
+const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myMealEntries }) => {
     const [year, month] = currentYearMonth.split('-')
     const dayCount = new Date(year, month, 0).getDate()
     const startDay = new Date(year, month - 1, 1).getDay()
     const today = new Date().getDate()
 
-    console.log(today)
     const goals = currentUser.macroGoals
     
-    const getDailyOffset = (entriesOfDay, myFoods) => {
+    const getDailyOffset = (entriesOfDay) => {
         if (entriesOfDay.length === 0) return null
-        if (myMeals.length === 0 ) return null
-        const entriesMacros = entriesOfDay.map(entry => calculateMacros(myFoods, myMeals.find(meal => entry.mealId === meal.id)))
+ 
+        const entriesMacros = entriesOfDay.map(entry => calculateEntryMacros(entry))
         const dailyTotal = entriesMacros.reduce((start, entry) => {
             start.cal += entry.cal
             start.protein += entry.protein
@@ -59,7 +58,7 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myFoods, m
                         const dayNumber = index - startDay + 1
                         const entriesOfDay = myMealEntries.filter(entry => 
                                                 getFormattedDate(entry.dateAndTime) === getFormattedDate(new Date(+year, +month - 1, dayNumber)))
-                        const dailyOffset = getDailyOffset(entriesOfDay, myFoods)
+                        const dailyOffset = getDailyOffset(entriesOfDay)
                         const hue = 120 - (120 * dailyOffset)
                         const logged = entriesOfDay.length === 0 ? false : true
 

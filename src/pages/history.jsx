@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
 
-const History = ({ myMealEntries, myFoods, myMeals }) => {
+const History = ({ myMealEntries }) => {
     const { currentUser } = useContext(UserContext)
 
     // calendar stuff
@@ -29,12 +29,12 @@ const History = ({ myMealEntries, myFoods, myMeals }) => {
     }            
 
     const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
-
-    const dailyMealCards = selectedDaysEntries.map(entry => {
-        const selectedMeal = myMeals.find(meal => meal.id === +entry.mealId)
-        if (!selectedMeal) return null
-        return <DailyMealCard key={entry.id} entryId={entry.id} meal={selectedMeal} myFoods={myFoods} readOnly={true}/>
-    })
+                        
+    const dailyMealCards = selectedDaysEntries.map(entry => <DailyMealCard 
+                                                                key={entry.id} 
+                                                                entryId={entry.id} 
+                                                                mealEntry={entry} 
+                                                                readOnly={true}/>)
     
     return (
         <div className='mainPage'>
@@ -46,7 +46,7 @@ const History = ({ myMealEntries, myFoods, myMeals }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
-                <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
+                <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
                 <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>
@@ -56,7 +56,7 @@ const History = ({ myMealEntries, myFoods, myMeals }) => {
                 <h1>{selectedDay}</h1>
             </div>
             <div className='myHistory2'>
-                <MacroChart currentUser={currentUser} myFoods={myFoods} myMeals={myMeals} todaysEntries={selectedDaysEntries}/>
+                <MacroChart currentUser={currentUser} todaysMealEntries={selectedDaysEntries}/>
             </div>
             <div className='myHistory3'>
                 {dailyMealCards.length === 0 ? <h1 id='dashboardPlaceholder'>No logged meals for this day.</h1> : dailyMealCards}
