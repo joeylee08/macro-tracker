@@ -7,7 +7,7 @@ import Login from './pages/login'
 import Today from './pages/today';
 import Menu from './pages/menu';
 import History from './pages/history';
-import Friends from './pages/friends';
+import Settings from './pages/settings';
 import Error from './pages/error';
 import NavBar from './components/navbar';
 import Footer from './components/footer';
@@ -40,7 +40,7 @@ function App() {
                 <Route path='/' element={<Today myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
                 <Route path='/menu' element={<Menu myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
                 <Route path='/history' element={<History myFoods={myFoods} myMealEntries={myMealEntries}/>} />
-                <Route path='/friends' element={<Friends/>} />
+                <Route path='/settings' element={<Settings/>} />
                 <Route path="/login" element={<Navigate to='/' replace />} />
                 <Route path="*" element={<Error />} />
               </>)
