@@ -5,6 +5,7 @@ import DailyMealCard from "../components/dailymealcard"
 import { useState } from "react"
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
+import { Clock } from 'lucide-react'
 
 const History = ({ myMealEntries }) => {
     const { currentUser } = useContext(UserContext)
@@ -38,7 +39,7 @@ const History = ({ myMealEntries }) => {
     
     return (
         <div className='mainPage'>
-            <div className='headerBox'>
+            <div className='headerBox' id='history'>
                 <h1>Your Dietary History</h1>
             </div>
             <div className='dateHeader'>
@@ -46,6 +47,9 @@ const History = ({ myMealEntries }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
+                <button className='calendarBtn'>
+                    <Clock size={36}/>
+                </button>
                 <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
                 <hr className='dividerLine3'/>
             </div>

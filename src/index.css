@@ -567,7 +567,24 @@ form input#cal {
   border-radius: 5px;
 }
 
+.calendarBtn {
+  position: absolute;
+  display: flex;
+  padding: 0;
+  background-color: white;
+  align-self: center;
+  border: none;
+  cursor: pointer;
+  color: #8a7b6a;
+  transition: color 0.5s ease;
+}
+
+.calendarBtn:hover {
+  color: green;
+}
+
 .myHistory {
+  position: relative;
   margin: auto auto;
   width: 95%;
   box-sizing: border-box;
