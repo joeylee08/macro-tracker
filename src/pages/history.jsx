@@ -27,12 +27,9 @@ const History = ({ myMealEntries }) => {
     }
 
     // macrochart and readOnly meal tiles   
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
-
-    const [selectedDay, setSelectedDay] = useState(getFormattedDate(yesterday))   
-    const handleSelectDay = (dayNumber) => {
-        const newDay = new Date(+year, +month - 1, dayNumber)
+    const [selectedDay, setSelectedDay] = useState(getFormattedDate(now))   
+    const handleSelectDay = (dayNumber, specificYear = year, specificMonth = month) => {
+        const newDay = new Date(+specificYear, +specificMonth - 1, dayNumber)
         setSelectedDay(getFormattedDate(newDay))
     }
 
@@ -47,7 +44,7 @@ const History = ({ myMealEntries }) => {
     return (
         <div className='mainPage'>
             {toggleHistoryForm && <div id='screenBlock'></div>}
-            {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm} setCurrentYearMonth={setCurrentYearMonth} myMealEntries={myMealEntries}/>}
+            {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm} setCurrentYearMonth={setCurrentYearMonth} handleSelectDay={handleSelectDay} myMealEntries={myMealEntries}/>}
             <div className='headerBox' id='history'>
                 <h1>Your Dietary History</h1>
             </div>

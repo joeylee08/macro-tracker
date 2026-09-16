@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-const MonthYearSelect = ({ handleToggleHistoryForm, setCurrentYearMonth, myMealEntries }) => {
-    // initialize tempMonthYEar from current month/year
-    // derive years from myMealEntries
+const MonthYearSelect = ({ handleToggleHistoryForm, setCurrentYearMonth, handleSelectDay, myMealEntries }) => {
     const now = new Date()
 
     const [defaultYearMonth, setDefaultYearMonth] = useState(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`)
@@ -27,8 +25,13 @@ const MonthYearSelect = ({ handleToggleHistoryForm, setCurrentYearMonth, myMealE
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        
         const updatedYearMonth = `${tempMonthYear.year}-${tempMonthYear.month}`
         setCurrentYearMonth(updatedYearMonth)
+
+        const displayedDay = tempMonthYear.year === defaultYear && tempMonthYear.month === defaultMonth ? now.getDate() : 1
+        
+        handleSelectDay(displayedDay, tempMonthYear.year, tempMonthYear.month)
         handleToggleHistoryForm()
     }
 
