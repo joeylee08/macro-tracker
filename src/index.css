@@ -661,12 +661,12 @@ select.monthYear {
   box-sizing: border-box;
 }
 
-#emptyDayTile {
+.emptyDayTile {
   width: 100%;
   aspect-ratio: 1;
 }
 
-#dayTile {
+.dayTile {
   width: 100%;
   aspect-ratio: 1;
   position: relative;
@@ -687,10 +687,16 @@ select.monthYear {
   padding: 0.2rem;
 }
 
-#dayTile:hover {
+.dayTile:hover {
   border-color: green;
   cursor: pointer;
 }
+
+.isToday {
+  border: 3px solid blue;
+}
+
+
 
 #todayBox {
   width: 100%;

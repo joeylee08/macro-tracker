@@ -4,7 +4,6 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myMealEntr
     const [year, month] = currentYearMonth.split('-')
     const dayCount = new Date(year, month, 0).getDate()
     const startDay = new Date(year, month - 1, 1).getDay()
-    const today = new Date().getDate()
 
     const goals = currentUser.macroGoals
     
@@ -61,16 +60,20 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myMealEntr
                         const dailyOffset = getDailyOffset(entriesOfDay)
                         const hue = 120 - (120 * dailyOffset)
                         const logged = entriesOfDay.length === 0 ? false : true
+                        const isToday = 
+                                    dayNumber === new Date().getDate() &&
+                                    +month === new Date().getMonth() + 1 &&
+                                    +year === new Date().getFullYear()
 
                         return item === 0 
-                            ? <div key={`empty-${index}`} id='emptyDayTile'></div>
+                            ? <div key={`empty-${index}`} className='emptyDayTile'></div>
                             : <button key={`day-${index}`} 
                                       type='button' 
-                                      id='dayTile' 
+                                      className={`dayTile ${isToday ? 'isToday' : ''}`} 
                                       onClick={() => handleSelectDay(dayNumber)} 
                                       style={logged 
                                                 ? { backgroundColor: `hsl(${hue}, 60%, 70%)`} 
-                                                : null}>{dayNumber === today ? <span id='todayBox'>{dayNumber}</span> : dayNumber}</button>
+                                                : null}>{dayNumber}</button>
                         })
 
     return (

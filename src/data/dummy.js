@@ -44,7 +44,7 @@ const mealEntries = [
         id: 1,
         userId: 1,
         name: 'Chicken Penis Bowl',
-        dateAndTime: '2026-09-14T18:42:31.123Z',
+        dateAndTime: '2028-09-14T18:42:31.123Z',
         ingredients: [
             {
                 name: 'Chicken Breast',
@@ -59,7 +59,7 @@ const mealEntries = [
             },
             {
                 name: 'White Rice',
-                servingSize: 0/5,
+                servingSize: 0.5,
                 servingUnit: 'cup',
                 units: 1,
                 cal: 170,
@@ -99,7 +99,97 @@ const mealEntries = [
                 sodium: 10
             },
         ]
-    }
+    },
+    {
+        id: 3,
+        userId: 1,
+        name: 'Salmonella Tacos',
+        dateAndTime: '2026-09-15T18:42:31.123Z',
+        ingredients: [
+            {
+                name: 'Pork Chop',
+                servingSize: 1,
+                servingUnit: 'oz',
+                units: 4,
+                cal: 40,
+                protein: 20,
+                carb: 0,
+                fat: 0.5,
+                sodium: 60
+            },
+            {
+                name: 'Corn Tortillas',
+                servingSize: 1,
+                servingUnit: 'piece',
+                units: 3,
+                cal: 200,
+                protein: 6,
+                carb: 40,
+                fat: 0.5,
+                sodium: 10
+            },
+        ]
+    },
+    {
+        id: 4,
+        userId: 1,
+        name: 'Prison Oatmeal',
+        dateAndTime: '2026-09-16T18:42:31.123Z',
+        ingredients: [
+            {
+                name: 'Oatmeal',
+                servingSize: 1,
+                servingUnit: 'cup',
+                units: 0.5,
+                cal: 80,
+                protein: 3,
+                carb: 30,
+                fat: 0.5,
+                sodium: 10
+            },
+            {
+                name: 'Peanut Butter',
+                servingSize: 1,
+                servingUnit: 'tbsp',
+                units: 2,
+                cal: 300,
+                protein: 20,
+                carb: 8,
+                fat: 12,
+                sodium: 10
+            },
+        ]
+    },
+    {
+        id: 5,
+        userId: 1,
+        name: 'Chicken Penis Bowl 2',
+        dateAndTime: '2026-09-16T18:42:31.123Z',
+        ingredients: [
+            {
+                name: 'Chicken Breast',
+                servingSize: 1,
+                servingUnit: 'oz',
+                units: 5,
+                cal: 35,
+                protein: 14,
+                carb: 0,
+                fat: 0.5,
+                sodium: 38
+            },
+            {
+                name: 'White Rice',
+                servingSize: 0.5,
+                servingUnit: 'cup',
+                units: 1,
+                cal: 170,
+                protein: 2,
+                carb: 28,
+                fat: 0.5,
+                sodium: 10
+            },
+        ]
+    },
 ]
 
 
