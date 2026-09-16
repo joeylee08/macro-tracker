@@ -21,7 +21,7 @@ const History = ({ myMealEntries }) => {
                                                         year: 'numeric'
                                                     })
 
-    const [toggleHistoryForm, setToggleHistoryForm] = useState(true)
+    const [toggleHistoryForm, setToggleHistoryForm] = useState(false)
     const handleToggleHistoryForm = () => {
         setToggleHistoryForm(bool => !bool)
     }
@@ -49,7 +49,7 @@ const History = ({ myMealEntries }) => {
     return (
         <div className='mainPage'>
             {toggleHistoryForm && <div id='screenBlock'></div>}
-            {toggleHistoryForm && <MonthYearSelect />}
+            {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm}/>}
             <div className='headerBox' id='history'>
                 <h1>Your Dietary History</h1>
             </div>
@@ -58,7 +58,7 @@ const History = ({ myMealEntries }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
-                <button className='calendarBtn' aria-label='Choose month and year' title='Choose month and year'>
+                <button className='calendarBtn' onClick={handleToggleHistoryForm} aria-label='Choose month and year' title='Choose month and year'>
                     <Clock size={36}/>
                 </button>
                 <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>

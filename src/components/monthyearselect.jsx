@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const MonthYearSelect = () => {
+const MonthYearSelect = ({ handleToggleHistoryForm }) => {
     const [tempMonthYear, setTempMonthYear] = useState({month: 'January', year: '2026'})
 
     const handleChange = (event) => {
@@ -18,7 +18,7 @@ const MonthYearSelect = () => {
 
     return (
         <form className='form'>
-            <button type='button' className='closeForm' onClick={console.log('your penis')}>×</button>
+            <button type='button' className='closeForm' onClick={handleToggleHistoryForm}>×</button>
             <div className='foodFormField'>
                 <select id='month' name='month' className='monthYear' value={tempMonthYear.month} onChange={handleChange}>
                     <option value=''>Select a Month</option>
