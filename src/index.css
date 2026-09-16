@@ -595,6 +595,7 @@ form input#cal {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.8rem;
 }
 
 select.monthYear {
@@ -604,7 +605,6 @@ select.monthYear {
   align-self: flex-start;
   border: 2px solid #cbb59b;
   border-radius: 5px;
-  margin-bottom: 0.7rem;
   font-weight: bold;
   color: #362312;
 }
