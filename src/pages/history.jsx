@@ -34,9 +34,7 @@ const History = ({ myMealEntries }) => {
     const handleSelectDay = (dayNumber) => {
         const newDay = new Date(+year, +month - 1, dayNumber)
         setSelectedDay(getFormattedDate(newDay))
-    } 
-    
-    // const changeMonthYear = () => {}
+    }
 
     const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
                         
@@ -49,7 +47,7 @@ const History = ({ myMealEntries }) => {
     return (
         <div className='mainPage'>
             {toggleHistoryForm && <div id='screenBlock'></div>}
-            {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm}/>}
+            {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm} setCurrentYearMonth={setCurrentYearMonth} myMealEntries={myMealEntries}/>}
             <div className='headerBox' id='history'>
                 <h1>Your Dietary History</h1>
             </div>
