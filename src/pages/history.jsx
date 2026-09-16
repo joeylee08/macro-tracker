@@ -2,6 +2,7 @@ import { getFormattedDate } from "../util/helpers"
 import MonthChart from "../components/monthchart"
 import MacroChart from "../components/macrochart"
 import DailyMealCard from "../components/dailymealcard"
+import MonthYearSelect from "../components/monthyearselect"
 import { useState } from "react"
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
@@ -19,6 +20,12 @@ const History = ({ myMealEntries }) => {
                                                         month: 'long',
                                                         year: 'numeric'
                                                     })
+
+    const [toggleHistoryForm, setToggleHistoryForm] = useState(true)
+    const handleToggleHistoryForm = () => {
+        setToggleHistoryForm(bool => !bool)
+    }
+
     // macrochart and readOnly meal tiles   
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
@@ -27,7 +34,9 @@ const History = ({ myMealEntries }) => {
     const handleSelectDay = (dayNumber) => {
         const newDay = new Date(+year, +month - 1, dayNumber)
         setSelectedDay(getFormattedDate(newDay))
-    }            
+    } 
+    
+    // const changeMonthYear = () => {}
 
     const selectedDaysEntries = myMealEntries.filter(entry => getFormattedDate(entry.dateAndTime) === selectedDay)
                         
@@ -39,6 +48,8 @@ const History = ({ myMealEntries }) => {
     
     return (
         <div className='mainPage'>
+            {toggleHistoryForm && <div id='screenBlock'></div>}
+            {toggleHistoryForm && <MonthYearSelect />}
             <div className='headerBox' id='history'>
                 <h1>Your Dietary History</h1>
             </div>
@@ -47,7 +58,7 @@ const History = ({ myMealEntries }) => {
             </div>
             <div className='myHistory'>
                 <hr className='dividerLine2'/>
-                <button className='calendarBtn'>
+                <button className='calendarBtn' aria-label='Choose month and year' title='Choose month and year'>
                     <Clock size={36}/>
                 </button>
                 <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
