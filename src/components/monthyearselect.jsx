@@ -17,11 +17,11 @@ const MonthYearSelect = ({ handleToggleHistoryForm }) => {
     }
 
     return (
-        <form className='form'>
+        <form className='form' id='monthYear'>
             <button type='button' className='closeForm' onClick={handleToggleHistoryForm}>×</button>
-            <div className='foodFormField'>
+            <div className='historyFormField'>
                 <select id='month' name='month' className='monthYear' value={tempMonthYear.month} onChange={handleChange}>
-                    <option value=''>Select a Month</option>
+                    <option value=''>Select Month</option>
                     <option value='jan'>January</option>
                     <option value='feb'>February</option>
                     <option value='mar'>March</option>
@@ -37,6 +37,7 @@ const MonthYearSelect = ({ handleToggleHistoryForm }) => {
                 <select id='year' name='year' className='monthYear' value={tempMonthYear.year} onChange={handleChange}>
                     <option value=''>Select Year</option>
                 </select>
+                <button id='formBtnHistory'>Find History</button>
             </div>
             
         </form>
