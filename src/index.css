@@ -32,13 +32,14 @@ body {
   width: 95%;
   height: 2.7rem;
   margin: 0 auto;
+  display: flex;
 }
 
 h1 {
   font-size: 2.2rem;
   font-weight: 400;
   color: #362312;
-  margin-top: 0;
+  margin: 0;
 }
 
 p {
@@ -576,10 +577,11 @@ form input#cal {
 
 .calendarBtn {
   position: absolute;
+  top: 0.7rem;
+  left: 0.7rem;
   display: flex;
   padding: 0;
   background-color: white;
-  align-self: center;
   border: none;
   cursor: pointer;
   color: #8a7b6a;
@@ -630,10 +632,14 @@ select.monthYear {
 }
 
 .myHistory {
+  display: flex;
   position: relative;
-  margin: auto auto;
+  margin: 2rem auto;
   width: 95%;
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
   box-sizing: border-box;
+  height: 26em;
 }
 
 .myHistory2 {
@@ -662,8 +668,9 @@ select.monthYear {
   grid-template-columns: repeat(7, 3.5rem);
   justify-content: center;
   align-items: center;
-  gap: 0.8rem;
-  margin: 0 auto;
+  gap: 0.7rem;
+  width: 80%;
+  margin: auto auto;
   box-sizing: border-box;
 }
 
@@ -718,6 +725,57 @@ select.monthYear {
 #todayBox:hover {
   border-color: green;
   cursor: pointer;
+}
+
+.settingsBtn {
+  position: absolute;
+  right: 0.7rem;
+  top: 0.7rem;
+  display: flex;
+  padding: 0;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  color: #8a7b6a;
+  transition: color 0.5s ease;
+  aspect-ratio: 1;
+}
+
+.settingsBtn:hover {
+  color: green;
+}
+
+.mySettings {
+  display: flex;
+  flex-direction: column;
+  margin: 1.2rem auto;
+  position: relative;
+  width: 95%;
+  align-items: center;
+  box-sizing: border-box;
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
+}
+
+.settingsField {
+  width: 90%;
+  height: auto;
+  margin: 2rem auto;
+  gap: 0.5rem;
+}
+
+.mySettings h2 {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #362312;
+}
+
+h2#username {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #8a7b6a;
 }
 
 .footer {

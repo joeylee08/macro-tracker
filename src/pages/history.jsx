@@ -52,12 +52,10 @@ const History = ({ myMealEntries }) => {
                 <h1>{formattedMonth}</h1>
             </div>
             <div className='myHistory'>
-                <hr className='dividerLine2'/>
                 <button className='calendarBtn' onClick={handleToggleHistoryForm} aria-label='Choose month and year' title='Choose month and year'>
-                    <Clock size={36}/>
+                    <Clock size={30.5}/>
                 </button>
                 <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} selectedDay={selectedDay} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
-                <hr className='dividerLine3'/>
             </div>
             <div className='headerBox'>
                 <h1>Daily Summary</h1>
