@@ -13,7 +13,7 @@ const Meals = ({ myMeals, myFoods, handleIsEditing, handleDelete }) => {
     return (
         <div className='myFoods'>
             <div className='myFoodsChild'>
-                {renderedMeals.length === 0 ? <h1 id='dashboardPlaceholder'>Create your first meal.</h1> : renderedMeals}
+                {renderedMeals.length === 0 ? <h1 className='dashboardPlaceholder'>Create your first meal.</h1> : renderedMeals}
             </div>
             <hr className='dividerLine1'></hr>
         </div>

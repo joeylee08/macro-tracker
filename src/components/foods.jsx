@@ -8,7 +8,7 @@ const Foods = ({ myFoods, handleIsEditing, handleDelete }) => {
     return (
         <div className='myFoods'>
             <div className='myFoodsChild'>
-                {renderedFoods.length === 0 ? <h1 id='dashboardPlaceholder'>Add a new ingredient.</h1> : renderedFoods}
+                {renderedFoods.length === 0 ? <h1 className='dashboardPlaceholder'>Add a new ingredient.</h1> : renderedFoods}
             </div>
         </div>
     )
