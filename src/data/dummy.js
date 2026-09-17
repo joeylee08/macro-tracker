@@ -163,7 +163,7 @@ const mealEntries = [
     {
         id: 5,
         userId: 1,
-        name: 'Chicken Penis Bowl 2',
+        name: 'Ch Penis Bowl 2',
         dateAndTime: '2026-09-16T18:42:31.123Z',
         ingredients: [
             {

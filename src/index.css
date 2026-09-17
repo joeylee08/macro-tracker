@@ -10,17 +10,21 @@
   font-optical-sizing: auto;
 }
 
+html {
+  font-size: 90%;
+}
+
 body {
   background-color: white;
-  margin: 0px;
+  margin: 0;
   height: 100%;
 }
 
 .mainPage {
   margin: 0 auto;
   width: 90%;
-  max-width: 64.7rem;
-  min-width: 38.4rem;
+  max-width: 64.89rem;
+  min-width: 38.52rem;
   padding: 3rem 0 1rem 0;
 }
 
@@ -46,7 +50,7 @@ p {
 
 .navbar {
   width: 100%;
-  height: 110px;
+  height: 6.8rem;
   min-width: 38.4rem;
   background-color: #f2e7d5;;
   display: flex;
@@ -338,8 +342,8 @@ h2.stats {
   flex-direction: column;
   justify-content: center;
   padding: 0.4rem;
-  width: 165px;
-  height: 135px;
+  width: 10.3125rem;
+  height: 8.4375rem;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
   background-color: white;
@@ -719,7 +723,7 @@ select.monthYear {
 .footer {
   display: flex;
   width: 100%;
-  height: 145px;
+  height: 9rem;
   min-width: 38.4rem;
   background-color: #f2e7d5;
 }
