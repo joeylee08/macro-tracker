@@ -41,7 +41,9 @@ const foods= [
     {id: 17, userId: 1, name: 'Ground Turkey 93/7', servingSize: 1, servingUnit: 'oz', cal: 40, protein: 5.5, carb: 0, fat: 2, sodium: 21.25},
     {id: 18, userId: 1, name: 'Smoked Kielbasa', servingSize: 1, servingUnit: 'oz', cal: 80, protein: 4.5, carb: 1, fat: 6.5, sodium: 170},
     {id: 19, userId: 1, name: 'Baby Cucumber', servingSize: 1, servingUnit: 'piece', cal: 10, protein: 0.5, carb: 2, fat: 0, sodium: 2},
-    {id: 20, userId: 1, name: 'Salsitas Full Bag', servingSize: 1, servingUnit: 'piece', cal: 750, protein: 1, carb: 15, fat: 2.5, sodium: 750}
+    {id: 20, userId: 1, name: 'Salsitas Full Bag', servingSize: 1, servingUnit: 'piece', cal: 750, protein: 1, carb: 15, fat: 2.5, sodium: 750},
+    {id: 21, userId: 1, name: 'Mini Tortilla', servingSize: 1, servingUnit: 'piece', cal: 33.3, protein: 0.67, carb: 6.33, fat: 0.33, sodium: 6.67},
+    {id: 22, userId: 1, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
 ]
 
 const mealEntries = [
