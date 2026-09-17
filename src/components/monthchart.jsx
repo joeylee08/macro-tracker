@@ -1,6 +1,6 @@
 import { calculateEntryMacros, getFormattedDate } from "../util/helpers"
 
-const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myMealEntries }) => {
+const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDay, myMealEntries }) => {
     const [year, month] = currentYearMonth.split('-')
     const dayCount = new Date(year, month, 0).getDate()
     const startDay = new Date(year, month - 1, 1).getDay()
@@ -60,16 +60,13 @@ const MonthChart = ({ currentUser, currentYearMonth, handleSelectDay, myMealEntr
                         const dailyOffset = getDailyOffset(entriesOfDay)
                         const hue = 120 - (120 * dailyOffset)
                         const logged = entriesOfDay.length === 0 ? false : true
-                        const isToday = 
-                                    dayNumber === new Date().getDate() &&
-                                    +month === new Date().getMonth() + 1 &&
-                                    +year === new Date().getFullYear()
+                        const isSelected = selectedDay === getFormattedDate(new Date(+year, +month - 1, dayNumber))
 
                         return item === 0 
                             ? <div key={`empty-${index}`} className='emptyDayTile'></div>
                             : <button key={`day-${index}`} 
                                       type='button' 
-                                      className={`dayTile ${isToday ? 'isToday' : ''}`} 
+                                      className={`dayTile ${isSelected ? 'isSelected' : ''}`} 
                                       onClick={() => handleSelectDay(dayNumber)} 
                                       style={logged 
                                                 ? { backgroundColor: `hsl(${hue}, 60%, 70%)`} 

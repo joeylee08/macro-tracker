@@ -696,11 +696,9 @@ select.monthYear {
   cursor: pointer;
 }
 
-.isToday {
-  border: 3px solid blue;
+.isSelected {
+  border: 3.8px solid green;
 }
-
-
 
 #todayBox {
   width: 100%;
