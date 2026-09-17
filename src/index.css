@@ -675,7 +675,6 @@ select.monthYear {
   background-color: white;
 }
 
-
 #monthChart {
   display: grid;
   grid-template-columns: repeat(7, 3.5rem);
@@ -761,7 +760,7 @@ select.monthYear {
 .mySettings {
   display: flex;
   flex-direction: column;
-  margin: 1.2rem auto;
+  margin: 1rem auto 1.5rem auto;
   position: relative;
   width: 95%;
   align-items: center;
@@ -796,6 +795,29 @@ h2.macroGoalLabel {
   font-weight: 500;
   color: #8a7b6a;
   height: 2rem;
+}
+
+.mySettings2 {
+  display: flex;
+  margin: 2.4rem auto 1.5rem auto;
+  width: 95%;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.logoutBtn {
+  margin: 0 auto;
+  width: 12rem;
+  height: 3.2rem;
+  background-color: white;
+  font-size: 1.2rem;
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
+  transition: border-color 0.5s ease;
+}
+
+.logoutBtn:hover {
+  border-color: green;
 }
 
 .footer {

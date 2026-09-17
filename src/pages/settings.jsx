@@ -31,6 +31,9 @@ const Settings = () => {
                     <h2 className='macroGoalLabel'>Sodium: {currentUser.macroGoals.sodium}mg</h2>
                 </div>
             </div>
+            <div className='mySettings2'>
+                <button className='logoutBtn'>Log Out</button>
+            </div>
         </div>
     )
 }
