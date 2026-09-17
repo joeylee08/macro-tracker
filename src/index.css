@@ -649,6 +649,7 @@ select.monthYear {
   justify-content: flex-start;
   margin: auto auto;
   min-height: 9.7rem;
+  min-width: 36.6rem;
   width: 36.5rem;
   margin: 1.7rem auto;
   gap: 1rem;
