@@ -1,5 +1,5 @@
 const users = [
-    { id: 1, username: 'joeylee08', password: 'poo3', email: 'penis1@gmail.com', firstName: 'Joseph', lastName: 'Lee', dateJoined: '', macroGoals: {cal: 2000, protein: 125, carb: 225, fat: 67, sodium: 1800}},
+    { id: 1, username: 'jleemuaythai', password: 'poo3', email: 'penis1@gmail.com', firstName: 'Joseph', lastName: 'Lee', dateJoined: '', macroGoals: {cal: 2000, protein: 125, carb: 225, fat: 67, sodium: 1800}},
     { id: 2, username: 'demonslayer666', password: 'poo1', email: 'penis2@gmail.com', firstName: 'Bobert', lastName: 'Smith', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
     { id: 3, username: 'wildgirl69', password: 'poo2', email: 'penis3@gmail.com', firstName: 'Katie', lastName: 'Contreras', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
     { id: 4, username: 'littlekidlover', password: 'poo5', email: 'penis4@gmail.com', firstName: 'Michael', lastName: 'Scott', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
