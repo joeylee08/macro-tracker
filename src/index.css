@@ -206,6 +206,11 @@ h1.dashboardPlaceholder {
   color: #cbb59b;
 }
 
+h1.dashboardPlaceholder#historyPlaceholder, 
+h1.dashboardPlaceholder#todayPlaceholder {
+  margin-bottom: 2.7rem;
+}
+
 #macroChart {
   display: flex;
   flex-direction: column;

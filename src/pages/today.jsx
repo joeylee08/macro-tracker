@@ -77,7 +77,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                 <MealSelect myMeals={myMeals} handleMealEntries={handleMealEntries} />
             </div>
             <div className='myGoals3'>
-                {dailyMealCards.length === 0 ? <h1 className='dashboardPlaceholder'>Ready for a new day!</h1> : dailyMealCards}
+                {dailyMealCards.length === 0 ? <h1 className='dashboardPlaceholder' id='todayPlaceholder'>Ready for a new day!</h1> : dailyMealCards}
             </div>
         </div>
     )
