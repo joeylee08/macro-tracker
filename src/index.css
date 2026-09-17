@@ -206,6 +206,10 @@ h1.dashboardPlaceholder {
   color: #cbb59b;
 }
 
+h1.dashboardPlaceholder#ingredientPlaceholder {
+  margin-top: 3.4rem;
+}
+
 h1.dashboardPlaceholder#historyPlaceholder, 
 h1.dashboardPlaceholder#todayPlaceholder {
   margin-bottom: 2.7rem;
