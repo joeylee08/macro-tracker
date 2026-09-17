@@ -33,24 +33,26 @@ function App() {
 
   return (
     <BrowserRouter>
-      {currentUser && <NavBar/>}
-        <Routes>
-          {currentUser 
-            ? (<>
-                <Route path='/' element={<Today myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
-                <Route path='/menu' element={<Menu myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
-                <Route path='/history' element={<History myFoods={myFoods} myMealEntries={myMealEntries}/>} />
-                <Route path='/settings' element={<Settings/>} />
-                <Route path="/login" element={<Navigate to='/' replace />} />
-                <Route path="*" element={<Error />} />
-              </>)
-            : (<>
-                <Route path='/login' element={<Login/>} />
-                <Route path="*" element={<Navigate to='/login' replace />} />
-              </>
-            )}
-        </Routes>
-      {currentUser && <Footer/>}
+      <div id='app'>
+        {currentUser && <NavBar/>}
+          <Routes>
+            {currentUser 
+              ? (<>
+                  <Route path='/' element={<Today myFoods={myFoods} myMeals={myMeals} myMealEntries={myMealEntries} setMealEntries={setMealEntries}/>} />
+                  <Route path='/menu' element={<Menu myFoods={myFoods} myMeals={myMeals} setMyFoods={setMyFoods} setMyMeals={setMyMeals}/>} />
+                  <Route path='/history' element={<History myFoods={myFoods} myMealEntries={myMealEntries}/>} />
+                  <Route path='/settings' element={<Settings/>} />
+                  <Route path="/login" element={<Navigate to='/' replace />} />
+                  <Route path="*" element={<Error />} />
+                </>)
+              : (<>
+                  <Route path='/login' element={<Login/>} />
+                  <Route path="*" element={<Navigate to='/login' replace />} />
+                </>
+              )}
+          </Routes>
+        {currentUser && <Footer/>}
+      </div>
     </BrowserRouter>
   )
 }
