@@ -477,7 +477,6 @@ form input#cal {
   font-size: 1rem;
   align-self: flex-start;
   margin-bottom: 0.6rem;
-  font-weight: bold;
   color: #362312; 
 }
 
@@ -489,7 +488,6 @@ form input#cal {
   border: 2px solid #cbb59b;
   border-radius: 5px;
   margin-bottom: 0.7rem;
-  font-weight: bold;
   color: #362312;
 }
 
