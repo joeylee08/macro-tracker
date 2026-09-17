@@ -17,6 +17,7 @@ const meals = [
     {id: 5, name: 'Prison Tostadas Ch', userId: 1, ingredients: [{foodId: 1, units: 5.92}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
     {id: 6, name: 'Orange Pk Bowl', userId: 1, ingredients: [{foodId: 16, units: 6.34}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
     {id: 7, name: 'Prison Tostadas Pk', userId: 1, ingredients: [{foodId: 16, units: 6.34}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
+    {id: 1, name: 'Sausage Rice Bowl', userId: 1, ingredients: [{foodId: 18, units: 3}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 15, units: 1}, {foodId: 19, units: 1}]}
 ]
 
 const foods= [
@@ -37,6 +38,8 @@ const foods= [
     {id: 15, userId: 1, name: 'Cabbage Mix', servingSize: 0.5, servingUnit: 'cup', cal: 15, protein: 0.5, carb: 0, fat: 0, sodium: 12},
     {id: 16, userId: 1, name: 'Pork Chop', servingSize: 1, servingUnit: 'oz', cal: 45, protein: 6, carb: 0, fat: 2, sodium: 13.75},
     {id: 17, userId: 1, name: 'Ground Turkey 93/7', servingSize: 1, servingUnit: 'oz', cal: 40, protein: 5.5, carb: 0, fat: 2, sodium: 21.25},
+    {id: 18, userId: 1, name: 'Smoked Kielbasa', servingSize: 1, servingUnit: 'oz', cal: 80, protein: 4.5, carb: 1, fat: 6.5, sodium: 170},
+    {id: 19, userId: 1, name: 'Baby Cucumber', servingSize: 1, servingUnit: 'piece', cal: 10, protein: 0.5, carb: 2, fat: 0, sodium: 2}
 ]
 
 const mealEntries = [
