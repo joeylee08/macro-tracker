@@ -1,3 +1,5 @@
+import { validateData } from "../util/helpers"
+
 const QuickAddForm = ({ currentUser, myMealEntries, toggleQuickAdd }) => {
     const nextEntryIndex = myMealEntries.length
                                     ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
@@ -37,7 +39,8 @@ const QuickAddForm = ({ currentUser, myMealEntries, toggleQuickAdd }) => {
         }
     
         const handleSubmit = () => {
-            console.log('penis')
+            if (!validateData(formData, 'mealEntryModel')) return
+
         }
 
     return (
