@@ -1,6 +1,7 @@
 import MacroChart from "../components/macrochart";
 import MealSelect from "../components/mealselect";
 import DailyMealCard from "../components/dailymealcard";
+import QuickAddForm from "../components/quickaddform";
 import { getFormattedDate } from "../util/helpers";
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
@@ -9,6 +10,11 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
     const { currentUser } = useContext(UserContext)
 
     const todaysDate = getFormattedDate(new Date())
+
+    const [quickAddOpen, setQuickAddOpen] = useState(false)
+    const toggleQuickAdd = () => {
+        setQuickAddOpen(bool => !bool)
+    }
     
     const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
@@ -61,6 +67,8 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
     return (
         <div className='mainPage'>
+            {quickAddOpen && <QuickAddForm currentUser={currentUser} myMealEntries={myMealEntries} toggleQuickAdd={toggleQuickAdd} />}
+            {quickAddOpen && <div id='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>
             </div>

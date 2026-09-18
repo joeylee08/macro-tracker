@@ -70,7 +70,7 @@ const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handle
     //submit completed meal
     function handleSubmit(event) {
         event.preventDefault()
-        console.log(meal)
+  
         onAddMeal(meal)
     }
 

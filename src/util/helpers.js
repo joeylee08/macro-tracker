@@ -1,11 +1,12 @@
-import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel } from '../models/models.js';
+import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel } from '../models/models.js';
 
 const modelObj = {
     'user': userModel,
     'meal': mealModel,
     'food': foodModel,
     'ingredient': ingredientModel,
-    'mealEntry': mealEntryModel
+    'mealEntry': mealEntryModel,
+    'mealEntryIngredientModel': mealEntryIngredientModel
 }
 
 const validateData = (data, modelType) => {
@@ -17,7 +18,17 @@ const validateData = (data, modelType) => {
     const model = modelObj[modelType]
 
     for (const key in model) {
-        if (key === 'ingredients') continue
+        if (key === 'ingredients' && modelType === 'meal') {
+            for (const item of data[key]) {
+                if (!validateData(item, 'ingredient')) return false
+            } 
+            continue
+        } else if (key === 'ingredients' && modelType ==='mealEntry') {
+            for (const item of data[key]) {
+                if (!validateData(item, 'mealEntryIngredientModel')) return false
+            }
+            continue
+        }
 
         if (data[key] === null || data[key] === undefined) {
             alert('Please fill out all fields.');
