@@ -1,12 +1,14 @@
 import { useContext, useState } from 'react'
 import { UserContext } from '../context/usercontext'
 import { Settings as SettingsIcon } from 'lucide-react'
+import MacroGoals from '../components/macrogoals'
 
 const Settings = () => {
     const { currentUser } = useContext(UserContext)
 
     return (
         <div className='mainPage'>
+            <MacroGoals />
             <div className='headerBox'>
                 <h1>Your Account</h1>
             </div>

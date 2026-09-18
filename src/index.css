@@ -422,7 +422,7 @@ h2.stats {
   transform: translate(-50%, -50%);
   width: 18rem;
   height: auto;
-  min-height: 31rem;
+  min-height: 32rem;
   max-height: 90vh;
   overflow-y: auto;
   border: 2px solid #cbb59b;
@@ -436,6 +436,7 @@ h2.stats {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 0.5rem;
 }
 
 .form input {
@@ -538,7 +539,7 @@ form input#cal {
   display: flex;
   justify-content: center;
   gap: 0.7rem;
-  margin-top: 0.7rem;
+  margin: 0.7rem auto 0.2rem auto;
 }
 
 #formBtnFood {
@@ -791,9 +792,9 @@ h2#username {
 }
 
 h2.macroGoalLabel {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  color: #8a7b6a;
+  color: #362312;
   height: 2rem;
 }
 
@@ -803,6 +804,10 @@ h2.macroGoalLabel {
   width: 95%;
   align-items: center;
   box-sizing: border-box;
+}
+
+.form#editMacroGoals {
+  min-height: 21.5rem;
 }
 
 .logoutBtn {
