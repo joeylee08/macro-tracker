@@ -1,9 +1,9 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/usercontext'
 
-const MacroGoals = () => {
+const MacroGoals = ({ handleToggleForm }) => {
     const { currentUser } = useContext(UserContext)
-    console.log(currentUser)
+
     const [formData, setFormData] = useState(currentUser.macroGoals)
 
     const handleChange = (event) => {
@@ -20,7 +20,7 @@ const MacroGoals = () => {
     }
     return (
         <form className='form' id='editMacroGoals' onSubmit={handleSubmit}>
-            <button type='button' className='closeForm' onClick={() => handleToggleForm('food')}>×</button>
+            <button type='button' className='closeForm' onClick={handleToggleForm}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='cal'>Calories</label>
                 <input type='number' id='cal' name='cal' value={formData.cal} onChange={handleChange} min='0' step='any'></input>

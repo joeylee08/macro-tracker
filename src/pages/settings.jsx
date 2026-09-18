@@ -6,9 +6,15 @@ import MacroGoals from '../components/macrogoals'
 const Settings = () => {
     const { currentUser } = useContext(UserContext)
 
+    const [formOpen, setFormOpen] = useState(false)
+    const handleToggleForm = () => {
+        setFormOpen(bool => !bool)
+    }
+
     return (
         <div className='mainPage'>
-            <MacroGoals />
+            {formOpen && <MacroGoals handleToggleForm={handleToggleForm} />}
+            {formOpen && <div id='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Account</h1>
             </div>
@@ -22,7 +28,7 @@ const Settings = () => {
                 <h1>Your Macro Goals</h1>
             </div>
             <div className='mySettings'>
-                <button className='settingsBtn'>
+                <button className='settingsBtn' onClick={handleToggleForm}>
                     <SettingsIcon size={30}/>
                 </button>
                 <div className='settingsField'>
