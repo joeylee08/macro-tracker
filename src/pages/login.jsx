@@ -85,7 +85,7 @@ const Login = () => {
                 <input name='confirmPassword' className='loginInput' type='password' onChange={handleSetFormData} value={formData.confirmPassword} placeholder="Confirm Password"></input>
             </div>
             <div id='loginButtons'>
-                <button className='formBtnLogin' type='submit'>SIGN UP</button>
+                <button className='formBtnLogin' id='loginSignup' type='submit'>SIGN UP</button>
             </div>
         </form>
       </div>
