@@ -55,6 +55,10 @@ p {
   color: #362312;
 }
 
+.mainPage .form label {
+  font-weight: 600;
+}
+
 .navbar {
   width: 100%;
   height: 6.8rem;
@@ -151,6 +155,7 @@ p {
   height: 3.2rem;
   background-color: white;
   font-size: 1.2rem;
+  font-weight: 500;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
   transition: border-color 0.5s ease;
@@ -295,6 +300,7 @@ h2.stats {
   height: 2rem;
   width: 15rem;
   font-size: 1rem;
+  font-weight: 500;
   border: 3px solid #f2e7d5;
   border-radius: 5px;
 }
@@ -303,6 +309,7 @@ h2.stats {
   width: 8rem;
   height: 2rem;
   font-size: 1rem;
+  font-weight: 500;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
   background-color: white;
@@ -553,8 +560,9 @@ form input#cal {
 
 #formBtnFood {
   font-size: 1rem;
-  width: 7rem;
-  height: 2rem;
+  font-weight: 500;
+  width: 7.5rem;
+  height: 2.2rem;
   margin-top: 1rem;
   border: 2px solid #cbb59b;
   border-radius: 5px;
@@ -564,8 +572,9 @@ form input#cal {
 
 #formBtnMeal {
   font-size: 1rem;
+  font-weight: 500;
   width: 7.5rem;
-  height: 2.5rem;
+  height: 2.2rem;
   margin: 0.15rem 0;
   border: 2px solid #cbb59b;
   border-radius: 5px;
@@ -578,6 +587,57 @@ form input#cal {
 }
 
 #formBtnMeal:hover {
+  border-color: green;
+}
+
+.form#cascadeDeleteForm {
+  width: 20rem;
+}
+
+.form#cascadeDeleteForm h3 {
+  font-size: 1.4rem;
+  margin: 0 0 0.5rem 0;
+  color: red;
+}
+
+.form#cascadeDeleteForm p {
+  margin: 0;
+  font-weight: 500;
+}
+
+.cascadeDeleteChild {
+  width: 80%;
+  border: 2px solid green;
+}
+
+.cascadeDeleteChild2 {
+  width: 80%;
+  border: 2px solid blue;
+  min-height: 20rem;
+}
+
+.btnContainer#cascadeDeleteBtns {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 6rem;
+  gap: 1rem;
+}
+
+.formBtnCD {
+  font-size: 1rem;
+  font-weight: 500;
+  width: 15rem;
+  height: 3rem;
+  border: 2px solid #cbb59b;
+  border-radius: 5px;
+  background-color: white;
+  transition: border-color 0.5s ease;
+}
+
+.formBtnCD:hover {
   border-color: green;
 }
 
@@ -641,8 +701,9 @@ select.monthYear {
 
 #formBtnHistory {
   font-size: 1rem;
+  font-weight: 500;
   width: 8rem;
-  height: 2rem;
+  height: 2.2rem;
   margin-top: 1rem;
   border: 2px solid #cbb59b;
   border-radius: 5px;
@@ -799,6 +860,22 @@ select.monthYear {
   color: #362312;
 }
 
+#formBtnSettings {
+  font-size: 1rem;
+  font-weight: 500;
+  width: 8rem;
+  height: 2.2rem;
+  margin-top: 1rem;
+  border: 2px solid #cbb59b;
+  border-radius: 5px;
+  background-color: white;
+  transition: border-color 0.5s ease;
+}
+
+#formBtnSettings:hover {
+  border-color: green;
+}
+
 h2#username {
   font-size: 1.4rem;
   font-weight: 500;
@@ -830,6 +907,7 @@ h2.macroGoalLabel {
   height: 3.2rem;
   background-color: white;
   font-size: 1.2rem;
+  font-weight: 500;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
   transition: border-color 0.5s ease;

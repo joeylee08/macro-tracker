@@ -34,7 +34,7 @@ const MacroGoals = ({ handleToggleForm }) => {
                 <input type='number' id='sodium' name='sodium' value={formData.sodium} onChange={handleChange} min='0' step='any'></input>
             </div>
             
-            <button id='formBtnFood'>
+            <button id='formBtnSettings'>
                 Save Edit
             </button>
         </form>

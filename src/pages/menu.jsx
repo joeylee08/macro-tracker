@@ -2,6 +2,7 @@ import Meals from "../components/meals"
 import Foods from "../components/foods"
 import CreateFoodForm from "../components/createfoodform"
 import CreateMealForm from "../components/createmealform"
+import CascadeDeleteForm from "../components/cascadedeleteform"
 import { useState } from "react";
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
@@ -38,12 +39,14 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
     const [toggleFoodForm, setToggleFoodForm] = useState(false)
     const [toggleMealForm, setToggleMealForm] = useState(false)
+    const [toggleCascadeDelete, setToggleCascadeDelete] = useState(false)
 
     const handleToggleForm = (formType) => {
         if (isEditing) setIsEditing(false)
 
         if (formType === 'food') setToggleFoodForm(bool => !bool)
         else if (formType === 'meal') setToggleMealForm(bool => !bool)
+        else if (formType === 'cascadeDelete') toggleCascadeDelete(bool => !bool)
     }
 
     const [selectedItem, setSelectedItem] = useState(null)
@@ -83,7 +86,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
     return (
         <div className='mainPage'>
-            {(toggleFoodForm || toggleMealForm) && <div id='screenBlock'></div>}
+            {(toggleFoodForm || toggleMealForm || toggleCascadeDelete) && <div id='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Personalized Menu</h1>
             </div>
@@ -95,6 +98,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
+            {toggleCascadeDelete && <CascadeDeleteForm />}
         </div>
     )
 }
