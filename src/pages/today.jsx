@@ -3,7 +3,7 @@ import MealSelect from "../components/mealselect";
 import DailyMealCard from "../components/dailymealcard";
 import QuickAddForm from "../components/quickaddform";
 import { getFormattedDate } from "../util/helpers";
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../context/usercontext'
 
 const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
@@ -67,7 +67,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
     return (
         <div className='mainPage'>
-            {quickAddOpen && <QuickAddForm currentUser={currentUser} myMealEntries={myMealEntries} toggleQuickAdd={toggleQuickAdd} />}
+            {quickAddOpen && <QuickAddForm currentUser={currentUser} myMealEntries={myMealEntries} setMealEntries={setMealEntries} toggleQuickAdd={toggleQuickAdd} />}
             {quickAddOpen && <div id='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>
@@ -82,7 +82,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                 <h1>Your Daily Dashboard</h1>
             </div>
             <div className='myGoals2' id='mealsDash'>
-                <MealSelect myMeals={myMeals} handleMealEntries={handleMealEntries} />
+                <MealSelect myMeals={myMeals} handleMealEntries={handleMealEntries} toggleQuickAdd={toggleQuickAdd}/>
             </div>
             <div className='myGoals3'>
                 {dailyMealCards.length === 0 ? <h1 className='dashboardPlaceholder' id='todayPlaceholder'>Ready for a new day!</h1> : dailyMealCards}

@@ -1,6 +1,7 @@
 import { validateData } from "../util/helpers"
+import { useState } from 'react'
 
-const QuickAddForm = ({ currentUser, myMealEntries, toggleQuickAdd }) => {
+const QuickAddForm = ({ currentUser, myMealEntries, setMealEntries, toggleQuickAdd }) => {
     const nextEntryIndex = myMealEntries.length
                                     ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
                                     : 1
@@ -11,7 +12,7 @@ const QuickAddForm = ({ currentUser, myMealEntries, toggleQuickAdd }) => {
         name: '',
         dateAndTime: new Date().toISOString(),
         ingredients: [
-            {   name: formData.name,
+            {   name: 'quickAddItem',
                 servingSize: 1,
                 servingUnit: 'piece',
                 units: 1,
@@ -38,29 +39,43 @@ const QuickAddForm = ({ currentUser, myMealEntries, toggleQuickAdd }) => {
             }
         }
     
-        const handleSubmit = () => {
-            if (!validateData(formData, 'mealEntryModel')) return
+        const handleSubmit = (event) => {
+            event.preventDefault()
 
+            const toNumbers = {
+                id: formData.id,
+                userId: formData.userId,
+                name: formData.name,
+                dateAndTime: formData.dateAndTime,
+                ingredients: [
+                    {   name: 'quickAddItem',
+                        servingSize: 1,
+                        servingUnit: 'piece',
+                        units: 1,
+                        cal: +formData.ingredients[0].cal,
+                        protein: +formData.ingredients[0].protein,
+                        carb: +formData.ingredients[0].carb,
+                        fat: +formData.ingredients[0].fat,
+                        sodium: +formData.ingredients[0].sodium
+                    }]
+            }
+
+            if (!validateData(toNumbers, 'mealEntry')) return
+
+            setMealEntries(previous => [
+                ...previous,
+                toNumbers
+            ])
+            
+            toggleQuickAdd()
         }
 
     return (
-        <form className='form' onSubmit={handleSubmit}>
+        <form className='form' id='quickAddForm' onSubmit={handleSubmit}>
             <button type='button' className='closeForm' onClick={toggleQuickAdd}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Name</label>
                 <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required minLength='1' maxLength='19'></input>
-                <label htmlFor='servingSize'>Serving Size</label>
-                <input type='number' id='servingSize' name='servingSize' value={formData.servingSize} onChange={handleChange} required min='.01' step='any'></input>
-                <label htmlFor='servingUnit'>Serving Unit</label>
-                <select id='servingUnit' name='servingUnit' value={formData.servingUnit} onChange={handleChange}>
-                    <option value=''>Select Unit</option>
-                    <option value='oz'>oz</option>
-                    <option value='g'>g</option>
-                    <option value='tbsp'>tbsp</option>
-                    <option value='tsp'>tsp</option>
-                    <option value='cup'>cup</option>
-                    <option value='piece'>piece</option>
-                </select>
                 <label htmlFor='cal'>Calories</label>
                 <input type='number' id='cal' name='cal' value={formData.cal} onChange={handleChange} min='0' step='any'></input>
                 <label htmlFor='protein'>Protein (g)</label>
@@ -74,7 +89,7 @@ const QuickAddForm = ({ currentUser, myMealEntries, toggleQuickAdd }) => {
             </div>
             
             <button id='formBtnFood'>
-                {isEditing ? 'Save Edit' : 'Submit'}
+                Submit
             </button>
         </form>
     )

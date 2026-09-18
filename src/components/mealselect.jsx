@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
-const MealSelect = ({ myMeals, handleMealEntries }) => {
+const MealSelect = ({ myMeals, handleMealEntries, toggleQuickAdd }) => {
     const [selectedMealId, setSelectedMealId] = useState(0)
     
     const handleChange = (event) => {
         if (event.target.value === 'quick') {
-            console.log('open penis')
+            toggleQuickAdd()
             return
         }
         const mealId = +event.target.value 

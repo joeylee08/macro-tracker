@@ -314,6 +314,10 @@ h2.stats {
   border-color: green;
 }
 
+.form#quickAddForm {
+  min-height: 25.2rem;
+}
+
 .myFoods {
   margin: auto auto;
   width: 95%;
