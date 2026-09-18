@@ -647,13 +647,14 @@ select.monthYear {
 
 .myHistory {
   display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   margin: 2rem auto;
   width: 95%;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
   box-sizing: border-box;
-  height: 26em;
 }
 
 .myHistory2 {
@@ -674,6 +675,10 @@ select.monthYear {
   margin: 1.7rem auto;
   gap: 1rem;
   background-color: white;
+}
+
+#monthChartWrapper {
+  margin: 2.5rem auto;
 }
 
 #monthChart {
