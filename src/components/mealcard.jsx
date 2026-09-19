@@ -1,7 +1,6 @@
 import { calculateMacros } from "../util/helpers"
 
 const MealCard = ({ meal, myFoods, handleIsEditing, handleDelete }) => {
-    
     const macros = calculateMacros(myFoods, meal)
 
     const handleDeleteMeal = (event) => {
