@@ -1,7 +1,13 @@
 const FoodCard = ({ food, handleIsEditing, handleDelete }) => {
+
+    const handleDeleteFood = (event) => {
+        event.stopPropagation()
+        handleDelete('food', food.id)
+    }
+
     return (
         <div className='foodCard' onClick={() => handleIsEditing('food', true, food.id)}>
-            <button type='button' className='deleteBtn' onClick={(event) => handleDelete(event, 'food', food.id)}>×</button>
+            <button type='button' className='deleteBtn' onClick={handleDeleteFood}>×</button>
             <h3>{food.name}</h3>
             <p></p>
             <p>{food.cal} Calories / {food.servingSize} {food.servingUnit}</p>

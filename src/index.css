@@ -14,11 +14,11 @@ html {
   font-size: 90%;
 }
 
-#app {
+/* #app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
+} */
 
 body {
   background-color: white;
