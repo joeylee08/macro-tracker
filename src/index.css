@@ -626,9 +626,14 @@ button.closeForm#cascadeDeleteCloseBtn {
 }
 
 .cascadeDeleteItems {
+  height: 2rem;
   font-size: 1.2rem;
   font-weight: 450;
   color: #362312;
+}
+
+.cascadeDeleteItems::marker {
+  content: '🔪 '
 }
 
 .btnContainer#cascadeDeleteBtns {
