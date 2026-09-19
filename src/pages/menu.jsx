@@ -46,7 +46,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
         if (formType === 'food') setToggleFoodForm(bool => !bool)
         else if (formType === 'meal') setToggleMealForm(bool => !bool)
-        else if (formType === 'cascadeDelete') toggleCascadeDelete(bool => !bool)
+        else if (formType === 'cascadeDelete') setToggleCascadeDelete(bool => !bool)
     }
 
     const [selectedItem, setSelectedItem] = useState(null)
@@ -60,20 +60,23 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         setSelectedItem(itemToEdit)
     }
 
+    const [linkedMeals, setLinkedMeals] = useState([])
+    const [linkedFoodId, setLinkedFoodId] = useState(0)
+
     const handleDelete = (event, itemType, itemId) => {
         event.stopPropagation()
   
         if (itemType === 'food') {
-            const linkedMeals = myMeals.filter(meal => meal.ingredients.find(item => item.foodId === itemId))
-            if (linkedMeals.length > 0) {
-                const mealNames = linkedMeals
-                                        .map(meal => meal.name)
-                                        .join('\n• ')
-                alert(`Cannot delete ingredient.\n\nCurrently being used in:\n\n• ${mealNames}`)
-                return
-            }
-            const modified = myFoods.filter(item => item.id !== itemId)
-            setMyFoods(modified)
+            const linkedToFood = myMeals.filter(meal => meal.ingredients.find(item => item.foodId === itemId))
+            console.log(linkedToFood)
+            if (linkedToFood.length === 0) {
+                const modified = myFoods.filter(item => item.id !== itemId)
+                setMyFoods(modified)
+            } else {
+                setLinkedFoodId(itemId)
+                setLinkedMeals(linkedToFood) 
+                handleToggleForm('cascadeDelete')                    
+            }  
         } else if (itemType === 'meal') {
             const modified = myMeals.filter(item => item.id !== itemId)
             setMyMeals(modified)
@@ -98,7 +101,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
-            {toggleCascadeDelete && <CascadeDeleteForm />}
+            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals}/>}
         </div>
     )
 }
