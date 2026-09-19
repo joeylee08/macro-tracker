@@ -1,4 +1,4 @@
-const CascadeDeleteForm = ({ myMeals, myFoods, setToggleCascadeDelete, linkedFoodId, linkedMeals, handleSetMyMeals, handleDelete }) => {
+const CascadeDeleteForm = ({ myMeals, myFoods, setToggleCascadeDelete, linkedFoodId, linkedMeals, handleSetMyMeals, postCascadeFoodDelete }) => {
     const allLinkedMeals = linkedMeals.map(meal => {
         return <li key={meal.id} className='cascadeDeleteItems'>{meal.name}</li>
     })
@@ -12,14 +12,14 @@ const CascadeDeleteForm = ({ myMeals, myFoods, setToggleCascadeDelete, linkedFoo
         })).filter(meal => meal.ingredients.length !== 0)
 
         handleSetMyMeals(updated, true)
-        handleDelete('food', linkedFoodId)
+        postCascadeFoodDelete(linkedFoodId)
         setToggleCascadeDelete()
     }
     //CREATE A DEDICATED POST-CASCADE FOOD DELETE FUNCTION THAT BYPASSES THE LINKEDMEALS DEPENDENCY CHECK
     const deleteMeals = () => {
         const filtered = myMeals.filter(meal => !meal.ingredients.some(item => item.foodId === linkedFoodId))
         handleSetMyMeals(filtered, true)
-        handleDelete('food', linkedFoodId) //so make this a FOOD DELETE ONLY function
+        postCascadeFoodDelete(linkedFoodId)
         setToggleCascadeDelete()
     }
 
