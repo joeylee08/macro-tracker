@@ -72,7 +72,7 @@ const QuickAddForm = ({ currentUser, myMealEntries, setMealEntries, toggleQuickA
 
     return (
         <form className='form' id='quickAddForm' onSubmit={handleSubmit}>
-            <button type='button' className='closeForm' onClick={toggleQuickAdd}>×</button>
+            <button type='button' className='closeForm' id='closeQuickAdd' onClick={toggleQuickAdd}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Name</label>
                 <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required minLength='1' maxLength='19'></input>

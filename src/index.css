@@ -322,7 +322,13 @@ h2.stats {
 }
 
 .form#quickAddForm {
-  min-height: 25.2rem;
+  position: fixed;
+  min-height: 25rem;
+  width: 17rem;
+}
+
+button.closeForm#closeQuickAdd {
+  right: 0.5rem;
 }
 
 .myFoods {
