@@ -10,7 +10,7 @@ const MealCard = ({ meal, myFoods, handleIsEditing, handleDelete }) => {
 
     return (
         <div className='foodCard' onClick={() => handleIsEditing('meal', true, meal.id)}>
-            <button type='button' className='redX deleteBtn' onClick={(event) => handleDeleteMeal(event)}>×</button>
+            <button type='button' className='redX deleteBtnX' onClick={(event) => handleDeleteMeal(event)}>×</button>
             <h3>{meal.name}</h3>
             <p>{Math.round(macros.cal)} Calories</p>
             <p>{Math.round(macros.protein)}g Protein</p>

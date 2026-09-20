@@ -24,8 +24,8 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
     }
 
     return (
-        <div className='form' id='cascadeDeleteForm'>
-            <button type='button' className='redX closeForm' id='cascadeDeleteCloseBtn' onClick={() => handleToggleForm('cascadeDelete')}>×</button>
+        <div className='form cascadeDeleteForm'>
+            <button type='button' className='redX closeFormX cascadeDeleteX' onClick={() => handleToggleForm('cascadeDelete')}>×</button>
             <div className='cascadeDeleteChild'>
                 <h3>Warning!</h3>
                 <p><span style={{ color: 'green'}}>{foodName}</span> is currently used in the following:</p>
@@ -35,7 +35,7 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
                     {allLinkedMeals}
                 </ul>
             </div>
-            <div className='btnContainer' id='cascadeDeleteBtns'>
+            <div className='cascadeDeleteBtns'>
                 <button className='formBtnCD' onClick={deleteIngredient}>
                     Remove item from all meals.
                 </button>

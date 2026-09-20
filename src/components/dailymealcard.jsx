@@ -6,7 +6,7 @@ const DailyMealCard = ({ entryId, mealEntry, handleMealEntries, readOnly }) => {
 
     return (
         <div className={readOnly ? 'foodCard readOnly' : 'foodCard'}>
-            {readOnly ? null : <button type='button' className='redX deleteBtn' onClick={() => handleMealEntries(entryId, 'delete')}>×</button>}
+            {readOnly ? null : <button type='button' className='redX deleteBtnX' onClick={() => handleMealEntries(entryId, 'delete')}>×</button>}
             <h3>{mealEntry.name}</h3>
             <p>{Math.round(macros.cal)} Calories</p>
             <p>{Math.round(macros.protein)}g Protein</p>

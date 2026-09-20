@@ -7,7 +7,7 @@ const FoodCard = ({ food, handleIsEditing, handleDelete }) => {
 
     return (
         <div className='foodCard' onClick={() => handleIsEditing('food', true, food.id)}>
-            <button type='button' className='redX deleteBtn' onClick={handleDeleteFood}>×</button>
+            <button type='button' className='redX deleteBtnX' onClick={handleDeleteFood}>×</button>
             <h3>{food.name}</h3>
             <p></p>
             <p>{food.cal} Calories / {food.servingSize} {food.servingUnit}</p>

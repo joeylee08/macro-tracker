@@ -406,6 +406,9 @@ h1.dashboardPlaceholder {
 }
 
 .redX {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
   height: 1.5rem;
   width: 1.5rem;
@@ -415,17 +418,17 @@ h1.dashboardPlaceholder {
   cursor: pointer;
 }
 
-.deleteBtn {
+.deleteBtnX {
   position: absolute;
   border: 1px solid #362312;
   border-radius: 50%;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   margin: -8.8rem 0 0 9.8rem;
   opacity: 0;
   transition: opacity 0.15s ease;
 }
 
-.closeForm {
+.closeFormX {
   position: fixed;
   margin: -1.2rem 0 0 15.5rem;
   line-height: 1.25rem;
@@ -435,12 +438,29 @@ h1.dashboardPlaceholder {
   border-radius: 5px;
 }
 
+.thumbX {
+  height: 1.1rem;
+  width: 1.1rem;
+  color: red;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: auto 0;
+  margin-right: 0.5rem;
+  padding: 0.05rem 0.04rem 0 0;
+  cursor: pointer;
+}
+
+
 .quickAddX {
   right: 0.5rem;
 }
 
-.foodCard:hover .deleteBtn {
-    opacity: 1;
+.cascadeDeleteX {
+  right: 0.5rem;
+}
+
+.foodCard:hover .deleteBtnX {
+  opacity: 1;
 }
 
 /* FIX CSS WHEN SCROLLBAR APPEARS ON FORM! EVERYTHING GETS FUCKED UP! */
@@ -552,23 +572,6 @@ form input#cal {
   color: #362312;
 }
 
-.foodThumb #removeX {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 1.1rem;
-  width: 1.1rem;
-  color: red;
-  font-size: 1.6rem;
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 5px;
-  margin: auto 0;
-  margin-right: 0.5rem;
-  padding: 0.05rem 0.04rem 0 0;
-  cursor: pointer;
-}
-
 #btnContainer {
   width: 100%;
   display: flex;
@@ -609,23 +612,19 @@ form input#cal {
   border-color: green;
 }
 
-.form#cascadeDeleteForm {
+.cascadeDeleteForm {
   width: 20rem;
   min-height: 27rem;
 }
 
-button.closeForm#cascadeDeleteCloseBtn {
-  right: 0.5rem;
-}
-
-#cascadeDeleteForm h3 {
+.cascadeDeleteForm h3 {
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
   color: red;
 }
 
-#cascadeDeleteForm p {
+.cascadeDeleteForm p {
   margin: 0;
   font-weight: 500;
   color: #362312;
@@ -645,17 +644,14 @@ button.closeForm#cascadeDeleteCloseBtn {
 }
 
 .cascadeDeleteItems {
-  height: 2rem;
-  font-size: 1rem;
-  font-weight: 450;
-  color: #362312;
+  height: 1.5rem;
 }
 
 .cascadeDeleteItems::marker {
   content: '🔪 '
 }
 
-#cascadeDeleteBtns {
+.cascadeDeleteBtns {
   display: flex;
   flex-direction: column;
   align-items: center;

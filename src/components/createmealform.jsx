@@ -104,7 +104,7 @@ const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handle
 
     return (
         <form className='form' onSubmit={handleSubmit}>
-            <button type='button' className='redX closeForm' onClick={() => handleToggleForm('meal')}>×</button>
+            <button type='button' className='redX closeFormX' onClick={() => handleToggleForm('meal')}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Meal Name</label>
                 <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
