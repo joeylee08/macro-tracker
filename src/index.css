@@ -121,7 +121,7 @@ body {
   color: #362312;
 }
 
-#screenBlock {
+.screenBlock {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.25);
@@ -158,7 +158,7 @@ form.loginForm {
   color: #362312;
 }
 
-/* Menu Page CSS */
+/* Today Page CSS */
 
 .myGoals {
   margin: auto auto;
@@ -184,7 +184,6 @@ form.loginForm {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-  margin: auto auto;
   min-height: 9.7rem;
   width: 95%;
   margin: 1.7rem auto;
@@ -686,7 +685,6 @@ select.monthYear {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-  margin: auto auto;
   min-height: 9.7rem;
   min-width: 36.6rem;
   width: 36.5rem;
@@ -773,6 +771,26 @@ select.monthYear {
   border-radius: 8px;
 }
 
+.mySettings2 {
+  display: flex;
+  flex-direction: column;
+  margin: 0.8rem auto 1.8rem auto;
+  position: relative;
+  width: 95%;
+  align-items: center;
+  box-sizing: border-box;
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
+}
+
+.mySettings3 {
+  display: flex;
+  margin: 2.4rem auto 1.5rem auto;
+  width: 95%;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 .settingsField {
   width: 90%;
   height: auto;
@@ -780,7 +798,11 @@ select.monthYear {
   gap: 0.5rem;
 }
 
-.mySettings h2 {
+.mySettings2 .settingsField {
+  margin: 1.2rem auto 1rem auto;
+}
+
+h2 {
   width: 100%;
   margin: 0 auto;
   font-size: 1.5rem;
@@ -798,15 +820,7 @@ h2.macroGoalLabel {
   font-size: 1.2rem;
   font-weight: 450;
   color: #362312;
-  height: 1.9rem;
-}
-
-.mySettings2 {
-  display: flex;
-  margin: 2.4rem auto 1.5rem auto;
-  width: 95%;
-  align-items: center;
-  box-sizing: border-box;
+  height: 1.8rem;
 }
 
 .editMacroGoals {
@@ -822,7 +836,7 @@ h2.macroGoalLabel {
   margin-top: auto;
 }
 
-#footerText {
+.footerText {
   font-size: 1.9rem;
   font-family: "Allura", cursive;
   font-weight: 400;

@@ -43,7 +43,7 @@ const History = ({ myMealEntries }) => {
     
     return (
         <div className='mainPage'>
-            {toggleHistoryForm && <div id='screenBlock'></div>}
+            {toggleHistoryForm && <div className='screenBlock'></div>}
             {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm} setCurrentYearMonth={setCurrentYearMonth} handleSelectDay={handleSelectDay} myMealEntries={myMealEntries}/>}
             <div className='headerBox'>
                 <h1>Your Dietary History</h1>

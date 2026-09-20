@@ -118,7 +118,7 @@ const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handle
             </div>
             <div className='formBtnContainer'>
                 <button type='button' className='formBtn formBtnMeal' onClick={handleAddIngredient}>Add Item</button>
-                <button type='submit' className='formBtn formBtnMeal' onClick={handleSubmit}>{isEditing ? 'Save Edit' : 'Save Meal'}</button>
+                <button type='submit' className='formBtn formBtnMeal'>{isEditing ? 'Save Edit' : 'Save Meal'}</button>
             </div>
             <div className='foodThumbDashboard'>
                 {dashboard}
