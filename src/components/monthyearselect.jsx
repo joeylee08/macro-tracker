@@ -37,7 +37,7 @@ const MonthYearSelect = ({ handleToggleHistoryForm, setCurrentYearMonth, handleS
 
     return (
         <form className='form' id='monthYear' onSubmit={handleSubmit}>
-            <button type='button' className='closeForm' onClick={handleToggleHistoryForm}>×</button>
+            <button type='button' className='redX closeForm' onClick={handleToggleHistoryForm}>×</button>
             <div className='historyFormField'>
                 <select id='month' name='month' className='monthYear' value={tempMonthYear.month} onChange={handleChange}>
                     <option value=''>Select Month</option>

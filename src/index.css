@@ -327,10 +327,6 @@ h1.dashboardPlaceholder {
   width: 17rem;
 }
 
-button#closeQuickAdd {
-  right: 0.5rem;
-}
-
 .myFoods {
   margin: auto auto;
   width: 95%;
@@ -437,6 +433,10 @@ button#closeQuickAdd {
   font-weight: 700;
   border: none;
   border-radius: 5px;
+}
+
+.quickAddX {
+  right: 0.5rem;
 }
 
 .foodCard:hover .deleteBtn {
@@ -679,16 +679,6 @@ button.closeForm#cascadeDeleteCloseBtn {
 
 .formBtnCD:hover {
   border-color: red;
-}
-
-.redX#closeForm {
-  position: fixed;
-  margin: -1.2rem 0 0 15.5rem;
-  line-height: 1.25rem;
-  font-size: 2.1rem;
-  font-weight: 700;
-  border: none;
-  border-radius: 5px;
 }
 
 .calendarBtn {

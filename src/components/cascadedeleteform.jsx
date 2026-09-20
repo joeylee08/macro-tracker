@@ -25,7 +25,7 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
 
     return (
         <div className='form' id='cascadeDeleteForm'>
-            <button type='button' className='closeForm' id='cascadeDeleteCloseBtn' onClick={() => handleToggleForm('cascadeDelete')}>×</button>
+            <button type='button' className='redX closeForm' id='cascadeDeleteCloseBtn' onClick={() => handleToggleForm('cascadeDelete')}>×</button>
             <div className='cascadeDeleteChild'>
                 <h3>Warning!</h3>
                 <p><span style={{ color: 'green'}}>{foodName}</span> is currently used in the following:</p>

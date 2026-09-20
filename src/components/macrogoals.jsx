@@ -20,7 +20,7 @@ const MacroGoals = ({ handleToggleForm }) => {
     }
     return (
         <form className='form' id='editMacroGoals' onSubmit={handleSubmit}>
-            <button type='button' className='closeForm' onClick={handleToggleForm}>×</button>
+            <button type='button' className='redX closeForm' onClick={handleToggleForm}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='cal'>Calories</label>
                 <input type='number' id='cal' name='cal' value={formData.cal} onChange={handleChange} min='0' step='any'></input>
