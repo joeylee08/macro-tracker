@@ -108,7 +108,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
-            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} setToggleCascadeDelete={setToggleCascadeDelete} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyMeals={handleSetMyMeals} postCascadeFoodDelete={postCascadeFoodDelete}/>}
+            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyMeals={handleSetMyMeals} postCascadeFoodDelete={postCascadeFoodDelete}/>}
         </div>
     )
 }

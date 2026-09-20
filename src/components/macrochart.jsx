@@ -22,9 +22,14 @@ const MacroChart = ({ currentUser, todaysMealEntries }) => {
 
     //calculate from consolidated macros object
     const macroRows = Object.entries(macroTotals).map(([macro, value]) => {
-        const percentage = Math.round((value / userGoals[macro]) * 100)
-        const remainder = Math.round(userGoals[macro] - value)
-        const overColor = macro === 'protein' ? 'blue' : 'red'
+        const roundedValue = Math.round(value)
+        const remainder = userGoals[macro] - roundedValue
+        const percentage = userGoals[macro] === 0
+                                        ? 0
+                                        : Math.floor((roundedValue / userGoals[macro]) * 100)
+        
+        let overColor = macro === 'protein' ? 'blue' : 'red'
+        if (remainder === 0) overColor = 'green'
 
         return (
             <div className='meterAndLabel' key={macro}>
@@ -32,9 +37,9 @@ const MacroChart = ({ currentUser, todaysMealEntries }) => {
                 <div className='macroMeter'>
                     <div className='macroMeterFill' id={macro} style={{ width: `${Math.min(percentage, 100)}%`}}></div>
                 </div>
-                <h2 className='stats' style={{ color: percentage > 100 ? overColor : 'inherit' }}>{Math.round(value)} / {userGoals[macro]} [{percentage}%]</h2>
-                <h3 id='remaining' style={{ color: percentage > 100 ? overColor : 'green' }}>{percentage <= 100 ? remainder : `+${Math.abs(remainder)}`}</h3>
-            </div>
+                <h2 className='stats' style={{ color: remainder >= 0 ? 'inherit' : overColor }}>{roundedValue} / {userGoals[macro]} [{percentage}%]</h2>
+                <h3 id='remaining' style={{ color: remainder >= 0 ? 'green' : overColor }}>{remainder > 0 ? `+${Math.abs(remainder)}` : `${Math.abs(remainder)}`}</h3>
+            </div>                                                                                        
         )
     })
 

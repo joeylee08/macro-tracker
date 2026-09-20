@@ -14,11 +14,11 @@ html {
   font-size: 90%;
 }
 
-/* #app {
+#app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-} */
+}
 
 body {
   background-color: white;
@@ -633,7 +633,7 @@ button.closeForm#cascadeDeleteCloseBtn {
 
 .cascadeDeleteItems {
   height: 2rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 450;
   color: #362312;
 }
@@ -863,7 +863,7 @@ select.monthYear {
 .mySettings {
   display: flex;
   flex-direction: column;
-  margin: 1rem auto 1.5rem auto;
+  margin: 0.8rem auto 1.8rem auto;
   position: relative;
   width: 95%;
   align-items: center;
@@ -875,14 +875,14 @@ select.monthYear {
 .settingsField {
   width: 90%;
   height: auto;
-  margin: 1.6rem auto;
+  margin: 0.9rem auto;
   gap: 0.5rem;
 }
 
 .mySettings h2 {
   width: 100%;
   margin: 0 auto;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: #362312;
 }
@@ -904,16 +904,16 @@ select.monthYear {
 }
 
 h2#username {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 500;
   color: #8a7b6a;
 }
 
 h2.macroGoalLabel {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 450;
   color: #362312;
-  height: 2rem;
+  height: 1.9rem;
 }
 
 .mySettings2 {
