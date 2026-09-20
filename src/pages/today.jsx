@@ -81,11 +81,11 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
             <div className='headerBox'>
                 <h1>Your Daily Dashboard</h1>
             </div>
-            <div className='myGoals2' id='mealsDash'>
+            <div className='myGoals2'>
                 <MealSelect myMeals={myMeals} handleMealEntries={handleMealEntries} toggleQuickAdd={toggleQuickAdd}/>
             </div>
             <div className='myGoals3'>
-                {dailyMealCards.length === 0 ? <h1 className='dashboardPlaceholder' id='todayPlaceholder'>Ready for a new day!</h1> : dailyMealCards}
+                {dailyMealCards.length === 0 ? <h1 className='dashboardPlaceholder todayP'>Ready for a new day!</h1> : dailyMealCards}
             </div>
         </div>
     )

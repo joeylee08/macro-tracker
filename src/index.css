@@ -64,6 +64,24 @@ body {
   color: #8a7b6a;
 }
 
+.dashboardPlaceholder {
+  margin-top: 3rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  width: 100%;
+  text-align: center;
+  color: #cbb59b;
+}
+
+.ingredientP {
+  margin-top: 3.4rem;
+}
+
+.historyP, 
+.todayP {
+  margin-bottom: 2.7rem;
+}
+
 /* Navbar CSS */
 
 .navbar {
@@ -142,21 +160,6 @@ form.loginForm {
 
 /* Menu Page CSS */
 
-.createBtn {
-  width: 16rem;
-  height: 3.2rem;
-  background-color: white;
-  font-size: 1.2rem;
-  font-weight: 450;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
-  transition: border-color 0.5s ease;
-}
-
-.createBtn:hover {
-  border-color: green;
-}
-
 .myGoals {
   margin: auto auto;
   width: 95%;
@@ -189,25 +192,7 @@ form.loginForm {
   background-color: white;
 }
 
-h1.dashboardPlaceholder {
-  margin-top: 3rem;
-  font-size: 2.5rem;
-  font-weight: 500;
-  width: 100%;
-  text-align: center;
-  color: #cbb59b;
-}
-
-#ingredientPlaceholder {
-  margin-top: 3.4rem;
-}
-
-#historyPlaceholder, 
-#todayPlaceholder {
-  margin-bottom: 2.7rem;
-}
-
-#macroChart {
+.macroChart {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -222,7 +207,7 @@ h1.dashboardPlaceholder {
   padding: 1.3rem 2rem;
 }
 
-.meterLabel {
+h2.meterLabel {
   font-size: 1.1rem;
   font-weight: 500;
   color: #362312;
@@ -260,41 +245,25 @@ h1.dashboardPlaceholder {
   color: #362312;
 }
 
-#remaining {
+.remaining {
   color: green;
   font-size: 1rem;
 }
 
-#selectorBox {
+.mealSelectBox {
   display: flex;
   gap: 2rem;
   align-items: center;
   justify-content: center;
 }
 
-#mealSelect {
+.mealSelect {
   height: 2rem;
   width: 15rem;
   font-size: 1rem;
   font-weight: 500;
   border: 3px solid #f2e7d5;
   border-radius: 5px;
-}
-
-#addDailyBtn {
-  width: 8rem;
-  height: 2rem;
-  font-size: 1rem;
-  font-weight: 500;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
-  background-color: white;
-  transition: border-color 0.5s ease;
-  box-sizing: border-box;
-}
-
-#addDailyBtn:hover {
-  border-color: green;
 }
 
 .form#quickAddForm {
@@ -569,6 +538,21 @@ h1.dashboardPlaceholder {
   height: 2rem;
   margin: 0.5rem auto 1.5rem auto;
   font-size: 0.99rem;
+}
+
+.addDailyBtn {
+  width: 8rem;
+  height: 2rem;
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
+}
+
+.formBtnMenu {
+  width: 16rem;
+  height: 3.2rem;
+  font-size: 1.2rem;
+  border: 3px solid #f2e7d5;
+  border-radius: 8px;
 }
 
 .formBtnFood {
