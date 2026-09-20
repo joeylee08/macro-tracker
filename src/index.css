@@ -41,23 +41,30 @@ body {
   display: flex;
 }
 
-h1 {
+.headerBox h1 {
   font-size: 2.2rem;
   font-weight: 400;
   color: #362312;
   margin: 0;
 }
 
-p {
-  font-size: 1.2rem;
-  line-height: 1.55rem;
-  margin-bottom: 0;
-  color: #362312;
+.dateHeader {
+  display: flex;
+  align-items: center;
+  width: 95%;
+  height: 2.5rem;
+  margin: 0 auto;
+  margin-top: 0.2rem;
 }
 
-.mainPage .form label {
-  font-weight: 600;
+.dateHeader h1 {
+  margin: auto 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #8a7b6a;
 }
+
+/* Navbar CSS */
 
 .navbar {
   width: 100%;
@@ -110,12 +117,12 @@ p {
   background-color: #f2e7d5;
 }
 
-.form.loginForm {
+form.loginForm {
   height: 25.6rem;
   min-height: 25.6rem;
 }
 
-.form h1 {
+.loginForm h1 {
   font-size: 1.4rem;
   font-weight: 500;
   margin-bottom: 1.1rem;
@@ -128,10 +135,12 @@ p {
   margin: 0.3rem auto 0.9rem auto;
 }
 
-.form .loginFormField label {
+.loginFormField label {
   margin-left: 0;
   color: #362312;
 }
+
+/* Menu Page CSS */
 
 .createBtn {
   width: 16rem;
@@ -146,22 +155,6 @@ p {
 
 .createBtn:hover {
   border-color: green;
-}
-
-.dateHeader {
-  display: flex;
-  align-items: center;
-  width: 95%;
-  height: 2.5rem;
-  margin: 0 auto;
-  margin-top: 0.2rem;
-}
-
-.dateHeader h1 {
-  margin: auto 0;
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: #8a7b6a;
 }
 
 .myGoals {
