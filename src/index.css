@@ -222,12 +222,12 @@ h1.dashboardPlaceholder {
   color: #cbb59b;
 }
 
-h1.dashboardPlaceholder#ingredientPlaceholder {
+#ingredientPlaceholder {
   margin-top: 3.4rem;
 }
 
-h1.dashboardPlaceholder#historyPlaceholder, 
-h1.dashboardPlaceholder#todayPlaceholder {
+#historyPlaceholder, 
+#todayPlaceholder {
   margin-bottom: 2.7rem;
 }
 
@@ -246,7 +246,7 @@ h1.dashboardPlaceholder#todayPlaceholder {
   padding: 1.3rem 2rem;
 }
 
-h2.meterLabel {
+.meterLabel {
   font-size: 1.1rem;
   font-weight: 500;
   color: #362312;
@@ -277,7 +277,7 @@ h2.meterLabel {
   transition: width 1s ease;
 }
 
-h2.stats {
+.stats {
   font-size: 1rem;
   font-weight: 400;
   border-right: 1px solid #cbb59b;
@@ -327,7 +327,7 @@ h2.stats {
   width: 17rem;
 }
 
-button.closeForm#closeQuickAdd {
+button#closeQuickAdd {
   right: 0.5rem;
 }
 
@@ -605,14 +605,14 @@ button.closeForm#cascadeDeleteCloseBtn {
   right: 0.5rem;
 }
 
-.form#cascadeDeleteForm h3 {
+#cascadeDeleteForm h3 {
   font-size: 1.4rem;
   font-weight: 600;
   margin: 0 0 0.5rem 0;
   color: red;
 }
 
-.form#cascadeDeleteForm p {
+#cascadeDeleteForm p {
   margin: 0;
   font-weight: 500;
   color: #362312;
@@ -642,7 +642,7 @@ button.closeForm#cascadeDeleteCloseBtn {
   content: '🔪 '
 }
 
-.btnContainer#cascadeDeleteBtns {
+#cascadeDeleteBtns {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -672,7 +672,7 @@ button.closeForm#cascadeDeleteCloseBtn {
   width: 1.5rem;
   height: 1.5rem;
   position: fixed;
-  background-color: #faf0e6;
+  background-color: white;
   padding: 0;
   margin: -1.2rem 0 0 15.5rem;
   line-height: 1.25rem;
