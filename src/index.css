@@ -266,10 +266,29 @@ h2.meterLabel {
   border-radius: 5px;
 }
 
-.form#quickAddForm {
+form.quickAddForm {
   position: fixed;
   min-height: 25rem;
   width: 17rem;
+}
+
+/* Menu Page CSS */
+
+.buttonDivMenu {
+  display: flex;
+  justify-content: center;
+  margin: 0.8rem auto -0.8rem auto;
+  width: 95%;
+  gap: 2rem;
+  background-color: white;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.dividerLineMeals {
+  margin: 1.7rem auto;
+  width: 100%;
+  border: 2px solid #f2e7d5;
 }
 
 .myFoods {
@@ -286,35 +305,6 @@ h2.meterLabel {
   gap: 1rem;
   background-color: white;
   min-height: 9.7rem;
-}
-
-.buttonDiv {
-  display: flex;
-  justify-content: center;
-  margin: 0.8rem auto -0.8rem auto;
-  width: 95%;
-  gap: 2rem;
-  background-color: white;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.dividerLine1 {
-  margin: 1.7rem auto;
-  width: 100%;
-  border: 2px solid #f2e7d5;
-}
-
-.dividerLine2 {
-  margin: 1.6rem auto 2rem auto;
-  width: 100%;
-  border: 2px solid #f2e7d5;
-}
-
-.dividerLine3 {
-  margin: 2rem auto 2.3rem auto;
-  width: 100%;
-  border: 2px solid #f2e7d5;
 }
 
 .foodCard {

@@ -15,7 +15,7 @@ const Meals = ({ myMeals, myFoods, handleIsEditing, handleDelete }) => {
             <div className='myFoodsChild'>
                 {renderedMeals.length === 0 ? <h1 className='dashboardPlaceholder'>Create your first meal.</h1> : renderedMeals}
             </div>
-            <hr className='dividerLine1'></hr>
+            <hr className='dividerLineMeals'></hr>
         </div>
     )
 }

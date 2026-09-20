@@ -100,7 +100,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <div className='headerBox'>
                 <h1>Your Personalized Menu</h1>
             </div>
-            <div className='buttonDiv'>
+            <div className='buttonDivMenu'>
                 <button className='formBtn formBtnMenu' onClick={() => handleToggleForm('meal')}>Create New Meal</button>
                 <button className='formBtn formBtnMenu' onClick={() => handleToggleForm('food')}>Add Ingredient</button>
             </div>
