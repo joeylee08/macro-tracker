@@ -20,8 +20,8 @@ const Settings = () => {
             </div>
             <div className='mySettings'>
                 <div className='settingsField'>
-                    <h2 id='fullName'>{currentUser.firstName} {currentUser.lastName}</h2>
-                    <h2 id='username'>{currentUser.username}</h2>
+                    <h2>{currentUser.firstName} {currentUser.lastName}</h2>
+                    <h2 className='username'>{currentUser.username}</h2>
                 </div>
             </div>
             <div className='headerBox'>
@@ -40,7 +40,7 @@ const Settings = () => {
                 </div>
             </div>
             <div className='mySettings2'>
-                <button className='logoutBtn'>Log Out</button>
+                <button className='formBtn logoutBtn'>Log Out</button>
             </div>
         </div>
     )

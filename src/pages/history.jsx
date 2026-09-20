@@ -45,7 +45,7 @@ const History = ({ myMealEntries }) => {
         <div className='mainPage'>
             {toggleHistoryForm && <div id='screenBlock'></div>}
             {toggleHistoryForm && <MonthYearSelect handleToggleHistoryForm={handleToggleHistoryForm} setCurrentYearMonth={setCurrentYearMonth} handleSelectDay={handleSelectDay} myMealEntries={myMealEntries}/>}
-            <div className='headerBox' id='history'>
+            <div className='headerBox'>
                 <h1>Your Dietary History</h1>
             </div>
             <div className='dateHeader'>
@@ -55,7 +55,7 @@ const History = ({ myMealEntries }) => {
                 <button className='calendarBtn' onClick={handleToggleHistoryForm} aria-label='Choose month and year' title='Choose month and year'>
                     <Clock size={30.5}/>
                 </button>
-                <div id='monthChartWrapper'>
+                <div className='monthChartWrapper'>
                     <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} selectedDay={selectedDay} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>
                 </div>
             </div>
@@ -76,6 +76,3 @@ const History = ({ myMealEntries }) => {
 }
 
 export default History
-
-// dateAndTime: "2026-09-08T08:47:00-07:00"
-// Date Month Year [getFormattedDate]

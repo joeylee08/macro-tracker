@@ -74,7 +74,7 @@ const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDa
                         })
 
     return (
-        <div id='monthChart'>
+        <div className='monthChart'>
             {days}
         </div>
     )

@@ -65,7 +65,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
                 <label htmlFor='servingSize'>Serving Size</label>
                 <input type='number' id='servingSize' name='servingSize' value={formData.servingSize} onChange={handleChange} required min='.01' step='any'></input>
                 <label htmlFor='servingUnit'>Serving Unit</label>
-                <select id='servingUnit' name='servingUnit' value={formData.servingUnit} onChange={handleChange}>
+                <select name='servingUnit' value={formData.servingUnit} onChange={handleChange}>
                     <option value=''>Select Unit</option>
                     <option value='oz'>oz</option>
                     <option value='g'>g</option>

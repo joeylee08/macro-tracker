@@ -19,7 +19,7 @@ const MacroGoals = ({ handleToggleForm }) => {
         console.log('penis')
     }
     return (
-        <form className='form' id='editMacroGoals' onSubmit={handleSubmit}>
+        <form className='form editMacroGoals' onSubmit={handleSubmit}>
             <button type='button' className='redX closeFormX' onClick={handleToggleForm}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='cal'>Calories</label>

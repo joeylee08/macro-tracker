@@ -423,6 +423,14 @@ form.quickAddForm {
   margin-top: 0.5rem;
 }
 
+.form label {
+  color: #362312;
+  width: 12rem;
+  align-self: flex-start;
+  margin-bottom: 0.1rem;
+  font-weight: bold;
+}
+
 .form input {
   width: 12rem;
   height: 1.1rem;
@@ -446,37 +454,18 @@ form.quickAddForm {
   width: 6.5rem;
 }
 
-.form label {
-  color: #362312;
-  width: 12rem;
-  align-self: flex-start;
-  margin-bottom: 0.1rem;
-  font-weight: bold;
-}
-
-.form select#servingUnit {
+.form select {
   width: 12.5rem;
-  height: 1.65rem;
+  height: 1.7rem;
   border: 2px solid #cbb59b;
   border-radius: 5px;
   font-size: 1rem;
   align-self: flex-start;
-  margin-bottom: 0.6rem;
   color: #362312; 
-}
-
-.form select#ingredients {
-  width: 12.5rem;
-  height: 1.65rem;
-  font-size: 1rem;
-  align-self: flex-start;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
   margin-bottom: 0.7rem;
-  color: #362312;
 }
 
-#dashboard {
+.foodThumbDashboard {
   margin: 1rem 0;
   display: grid;
   gap: 0.5rem;
@@ -493,7 +482,7 @@ form.quickAddForm {
   background-color: white;
 }
 
-.foodThumb #thumbnailText {
+.thumbnailText {
   font-size: 1rem;
   margin: auto 0;
   margin-left: 0.5rem;
@@ -564,6 +553,14 @@ form.quickAddForm {
   margin-top: 1rem;
 }
 
+.logoutBtn {
+  margin: 0 auto;
+  width: 12rem;
+  height: 3.2rem;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
 .formBtn:hover {
   border-color: green;
 }
@@ -613,7 +610,7 @@ form.quickAddForm {
   content: '🔪 '
 }
 
-.cascadeDeleteBtns {
+.cascadeDeleteBtnBox {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -698,11 +695,11 @@ select.monthYear {
   background-color: white;
 }
 
-#monthChartWrapper {
+.monthChartWrapper {
   margin: 2.5rem auto;
 }
 
-#monthChart {
+.monthChart {
   display: grid;
   grid-template-columns: repeat(7, 3.5rem);
   justify-content: center;
@@ -748,24 +745,6 @@ select.monthYear {
   border: 3.8px solid green;
 }
 
-#todayBox {
-  width: 100%;
-  aspect-ratio: 1;
-  background-color: white;
-  border-radius: 4px;
-  border: 2px solid #8a7b6a;
-  align-content: center;
-  font-size: 1.4rem;
-  font-family: "Archivo", sans-serif;
-  font-optical-sizing: auto;
-  transition: border-color 0.5s ease;
-}
-
-#todayBox:hover {
-  border-color: green;
-  cursor: pointer;
-}
-
 /* Settings Page */
 
 .settingsBtn {
@@ -809,7 +788,7 @@ select.monthYear {
   color: #362312;
 }
 
-h2#username {
+h2.username {
   font-size: 1.2rem;
   font-weight: 500;
   color: #8a7b6a;
@@ -830,24 +809,8 @@ h2.macroGoalLabel {
   box-sizing: border-box;
 }
 
-.form#editMacroGoals {
+.editMacroGoals {
   min-height: 21.5rem;
-}
-
-.logoutBtn {
-  margin: 0 auto;
-  width: 12rem;
-  height: 3.2rem;
-  background-color: white;
-  font-size: 1.2rem;
-  font-weight: 450;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
-  transition: border-color 0.5s ease;
-}
-
-.logoutBtn:hover {
-  border-color: green;
 }
 
 .footer {
