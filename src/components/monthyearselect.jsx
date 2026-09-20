@@ -58,7 +58,7 @@ const MonthYearSelect = ({ handleToggleHistoryForm, setCurrentYearMonth, handleS
                     <option value=''>Select Year</option>
                     {yearsList}
                 </select>
-                <button id='formBtnHistory'>Find History</button>
+                <button className='formBtn formBtnHistory'>Find History</button>
             </div>
             
         </form>

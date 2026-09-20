@@ -36,10 +36,10 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
                 </ul>
             </div>
             <div className='cascadeDeleteBtns'>
-                <button className='formBtnCD' onClick={deleteIngredient}>
+                <button className='formBtn formBtnCD' onClick={deleteIngredient}>
                     Remove item from all meals.
                 </button>
-                <button className='formBtnCD' onClick={deleteMeals}>
+                <button className='formBtn formBtnCD' onClick={deleteMeals}>
                     Remove all associated meals.
                 </button>
             </div>

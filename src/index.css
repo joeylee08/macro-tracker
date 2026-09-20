@@ -103,33 +103,16 @@ p {
   z-index: 10;
 }
 
+/* Login Page CSS */
+
 .loginPage {
   height: 100vh;
   background-color: #f2e7d5;
 }
 
 .form.loginForm {
-  height: 25.5rem;
-  min-height: 25.5rem;
-}
-
-.formBtnLogin {
-  width: 9rem;
-  height: 2rem;
-  margin: 0.5rem auto 1.5rem auto;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
-  font-size: 0.9rem;
-  background-color: white;
-  transition: border-color 0.5s ease;
-}
-
-.formBtnLogin#loginSignup {
-  margin-bottom: 0;
-}
-
-.formBtnLogin:hover {
-  border-color: green;
+  height: 25.6rem;
+  min-height: 25.6rem;
 }
 
 .form h1 {
@@ -343,7 +326,7 @@ h1.dashboardPlaceholder {
   min-height: 9.7rem;
 }
 
-#buttonDiv {
+.buttonDiv {
   display: flex;
   justify-content: center;
   margin: 0.8rem auto -0.8rem auto;
@@ -373,6 +356,7 @@ h1.dashboardPlaceholder {
 }
 
 .foodCard {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -405,6 +389,8 @@ h1.dashboardPlaceholder {
   margin: 0.1rem 0.2rem;
 }
 
+/* Red X CSS */
+
 .redX {
   display: flex;
   align-items: center;
@@ -423,14 +409,16 @@ h1.dashboardPlaceholder {
   border: 1px solid #362312;
   border-radius: 50%;
   font-size: 1.7rem;
-  margin: -8.8rem 0 0 9.8rem;
+  top: -0.5rem;
+  right: -0.6rem;
   opacity: 0;
   transition: opacity 0.15s ease;
 }
 
 .closeFormX {
-  position: fixed;
-  margin: -1.2rem 0 0 15.5rem;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
   line-height: 1.25rem;
   font-size: 2.1rem;
   font-weight: 700;
@@ -441,22 +429,11 @@ h1.dashboardPlaceholder {
 .thumbX {
   height: 1.1rem;
   width: 1.1rem;
-  color: red;
   font-size: 1.6rem;
   font-weight: bold;
   margin: auto 0;
   margin-right: 0.5rem;
   padding: 0.05rem 0.04rem 0 0;
-  cursor: pointer;
-}
-
-
-.quickAddX {
-  right: 0.5rem;
-}
-
-.cascadeDeleteX {
-  right: 0.5rem;
 }
 
 .foodCard:hover .deleteBtnX {
@@ -509,7 +486,7 @@ h1.dashboardPlaceholder {
   width: 12rem;
 }
 
-form input#cal {
+.form input#cal {
   width: 9.5rem;
 }
 
@@ -572,7 +549,7 @@ form input#cal {
   color: #362312;
 }
 
-#btnContainer {
+.formBtnContainer {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -580,37 +557,55 @@ form input#cal {
   margin: 0.7rem auto 0.2rem auto;
 }
 
-#formBtnFood {
+/* CSS for ALL Buttons */
+
+.formBtn {
+  color: #362312;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 450;
   width: 7.5rem;
   height: 2.2rem;
+  border: 2px solid #cbb59b;
+  background-color: white;
+  border-radius: 5px;
+  transition: border-color 0.5s ease;
+}
+
+.formBtnLogin {
+  width: 9rem;
+  height: 2rem;
+  margin: 0.5rem auto 1.5rem auto;
+  font-size: 0.99rem;
+}
+
+.formBtnFood {
   margin-top: 1rem;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
-  background-color: white;
-  transition: border-color 0.5s ease;
 }
 
-#formBtnMeal {
-  font-size: 1rem;
-  font-weight: 500;
-  width: 7.5rem;
-  height: 2.2rem;
+.formBtnMeal {
   margin: 0.15rem 0;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
-  background-color: white;
-  transition: border-color 0.5s ease;
 }
 
-#formBtnFood:hover {
+.formBtnCD {
+  width: 15rem;
+  height: 3rem;
+}
+
+.formBtnHistory,
+.formBtnSettings {
+  width: 8rem;
+  margin-top: 1rem;
+}
+
+.formBtn:hover {
   border-color: green;
 }
 
-#formBtnMeal:hover {
-  border-color: green;
+.formBtnCD:hover {
+  border-color: red;
 }
+
+/* Cascade Delete Form */
 
 .cascadeDeleteForm {
   width: 20rem;
@@ -661,21 +656,7 @@ form input#cal {
   margin: 0.4rem auto 0.9rem auto;
 }
 
-.formBtnCD {
-  font-size: 1rem;
-  font-weight: 450;
-  color: #362312;
-  width: 15rem;
-  height: 3rem;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
-  background-color: white;
-  transition: border-color 0.5s ease;
-}
-
-.formBtnCD:hover {
-  border-color: red;
-}
+/* History Page CSS */
 
 .calendarBtn {
   position: absolute;
@@ -716,22 +697,6 @@ select.monthYear {
   border-radius: 5px;
   font-weight: bold;
   color: #362312;
-}
-
-#formBtnHistory {
-  font-size: 1rem;
-  font-weight: 500;
-  width: 8rem;
-  height: 2.2rem;
-  margin-top: 1rem;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
-  background-color: white;
-  transition: border-color 0.5s ease;
-}
-
-#formBtnHistory:hover {
-  border-color: green;
 }
 
 .myHistory {
@@ -834,6 +799,8 @@ select.monthYear {
   cursor: pointer;
 }
 
+/* Settings Page */
+
 .settingsBtn {
   position: absolute;
   right: 0.7rem;
@@ -846,10 +813,6 @@ select.monthYear {
   color: #8a7b6a;
   transition: color 0.5s ease;
   aspect-ratio: 1;
-}
-
-.settingsBtn:hover {
-  color: green;
 }
 
 .mySettings {
@@ -877,22 +840,6 @@ select.monthYear {
   font-size: 1.5rem;
   font-weight: 500;
   color: #362312;
-}
-
-#formBtnSettings {
-  font-size: 1rem;
-  font-weight: 500;
-  width: 8rem;
-  height: 2.2rem;
-  margin-top: 1rem;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
-  background-color: white;
-  transition: border-color 0.5s ease;
-}
-
-#formBtnSettings:hover {
-  border-color: green;
 }
 
 h2#username {

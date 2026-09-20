@@ -116,9 +116,9 @@ const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handle
                 <label htmlFor='units'>Units</label>
                 <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
             </div>
-            <div id='btnContainer'>
-                <button type='button' id='formBtnMeal' onClick={handleAddIngredient}>Add Item</button>
-                <button type='submit' id='formBtnMeal' onClick={handleSubmit}>{isEditing ? 'Save Edit' : 'Save Meal'}</button>
+            <div className='formBtnContainer'>
+                <button type='button' className='formBtn formBtnMeal' onClick={handleAddIngredient}>Add Item</button>
+                <button type='submit' className='formBtn formBtnMeal' onClick={handleSubmit}>{isEditing ? 'Save Edit' : 'Save Meal'}</button>
             </div>
             <div id='dashboard'>
                 {dashboard}

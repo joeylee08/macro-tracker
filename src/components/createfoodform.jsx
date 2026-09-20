@@ -86,7 +86,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
                 <input type='number' id='sodium' name='sodium' value={formData.sodium} onChange={handleChange} min='0' step='any'></input>
             </div>
             
-            <button id='formBtnFood'>
+            <button className='formBtn formBtnFood'>
                 {isEditing ? 'Save Edit' : 'Submit'}
             </button>
         </form>

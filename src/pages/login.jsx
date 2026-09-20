@@ -54,7 +54,7 @@ const Login = () => {
     return (
       <div className='loginPage'>
         <form className='form loginForm' onSubmit={handleLogin}>
-            <button className='formBtnLogin' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Sign Up' : 'to Login'}</button>
+            <button className='formBtn formBtnLogin' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Sign Up' : 'to Login'}</button>
             <h1>Macro Tracker Login</h1>
             <div className='loginFormField'>
                 <label htmlFor='username'>Username:</label>
@@ -63,7 +63,7 @@ const Login = () => {
                 <input name='password' className='loginInput' type='password' onChange={handleSetFormData} value={formData.password} placeholder="Enter Password"></input>
             </div>
             <div id='loginButtons'>
-                <button className='formBtnLogin' type='submit'>LOGIN</button>
+                <button className='formBtn formBtnLogin' type='submit'>LOGIN</button>
             </div>
         </form>
       </div>
@@ -72,7 +72,7 @@ const Login = () => {
     return (
       <div className='loginPage'>
         <form className='form loginForm' onSubmit={handleSignUp}>
-            <button className='formBtnLogin' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Sign Up' : 'to Login'}</button>
+            <button className='formBtn formBtnLogin' type='button' onClick={() => handleToggleForm()}>{isLogin ? 'to Sign Up' : 'to Login'}</button>
             <h1>Macro Tracker Sign Up</h1>
             <div className='loginFormField'>
                 <label htmlFor='username'>Username:</label>
@@ -85,7 +85,7 @@ const Login = () => {
                 <input name='confirmPassword' className='loginInput' type='password' onChange={handleSetFormData} value={formData.confirmPassword} placeholder="Confirm Password"></input>
             </div>
             <div id='loginButtons'>
-                <button className='formBtnLogin' id='loginSignup' type='submit'>SIGN UP</button>
+                <button className='formBtn formBtnLogin' type='submit'>SIGN UP</button>
             </div>
         </form>
       </div>
