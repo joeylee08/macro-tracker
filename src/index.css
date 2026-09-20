@@ -409,21 +409,34 @@ button#closeQuickAdd {
   margin: 0.1rem 0.2rem;
 }
 
-.deleteBtn {
+.redX {
   font-family: Arial, Helvetica, sans-serif;
-  position: absolute;
-  background-color: white;
-  border: 1px solid #362312;
   height: 1.5rem;
   width: 1.5rem;
+  background-color: white;
+  padding: 0;
+  color: red;
+  cursor: pointer;
+}
+
+.deleteBtn {
+  position: absolute;
+  border: 1px solid #362312;
   border-radius: 50%;
   font-size: 1.3rem;
-  color: red;
   margin: -8.8rem 0 0 9.8rem;
-  padding: 0;
   opacity: 0;
-  cursor: pointer;
   transition: opacity 0.15s ease;
+}
+
+.closeForm {
+  position: fixed;
+  margin: -1.2rem 0 0 15.5rem;
+  line-height: 1.25rem;
+  font-size: 2.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 5px;
 }
 
 .foodCard:hover .deleteBtn {
@@ -668,19 +681,12 @@ button.closeForm#cascadeDeleteCloseBtn {
   border-color: red;
 }
 
-.closeForm {
-  width: 1.5rem;
-  height: 1.5rem;
+.redX#closeForm {
   position: fixed;
-  background-color: white;
-  padding: 0;
   margin: -1.2rem 0 0 15.5rem;
   line-height: 1.25rem;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 2.1rem;
   font-weight: 700;
-  color: red;
-  cursor: pointer;
   border: none;
   border-radius: 5px;
 }
