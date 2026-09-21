@@ -119,3 +119,12 @@ app.delete('/api/meals/:id', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
+
+
+
+// CREATE TABLE meal_ingredients (
+//     meal_id INTEGER NOT NULL REFERENCES meals(id),
+//     food_id INTEGER NOT NULL REFERENCES foods(id),
+//     units DOUBLE PRECISION NOT NULL CHECK (units > 0),
+//     PRIMARY KEY (meal_id, food_id)    <= Table-level constraint
+// );
