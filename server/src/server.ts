@@ -97,6 +97,25 @@ app.patch('/api/meals/:id', (req, res) => {
     res.json(meal)
 })
 
+app.delete('/api/meals/:id', (req, res) => {
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Meal ID must be a number.'
+        })
+    }
+    const mealIndex = meals.findIndex(meal => meal.id === id)
+    if (mealIndex === -1) {
+        return res.status(404).json({
+            'error': 'Meal not found.'
+        })
+    }
+    meals.splice(mealIndex, 1)
+    res.json({
+        'message': 'Successfully deleted meal.',
+    })
+})
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
