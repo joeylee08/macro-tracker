@@ -17,8 +17,8 @@ const meals = [
     {id: 5, name: 'Prison Tostadas Ch', userId: 1, ingredients: [{foodId: 1, units: 5.92}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
     {id: 6, name: 'Orange Pk Bowl', userId: 1, ingredients: [{foodId: 16, units: 6.34}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 13, units: 1}, {foodId: 14, units: 1}, {foodId: 15, units: 1}]},
     {id: 7, name: 'Prison Tostadas Pk', userId: 1, ingredients: [{foodId: 16, units: 6.34}, {foodId: 2, units: 3}, {foodId: 8, units: 0.125}, {foodId: 11, units: 2}, {foodId: 13, units: 1}, {foodId: 14, units: 1}]},
-    {id: 8, name: 'Sausage Rice Bowl', userId: 1, ingredients: [{foodId: 18, units: 3}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 15, units: 1}, {foodId: 19, units: 1}]},
-    {id: 10, name: 'Salsitas 1/3 Bag', userId: 1, ingredients: [{foodId: 20, units: 0.33}]},
+    {id: 8, name: 'Sausage Rice Bowl', userId: 1, ingredients: [{foodId: 18, units: 3}, {foodId: 9, units: 1}, {foodId: 12, units: 1}, {foodId: 19, units: 1}]},
+    {id: 10, name: 'Pita Ch Pizza', userId: 1, ingredients: [{foodId: 23, units: 1}]},
 ]
 
 const foods= [
@@ -44,6 +44,7 @@ const foods= [
     {id: 20, userId: 1, name: 'Salsitas Full Bag', servingSize: 1, servingUnit: 'piece', cal: 750, protein: 1, carb: 15, fat: 2.5, sodium: 750},
     {id: 21, userId: 1, name: 'Mini Tortilla', servingSize: 1, servingUnit: 'piece', cal: 33.3, protein: 0.67, carb: 6.33, fat: 0.33, sodium: 6.67},
     {id: 22, userId: 1, name: 'Egg White', servingSize: 1, servingUnit: 'piece', cal: 17, protein: 3.6, carb: 0.2, fat: 0.1, sodium: 55},
+    {id: 23, userId: 1, name: 'Pita Ch Pizza', servingSize: 1, servingUnit: 'piece', cal: 350, protein: 31, carb: 33, fat: 12.5, sodium: 460}
 ]
 
 const mealEntries = [
