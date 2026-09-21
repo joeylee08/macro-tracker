@@ -47,13 +47,20 @@ app.get('/api/meals/:id', (req, res) => {
     res.json(meal)
 })
 
-app.post('/api/test', (request, response) => {
-    const data = request.body
+app.post('/api/meals', (req, res) => {
+    const meal = req.body
+    console.log(meal)
+    const nextId = Math.max(...meals.map(meal => meal.id)) + 1
+    const newMeal = {
+        id: nextId,
+        name: meal.name,
+        userId: meal.userId,
+        ingredients: meal.ingredients
+    }
+    meals.push(newMeal)
+    console.log(meals)
     // You can chain .status(code) to .json(responseData)
-    response.status(201).json({
-        message: "Object successfully created.",
-        data: data
-    })
+    res.status(201).json(newMeal)
 })
 
 app.patch('/api/meals/:id', (req, res) => {
@@ -69,8 +76,24 @@ app.patch('/api/meals/:id', (req, res) => {
             'error': 'Meal not found.'
         })
     }
-    const objData = req.body
-    Object.assign(meal, objData)
+    const { name } = req.body
+    if (typeof name !== 'string') {
+        return res.status(400).json({
+            'error': 'Meal name must be a string.'
+        })
+    }
+    const trimmed = name.trim()
+    if (trimmed.length === 0) {
+        return res.status(400).json({
+            'error': 'Name cannot be an empty string.'
+        })
+    }
+    if (trimmed.length > 100) {
+        return res.status(400).json({
+            'error': 'Names cannot be longer than 100 characters.'
+        })
+    }
+    meal.name = trimmed
     res.json(meal)
 })
 
