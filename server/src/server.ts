@@ -121,10 +121,44 @@ app.listen(PORT, () => {
 })
 
 
+/*
 
-// CREATE TABLE meal_ingredients (
-//     meal_id INTEGER NOT NULL REFERENCES meals(id),
-//     food_id INTEGER NOT NULL REFERENCES foods(id),
-//     units DOUBLE PRECISION NOT NULL CHECK (units > 0),
-//     PRIMARY KEY (meal_id, food_id)    <= Table-level constraint
-// );
+CREATE TABLE meals (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id)
+);
+
+INSERT INTO meals (name, user_id)
+VALUES ('Tacos Egg Avo GT', 1);
+
+CREATE TABLE foods (
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+INSERT INTO foods (name) VALUES ('Salsa');
+INSERT INTO foods (name) VALUES ('Ground Turkey');
+INSERT INTO foods (name) VALUES ('Avocado');
+
+CREATE TABLE meal_ingredients (
+    meal_id INTEGER NOT NULL REFERENCES meals(id) ON DELETE CASCADE,
+    food_id INTEGER NOT NULL REFERENCES foods(id),
+    units DOUBLE PRECISION NOT NULL CHECK (units > 0),
+    PRIMARY KEY (meal_id, food_id)    <= Table-level constraint
+);
+
+
+SELECT meals.name AS meal_name, foods.name AS food_name, meal_ingredients.units
+FROM meal_ingredients
+JOIN meals ON meals.id = meal_ingredients.meal_id
+JOIN foods ON foods.id = meal_ingredients.food_id
+WHERE meals.id = 1;
+
+INSERT INTO ...             POST
+SELECT ...                  GET
+UPDATE ... WHERE ...        PATCH
+DELETE FROM ... WHERE ...   DELETE
+JOIN                        combine related resources
+
+*/
