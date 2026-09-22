@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model foods {
+  id               Int                @id @default(autoincrement())
+  name             String
+  meal_ingredients meal_ingredients[]
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model meal_ingredients {
+  meal_id Int
+  food_id Int
+  units   Float
+  foods   foods @relation(fields: [food_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  meals   meals @relation(fields: [meal_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([meal_id, food_id])
+}
+
+model meals {
+  id               Int                @id @default(autoincrement())
+  name             String
+  user_id          Int
+  meal_ingredients meal_ingredients[]
+  users            users              @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id    Int     @id @default(autoincrement())
+  name  String
+  meals meals[]
+}
