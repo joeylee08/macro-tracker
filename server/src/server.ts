@@ -143,11 +143,13 @@ INSERT INTO foods (name) VALUES ('Avocado');
 
 CREATE TABLE meal_ingredients (
     meal_id INTEGER NOT NULL REFERENCES meals(id) ON DELETE CASCADE,
-    food_id INTEGER NOT NULL REFERENCES foods(id),
+    food_id INTEGER NOT NULL REFERENCES foods(id) ON DELETE CASCADE,
     units DOUBLE PRECISION NOT NULL CHECK (units > 0),
     PRIMARY KEY (meal_id, food_id)    <= Table-level constraint
 );
 
+ON DELETE CASCADE => "If a meal is deleted, automatically delete any
+related rows on the JOIN table meal_ingredients"
 
 SELECT meals.name AS meal_name, foods.name AS food_name, meal_ingredients.units
 FROM meal_ingredients
