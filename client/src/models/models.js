@@ -15,7 +15,7 @@ const mealModel = {
     id: 'number',
     name: 'string',
     userId: 'number',
-    ingredients: 'object'
+    ingredients: 'object' //an array of objects
 }
 
 const foodModel = {
