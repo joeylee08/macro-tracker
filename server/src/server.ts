@@ -3,7 +3,7 @@ import cors from "cors"
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client";
-// import { validateData } from 
+import { validateData } from "./util/helpers"
 
 const app = express()
 const PORT = 5000
@@ -56,7 +56,7 @@ app.get('/api/meals/:id', async (req, res) => {
     res.json(meal)
 })
 
-app.post('/api/meals', (req, res) => {
+app.post('/api/meals', async (req, res) => {
     const meal = req.body
     const name = meal.name
     if (typeof name !== 'string' || name.trim() === '') {
@@ -79,16 +79,31 @@ app.post('/api/meals', (req, res) => {
         })
         return
     }
-
-    const newMeal = {
-        name: meal.name,
-        userId: meal.userId,
-        mealIngredients: {
-            
+    for (const item of mealIngredients) {
+        if (!validateData(item, 'ingredient')) {
+            return res.status(400).json({
+                'error': 'Meal ingredient must be comprised of a foodId and units.'
+            })
         }
     }
 
-    res.status(201).json(newMeal)
+    const added = await prisma.meal.create({
+        data: {
+            name: meal.name,
+            userId: meal.userId,
+            mealIngredients : {
+                create: mealIngredients
+            }
+        },
+        include : {
+            mealIngredients: {
+                include: {
+                    food: true
+                }
+            }
+        }
+    })
+    res.status(201).json(added)
 })
 
 app.patch('/api/meals/:id', (req, res) => {
