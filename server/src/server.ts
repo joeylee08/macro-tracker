@@ -183,20 +183,19 @@ app.post('/api/users', async (req, res) => {
 })
 
 app.post('/api/meals', async (req, res) => {
-    const meal = req.body
-    const name = meal.name
-    if (typeof name !== 'string' || name.trim() === '') {
+    const mealData = req.body
+    if (!validateData(mealData, 'meal')) {
         return res.status(400).json({
-            'error': 'Name must be a string with at least one character.'
+            'error': 'Your meal data contains invalid properties.'
         })
     }
-    const userId = meal.userId
-    if (Number.isNaN(userId)) {
+    const name = mealData.name.trim()
+    if (name === '' || name.length > 19) {
         return res.status(400).json({
-            'error': 'User ID must be a number.'
+            'error': 'Name must contain between 1 and 19 characters.'
         })
     }
-    const mealIngredients = meal.ingredients
+    const mealIngredients = mealData.ingredients
     if (!Array.isArray(mealIngredients) || mealIngredients.length === 0) {
         return res.status(400).json({
             'error': 'Ingredients must be an array containing at least one item.'
@@ -209,11 +208,10 @@ app.post('/api/meals', async (req, res) => {
             })
         }
     }
-
     const added = await prisma.meal.create({
         data: {
-            name: meal.name,
-            userId: meal.userId,
+            name: mealData.name,
+            userId: mealData.userId,
             mealIngredients : {
                 create: mealIngredients
             }
@@ -230,40 +228,62 @@ app.post('/api/meals', async (req, res) => {
 })
 
 app.post('/api/foods', async (req, res) => {
-    const food = req.body
-    const name = food.name.trim()
-    if (name === '') {
+    const foodData = req.body
+    if (!validateData(foodData, 'food')) {
         return res.status(400).json({
-            'error': 'Please enter a food name.'
+            'error': 'Your food data contains invalid properties.'
         })
     }
-    if (!validateData(food, 'food')) {
+    const name = foodData.name.trim()
+    if (name === '' || name.length > 19) {
         return res.status(400).json({
-            'error': 'Your new food contains invalid properties.'
+            'error': 'Food name must contain between 1 and 19 characters.'
         })
     }
     const added = await prisma.food.create({
         data: {
-            name: food.name,
-            userId: +food.userId,
-            servingSize: +food.servingSize,
-            servingUnit: food.servingUnit,
-            cal: +food.cal,
-            protein: +food.protein,
-            carb: +food.carb,
-            fat: +food.fat,
-            sodium: +food.sodium
+            name: foodData.name,
+            userId: +foodData.userId,
+            servingSize: +foodData.servingSize,
+            servingUnit: foodData.servingUnit,
+            cal: +foodData.cal,
+            protein: +foodData.protein,
+            carb: +foodData.carb,
+            fat: +foodData.fat,
+            sodium: +foodData.sodium
         }
     })
     res.status(201).json(added)
 })
 
 //PATCH ROUTES
-//PATCH user
-//PATCH foods
-
 app.patch('/api/users/:id', async (req, res) => {
-
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'UserID must be a number.'
+        })
+    }
+    const userData = req.body
+    if (!validateData(userData, 'user')) {
+        return res.status(400).json({
+            'error': 'Your user data contains invalid properties.'
+        })
+    }
+    const { calGoal, proteinGoal, carbGoal, fatGoal, sodiumGoal } = userData
+    const updated = prisma.user.update({
+        where: {
+            id: id
+        },
+        data: {
+            calGoal: +calGoal,
+            proteinGoal: +proteinGoal,
+            carbGoal: +carbGoal,
+            fatGoal: +fatGoal,
+            sodiumGoal: +sodiumGoal
+        }
+    })
+    res.json(updated)
 })
 
 app.patch('/api/meals/:id', async (req, res) => {
@@ -286,22 +306,30 @@ app.patch('/api/meals/:id', async (req, res) => {
             'error': 'Meal not found.'
         })
     }
-    const { name, mealIngredients } = req.body
-    if (typeof name !== 'string') {
+    const mealData = req.body
+    if (typeof mealData.name !== 'string') {
         return res.status(400).json({
-            'error': 'Meal name must be a string with one or more characters.'
+            'error': 'Meal name must be a string.'
         })
     }
-    const trimmed = name.trim()
-    if (trimmed.length === 0) {
+    const trimmed = mealData.name.trim()
+    if (trimmed.length === 0 || trimmed.length > 19) {
         return res.status(400).json({
-            'error': 'Name cannot be an empty string.'
+            'error': 'Name must be between 1 and 19 characters'
         })
     }
-    if (trimmed.length > 19) {
+    const mealIngredients = mealData.mealIngredients
+    if (!Array.isArray(mealIngredients) || mealIngredients.length === 0) {
         return res.status(400).json({
-            'error': 'Names cannot be longer than 19 characters.'
+            'error': 'Ingredients must be an array containing at least one item.'
         })
+    }
+    for (const item of mealIngredients) {
+        if (!validateData(item, 'ingredient')) {
+            return res.status(400).json({
+                'error': 'Meal ingredient must be comprised of a foodId and units.'
+            })
+        }
     }
     const updated = await prisma.meal.update({
         where: {
@@ -309,7 +337,10 @@ app.patch('/api/meals/:id', async (req, res) => {
         },
         data: {
             name: trimmed,
-            mealIngredients: mealIngredients
+            mealIngredients: {
+                deleteMany: {},
+                create: mealIngredients
+            }
         },
         include: {
             mealIngredients: {
@@ -322,73 +353,124 @@ app.patch('/api/meals/:id', async (req, res) => {
     res.json(updated)
 })
 
-//DELETE user
-//DELETE food
-//DELETE meal
-app.delete('/api/meals/:id', (req, res) => {
+app.patch('/api/foods/:id', async (req, res) => {
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Requested foodID must be a number.'
+        })
+    }
+    const food = await prisma.food.findUnique({
+        where : {
+            id: id
+        },
+        select: {
+            id: true
+        }
+    })
+    if (!food) {
+        return res.status(404).json({
+            'error': 'Food not found.'
+        })
+    }
+    const foodData = req.body
+    if (!validateData(foodData, 'food')) {
+        return res.status(400).json({
+            'error': 'Your food data contains invalid properties.'
+        })
+    }
+    const { name, servingSize, servingUnit, cal, protein, carb, fat, sodium } = foodData
+    const trimmed = name.trim()
+    if (trimmed.length === 0 || trimmed.length > 19) {
+        return res.status(400).json({
+            'error': 'Name must be between 1 and 19 characters.'
+        })
+    }
+    const updated = await prisma.food.update({
+        where: {
+            id: id
+        },
+        data: {
+            name: trimmed,
+            servingSize: +servingSize,
+            servingUnit: servingUnit,
+            cal: +cal,
+            protein: +protein,
+            carb: +carb,
+            fat: +fat,
+            sodium: +sodium
+        }
+    })
+    res.json(updated)
+})
+
+//DELETE ROUTES
+app.delete('/api/users/:id', async (req, res) => {
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'User ID must be a number.'
+        })
+    }
+    const user = await prisma.user.delete({
+        where: {
+            id: id
+        }
+    })
+    if (!user) {
+        return res.status(404).json({
+            'error': 'User not found.'
+        })
+    }
+    res.json({
+        'message': 'Successfully deleted user.',
+    })
+})
+
+app.delete('/api/meals/:id', async (req, res) => {
     const id = +req.params.id
     if (Number.isNaN(id)) {
         return res.status(400).json({
             'error': 'Meal ID must be a number.'
         })
     }
-
-    // if (!meal) {
-    //     return res.status(404).json({
-    //         'error': 'Meal not found.'
-    //     })
-    // }
-
+    const meal = await prisma.meal.delete({
+        where: {
+            id: id
+        }
+    })
+    if (!meal) {
+        return res.status(404).json({
+            'error': 'Meal not found.'
+        })
+    }
     res.json({
         'message': 'Successfully deleted meal.',
+    })
+})
+
+app.delete('/api/foods/:id', async (req, res) => {
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Food ID must be a number.'
+        })
+    }
+    const food = await prisma.food.delete({
+        where: {
+            id: id
+        }
+    })
+    if (!food) {
+        return res.status(404).json({
+            'error': 'Food not found.'
+        })
+    }
+    res.json({
+        'message': 'Successfully deleted food.',
     })
 })
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
-
-
-/*
-
-CREATE TABLE meals (
-    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name TEXT NOT NULL,
-    user_id INTEGER NOT NULL REFERENCES users(id)
-);
-
-INSERT INTO meals (name, user_id)
-VALUES ('Tacos Egg Avo GT', 1);
-
-CREATE TABLE foods (
-    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name TEXT NOT NULL
-);
-
-INSERT INTO foods (name) VALUES ('Salsa');
-INSERT INTO foods (name) VALUES ('Ground Turkey');
-INSERT INTO foods (name) VALUES ('Avocado');
-
-CREATE TABLE meal_ingredients (
-    meal_id INTEGER NOT NULL REFERENCES meals(id) ON DELETE CASCADE,
-    food_id INTEGER NOT NULL REFERENCES foods(id) ON DELETE CASCADE,
-    units DOUBLE PRECISION NOT NULL CHECK (units > 0),
-    PRIMARY KEY (meal_id, food_id)    <= Table-level constraint
-);
-
-ON DELETE CASCADE => "If a meal is deleted, automatically delete any
-related rows on the JOIN table meal_ingredients"
-
-SELECT meals.name AS meal_name, foods.name AS food_name, meal_ingredients.units
-FROM meal_ingredients
-JOIN meals ON meals.id = meal_ingredients.meal_id
-JOIN foods ON foods.id = meal_ingredients.food_id
-WHERE meals.id = 1;
-
-INSERT INTO ...             POST
-SELECT ...                  GET
-UPDATE ... WHERE ...        PATCH
-DELETE FROM ... WHERE ...   DELETE
-JOIN                        combine related resources
-
-*/
