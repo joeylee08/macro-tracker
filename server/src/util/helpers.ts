@@ -1,7 +1,8 @@
-import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel } from './models';
+import { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel } from './models';
 
 const modelObj = {
     'user': userModel,
+    'macro': macroModel,
     'meal': mealModel,
     'food': foodModel,
     'ingredient': ingredientModel,
@@ -13,7 +14,6 @@ type ModelType = keyof typeof modelObj;
 
 const validateData = (data: Record <string, unknown> , modelType: ModelType) => {
     if (!(modelType in modelObj)) {
-        alert('Not a valid model type.')
         return false
     }
 
@@ -34,10 +34,8 @@ const validateData = (data: Record <string, unknown> , modelType: ModelType) => 
             continue
         }
         if (data[key] === null || data[key] === undefined) {
-            alert('Please fill out all fields.');
             return false
         } else if (typeof data[key] !== model[key as keyof typeof model]) {
-            alert(`Incorrect data type. ${key} needs to be a ${model[key as keyof typeof model]}.`)
             return false
         }
     }

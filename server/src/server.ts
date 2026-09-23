@@ -30,13 +30,13 @@ app.get('/api/users/:id', async (req, res) => {
             'error': 'Requested userID must be a number.'
         })
     }
-    const username = req.body.username
-    const hashedPass = req.body.password // apply the hash before checking the db
+    // const username = req.body.username
+    // const hashedPass = req.body.password // apply the hash before checking the db
     const user = await prisma.user.findUnique({
         where: {
             id: id,
-            username: username,
-            hashed: hashedPass
+            // username: username,
+            // hashed: hashedPass
         }
     })
     //check hashed password and return error if password incorrect
@@ -265,7 +265,7 @@ app.patch('/api/users/:id', async (req, res) => {
         })
     }
     const userData = req.body
-    if (!validateData(userData, 'user')) {
+    if (!validateData(userData, 'macro')) {
         return res.status(400).json({
             'error': 'Your user data contains invalid properties.'
         })

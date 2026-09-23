@@ -1,9 +1,15 @@
 const userModel = {
-    id: 'number',
     username: 'string',
     firstName: 'string',
     lastName: 'string',
-    dateJoined: 'string',
+    calGoal: 'number',
+    proteinGoal: 'number',
+    carbGoal: 'number',
+    fatGoal: 'number',
+    sodiumGoal: 'number'
+}
+
+const macroModel = {
     calGoal: 'number',
     proteinGoal: 'number',
     carbGoal: 'number',
@@ -12,14 +18,12 @@ const userModel = {
 }
 
 const mealModel = {
-    id: 'number',
     name: 'string',
     userId: 'number',
     ingredients: 'object' //an array of objects
 }
 
 const foodModel = {
-    id: 'number',
     name: 'string',
     userId: 'number',
     servingSize: 'number',
@@ -49,7 +53,6 @@ const mealEntryIngredientModel = {
 }
 
 const mealEntryModel = {
-    id: 'number',
     userId: 'number',
     name: 'string',
     dateAndTime: 'string',
@@ -67,4 +70,4 @@ const mealEntryModel = {
         }]
 }
 
-export { userModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel }
+export { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel }
