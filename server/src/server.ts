@@ -271,7 +271,7 @@ app.patch('/api/users/:id', async (req, res) => {
         })
     }
     const { calGoal, proteinGoal, carbGoal, fatGoal, sodiumGoal } = userData
-    const updated = prisma.user.update({
+    const updated = await prisma.user.update({
         where: {
             id: id
         },
@@ -412,14 +412,15 @@ app.delete('/api/users/:id', async (req, res) => {
             'error': 'User ID must be a number.'
         })
     }
-    const user = await prisma.user.delete({
-        where: {
-            id: id
-        }
-    })
-    if (!user) {
-        return res.status(404).json({
-            'error': 'User not found.'
+    try {
+        await prisma.user.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch {
+         return res.status(500).json({
+            'error': 'Unable to perform delete operation.'
         })
     }
     res.json({
@@ -434,14 +435,15 @@ app.delete('/api/meals/:id', async (req, res) => {
             'error': 'Meal ID must be a number.'
         })
     }
-    const meal = await prisma.meal.delete({
-        where: {
-            id: id
-        }
-    })
-    if (!meal) {
-        return res.status(404).json({
-            'error': 'Meal not found.'
+    try {
+        await prisma.meal.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch {
+         return res.status(500).json({
+            'error': 'Unable to perform delete operation.'
         })
     }
     res.json({
@@ -456,14 +458,15 @@ app.delete('/api/foods/:id', async (req, res) => {
             'error': 'Food ID must be a number.'
         })
     }
-    const food = await prisma.food.delete({
-        where: {
-            id: id
-        }
-    })
-    if (!food) {
-        return res.status(404).json({
-            'error': 'Food not found.'
+    try {
+        await prisma.food.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch {
+         return res.status(500).json({
+            'error': 'Unable to perform delete operation.'
         })
     }
     res.json({
