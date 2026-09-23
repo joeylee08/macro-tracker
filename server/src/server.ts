@@ -22,7 +22,7 @@ app.use(cors({
 // Middleware. Parses incoming JSON requests into Javascript objects.
 app.use(express.json())
 
-// CRUD ROUTES 
+// GET ROUTES 
 app.get('/api/users/:id', async (req, res) => {
     const id = +req.params.id
     if (Number.isNaN(id)) {
@@ -158,9 +158,7 @@ app.get('/api/foods/:id', async (req, res) => {
     res.json(food)
 })
 
-//POST user
-//POST food
-
+//POST ROUTES
 app.post('/api/users', async (req, res) => {
     const userData = req.body
     if (!validateData(userData, 'user')) {
@@ -181,30 +179,28 @@ app.post('/api/users', async (req, res) => {
     const added = await prisma.user.create({
         data: newUser
     })
+    res.status(201).json(added)
 })
 
 app.post('/api/meals', async (req, res) => {
     const meal = req.body
     const name = meal.name
     if (typeof name !== 'string' || name.trim() === '') {
-        res.status(400).json({
+        return res.status(400).json({
             'error': 'Name must be a string with at least one character.'
         })
-        return
     }
-    const userId = meal.userId //or if the userId doesn't exist in the database
+    const userId = meal.userId
     if (Number.isNaN(userId)) {
-        res.status(400).json({
+        return res.status(400).json({
             'error': 'User ID must be a number.'
         })
-        return
     }
     const mealIngredients = meal.ingredients
     if (!Array.isArray(mealIngredients) || mealIngredients.length === 0) {
-        res.status(400).json({
+        return res.status(400).json({
             'error': 'Ingredients must be an array containing at least one item.'
         })
-        return
     }
     for (const item of mealIngredients) {
         if (!validateData(item, 'ingredient')) {
@@ -233,25 +229,67 @@ app.post('/api/meals', async (req, res) => {
     res.status(201).json(added)
 })
 
+app.post('/api/foods', async (req, res) => {
+    const food = req.body
+    const name = food.name.trim()
+    if (name === '') {
+        return res.status(400).json({
+            'error': 'Please enter a food name.'
+        })
+    }
+    if (!validateData(food, 'food')) {
+        return res.status(400).json({
+            'error': 'Your new food contains invalid properties.'
+        })
+    }
+    const added = await prisma.food.create({
+        data: {
+            name: food.name,
+            userId: +food.userId,
+            servingSize: +food.servingSize,
+            servingUnit: food.servingUnit,
+            cal: +food.cal,
+            protein: +food.protein,
+            carb: +food.carb,
+            fat: +food.fat,
+            sodium: +food.sodium
+        }
+    })
+    res.status(201).json(added)
+})
+
+//PATCH ROUTES
 //PATCH user
-//PATCH food
-app.patch('/api/meals/:id', (req, res) => {
+//PATCH foods
+
+app.patch('/api/users/:id', async (req, res) => {
+
+})
+
+app.patch('/api/meals/:id', async (req, res) => {
     const id = +req.params.id
     if (Number.isNaN(id)) {
         return res.status(400).json({
             'error': 'Requested mealID must be a number.'
         })
     }
-
-    // if (!meal) {
-    //     return res.status(404).json({
-    //         'error': 'Meal not found.'
-    //     })
-    // }
-    const { name } = req.body
+    const meal = await prisma.meal.findUnique({
+        where : {
+            id: id
+        },
+        select: {
+            id: true
+        }
+    })
+    if (!meal) {
+        return res.status(404).json({
+            'error': 'Meal not found.'
+        })
+    }
+    const { name, mealIngredients } = req.body
     if (typeof name !== 'string') {
         return res.status(400).json({
-            'error': 'Meal name must be a string.'
+            'error': 'Meal name must be a string with one or more characters.'
         })
     }
     const trimmed = name.trim()
@@ -260,13 +298,28 @@ app.patch('/api/meals/:id', (req, res) => {
             'error': 'Name cannot be an empty string.'
         })
     }
-    if (trimmed.length > 100) {
+    if (trimmed.length > 19) {
         return res.status(400).json({
-            'error': 'Names cannot be longer than 100 characters.'
+            'error': 'Names cannot be longer than 19 characters.'
         })
     }
-   
-    res.json()
+    const updated = await prisma.meal.update({
+        where: {
+            id: id
+        },
+        data: {
+            name: trimmed,
+            mealIngredients: mealIngredients
+        },
+        include: {
+            mealIngredients: {
+                include: {
+                    food: true
+                }
+            }
+        }
+    })
+    res.json(updated)
 })
 
 //DELETE user
