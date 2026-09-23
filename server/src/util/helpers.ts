@@ -1,0 +1,44 @@
+import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel } from './models';
+
+const modelObj = {
+    'user': userModel,
+    'meal': mealModel,
+    'food': foodModel,
+    'ingredient': ingredientModel,
+    'mealEntry': mealEntryModel,
+    'mealEntryIngredientModel': mealEntryIngredientModel
+}
+
+type ModelType = keyof typeof modelObj;
+
+const validateData = (data: Record <string, unknown> , modelType: ModelType) => {
+    if (!(modelType in modelObj)) {
+        alert('Not a valid model type.')
+        return false
+    }
+
+    const model = modelObj[modelType]
+
+    for (const key in model) {
+        if (key === 'ingredients' && modelType === 'meal') {
+            for (const item of data[key]) {
+                if (!validateData(item, 'ingredient')) return false
+            } 
+            continue
+        } else if (key === 'ingredients' && modelType ==='mealEntry') {
+            for (const item of data[key]) {
+                if (!validateData(item, 'mealEntryIngredientModel')) return false
+            }
+            continue
+        }
+
+        if (data[key] === null || data[key] === undefined) {
+            alert('Please fill out all fields.');
+            return false
+        } else if (typeof data[key] !== model[key]) {
+            alert(`Incorrect data type. ${key} needs to be a ${model[key]}.`)
+            return false
+        }
+    }
+    return true
+}
