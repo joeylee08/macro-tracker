@@ -29,6 +29,41 @@ app.get("/", (request, response) => {
 //Request parameters. :param is sent dynamically from the client.
 //Its value is stored in the request.params object.
 
+app.get('/api/users/:userId/meals', async (req, res) => {
+    const id = +req.params.userId
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Requested userID must be a number.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true
+        }
+    })
+    if (user === null) {
+        return res.status(404).json({
+            'error': 'User not found.'
+        })
+    }
+    const meals = await prisma.meal.findMany({
+        where: {
+            userId: id
+        },
+        include: {
+            mealIngredients: {
+                include: {
+                    food: true
+                }
+            }
+        }
+    })
+    res.json(meals)
+})
+
 app.get('/api/meals/:id', async (req, res) => {
     const id = +req.params.id
     if (Number.isNaN(id)) {
