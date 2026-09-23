@@ -22,12 +22,31 @@ app.use(cors({
 // Middleware. Parses incoming JSON requests into Javascript objects.
 app.use(express.json())
 
-app.get("/", (request, response) => {
-    response.send("Macro Tracker API is alive!")
+// CRUD ROUTES 
+app.get('/api/users/:id', async (req, res) => {
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Requested userID must be a number.'
+        })
+    }
+    const username = req.body.username
+    const hashedPass = req.body.password // apply the hash before checking the db
+    const user = await prisma.user.findUnique({
+        where: {
+            id: id,
+            username: username,
+            hashed: hashedPass
+        }
+    })
+    //check hashed password and return error if password incorrect
+    if (user === null) {
+        return res.status(404).json({
+            'error': 'User not found.'
+        })
+    }
+    res.json(user)
 })
-
-//Request parameters. :param is sent dynamically from the client.
-//Its value is stored in the request.params object.
 
 app.get('/api/users/:userId/meals', async (req, res) => {
     const id = +req.params.userId
@@ -91,6 +110,79 @@ app.get('/api/meals/:id', async (req, res) => {
     res.json(meal)
 })
 
+app.get('/api/users/:userId/foods', async (req, res) => {
+    const id = +req.params.userId
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Requested userID must be a number.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true
+        }
+    })
+    if (user === null) {
+        return res.status(404).json({
+            'error': 'User not found.'
+        })
+    }
+    const foods = await prisma.food.findMany({
+        where: {
+            userId: id
+        }
+    })
+    res.json(foods)
+})
+
+app.get('/api/foods/:id', async (req, res) => {
+    const id = +req.params.id
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            'error': 'Requested foodID must be a number.'
+        })
+    }
+    const food = await prisma.food.findUnique({
+        where: {
+            id: id,
+        }
+    })
+    if (!food) {
+        return res.status(404).json({
+            'error': 'Food not found.'
+        })
+    }
+    res.json(food)
+})
+
+//POST user
+//POST food
+
+app.post('/api/users', async (req, res) => {
+    const userData = req.body
+    if (!validateData(userData, 'user')) {
+        return res.status(400).json({
+            'error': 'User data is not formatted properly.'
+        })
+    }
+    const newUser = {
+        username: userData.username.trim(),
+        firstName: userData.firstName.trim(),
+        lastName: userData.lastName.trim(),
+        calGoal: +userData.calGoal,
+        proteinGoal: +userData.proteinGoal,
+        carbGoal: +userData.carbGoal,
+        fatGoal: +userData.fatGoal,
+        sodiumGoal: +userData.sodiumGoal
+    }
+    const added = await prisma.user.create({
+        data: newUser
+    })
+})
+
 app.post('/api/meals', async (req, res) => {
     const meal = req.body
     const name = meal.name
@@ -141,6 +233,8 @@ app.post('/api/meals', async (req, res) => {
     res.status(201).json(added)
 })
 
+//PATCH user
+//PATCH food
 app.patch('/api/meals/:id', (req, res) => {
     const id = +req.params.id
     if (Number.isNaN(id)) {
@@ -175,6 +269,9 @@ app.patch('/api/meals/:id', (req, res) => {
     res.json()
 })
 
+//DELETE user
+//DELETE food
+//DELETE meal
 app.delete('/api/meals/:id', (req, res) => {
     const id = +req.params.id
     if (Number.isNaN(id)) {
