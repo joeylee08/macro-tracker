@@ -8,19 +8,53 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  meals Meal[]
+  id          Int      @id @default(autoincrement())
+  username    String
+  firstName   String
+  lastName    String
+  dateJoined  DateTime @default(now()) @map("date_joined")
+  calGoal     Int
+  proteinGoal Int
+  carbGoal    Int
+  fatGoal     Int
+  sodiumGoal  Int
+
+  meals       Meal[]
+  foods       Food[]
+  mealEntries MealEntry[]
 
   @@map("users")
 }
 
 model Food {
-  id              Int              @id @default(autoincrement())
-  name            String
+  id          Int    @id @default(autoincrement())
+  name        String
+  userId      Int    @map("user_id")
+  servingSize Float  @map("serving_size")
+  servingUnit String @map("serving_unit")
+  cal         Float
+  protein     Float
+  carb        Float
+  fat         Float
+  sodium      Float
+
   mealIngredients MealIngredient[]
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
   @@map("foods")
+}
+
+model Meal {
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int    @map("user_id")
+
+  mealIngredients MealIngredient[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("meals")
 }
 
 model MealIngredient {
@@ -28,19 +62,25 @@ model MealIngredient {
   foodId Int   @map("food_id")
   units  Float
 
-  food Food @relation(fields: [foodId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  meal Meal @relation(fields: [mealId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  food Food @relation(fields: [foodId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  meal Meal @relation(fields: [mealId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@id([mealId, foodId])
   @@map("meal_ingredients")
 }
 
-model Meal {
-  id              Int              @id @default(autoincrement())
-  name            String
-  userId          Int              @map("user_id")
-  mealIngredients MealIngredient[]
-  user            User             @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model MealEntry {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  name        String
+  cal         Float
+  protein     Float
+  carb        Float
+  fat         Float
+  sodium      Float
+  dateAndTime DateTime @default(now()) @map("date_and_time")
 
-  @@map("meals")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@map("meal_entries")
 }
