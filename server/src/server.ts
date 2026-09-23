@@ -25,9 +25,9 @@ app.use(express.json())
 // GET ROUTES 
 app.get('/api/users/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested userID must be a number.'
+            'error': 'User ID must be a positive integer.'
         })
     }
     // const username = req.body.username
@@ -50,9 +50,9 @@ app.get('/api/users/:id', async (req, res) => {
 
 app.get('/api/users/:userId/meals', async (req, res) => {
     const id = +req.params.userId
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested userID must be a number.'
+            'error': 'User ID must be a positive integer.'
         })
     }
     const user = await prisma.user.findUnique({
@@ -85,9 +85,9 @@ app.get('/api/users/:userId/meals', async (req, res) => {
 
 app.get('/api/meals/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested mealID must be a number.'
+            'error': 'Meal ID must be a positive integer.'
         })
     }
     const meal = await prisma.meal.findUnique({
@@ -112,9 +112,9 @@ app.get('/api/meals/:id', async (req, res) => {
 
 app.get('/api/users/:userId/foods', async (req, res) => {
     const id = +req.params.userId
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested userID must be a number.'
+            'error': 'User ID must be a positive integer.'
         })
     }
     const user = await prisma.user.findUnique({
@@ -140,9 +140,9 @@ app.get('/api/users/:userId/foods', async (req, res) => {
 
 app.get('/api/foods/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested foodID must be a number.'
+            'error': 'Food ID must be a positive integer.'
         })
     }
     const food = await prisma.food.findUnique({
@@ -166,10 +166,33 @@ app.post('/api/users', async (req, res) => {
             'error': 'User data is not formatted properly.'
         })
     }
+    const username = userData.username.trim()
+    const firstName = userData.firstName.trim()
+    const lastName = userData.lastName.trim()
+
+    if (username === ''  || firstName === '' || lastName === '') {
+        return res.status(400).json({
+            'error': 'First, last, and user names must each contain at least 1 character.'
+        })
+    }
+    const macroValues = [
+        userData.calGoal,
+        userData.proteinGoal,
+        userData.carbGoal,
+        userData.fatGoal,
+        userData.sodiumGoal
+    ]
+    for (const macro of macroValues) {
+        if (macro < 1 || !Number.isInteger(macro)) {
+            return res.status(400).json({
+                'error': 'All macro values must be positive integers.'
+            })
+        }
+    }
     const newUser = {
-        username: userData.username.trim(),
-        firstName: userData.firstName.trim(),
-        lastName: userData.lastName.trim(),
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
         calGoal: +userData.calGoal,
         proteinGoal: +userData.proteinGoal,
         carbGoal: +userData.carbGoal,
@@ -187,6 +210,22 @@ app.post('/api/meals', async (req, res) => {
     if (!validateData(mealData, 'meal')) {
         return res.status(400).json({
             'error': 'Your meal data contains invalid properties.'
+        })
+    }
+    const userId = mealData.userId
+    if (!Number.isInteger(userId) || userId < 1) {
+        return res.status(400).json({
+            'error': 'User ID must be a positive integer.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if (!user) {
+        return res.status(404).json({
+            'error': 'Associated user does not exist.'
         })
     }
     const name = mealData.name.trim()
@@ -207,7 +246,38 @@ app.post('/api/meals', async (req, res) => {
                 'error': 'Meal ingredient must be comprised of a foodId and units.'
             })
         }
+        if (!Number.isInteger(item.foodId) || item.foodId < 1) {
+            return res.status(400).json({
+                'error': 'Food ID must be a positive integer.'
+            })
+        }
+        if (item.units <= 0) {
+            return res.status(400).json({
+                'error': 'Units must be greater than zero.'
+            })
+        }
     }
+    const foodIds = mealIngredients.map(item => item.foodId)
+    const uniqueFoodIds = [...new Set(foodIds)]
+    if (foodIds.length !== uniqueFoodIds.length) {
+        return res.status(400).json({
+                'error': 'A food may only appear once in each meal.'
+            })
+    }
+    const usersRelatedFoods = await prisma.food.findMany({
+        where: {
+            userId: userId,
+            id: {
+                in: uniqueFoodIds
+            }
+        }
+    })
+    if (uniqueFoodIds.length !== usersRelatedFoods.length) {
+        return res.status(400).json({
+                'error': 'One or more of the proposed ingredients are unavailable to the user.'
+            })
+    }
+
     const added = await prisma.meal.create({
         data: {
             name: mealData.name,
@@ -234,16 +304,57 @@ app.post('/api/foods', async (req, res) => {
             'error': 'Your food data contains invalid properties.'
         })
     }
+    const userId = foodData.userId
+    if (!Number.isInteger(userId) || userId < 1) {
+        return res.status(400).json({
+            'error': 'User ID must be a positive integer.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if (!user) {
+        return res.status(404).json({
+            'error': 'Associated user does not exist.'
+        })
+    }
     const name = foodData.name.trim()
     if (name === '' || name.length > 19) {
         return res.status(400).json({
             'error': 'Food name must contain between 1 and 19 characters.'
         })
     }
+    const servingUnits = ['oz', 'tsp', 'tbsp', 'g', 'cup', 'piece']
+    if (!servingUnits.includes(foodData.servingUnit)) {
+        return res.status(400).json({
+            'error': 'Not a valid serving unit.'
+        })
+    }
+    if (foodData.servingSize <= 0) {
+        return res.status(400).json({
+            'error': 'Serving size must be greater than zero.'
+        })
+    }
+    const macroValues = [
+        foodData.cal,
+        foodData.protein,
+        foodData.carb,
+        foodData.fat,
+        foodData.sodium
+    ]
+    for (const macro of macroValues) {
+        if (macro < 0) {
+            return res.status(400).json({
+                'error': 'Macro values may not be negative.'
+            })
+        }
+    }
     const added = await prisma.food.create({
         data: {
-            name: foodData.name,
-            userId: +foodData.userId,
+            name: name,
+            userId: userId,
             servingSize: +foodData.servingSize,
             servingUnit: foodData.servingUnit,
             cal: +foodData.cal,
@@ -259,9 +370,9 @@ app.post('/api/foods', async (req, res) => {
 //PATCH ROUTES
 app.patch('/api/users/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'UserID must be a number.'
+            'error': 'User ID must be a positive integer.'
         })
     }
     const userData = req.body
@@ -288,9 +399,9 @@ app.patch('/api/users/:id', async (req, res) => {
 
 app.patch('/api/meals/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested mealID must be a number.'
+            'error': 'Meal ID must be a positive integer.'
         })
     }
     const meal = await prisma.meal.findUnique({
@@ -355,9 +466,9 @@ app.patch('/api/meals/:id', async (req, res) => {
 
 app.patch('/api/foods/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Requested foodID must be a number.'
+            'error': 'Food ID must be a positive integer.'
         })
     }
     const food = await prisma.food.findUnique({
@@ -407,9 +518,9 @@ app.patch('/api/foods/:id', async (req, res) => {
 //DELETE ROUTES
 app.delete('/api/users/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'User ID must be a number.'
+            'error': 'User ID must be a positive integer.'
         })
     }
     try {
@@ -430,9 +541,9 @@ app.delete('/api/users/:id', async (req, res) => {
 
 app.delete('/api/meals/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Meal ID must be a number.'
+            'error': 'Meal ID must be a positive integer.'
         })
     }
     try {
@@ -453,9 +564,9 @@ app.delete('/api/meals/:id', async (req, res) => {
 
 app.delete('/api/foods/:id', async (req, res) => {
     const id = +req.params.id
-    if (Number.isNaN(id)) {
+    if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
-            'error': 'Food ID must be a number.'
+            'error': 'Food ID must be a positive integer.'
         })
     }
     try {

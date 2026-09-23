@@ -19,13 +19,11 @@ const macroModel = {
 
 const mealModel = {
     name: 'string',
-    userId: 'number',
     ingredients: 'object' //an array of objects
 }
 
 const foodModel = {
     name: 'string',
-    userId: 'number',
     servingSize: 'number',
     servingUnit: 'string',
     cal: 'number',
@@ -53,7 +51,6 @@ const mealEntryIngredientModel = {
 }
 
 const mealEntryModel = {
-    userId: 'number',
     name: 'string',
     dateAndTime: 'string',
     ingredients: [
