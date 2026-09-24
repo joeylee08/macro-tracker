@@ -159,6 +159,57 @@ app.get('/api/foods/:id', async (req, res) => {
     res.json(food)
 })
 
+app.get('/api/users/:userId/mealEntries', async (req, res) => {
+    const id = +req.params.userId
+    if (!Number.isInteger(id) || id < 1) {
+        return res.status(400).json({
+            'error': 'User ID must be a positive integer.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: id
+        },
+        select: {
+            id: true
+        }
+    })
+    if (user === null) {
+        return res.status(404).json({
+            'error': 'User not found.'
+        })
+    }
+    const mealEntries = await prisma.mealEntry.findMany({
+        where: {
+            userId: id
+        },
+        orderBy: {
+            dateAndTime: 'desc'
+        }
+    })
+    res.json(mealEntries)
+})
+
+app.get('/api/mealEntries/:id', async (req, res) => {
+    const id = +req.params.id
+    if (!Number.isInteger(id) || id < 1) {
+        return res.status(400).json({
+            'error': 'Meal entry ID must be a positive integer.'
+        })
+    }
+    const mealEntry = await prisma.mealEntry.findUnique({
+        where: {
+            id: id,
+        }
+    })
+    if (!mealEntry) {
+        return res.status(404).json({
+            'error': 'Meal entry not found.'
+        })
+    }
+    res.json(mealEntry)
+})
+
 //POST ROUTES
 app.post('/api/users', async (req, res) => {
     const userData = req.body
@@ -363,6 +414,63 @@ app.post('/api/foods', async (req, res) => {
             carb: +foodData.carb,
             fat: +foodData.fat,
             sodium: +foodData.sodium
+        }
+    })
+    res.status(201).json(added)
+})
+
+app.post('/api/mealEntries', async (req, res) => {
+    const mealEntryData = req.body
+    if (!validateData(mealEntryData, 'mealEntry')) {
+        return res.status(400).json({
+            'error': 'Your meal entry data contains invalid properties.'
+        })
+    }
+    const userId = mealEntryData.userId
+    if (!Number.isInteger(userId) || userId < 1) {
+        return res.status(400).json({
+            'error': 'User ID must be a positive integer.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: userId
+        }
+    })
+    if (!user) {
+        return res.status(404).json({
+            'error': 'Associated user does not exist.'
+        })
+    }
+    const name = mealEntryData.name.trim()
+    if (name === '' || name.length > 19) {
+        return res.status(400).json({
+            'error': 'Meal name must contain between 1 and 19 characters.'
+        })
+    }
+    const macroValues = [
+        mealEntryData.cal,
+        mealEntryData.protein,
+        mealEntryData.carb,
+        mealEntryData.fat,
+        mealEntryData.sodium
+    ]
+    for (const macro of macroValues) {
+        if (macro < 0) {
+            return res.status(400).json({
+                'error': 'Macro values may not be negative.'
+            })
+        }
+    }
+    const added = await prisma.mealEntry.create({
+        data: {
+            userId: userId,
+            name: name,
+            cal: mealEntryData.cal,
+            protein: mealEntryData.protein,
+            carb: mealEntryData.carb,
+            fat: mealEntryData.fat,
+            sodium: mealEntryData.sodium
         }
     })
     res.status(201).json(added)
@@ -671,6 +779,34 @@ app.delete('/api/foods/:id', async (req, res) => {
     }
     res.json({
         'message': 'Successfully deleted food.',
+    })
+})
+
+app.delete('/api/mealEntries/:id', async (req, res) => {
+    const id = +req.params.id
+    if (!Number.isInteger(id) || id < 1) {
+        return res.status(400).json({
+            'error': 'Meal entry ID must be a positive integer.'
+        })
+    }
+    try {
+        await prisma.mealEntry.delete({
+            where: {
+                id: id
+            }
+        })
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'Meal entry not found.'
+            })
+        }
+        return res.status(500).json({
+            'error': 'Unable to perform delete operation.'
+        })
+    }
+    res.json({
+        'message': 'Successfully deleted meal entry.',
     })
 })
 

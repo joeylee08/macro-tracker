@@ -51,20 +51,13 @@ const mealEntryIngredientModel = {
 }
 
 const mealEntryModel = {
+    userId: 'number',
     name: 'string',
-    dateAndTime: 'string',
-    ingredients: [
-        {
-            name: 'string',
-            servingSize: 'number',
-            servingUnit: 'string',
-            units: 'number',
-            cal: 'number',
-            protein: 'number',
-            carb: 'number',
-            fat: 'number',
-            sodium: 'number'
-        }]
+    cal: 'number',
+    protein: 'number',
+    carb: 'number',
+    fat: 'number',
+    sodium: 'number'
 }
 
 export { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel }
