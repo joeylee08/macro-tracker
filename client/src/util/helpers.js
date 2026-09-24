@@ -1,12 +1,11 @@
-import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel } from '../models/models.js';
+import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel } from '../models/models.js';
 
 const modelObj = {
     'user': userModel,
     'meal': mealModel,
     'food': foodModel,
     'ingredient': ingredientModel,
-    'mealEntry': mealEntryModel,
-    'mealEntryIngredientModel': mealEntryIngredientModel
+    'mealEntry': mealEntryModel
 }
 
 const validateData = (data, modelType) => {
@@ -23,13 +22,7 @@ const validateData = (data, modelType) => {
                 if (!validateData(item, 'ingredient')) return false
             } 
             continue
-        } else if (key === 'ingredients' && modelType ==='mealEntry') {
-            for (const item of data[key]) {
-                if (!validateData(item, 'mealEntryIngredientModel')) return false
-            }
-            continue
         }
-
         if (data[key] === null || data[key] === undefined) {
             alert('Please fill out all fields.');
             return false
@@ -93,13 +86,5 @@ const getFormattedDate = (date) => {
 const getMonthYear = (isoFormat) => {
     return isoFormat.slice(0, 7)
 }
-
-//when creating a new entry for globalFood or food, the user will have the 
-//option of simply not entering macros they don't want to log
-
-//if they keep all the macros but don't enter anything, it will be initialized to 0
-
-//the empty ingredients array will be there independently of user interaction
-//ingredient structure will be validated as they are added
 
 export { validateData, calculateMacros, calculateEntryMacros, getFormattedDate, getMonthYear };

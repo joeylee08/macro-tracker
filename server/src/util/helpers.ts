@@ -1,4 +1,4 @@
-import { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel } from './models';
+import { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel } from './models';
 
 const modelObj = {
     'user': userModel,
@@ -6,8 +6,7 @@ const modelObj = {
     'meal': mealModel,
     'food': foodModel,
     'ingredient': ingredientModel,
-    'mealEntry': mealEntryModel,
-    'mealEntryIngredientModel': mealEntryIngredientModel
+    'mealEntry': mealEntryModel
 }
 
 type ModelType = keyof typeof modelObj;
@@ -25,12 +24,6 @@ const validateData = (data: Record <string, unknown> , modelType: ModelType) => 
             for (const item of data[key]) {
                 if (!validateData(item, 'ingredient')) return false
             } 
-            continue
-        } else if (key === 'ingredients' && modelType ==='mealEntry') {
-            if (!Array.isArray(data[key])) return false
-            for (const item of data[key]) {
-                if (!validateData(item, 'mealEntryIngredientModel')) return false
-            }
             continue
         }
         if (data[key] === null || data[key] === undefined) {

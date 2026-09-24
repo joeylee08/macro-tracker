@@ -38,18 +38,6 @@ const ingredientModel = {
     units: 'number'
 }
 
-const mealEntryIngredientModel = {
-    name: 'string',
-    servingSize: 'number',
-    servingUnit: 'string',
-    units: 'number',
-    cal: 'number',
-    protein: 'number',
-    carb: 'number',
-    fat: 'number',
-    sodium: 'number'
-}
-
 const mealEntryModel = {
     userId: 'number',
     name: 'string',
@@ -60,4 +48,4 @@ const mealEntryModel = {
     sodium: 'number'
 }
 
-export { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel, mealEntryIngredientModel }
+export { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel }
