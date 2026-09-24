@@ -5,6 +5,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client";
 import { validateData } from "./util/helpers"
 import { Prisma } from './generated/prisma/client.js'
+import { empty } from "@prisma/client/runtime/client";
 
 const app = express()
 const PORT = 5000
@@ -774,6 +775,16 @@ app.delete('/api/foods/:id', async (req, res) => {
             'error': 'Food ID must be a positive integer.'
         })
     }
+    //find linked meals
+    const linkedMealEntries = await prisma.mealIngredient.findMany({
+        where: {
+            foodId: id
+        },
+        select: {
+            mealId: true
+        }
+    })
+    const linkedMealIds = linkedMealEntries.map(entry => entry.mealId)
     try {
         await prisma.food.delete({
             where: {
@@ -790,6 +801,26 @@ app.delete('/api/foods/:id', async (req, res) => {
             'error': 'Unable to perform delete operation.'
         })
     }
+    //see if any of the previously linked meals now have zero ingredients
+    const linkedMeals = await prisma.meal.findMany({
+        where: {
+            id: {
+                in: linkedMealIds
+            },
+            mealIngredients: {
+                none: {}
+            }
+        }
+    })
+    //systematically delete those now empty meals
+    const emptyMealIds = linkedMeals.map(meal => meal.id)
+    await prisma.meal.deleteMany({
+        where: {
+            id: {
+                in: emptyMealIds
+            }
+        }
+    })
     res.json({
         'message': 'Successfully deleted food.',
     })
