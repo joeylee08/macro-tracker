@@ -57,25 +57,6 @@ const calculateMacros = (myFoods, meal) => {
     return macros
 }
 
-const calculateEntryMacros = (mealEntry) => {
-    const ingredients = mealEntry.ingredients
-
-    const macros = ingredients.reduce((total, item) => {
-        for (const macro in total) {
-            total[macro] += (item[macro] * item.units)
-        }
-        return total
-    }, {
-        cal: 0,
-        protein: 0,
-        carb: 0,
-        fat: 0,
-        sodium: 0
-        })
-    
-    return macros
-}
-
 const getFormattedDate = (date) => {
     return new Date(date).toLocaleDateString('en-GB', {
                         month: 'long',
@@ -87,4 +68,4 @@ const getMonthYear = (isoFormat) => {
     return isoFormat.slice(0, 7)
 }
 
-export { validateData, calculateMacros, calculateEntryMacros, getFormattedDate, getMonthYear };
+export { validateData, calculateMacros, getFormattedDate, getMonthYear };

@@ -1,10 +1,14 @@
-import { calculateEntryMacros } from '../util/helpers'
-
 const MacroChart = ({ currentUser, todaysMealEntries }) => {
     const todaysMacros = { cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}
 
     const macroTotals = todaysMealEntries
-                            .map(entry => calculateEntryMacros(entry))
+                            .map(entry => ({
+                                cal: entry.cal,
+                                protein: entry.protein,
+                                carb: entry.carb,
+                                fat: entry.fat,
+                                sodium: entry.sodium,
+                            }))
                             .reduce((a, b) => {
                                 for (const macro in a) a[macro] += b[macro]
                                 return a

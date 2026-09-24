@@ -5,6 +5,7 @@ import QuickAddForm from "../components/quickaddform";
 import { getFormattedDate } from "../util/helpers";
 import { useContext, useState } from 'react'
 import { UserContext } from '../context/usercontext'
+import { calculateMacros } from "../util/helpers";
 
 const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
     const { currentUser } = useContext(UserContext)
@@ -19,33 +20,20 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
     const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
             if (mealOrEntryId === 0) return
-
-            const nextEntryIndex = myMealEntries.length
-                                    ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
-                                    : 1
             
             const meal = myMeals.find(meal => meal.id === mealOrEntryId)
-            const ingredients = meal.ingredients.map(foodPointer => {
-                                                        const food = myFoods.find(item => foodPointer.foodId === item.id)
-                                                        return {
-                                                                    name: food.name,
-                                                                    servingSize: food.servingSize,
-                                                                    servingUnit: food.servingUnit,
-                                                                    units: foodPointer.units,
-                                                                    cal: food.cal,
-                                                                    protein: food.protein,
-                                                                    carb: food.carb,
-                                                                    fat: food.fat,
-                                                                    sodium: food.sodium
-                                                                }
-                                                        })
+            const macros = calculateMacros(myFoods, meal)
 
             const newMealEntry = {
-                    id: nextEntryIndex,
+                    id: 1, ///TAKE OUT LATER!!
                     userId: currentUser.id,
                     name: meal.name,
-                    dateAndTime: new Date().toISOString(),
-                    ingredients: ingredients
+                    cal: macros.cal,
+                    protein: macros.protein,
+                    carb: macros.carb,
+                    fat: macros.fat,
+                    sodium: macros.sodium,
+                    dateAndTime: new Date().toISOString() //TAKE OUT LATER!!
             }
             
             setMealEntries(previous => ([

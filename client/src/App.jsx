@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { foods, meals, mealEntries } from './data/dummy';
+import { foods, meals } from './data/dummy';
 import { useState, useContext, useEffect } from 'react'
 import { Navigate } from "react-router-dom";
 import { UserContext } from './context/usercontext'
@@ -23,7 +23,7 @@ function App() {
     if (currentUser) {
       setMyFoods(foods.filter(item => item.userId === currentUser.id))
       setMyMeals(meals.filter(item => item.userId === currentUser.id))
-      setMealEntries(mealEntries.filter(entry => entry.userId === currentUser.id))
+      // setMealEntries(mealEntries.filter(entry => entry.userId === currentUser.id))
     } else {
       setMyFoods([])
       setMyMeals([])

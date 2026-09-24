@@ -1,4 +1,4 @@
-import { calculateEntryMacros, getFormattedDate } from "../util/helpers"
+import { getFormattedDate } from "../util/helpers"
 
 const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDay, myMealEntries }) => {
     const [year, month] = currentYearMonth.split('-')
@@ -10,7 +10,13 @@ const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDa
     const getDailyOffset = (entriesOfDay) => {
         if (entriesOfDay.length === 0) return null
  
-        const entriesMacros = entriesOfDay.map(entry => calculateEntryMacros(entry))
+        const entriesMacros = entriesOfDay.map(entry => ({
+                                                cal: entry.cal,
+                                                protein: entry.protein,
+                                                carb: entry.carb,
+                                                fat: entry.fat,
+                                                sodium: entry.sodium,
+                                            }))
         const dailyTotal = entriesMacros.reduce((start, entry) => {
             start.cal += entry.cal
             start.protein += entry.protein
@@ -18,12 +24,6 @@ const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDa
             start.fat += entry.fat
             start.sodium += entry.sodium
             return start
-        }, {
-            cal: 0,
-            protein: 0,
-            carb: 0,
-            fat: 0,
-            sodium: 0
         })
         const scoreOffsets = ['cal', 'protein', 'carb', 'fat', 'sodium'].map(item => {
             switch(item) {
