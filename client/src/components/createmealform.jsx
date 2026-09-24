@@ -56,7 +56,7 @@ const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isE
 
         const newIngredient = {
             foodId: +ingredient.foodId,
-            units: +ingredient.units
+            units: +(+ingredient.units).toFixed(2)
         }
         setMeal(previous => ({
             ...previous,
