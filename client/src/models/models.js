@@ -37,15 +37,13 @@ const ingredientModel = {
 }
 
 const mealEntryModel = {
-    id: 'number',
     userId: 'number',
     name: 'string',
     cal: 'number',
     protein: 'number',
     carb: 'number',
     fat: 'number',
-    sodium: 'number',
-    dateAndTime: 'string'
+    sodium: 'number'
 }
 
 export { userModel, mealModel, foodModel, ingredientModel, mealEntryModel }

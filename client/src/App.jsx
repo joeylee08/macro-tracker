@@ -20,10 +20,25 @@ function App() {
   const [myMealEntries, setMealEntries] = useState([])
   
   useEffect(() => {
+    const getFoods = () => {
+      fetch(`http://localhost:5000/api/users/${currentUser.id}/foods`)
+        .then(res => res.json())
+        .then(json => setMyFoods(json))
+    }
+    const getMeals = () => {
+      fetch(`http://localhost:5000/api/users/${currentUser.id}/meals`)
+        .then(res => res.json())
+        .then(json => setMyMeals(json))
+    }
+    const getMealEntries = () => {
+      fetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`)
+        .then(res => res.json())
+        .then(json => setMealEntries(json))
+    }
     if (currentUser) {
-      setMyFoods(foods.filter(item => item.userId === currentUser.id))
-      setMyMeals(meals.filter(item => item.userId === currentUser.id))
-      // setMealEntries(mealEntries.filter(entry => entry.userId === currentUser.id))
+      getFoods()
+      getMeals()
+      getMealEntries()
     } else {
       setMyFoods([])
       setMyMeals([])

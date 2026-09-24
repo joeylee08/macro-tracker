@@ -55,7 +55,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
     return (
         <div className='mainPage'>
-            {quickAddOpen && <QuickAddForm currentUser={currentUser} myMealEntries={myMealEntries} setMealEntries={setMealEntries} toggleQuickAdd={toggleQuickAdd} />}
+            {quickAddOpen && <QuickAddForm currentUser={currentUser} setMealEntries={setMealEntries} toggleQuickAdd={toggleQuickAdd} />}
             {quickAddOpen && <div className='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>

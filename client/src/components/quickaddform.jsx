@@ -1,71 +1,52 @@
 import { validateData } from "../util/helpers"
 import { useState } from 'react'
 
-const QuickAddForm = ({ currentUser, myMealEntries, setMealEntries, toggleQuickAdd }) => {
-    const nextEntryIndex = myMealEntries.length
-                                    ? Math.max(...myMealEntries.map(entry => entry.id)) + 1
-                                    : 1
-
+const QuickAddForm = ({ currentUser, setMealEntries, toggleQuickAdd }) => {
     const [formData, setFormData] = useState({
-        id: nextEntryIndex,
         userId: currentUser.id,
         name: '',
-        dateAndTime: new Date().toISOString(),
-        ingredients: [
-            {   name: 'quickAddItem',
-                servingSize: 1,
-                servingUnit: 'piece',
-                units: 1,
-                cal: '',
-                protein: '',
-                carb: '',
-                fat: '',
-                sodium: ''
-            }]
+        cal: '',
+        protein: '',
+        carb: '',
+        fat: '',
+        sodium: ''
         })
     
         const handleChange = (event) => {
             const { name, value } = event.target
-
-            if (name === 'name') setFormData(previous => ({...previous, name: value}))
-            else {
-                setFormData(previous => ({
-                    ...previous,
-                    ingredients: [{
-                        ...previous.ingredients[0],
-                        [name]: value
-                    }]
-                }))
-            }
+            setFormData(previous => ({
+                ...previous,
+                [name]: value
+            }))
         }
     
         const handleSubmit = (event) => {
             event.preventDefault()
 
             const toNumbers = {
-                id: formData.id,
-                userId: formData.userId,
+                userId: +formData.userId,
                 name: formData.name,
-                dateAndTime: formData.dateAndTime,
-                ingredients: [
-                    {   name: 'quickAddItem',
-                        servingSize: 1,
-                        servingUnit: 'piece',
-                        units: 1,
-                        cal: +formData.ingredients[0].cal,
-                        protein: +formData.ingredients[0].protein,
-                        carb: +formData.ingredients[0].carb,
-                        fat: +formData.ingredients[0].fat,
-                        sodium: +formData.ingredients[0].sodium
-                    }]
+                cal: +formData.cal,
+                protein: +formData.protein,
+                carb: +formData.carb,
+                fat: +formData.fat,
+                sodium: +formData.sodium
             }
 
             if (!validateData(toNumbers, 'mealEntry')) return
 
-            setMealEntries(previous => [
+            fetch('http://localhost:5000/api/mealEntries', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(toNumbers)
+            })
+            .then(res => res.json())
+            .then(json => setMealEntries(previous => [
                 ...previous,
-                toNumbers
-            ])
+                json
+            ]))
             
             toggleQuickAdd()
         }

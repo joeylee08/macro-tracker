@@ -17,7 +17,7 @@ const prisma = new PrismaClient({ adapter });
 
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: "http://localhost:5174"
 }))
 
 // Middleware. Parses incoming JSON requests into Javascript objects.
@@ -75,13 +75,20 @@ app.get('/api/users/:userId/meals', async (req, res) => {
         },
         include: {
             mealIngredients: {
-                include: {
-                    food: true
+                select: {
+                    foodId: true,
+                    units: true
                 }
             }
         }
     })
-    res.json(meals)
+    const formattedMeals = meals.map(meal => ({
+        id: meal.id,
+        name: meal.name,
+        userId: meal.userId,
+        ingredients: meal.mealIngredients
+    }))
+    res.json(formattedMeals)
 })
 
 app.get('/api/meals/:id', async (req, res) => {
