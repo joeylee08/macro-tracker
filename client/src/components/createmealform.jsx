@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import FoodThumb from './foodthumb'
 
-const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handleToggleForm, isEditing, selectedItem}) => {
+const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isEditing, selectedItem}) => {
     const [meal, setMeal] = useState(
         isEditing  
             ? selectedItem
             : {
-                id: nextMealIndex,
                 name: '',
                 userId: currentUser.id,
                 ingredients: []
@@ -70,8 +69,18 @@ const CreateMealForm = ({ onAddMeal, currentUser, nextMealIndex, myFoods, handle
     //submit completed meal
     function handleSubmit(event) {
         event.preventDefault()
-  
-        onAddMeal(meal)
+
+        fetch('http://localhost:5000/api/meals', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(meal)
+            })
+            .then(res => res.json())
+            .then(json => {
+                onAddMeal(json)
+            })
     }
 
     //close temporary thumbnail on dashboard

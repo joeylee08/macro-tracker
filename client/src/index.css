@@ -795,10 +795,11 @@ select.monthYear {
 }
 
 .settingsField {
-  width: 90%;
+  width: 100%;
   height: auto;
   margin: 0.9rem auto;
   gap: 0.5rem;
+  padding-left: 1.2rem;
 }
 
 .mySettings2 .settingsField {

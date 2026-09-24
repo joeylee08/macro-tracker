@@ -90,10 +90,6 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         setMyFoods(updatedFoods)
     }
 
-    //for manually assigning DB IDs to dummy data
-    const nextFoodIndex = Math.max(...myFoods.map(food => food.id), 0) + 1
-    const nextMealIndex = Math.max(...myMeals.map(meal => meal.id), 0) + 1
-
     return (
         <div className='mainPage'>
             {(toggleFoodForm || toggleMealForm || toggleCascadeDelete) && <div className='screenBlock'></div>}
@@ -106,8 +102,8 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             </div>
             <Meals myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} nextFoodIndex={nextFoodIndex} isEditing={isEditing} selectedItem={selectedItem}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} nextMealIndex={nextMealIndex} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
             {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyMeals={handleSetMyMeals} postCascadeFoodDelete={postCascadeFoodDelete}/>}
         </div>
     )

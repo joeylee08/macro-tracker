@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleForm, isEditing, selectedItem }) => {
+const CreateFoodForm = ({ onAddFood, currentUser, handleToggleForm, isEditing, selectedItem }) => {
     const [formData, setFormData] = useState(
         isEditing 
             ? selectedItem
             : {
-                id: nextFoodIndex,
                 name: '',
-                userId: currentUserId,
+                userId: currentUser.id,
                 servingSize: '',
                 servingUnit: '',
                 cal: '',
@@ -18,7 +17,6 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
                 sodium: ''
             }
         )
-
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -36,9 +34,7 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
             return null
         }
 
-        //event.target.value gives number values as strings so convert
         const toNumbers = {
-            id: +formData.id,
             name: formData.name,
             userId: +formData.userId,
             servingSize: +formData.servingSize,
@@ -50,10 +46,19 @@ const CreateFoodForm = ({ onAddFood, currentUserId, nextFoodIndex, handleToggleF
             sodium: +formData.sodium
         }
 
-        const isValid = validateData(toNumbers, 'food')
-        if (!isValid) return
+        if(!validateData(toNumbers, 'food')) return
 
-        onAddFood(toNumbers)
+        fetch('http://localhost:5000/api/foods', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(toNumbers)
+            })
+            .then(res => res.json())
+            .then(json => {
+                onAddFood(json)
+            })
     }
 
     return (

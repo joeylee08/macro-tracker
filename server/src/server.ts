@@ -17,7 +17,7 @@ const prisma = new PrismaClient({ adapter });
 
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
-    origin: "http://localhost:5174"
+    origin: "http://localhost:5173"
 }))
 
 // Middleware. Parses incoming JSON requests into Javascript objects.
@@ -336,7 +336,6 @@ app.post('/api/meals', async (req, res) => {
                 'error': 'One or more of the proposed ingredients are unavailable to the user.'
             })
     }
-
     const added = await prisma.meal.create({
         data: {
             name: mealData.name,
@@ -347,13 +346,20 @@ app.post('/api/meals', async (req, res) => {
         },
         include : {
             mealIngredients: {
-                include: {
-                    food: true
+                select: {
+                    foodId: true,
+                    units: true
                 }
             }
         }
     })
-    res.status(201).json(added)
+    const formattedMeal = {
+        id: added.id,
+        name: added.name,
+        userId: added.userId,
+        ingredients: added.mealIngredients
+    }
+    res.status(201).json(formattedMeal)
 })
 
 app.post('/api/foods', async (req, res) => {
