@@ -385,6 +385,7 @@ form.quickAddForm {
   margin: auto 0;
   margin-right: 0.5rem;
   padding: 0.05rem 0.04rem 0 0;
+  flex-shrink: 0;
 }
 
 .foodCard:hover .deleteBtnX {
@@ -475,7 +476,7 @@ form.quickAddForm {
   align-items:center;
   justify-content: space-between;
   width: 14rem;
-  height: 2rem;
+  min-height: 2rem;
   border: 2px solid #d9b99b;
   border-radius: 5px;
   background-color: white;
@@ -483,10 +484,11 @@ form.quickAddForm {
 
 .thumbnailText {
   font-size: 1rem;
-  margin: auto 0;
-  margin-left: 0.5rem;
-  padding-top: 0.1rem;
+  margin: 0;
+  padding: 0.2rem 0.3rem 0.2rem 0.5rem;
   color: #362312;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .formBtnContainer {
