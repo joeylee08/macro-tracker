@@ -5,7 +5,7 @@ import QuickAddForm from "../components/quickaddform";
 import { getFormattedDate } from "../util/helpers";
 import { useContext, useState } from 'react'
 import { UserContext } from '../context/usercontext'
-import { calculateMacros } from "../util/helpers";
+import { calculateMacros, validateData } from "../util/helpers";
 
 const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
     const { currentUser } = useContext(UserContext)
@@ -24,24 +24,40 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
             const meal = myMeals.find(meal => meal.id === mealOrEntryId)
             const macros = calculateMacros(myFoods, meal)
 
-            const newMealEntry = {
-                    id: 1, ///TAKE OUT LATER!!
-                    userId: currentUser.id,
-                    name: meal.name,
-                    cal: macros.cal,
-                    protein: macros.protein,
-                    carb: macros.carb,
-                    fat: macros.fat,
-                    sodium: macros.sodium,
-                    dateAndTime: new Date().toISOString() //TAKE OUT LATER!!
+            const toNumbers = {
+                userId: +currentUser.id,
+                name: meal.name,
+                cal: +macros.cal,
+                protein: +macros.protein,
+                carb: +macros.carb,
+                fat: +macros.fat,
+                sodium: +macros.sodium
             }
+
+            if (!validateData(toNumbers, 'mealEntry')) return
             
-            setMealEntries(previous => ([
+            fetch('http://localhost:5000/api/mealEntries', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(toNumbers)
+            })
+            .then(res => res.json())
+            .then(json => setMealEntries(previous => [
                 ...previous,
-                newMealEntry
+                json
             ]))
         } else if (action === 'delete') {
-            setMealEntries(previous => previous.filter(entry => entry.id !== mealOrEntryId))
+            fetch(`http://localhost:5000/api/mealEntries/${mealOrEntryId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(json => console.log(json.message))
+            .then(() => setMealEntries(previous => previous.filter(item => item.id !== mealOrEntryId)))
         }
     }
 
