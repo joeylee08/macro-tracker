@@ -191,7 +191,7 @@ app.get('/api/users/:userId/mealEntries', async (req, res) => {
             userId: id
         },
         orderBy: {
-            dateAndTime: 'desc'
+            dateAndTime: 'asc'
         }
     })
     res.json(mealEntries)
