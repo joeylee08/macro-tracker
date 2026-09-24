@@ -4,6 +4,7 @@ import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client";
 import { validateData } from "./util/helpers"
+import { Prisma } from './generated/prisma/client.js'
 
 const app = express()
 const PORT = 5000
@@ -183,9 +184,9 @@ app.post('/api/users', async (req, res) => {
         userData.sodiumGoal
     ]
     for (const macro of macroValues) {
-        if (macro < 1 || !Number.isInteger(macro)) {
+        if (macro < 0 || !Number.isInteger(macro)) {
             return res.status(400).json({
-                'error': 'All macro values must be positive integers.'
+                'error': 'All macro values must be non-negative integers.'
             })
         }
     }
@@ -381,6 +382,20 @@ app.patch('/api/users/:id', async (req, res) => {
             'error': 'Your user data contains invalid properties.'
         })
     }
+    const macroValues = [
+        userData.calGoal,
+        userData.proteinGoal,
+        userData.carbGoal,
+        userData.fatGoal,
+        userData.sodiumGoal
+    ]
+    for (const macro of macroValues) {
+        if (macro < 0 || !Number.isInteger(macro)) {
+            return res.status(400).json({
+                'error': 'All macro values must be non-negative integers.'
+            })
+        }
+    }
     const { calGoal, proteinGoal, carbGoal, fatGoal, sodiumGoal } = userData
     const updated = await prisma.user.update({
         where: {
@@ -409,7 +424,8 @@ app.patch('/api/meals/:id', async (req, res) => {
             id: id
         },
         select: {
-            id: true
+            id: true,
+            userId: true
         }
     })
     if (!meal) {
@@ -417,6 +433,9 @@ app.patch('/api/meals/:id', async (req, res) => {
             'error': 'Meal not found.'
         })
     }
+    //THIS IS TEMPORARY!
+    const userId = meal.userId
+
     const mealData = req.body
     if (typeof mealData.name !== 'string') {
         return res.status(400).json({
@@ -441,6 +460,36 @@ app.patch('/api/meals/:id', async (req, res) => {
                 'error': 'Meal ingredient must be comprised of a foodId and units.'
             })
         }
+        if (!Number.isInteger(item.foodId) || item.foodId < 1) {
+            return res.status(400).json({
+                'error': 'Food ID must be a positive integer.'
+            })
+        }
+        if (item.units <= 0) {
+            return res.status(400).json({
+                'error': 'Units must be greater than zero.'
+            })
+        }
+    }
+    const foodIds = mealIngredients.map(item => item.foodId)
+    const uniqueFoodIds = [...new Set(foodIds)]
+    if (foodIds.length !== uniqueFoodIds.length) {
+        return res.status(400).json({
+                'error': 'A food may only appear once in each meal.'
+            })
+    }
+    const usersRelatedFoods = await prisma.food.findMany({
+        where: {
+            userId: userId,
+            id: {
+                in: uniqueFoodIds
+            }
+        }
+    })
+    if (uniqueFoodIds.length !== usersRelatedFoods.length) {
+        return res.status(400).json({
+                'error': 'One or more of the proposed ingredients are unavailable to the user.'
+            })
     }
     const updated = await prisma.meal.update({
         where: {
@@ -497,6 +546,31 @@ app.patch('/api/foods/:id', async (req, res) => {
             'error': 'Name must be between 1 and 19 characters.'
         })
     }
+    const servingUnits = ['oz', 'tsp', 'tbsp', 'g', 'cup', 'piece']
+    if (!servingUnits.includes(foodData.servingUnit)) {
+        return res.status(400).json({
+            'error': 'Not a valid serving unit.'
+        })
+    }
+    if (foodData.servingSize <= 0) {
+        return res.status(400).json({
+            'error': 'Serving size must be greater than zero.'
+        })
+    }
+    const macroValues = [
+        foodData.cal,
+        foodData.protein,
+        foodData.carb,
+        foodData.fat,
+        foodData.sodium
+    ]
+    for (const macro of macroValues) {
+        if (macro < 0) {
+            return res.status(400).json({
+                'error': 'Macro values may not be negative.'
+            })
+        }
+    }
     const updated = await prisma.food.update({
         where: {
             id: id
@@ -529,8 +603,13 @@ app.delete('/api/users/:id', async (req, res) => {
                 id: id
             }
         })
-    } catch {
-         return res.status(500).json({
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'User not found.'
+            })
+        }
+        return res.status(500).json({
             'error': 'Unable to perform delete operation.'
         })
     }
@@ -552,8 +631,13 @@ app.delete('/api/meals/:id', async (req, res) => {
                 id: id
             }
         })
-    } catch {
-         return res.status(500).json({
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'Meal not found.'
+            })
+        }
+        return res.status(500).json({
             'error': 'Unable to perform delete operation.'
         })
     }
@@ -575,8 +659,13 @@ app.delete('/api/foods/:id', async (req, res) => {
                 id: id
             }
         })
-    } catch {
-         return res.status(500).json({
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'Food not found.'
+            })
+        }
+        return res.status(500).json({
             'error': 'Unable to perform delete operation.'
         })
     }
