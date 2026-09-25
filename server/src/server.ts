@@ -787,6 +787,7 @@ app.delete('/api/foods/:id', async (req, res) => {
                 }
             })
             const linkedMealIds = linkedMealEntries.map(entry => entry.mealId)
+
             //delete the food
             await tx.food.delete({
                 where: {
@@ -818,6 +819,7 @@ app.delete('/api/foods/:id', async (req, res) => {
             })
             res.json({
                 'message': 'Successfully deleted food.',
+                'deletedFoodId': id,
                 'emptyMealIds': emptyMealIds
             })
         })

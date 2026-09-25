@@ -11,34 +11,50 @@ import { UserContext } from '../context/usercontext'
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const { currentUser } = useContext(UserContext)
 
-    const handleSetMyFoods = (newFood) => {
-        if (isEditing) {
-            const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
-            setMyFoods(editedFoods)
-            setIsEditing(false)
-            handleToggleForm('food')
-            setSelectedItem(null)
+    const handleSetMyFoods = (newFood, fromCascade) => {
+        // if (isEditing) {
+        //     //replace old food with new version of that food
+        //     const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
+        //     setMyFoods(editedFoods)
+        //     setIsEditing(false)
+        //     handleToggleForm('food')
+        //     setSelectedItem(null)
+        //     return
+        // }
+        //cascadeDelete will pass a food to delete, not a food to add
+
+        if (fromCascade) {
+            setMyFoods(previous => (
+                previous.filter(food => food.id !== newFood.id)
+            ))
             return
         }
         setMyFoods([...myFoods, newFood])
         handleToggleForm('food')
     }
    
-    const handleSetMyMeals = (newMeal, fromCascade) => {
-        if (isEditing) {
-            const editedMeals = myMeals.map(item => item.id === newMeal.id ? newMeal : item)
-            setMyMeals(editedMeals)
-            setIsEditing(false)
-            handleToggleForm('meal')
-            setSelectedItem(null)
+    const handleSetMyMeals = (mealOrArray, fromCascade) => {
+        // if (isEditing) {
+        //     //replace old meal with new version of that meal
+        //     //PATCH
+        //     const editedMeals = myMeals.map(item => item.id === newMeal.id ? newMeal : item)
+        //     setMyMeals(editedMeals)
+        //     setIsEditing(false)
+        //     handleToggleForm('meal')
+        //     setSelectedItem(null)
+        //     return
+        // }
+        if (fromCascade) {
+            //cascadeDelete will pass a meal to delete, not a meal to add
+            setMyMeals(previous =>
+                Array.isArray(mealOrArray)
+                    ? previous.filter(meal => !mealOrArray.includes(meal.id))
+                    : previous.filter(meal => meal.id !== mealOrArray)
+            )
             return
         }
-        if (fromCascade) {
-            setMyMeals(newMeal)
-        } else {
-            setMyMeals([...myMeals, newMeal])
-            handleToggleForm('meal')
-        }
+        setMyMeals([...myMeals, mealOrArray])
+        handleToggleForm('meal')
     }
 
     const [toggleFoodForm, setToggleFoodForm] = useState(false)
@@ -85,9 +101,9 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                     }
                     else return res.json()
                 }) 
-                .catch(error => console.error(error.message))
                 .then(json => console.log(json.message))
                 .then(() => setMyFoods(previous => previous.filter(item => item.id !== itemId)))
+                .catch(error => console.error(error.message))
             } else {
                 setLinkedFoodId(itemId)
                 setLinkedMeals(linkedToFood) 
@@ -107,15 +123,10 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                 }
                 else return res.json()
             }) 
-            .catch(error => console.error(error.message))
             .then(json => console.log(json.message))
             .then(() => setMyMeals(previous => previous.filter(item => item.id !== itemId)))
+            .catch(error => console.error(error.message))
         }
-    }
-
-    const postCascadeFoodDelete = (foodId) => {
-        const updatedFoods = myFoods.filter(item => item.id !== foodId)
-        setMyFoods(updatedFoods)
     }
 
     return (
@@ -132,7 +143,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
-            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyMeals={handleSetMyMeals} postCascadeFoodDelete={postCascadeFoodDelete}/>}
+            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyFoods={handleSetMyFoods} handleSetMyMeals={handleSetMyMeals}/>}
         </div>
     )
 }

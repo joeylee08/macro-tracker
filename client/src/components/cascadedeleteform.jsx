@@ -1,10 +1,10 @@
-const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyMeals, postCascadeFoodDelete }) => {
+const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals, postCascadeFoodDelete }) => {
     const allLinkedMeals = linkedMeals.map(meal => {
         return <li key={meal.id} className='cascadeDeleteItems'>{meal.name}</li>
     })
     
     const foodName = myFoods.find(item => item.id === linkedFoodId).name
-
+    console.log('LINKED FOOD NAME AND ID:', foodName, linkedFoodId)
     const deleteIngredient = () => {
         fetch(`http://localhost:5000/api/foods/${linkedFoodId}`, {
                 method: 'DELETE',
@@ -20,24 +20,26 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
                 else return res.json()
             }) 
             .then((json) => {
-                console.log(json.message)
-                console.log(json.emptyMealIds)
-                // setMyFoods(previous => previous.filter(item => item.id !== linkedFoodId))
-                // const updatedMeals = myMeals.filter(meal => meal.ingredients.length !== 0)
-                // handleSetMyMeals(updatedMeals)
-                // handleToggleForm('cascadeDelete')
+                const deletedFoodId = +json.deletedFoodId
+                const deletedFood = myFoods.find(food => food.id === deletedFoodId)
+                const emptyMealIds = json.emptyMealIds
+
+                //pass the food or meal(s) to remove from React State
+                handleSetMyFoods(deletedFood, true)
+                handleSetMyMeals(emptyMealIds, true)
+                handleToggleForm('cascadeDelete')
             })
             .catch(error => console.error(error.message))
 
         // handleSetMyMeals(updated, true)
-        postCascadeFoodDelete(linkedFoodId)
+        // postCascadeFoodDelete(linkedFoodId)
         
     }
     //CREATE A DEDICATED POST-CASCADE FOOD DELETE FUNCTION THAT BYPASSES THE LINKEDMEALS DEPENDENCY CHECK
     const deleteMeals = () => {
         const filtered = myMeals.filter(meal => !meal.ingredients.some(item => item.foodId === linkedFoodId))
         handleSetMyMeals(filtered, true)
-        postCascadeFoodDelete(linkedFoodId)
+
         handleToggleForm('cascadeDelete')
     }
 
