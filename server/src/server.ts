@@ -775,21 +775,51 @@ app.delete('/api/foods/:id', async (req, res) => {
             'error': 'Food ID must be a positive integer.'
         })
     }
-    //find linked meals
-    const linkedMealEntries = await prisma.mealIngredient.findMany({
-        where: {
-            foodId: id
-        },
-        select: {
-            mealId: true
-        }
-    })
-    const linkedMealIds = linkedMealEntries.map(entry => entry.mealId)
     try {
-        await prisma.food.delete({
-            where: {
-                id: id
-            }
+        await prisma.$transaction(async (tx) => {
+            //find linked meals
+            const linkedMealEntries = await tx.mealIngredient.findMany({
+                where: {
+                    foodId: id
+                },
+                select: {
+                    mealId: true
+                }
+            })
+            const linkedMealIds = linkedMealEntries.map(entry => entry.mealId)
+            //delete the food
+            await tx.food.delete({
+                where: {
+                    id: id 
+                }
+            })
+            //see if any of the previously linked meals now have zero ingredients
+            const linkedMeals = await tx.meal.findMany({
+                where: {
+                    id: {
+                        in: linkedMealIds
+                    },
+                    mealIngredients: {
+                        none: {}
+                    }
+                },
+                select: {
+                        id: true
+                }
+            })
+            //systematically delete those now empty meals
+            const emptyMealIds = linkedMeals.map(meal => meal.id)
+            await tx.meal.deleteMany({
+                where: {
+                    id: {
+                        in: emptyMealIds
+                    }
+                }
+            })
+            res.json({
+                'message': 'Successfully deleted food.',
+                'emptyMealIds': emptyMealIds
+            })
         })
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
@@ -801,29 +831,6 @@ app.delete('/api/foods/:id', async (req, res) => {
             'error': 'Unable to perform delete operation.'
         })
     }
-    //see if any of the previously linked meals now have zero ingredients
-    const linkedMeals = await prisma.meal.findMany({
-        where: {
-            id: {
-                in: linkedMealIds
-            },
-            mealIngredients: {
-                none: {}
-            }
-        }
-    })
-    //systematically delete those now empty meals
-    const emptyMealIds = linkedMeals.map(meal => meal.id)
-    await prisma.meal.deleteMany({
-        where: {
-            id: {
-                in: emptyMealIds
-            }
-        }
-    })
-    res.json({
-        'message': 'Successfully deleted food.',
-    })
 })
 
 app.delete('/api/mealEntries/:id', async (req, res) => {
