@@ -72,16 +72,44 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             const linkedToFood = myMeals.filter(meal => meal.ingredients.find(item => item.foodId === itemId))
 
             if (linkedToFood.length === 0) {
-                const modified = myFoods.filter(item => item.id !== itemId)
-                setMyFoods(modified)
+                fetch(`http://localhost:5000/api/foods/${itemId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json()
+                                    .then(json => {throw new Error(json.error)})
+                    }
+                    else return res.json()
+                }) 
+                .catch(error => console.error(error.message))
+                .then(json => console.log(json.message))
+                .then(() => setMyFoods(previous => previous.filter(item => item.id !== itemId)))
             } else {
                 setLinkedFoodId(itemId)
                 setLinkedMeals(linkedToFood) 
                 handleToggleForm('cascadeDelete')                    
             }  
         } else if (itemType === 'meal') {
-            const modified = myMeals.filter(item => item.id !== itemId)
-            setMyMeals(modified)
+            fetch(`http://localhost:5000/api/meals/${itemId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                else return res.json()
+            }) 
+            .catch(error => console.error(error.message))
+            .then(json => console.log(json.message))
+            .then(() => setMyMeals(previous => previous.filter(item => item.id !== itemId)))
         }
     }
 

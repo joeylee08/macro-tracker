@@ -42,7 +42,13 @@ const QuickAddForm = ({ currentUser, setMealEntries, toggleQuickAdd }) => {
                 },
                 body: JSON.stringify(toNumbers)
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                return res.json()
+            }) 
             .then(json => setMealEntries(previous => [
                 ...previous,
                 json

@@ -6,10 +6,27 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
     const foodName = myFoods.find(item => item.id === linkedFoodId).name
 
     const deleteIngredient = () => {
-        const updated = myMeals.map(meal => ({
-            ...meal,
-            ingredients: meal.ingredients.filter(item => item.foodId !== linkedFoodId)
-        })).filter(meal => meal.ingredients.length !== 0)
+        fetch(`http://localhost:5000/api/foods/${linkedFoodId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                else return res.json()
+            }) 
+            .catch(error => console.error(error.message))
+            .then(json => console.log(json.message))
+            .then(() => setMyFoods(previous => previous.filter(item => item.id !== linkedFoodId)))
+        
+            // const updated = myMeals.map(meal => ({
+            //     ...meal,
+            //     ingredients: meal.ingredients.filter(item => item.foodId !== linkedFoodId)
+            // })).filter(meal => meal.ingredients.length !== 0)
 
         handleSetMyMeals(updated, true)
         postCascadeFoodDelete(linkedFoodId)

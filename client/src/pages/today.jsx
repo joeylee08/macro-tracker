@@ -43,7 +43,14 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                 },
                 body: JSON.stringify(toNumbers)
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                else return res.json()
+            }) 
+            .catch(error => console.error(error.message))
             .then(json => setMealEntries(previous => [
                 ...previous,
                 json
@@ -55,7 +62,14 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                else return res.json()
+            }) 
+            .catch(error => console.error(error.message))
             .then(json => console.log(json.message))
             .then(() => setMealEntries(previous => previous.filter(item => item.id !== mealOrEntryId)))
         }

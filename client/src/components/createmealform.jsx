@@ -77,10 +77,15 @@ const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isE
                 },
                 body: JSON.stringify(meal)
             })
-            .then(res => res.json())
-            .then(json => {
-                onAddMeal(json)
-            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                return res.json()
+            }) 
+            .then(json => onAddMeal(json))
+            .catch(error => console.error(error.message))
     }
 
     //close temporary thumbnail on dashboard

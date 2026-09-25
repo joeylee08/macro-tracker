@@ -22,18 +22,39 @@ function App() {
   useEffect(() => {
     const getFoods = () => {
       fetch(`http://localhost:5000/api/users/${currentUser.id}/foods`)
-        .then(res => res.json())
+        .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                return res.json()
+            }) 
         .then(json => setMyFoods(json))
+        .catch(error => console.error(error.message))
     }
     const getMeals = () => {
       fetch(`http://localhost:5000/api/users/${currentUser.id}/meals`)
-        .then(res => res.json())
+        .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                return res.json()
+            }) 
         .then(json => setMyMeals(json))
+        .catch(error => console.error(error.message))
     }
     const getMealEntries = () => {
       fetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`)
-        .then(res => res.json())
+        .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                return res.json()
+            }) 
         .then(json => setMealEntries(json))
+        .catch(error => console.error(error.message))
     }
     if (currentUser) {
       getFoods()

@@ -55,10 +55,15 @@ const CreateFoodForm = ({ onAddFood, currentUser, handleToggleForm, isEditing, s
                 },
                 body: JSON.stringify(toNumbers)
             })
-            .then(res => res.json())
-            .then(json => {
-                onAddFood(json)
-            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                return res.json()
+            }) 
+            .then(json => onAddFood(json))
+            .catch(error => console.error(error.message))
     }
 
     return (
