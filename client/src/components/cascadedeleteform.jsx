@@ -1,10 +1,10 @@
-const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals, postCascadeFoodDelete }) => {
+const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals }) => {
     const allLinkedMeals = linkedMeals.map(meal => {
         return <li key={meal.id} className='cascadeDeleteItems'>{meal.name}</li>
     })
     
-    const foodName = myFoods.find(item => item.id === linkedFoodId).name
-    
+    const foodName = myFoods.find(item => item.id === linkedFoodId)?.name
+
     const deleteIngredient = () => {
         fetch(`http://localhost:5000/api/foods/${linkedFoodId}`, {
                 method: 'DELETE',
@@ -31,12 +31,29 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
             })
             .catch(error => console.error(error.message))
     }
-    //CREATE A DEDICATED POST-CASCADE FOOD DELETE FUNCTION THAT BYPASSES THE LINKEDMEALS DEPENDENCY CHECK
-    const deleteMeals = () => {
-        const filtered = myMeals.filter(meal => !meal.ingredients.some(item => item.foodId === linkedFoodId))
-        handleSetMyMeals(filtered, true)
 
-        handleToggleForm('cascadeDelete')
+    const deleteFoodAndMeals = () => {
+        fetch(`http://localhost:5000/api/foods/${linkedFoodId}/meals`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                                .then(json => {throw new Error(json.error)})
+                }
+                else return res.json()
+            }) 
+            .then(json => {
+                const deletedFood = myFoods.find(food => food.id === json.foodId)
+                const deletedMealIds = json.deletedMeals
+                handleSetMyFoods(deletedFood, true)
+                handleSetMyMeals(deletedMealIds, true)
+                handleToggleForm('cascadeDelete')
+            })
+            .catch(error => console.error(error.message))
     }
 
     return (
@@ -55,7 +72,7 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
                 <button className='formBtn formBtnCD' onClick={deleteIngredient}>
                     Remove item from all meals.
                 </button>
-                <button className='formBtn formBtnCD' onClick={deleteMeals}>
+                <button className='formBtn formBtnCD' onClick={deleteFoodAndMeals}>
                     Remove all associated meals.
                 </button>
             </div>

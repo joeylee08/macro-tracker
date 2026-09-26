@@ -22,7 +22,6 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         //     return
         // }
         //cascadeDelete will pass a food to delete, not a food to add
-
         if (fromCascade) {
             setMyFoods(previous => (
                 previous.filter(food => food.id !== chosenFood.id)
@@ -45,7 +44,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         //     return
         // }
         if (fromCascade) {
-            //cascadeDelete will pass a meal to delete, not a meal to add
+            //cascadeDelete will pass a meal to remove, not a meal to add
             setMyMeals(previous =>
                 Array.isArray(mealOrArray)
                     ? previous.filter(meal => !mealOrArray.includes(meal.id))

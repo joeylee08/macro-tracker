@@ -58,12 +58,8 @@ app.get('/api/users/:userId/meals', async (req, res) => {
         })
     }
     const user = await prisma.user.findUnique({
-        where: {
-            id: id
-        },
-        select: {
-            id: true
-        }
+        where: { id: id },
+        select: { id: true}
     })
     if (user === null) {
         return res.status(404).json({
@@ -71,15 +67,10 @@ app.get('/api/users/:userId/meals', async (req, res) => {
         })
     }
     const meals = await prisma.meal.findMany({
-        where: {
-            userId: id
-        },
+        where: { userId: id },
         include: {
             mealIngredients: {
-                select: {
-                    foodId: true,
-                    units: true
-                }
+                select: { foodId: true, units: true }
             }
         }
     })
@@ -100,14 +91,10 @@ app.get('/api/meals/:id', async (req, res) => {
         })
     }
     const meal = await prisma.meal.findUnique({
-        where: {
-            id: id,
-        },
+        where: { id: id },
         include: {
             mealIngredients: {
-                include: {
-                    food: true
-                }
+                include: { food: true }
             }
         }
     })
@@ -127,12 +114,8 @@ app.get('/api/users/:userId/foods', async (req, res) => {
         })
     }
     const user = await prisma.user.findUnique({
-        where: {
-            id: id
-        },
-        select: {
-            id: true
-        }
+        where: { id: id },
+        select: { id: true }
     })
     if (user === null) {
         return res.status(404).json({
@@ -140,9 +123,7 @@ app.get('/api/users/:userId/foods', async (req, res) => {
         })
     }
     const foods = await prisma.food.findMany({
-        where: {
-            userId: id
-        }
+        where: { userId: id }
     })
     res.json(foods)
 })
@@ -155,9 +136,7 @@ app.get('/api/foods/:id', async (req, res) => {
         })
     }
     const food = await prisma.food.findUnique({
-        where: {
-            id: id,
-        }
+        where: { id: id }
     })
     if (!food) {
         return res.status(404).json({
@@ -175,12 +154,8 @@ app.get('/api/users/:userId/mealEntries', async (req, res) => {
         })
     }
     const user = await prisma.user.findUnique({
-        where: {
-            id: id
-        },
-        select: {
-            id: true
-        }
+        where: { id: id },
+        select: { id: true }
     })
     if (user === null) {
         return res.status(404).json({
@@ -188,12 +163,8 @@ app.get('/api/users/:userId/mealEntries', async (req, res) => {
         })
     }
     const mealEntries = await prisma.mealEntry.findMany({
-        where: {
-            userId: id
-        },
-        orderBy: {
-            dateAndTime: 'asc'
-        }
+        where: { userId: id },
+        orderBy: { dateAndTime: 'asc' }
     })
     res.json(mealEntries)
 })
@@ -206,9 +177,7 @@ app.get('/api/mealEntries/:id', async (req, res) => {
         })
     }
     const mealEntry = await prisma.mealEntry.findUnique({
-        where: {
-            id: id,
-        }
+        where: { id: id }
     })
     if (!mealEntry) {
         return res.status(404).json({
@@ -279,9 +248,7 @@ app.post('/api/meals', async (req, res) => {
         })
     }
     const user = await prisma.user.findUnique({
-        where: {
-            id: userId
-        }
+        where: { id: userId }
     })
     if (!user) {
         return res.status(404).json({
@@ -327,9 +294,7 @@ app.post('/api/meals', async (req, res) => {
     const usersRelatedFoods = await prisma.food.findMany({
         where: {
             userId: userId,
-            id: {
-                in: uniqueFoodIds
-            }
+            id: { in: uniqueFoodIds }
         }
     })
     if (uniqueFoodIds.length !== usersRelatedFoods.length) {
@@ -341,16 +306,13 @@ app.post('/api/meals', async (req, res) => {
         data: {
             name: mealData.name,
             userId: mealData.userId,
-            mealIngredients : {
+            mealIngredients: {
                 create: mealIngredients
             }
         },
         include : {
             mealIngredients: {
-                select: {
-                    foodId: true,
-                    units: true
-                }
+                select: { foodId: true, units: true }
             }
         }
     })
@@ -377,9 +339,7 @@ app.post('/api/foods', async (req, res) => {
         })
     }
     const user = await prisma.user.findUnique({
-        where: {
-            id: userId
-        }
+        where: { id: userId }
     })
     if (!user) {
         return res.status(404).json({
@@ -447,9 +407,7 @@ app.post('/api/mealEntries', async (req, res) => {
         })
     }
     const user = await prisma.user.findUnique({
-        where: {
-            id: userId
-        }
+        where: { id: userId }
     })
     if (!user) {
         return res.status(404).json({
@@ -520,9 +478,7 @@ app.patch('/api/users/:id', async (req, res) => {
     }
     const { calGoal, proteinGoal, carbGoal, fatGoal, sodiumGoal } = userData
     const updated = await prisma.user.update({
-        where: {
-            id: id
-        },
+        where: { id: id },
         data: {
             calGoal: +calGoal,
             proteinGoal: +proteinGoal,
@@ -542,13 +498,8 @@ app.patch('/api/meals/:id', async (req, res) => {
         })
     }
     const meal = await prisma.meal.findUnique({
-        where : {
-            id: id
-        },
-        select: {
-            id: true,
-            userId: true
-        }
+        where : { id: id },
+        select: { id: true, userId: true }
     })
     if (!meal) {
         return res.status(404).json({
@@ -603,9 +554,7 @@ app.patch('/api/meals/:id', async (req, res) => {
     const usersRelatedFoods = await prisma.food.findMany({
         where: {
             userId: userId,
-            id: {
-                in: uniqueFoodIds
-            }
+            id: { in: uniqueFoodIds }
         }
     })
     if (uniqueFoodIds.length !== usersRelatedFoods.length) {
@@ -614,9 +563,7 @@ app.patch('/api/meals/:id', async (req, res) => {
             })
     }
     const updated = await prisma.meal.update({
-        where: {
-            id: id
-        },
+        where: { id: id },
         data: {
             name: trimmed,
             mealIngredients: {
@@ -626,9 +573,7 @@ app.patch('/api/meals/:id', async (req, res) => {
         },
         include: {
             mealIngredients: {
-                include: {
-                    food: true
-                }
+                include: { food: true }
             }
         }
     })
@@ -643,12 +588,8 @@ app.patch('/api/foods/:id', async (req, res) => {
         })
     }
     const food = await prisma.food.findUnique({
-        where : {
-            id: id
-        },
-        select: {
-            id: true
-        }
+        where : { id: id },
+        select: { id: true }
     })
     if (!food) {
         return res.status(404).json({
@@ -694,9 +635,7 @@ app.patch('/api/foods/:id', async (req, res) => {
         }
     }
     const updated = await prisma.food.update({
-        where: {
-            id: id
-        },
+        where: { id: id },
         data: {
             name: trimmed,
             servingSize: +servingSize,
@@ -721,9 +660,7 @@ app.delete('/api/users/:id', async (req, res) => {
     }
     try {
         await prisma.user.delete({
-            where: {
-                id: id
-            }
+            where: { id: id }
         })
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
@@ -749,9 +686,7 @@ app.delete('/api/meals/:id', async (req, res) => {
     }
     try {
         await prisma.meal.delete({
-            where: {
-                id: id
-            }
+            where: { id: id }
         })
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
@@ -779,42 +714,28 @@ app.delete('/api/foods/:id', async (req, res) => {
         await prisma.$transaction(async (tx) => {
             //find linked meals
             const linkedMealEntries = await tx.mealIngredient.findMany({
-                where: {
-                    foodId: id
-                },
-                select: {
-                    mealId: true
-                }
+                where: { foodId: id },
+                select: { mealId: true }
             })
             const linkedMealIds = linkedMealEntries.map(entry => entry.mealId)
 
             //delete the food
             await tx.food.delete({
-                where: {
-                    id: id 
-                }
+                where: { id: id }
             })
             //see if any of the previously linked meals now have zero ingredients
             const linkedMeals = await tx.meal.findMany({
                 where: {
-                    id: {
-                        in: linkedMealIds
-                    },
-                    mealIngredients: {
-                        none: {}
-                    }
+                    id: { in: linkedMealIds },
+                    mealIngredients: { none: {} }
                 },
-                select: {
-                        id: true
-                }
+                select: { id: true }
             })
             //systematically delete those now empty meals
             const emptyMealIds = linkedMeals.map(meal => meal.id)
             await tx.meal.deleteMany({
                 where: {
-                    id: {
-                        in: emptyMealIds
-                    }
+                    id: { in: emptyMealIds }
                 }
             })
             res.json({
@@ -835,6 +756,46 @@ app.delete('/api/foods/:id', async (req, res) => {
     }
 })
 
+app.delete('/api/foods/:foodId/meals', async (req, res) => {
+    const id = +req.params.foodId
+    if (!Number.isInteger(id) || id < 1) {
+        return res.status(400).json({
+            'error': 'Food ID must be a positive integer.'
+        })
+    }
+    try {
+        await prisma.$transaction(async (tx) => {
+            const linkedMealIds = await tx.mealIngredient.findMany({
+                where: { foodId: id },
+                select: { mealId: true }
+            })
+            const idArray = linkedMealIds.map(item => item.mealId)
+            await tx.meal.deleteMany({
+                where: {
+                    id: { in: idArray }
+                }
+            })
+            await tx.food.delete({
+                where: { id: id}
+            })
+            res.json({
+                'message': 'Succesfully deleted food and all associated meals.',
+                'foodId': id,
+                'deletedMeals': idArray
+            })
+        })
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'Food not found.'
+            })
+        }
+        return res.status(500).json({
+            'error': 'Unable to perform delete operation.'
+        })
+    }    
+})
+
 app.delete('/api/mealEntries/:id', async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
@@ -844,9 +805,7 @@ app.delete('/api/mealEntries/:id', async (req, res) => {
     }
     try {
         await prisma.mealEntry.delete({
-            where: {
-                id: id
-            }
+            where: { id: id }
         })
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
