@@ -582,13 +582,17 @@ app.patch('/api/meals/:id', async (req, res) => {
                 'error': 'One or more of the proposed ingredients are unavailable to the user.'
             })
     }
+    const formattedIngredients = mealIngredients.map(ingredient => ({
+        foodId: ingredient.foodId,
+        units: ingredient.units
+    }))
     const updated = await prisma.meal.update({
         where: { id: id },
         data: {
             name: trimmed,
             mealIngredients: {
                 deleteMany: {},
-                create: mealIngredients
+                create: formattedIngredients
             }
         },
         include: {
