@@ -11,7 +11,7 @@ import { UserContext } from '../context/usercontext'
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const { currentUser } = useContext(UserContext)
 
-    const handleSetMyFoods = (newFood, fromCascade) => {
+    const handleSetMyFoods = (chosenFood, fromCascade) => {
         // if (isEditing) {
         //     //replace old food with new version of that food
         //     const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
@@ -25,11 +25,11 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
         if (fromCascade) {
             setMyFoods(previous => (
-                previous.filter(food => food.id !== newFood.id)
+                previous.filter(food => food.id !== chosenFood.id)
             ))
             return
         }
-        setMyFoods([...myFoods, newFood])
+        setMyFoods([...myFoods, chosenFood])
         handleToggleForm('food')
     }
    

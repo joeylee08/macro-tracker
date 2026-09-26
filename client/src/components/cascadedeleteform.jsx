@@ -4,7 +4,7 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
     })
     
     const foodName = myFoods.find(item => item.id === linkedFoodId).name
-    console.log('LINKED FOOD NAME AND ID:', foodName, linkedFoodId)
+    
     const deleteIngredient = () => {
         fetch(`http://localhost:5000/api/foods/${linkedFoodId}`, {
                 method: 'DELETE',
@@ -30,10 +30,6 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
                 handleToggleForm('cascadeDelete')
             })
             .catch(error => console.error(error.message))
-
-        // handleSetMyMeals(updated, true)
-        // postCascadeFoodDelete(linkedFoodId)
-        
     }
     //CREATE A DEDICATED POST-CASCADE FOOD DELETE FUNCTION THAT BYPASSES THE LINKEDMEALS DEPENDENCY CHECK
     const deleteMeals = () => {
