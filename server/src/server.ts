@@ -19,13 +19,15 @@ const prisma = new PrismaClient({ adapter });
 
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
-    origin: "http://localhost:5173"
+    origin: "http://localhost:5173",
+    credentials: true
 }))
 
 // Middleware. Parses incoming JSON requests into Javascript objects.
 app.use(express.json())
 
 app.use(session({
+    name: 'macroTracker.sid',
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
@@ -35,7 +37,7 @@ app.use(session({
     }
 }))
 
-// LOGIN ROUTES
+// LOGIN / LOGOUT ROUTES
 app.post(`/api/auth/login`, async (req, res) => {
     const { username, password } = req.body
     const user = await prisma.user.findUnique({
@@ -50,6 +52,41 @@ app.post(`/api/auth/login`, async (req, res) => {
     if (!verified) {
         return res.status(401).json({
             'error': 'Username and/or password is incorrect.'
+        })
+    }
+    req.session.userId = user.id
+
+    const { passwordHash, ...safeUser } = user
+    return res.json(safeUser)
+})
+
+app.post('/api/auth/logout', (req, res) => {
+    req.session.destroy((error) => {
+        if (error) {
+            return res.status(500).json({
+                'error': 'Unable to end current session.'
+            })
+        }
+        res.clearCookie('macroTracker.sid')
+        return res.json({
+            'message': 'Successfully ended current session.'
+        })
+    })
+})
+
+app.get('/api/auth/me', async (req, res) => {
+    const userId = req.session.userId
+    if (!userId) {
+        return res.status(401).json({
+            'error': 'Not authenticated.'
+        })
+    }
+    const user = await prisma.user.findUnique({
+        where: { id: userId}
+    })
+    if (!user) {
+        return res.status(401).json({
+            'error': 'Not authenticated.'
         })
     }
     const { passwordHash, ...safeUser } = user
@@ -291,6 +328,7 @@ app.post('/api/users', async (req, res) => {
         data: newUser
     })
     const { passwordHash: _, ...withoutPassword } = added
+    req.session.userId = added.id
     res.status(201).json(withoutPassword)
 })
 
