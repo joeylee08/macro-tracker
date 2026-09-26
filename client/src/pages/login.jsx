@@ -10,7 +10,6 @@ const Login = () => {
 
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
     password: '',
     confirmPassword: ''
   })
@@ -27,7 +26,6 @@ const Login = () => {
     setIsLogin(isLogin => !isLogin)
     setFormData({
       username: '',
-      email: '',
       password: '',
       confirmPassword: ''
     })
@@ -36,14 +34,8 @@ const Login = () => {
   const handleLogin = (event) => {
     event.preventDefault()
 
-    const user = users.find(person => person.username === formData.username &&
-                                      person.password === formData.password)
+    //get user
   
-    if (user) {
-      setCurrentUser(user)
-    } else {
-      alert('Invalid username and/or password, motherfucker.')
-    }
   }
 
   const handleSignUp = (event) => {
@@ -77,8 +69,6 @@ const Login = () => {
             <div className='loginFormField'>
                 <label htmlFor='username'>Username:</label>
                 <input name='username' className='loginInput' type='text' onChange={handleSetFormData} value={formData.username} placeholder="Enter Username"></input>
-                <label htmlFor='email'>Email:</label>
-                <input name='email' className='loginInput' type='email' onChange={handleSetFormData} value={formData.email} placeholder="Enter Email"></input>
                 <label htmlFor='password'>Password:</label>
                 <input name='password' className='loginInput' type='password' onChange={handleSetFormData} value={formData.password} placeholder="Enter Password"></input>
                 <label htmlFor='confirmPassword'>Confirm Password:</label>

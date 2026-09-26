@@ -8,16 +8,17 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  username    String
-  firstName   String
-  lastName    String
-  dateJoined  DateTime @default(now()) @map("date_joined")
-  calGoal     Int
-  proteinGoal Int
-  carbGoal    Int
-  fatGoal     Int
-  sodiumGoal  Int
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  firstName     String
+  lastName      String
+  passwordHash  String
+  dateJoined    DateTime @default(now()) @map("date_joined")
+  calGoal       Int
+  proteinGoal   Int
+  carbGoal      Int
+  fatGoal       Int
+  sodiumGoal    Int
 
   meals       Meal[]
   foods       Food[]

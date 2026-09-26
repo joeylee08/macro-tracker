@@ -1,12 +1,12 @@
 const users = [
-    { id: 1, username: 'jleemuaythai', password: 'poo3', email: 'penis1@gmail.com', firstName: 'Joseph', lastName: 'Lee', dateJoined: '', macroGoals: {cal: 2000, protein: 125, carb: 225, fat: 67, sodium: 1800}},
-    { id: 2, username: 'demonslayer666', password: 'poo1', email: 'penis2@gmail.com', firstName: 'Bobert', lastName: 'Smith', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
-    { id: 3, username: 'wildgirl69', password: 'poo2', email: 'penis3@gmail.com', firstName: 'Katie', lastName: 'Contreras', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
-    { id: 4, username: 'littlekidlover', password: 'poo5', email: 'penis4@gmail.com', firstName: 'Michael', lastName: 'Scott', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
-    { id: 5, username: 'prisonbuddy', password: 'poo4', email: 'penis5@gmail.com', firstName: 'Ablaham', lastName: 'Rincon', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
-    { id: 6, username: 'oregondude12', password: 'poo6', email: 'penis6@gmail.com', firstName: 'Taylor', lastName: 'Treehugger', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
-    { id: 7, username: 'therealbobhope', password: 'poo7', email: 'penis7@gmail.com', firstName: 'Bob', lastName: 'Hope', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
-    { id: 8, username: 'ibench405', password: 'poo8', email: 'penis8@gmail.com', firstName: 'Yeah', lastName: 'Bruh', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 1, username: 'jleemuaythai', password: 'poo3', firstName: 'Joseph', lastName: 'Lee', dateJoined: '', macroGoals: {cal: 2000, protein: 125, carb: 225, fat: 67, sodium: 1800}},
+    { id: 2, username: 'demonslayer666', password: 'poo1', firstName: 'Bobert', lastName: 'Smith', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 3, username: 'wildgirl69', password: 'poo2', firstName: 'Katie', lastName: 'Contreras', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 4, username: 'littlekidlover', password: 'poo5', firstName: 'Michael', lastName: 'Scott', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 5, username: 'prisonbuddy', password: 'poo4', firstName: 'Ablaham', lastName: 'Rincon', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 6, username: 'oregondude12', password: 'poo6', firstName: 'Taylor', lastName: 'Treehugger', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 7, username: 'therealbobhope', password: 'poo7', firstName: 'Bob', lastName: 'Hope', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
+    { id: 8, username: 'ibench405', password: 'poo8', firstName: 'Yeah', lastName: 'Bruh', dateJoined: '', macroGoals: {cal: 0, protein: 0, carb: 0, fat: 0, sodium: 0}},
 ]
 
 const meals = [

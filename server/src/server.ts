@@ -32,16 +32,9 @@ app.get('/api/users/:id', async (req, res) => {
             'error': 'User ID must be a positive integer.'
         })
     }
-    // const username = req.body.username
-    // const hashedPass = req.body.password // apply the hash before checking the db
     const user = await prisma.user.findUnique({
-        where: {
-            id: id,
-            // username: username,
-            // hashed: hashedPass
-        }
+        where: { id: id }
     })
-    //check hashed password and return error if password incorrect
     if (user === null) {
         return res.status(404).json({
             'error': 'User not found.'

@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { foods, meals } from './data/dummy';
 import { useState, useContext, useEffect } from 'react'
 import { Navigate } from "react-router-dom";
 import { UserContext } from './context/usercontext'
