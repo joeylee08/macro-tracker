@@ -6,6 +6,7 @@ import CascadeDeleteForm from "../components/cascadedeleteform"
 import { useState } from "react";
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
+import { MoveDiagonal2 } from "lucide-react"
 
 
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
@@ -56,6 +57,19 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         handleToggleForm('meal')
     }
 
+    // Updates React State with cascade-modified meals
+    const handleMealUpdate = (modifiedMeals) => {
+        const mealIds = modifiedMeals.map(meal => meal.id)
+        
+        setMyMeals(previous => (
+            previous.map(meal => (
+                mealIds.includes(meal.id)
+                    ? modifiedMeals.find(item => item.id === meal.id) 
+                    : meal
+            ))
+        ))
+    }
+
     const [toggleFoodForm, setToggleFoodForm] = useState(false)
     const [toggleMealForm, setToggleMealForm] = useState(false)
     const [toggleCascadeDelete, setToggleCascadeDelete] = useState(false)
@@ -84,30 +98,39 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
     const handleDelete = (itemType, itemId) => {
         if (itemType === 'food') {
-            const linkedToFood = myMeals.filter(meal => meal.ingredients.find(item => item.foodId === itemId))
-
-            if (linkedToFood.length === 0) {
-                fetch(`http://localhost:5000/api/foods/${itemId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(res => {
-                    if (!res.ok) {
-                        return res.json()
-                                    .then(json => {throw new Error(json.error)})
-                    }
-                    else return res.json()
-                }) 
-                .then(json => console.log(json.message))
-                .then(() => setMyFoods(previous => previous.filter(item => item.id !== itemId)))
-                .catch(error => console.error(error.message))
-            } else {
-                setLinkedFoodId(itemId)
-                setLinkedMeals(linkedToFood) 
-                handleToggleForm('cascadeDelete')                    
-            }  
+            const response = fetch(`http://localhost:5000/api/foods/${itemId}/meals`)
+                                .then(res => {
+                                    if (!res.ok) {
+                                        return res.json()
+                                                    .then(json => {throw new Error(json.error)})
+                                    }
+                                    return res.json()
+                                })
+                                .then(json => {
+                                    const linkedToFood = json
+                                    if (linkedToFood.length === 0) {
+                                        return fetch(`http://localhost:5000/api/foods/${itemId}`, {
+                                            method: 'DELETE',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            }
+                                        })
+                                        .then(res => {
+                                            if (!res.ok) {
+                                                return res.json()
+                                                            .then(json => {throw new Error(json.error)})
+                                            }
+                                            else return res.json()
+                                        }) 
+                                        .then(json => console.log(json.message))
+                                        .then(() => setMyFoods(previous => previous.filter(item => item.id !== itemId)))
+                                    } else {
+                                        setLinkedFoodId(itemId)
+                                        setLinkedMeals(linkedToFood) 
+                                        handleToggleForm('cascadeDelete')                    
+                                    }
+                                })
+                                .catch(error => console.error(error.message))
         } else if (itemType === 'meal') {
             fetch(`http://localhost:5000/api/meals/${itemId}`, {
                 method: 'DELETE',
@@ -142,7 +165,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem}/>}
             {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
-            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyFoods={handleSetMyFoods} handleSetMyMeals={handleSetMyMeals}/>}
+            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyFoods={handleSetMyFoods} handleSetMyMeals={handleSetMyMeals} handleMealUpdate={handleMealUpdate}/>}
         </div>
     )
 }

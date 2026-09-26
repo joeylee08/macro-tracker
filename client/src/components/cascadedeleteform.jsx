@@ -1,4 +1,4 @@
-const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals }) => {
+const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals, handleMealUpdate }) => {
     const allLinkedMeals = linkedMeals.map(meal => {
         return <li key={meal.id} className='cascadeDeleteItems'>{meal.name}</li>
     })
@@ -23,10 +23,12 @@ const CascadeDeleteForm = ({ myMeals, myFoods, handleToggleForm, linkedFoodId, l
                 const deletedFoodId = +json.deletedFoodId
                 const deletedFood = myFoods.find(food => food.id === deletedFoodId)
                 const emptyMealIds = json.emptyMealIds
+                const remainingMeals = json.remainingMeals
 
                 //pass the food or meal(s) to remove from React State
                 handleSetMyFoods(deletedFood, true)
                 handleSetMyMeals(emptyMealIds, true)
+                handleMealUpdate(remainingMeals)
                 handleToggleForm('cascadeDelete')
             })
             .catch(error => console.error(error.message))

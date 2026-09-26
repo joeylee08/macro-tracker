@@ -187,6 +187,26 @@ app.get('/api/mealEntries/:id', async (req, res) => {
     res.json(mealEntry)
 })
 
+app.get('/api/foods/:foodId/meals', async (req, res) => {
+    const id = +req.params.foodId
+    if (!Number.isInteger(id) || id < 1) {
+        return res.status(400).json({
+            'error': 'Food ID must be a positive integer.'
+        })
+    }
+    const linkedMealIngredients = await prisma.mealIngredient.findMany({
+        where: { foodId: id },
+        select: { mealId: true}
+    })
+    const linkedMealIds = linkedMealIngredients.map(meal => meal.mealId)
+    const linkedMeals = await prisma.meal.findMany({
+        where: {
+            id: { in: linkedMealIds }
+        }
+    })
+    res.json(linkedMeals)
+})
+
 //POST ROUTES
 app.post('/api/users', async (req, res) => {
     const userData = req.body
@@ -738,10 +758,26 @@ app.delete('/api/foods/:id', async (req, res) => {
                     id: { in: emptyMealIds }
                 }
             })
+            //query again to find suriviving meals from original list [still has >= 1 food]
+            const remainingMeals = await tx.meal.findMany({
+                where: {
+                    id: { in: linkedMealIds}
+                },
+                include: {
+                    mealIngredients: true
+                }
+            })
+            const formattedMeals = remainingMeals.map(meal => ({
+                id: meal.id,
+                name: meal.name,
+                userId: meal.userId,
+                ingredients: meal.mealIngredients
+            }))
             res.json({
                 'message': 'Successfully deleted food.',
                 'deletedFoodId': id,
-                'emptyMealIds': emptyMealIds
+                'emptyMealIds': emptyMealIds,
+                'remainingMeals': formattedMeals
             })
         })
     } catch(error) {
@@ -770,6 +806,7 @@ app.delete('/api/foods/:foodId/meals', async (req, res) => {
                 select: { mealId: true }
             })
             const idArray = linkedMealIds.map(item => item.mealId)
+
             await tx.meal.deleteMany({
                 where: {
                     id: { in: idArray }
