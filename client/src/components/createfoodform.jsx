@@ -64,12 +64,12 @@ const CreateFoodForm = ({ onAddFood, currentUser, handleToggleForm, isEditing, s
                     return res.json()
                 }) 
                 .then(json => {
-                    handleSetMyFoods(json, false)
+                    onAddFood(json, false)
                     console.log('Food successfully updated.')
                 })
                 .catch(error => console.error(error.message))
         }
-        
+
         fetch('http://localhost:5000/api/foods', {
                 method: 'POST',
                 headers: {
