@@ -1,7 +1,20 @@
+const userSignup = {
+    username: 'string',
+    firstName: 'string',
+    lastName: 'string',
+    password: 'string',
+    calGoal: 'number',
+    proteinGoal: 'number',
+    carbGoal: 'number',
+    fatGoal: 'number',
+    sodiumGoal: 'number'
+}
+
 const userModel = {
     username: 'string',
     firstName: 'string',
     lastName: 'string',
+    passwordHash: 'string',
     calGoal: 'number',
     proteinGoal: 'number',
     carbGoal: 'number',
@@ -48,4 +61,4 @@ const mealEntryModel = {
     sodium: 'number'
 }
 
-export { userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel }
+export { userSignup, userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel }

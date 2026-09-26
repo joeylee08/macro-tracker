@@ -1,11 +1,12 @@
 import express from "express"
 import cors from "cors"
 import "dotenv/config";
+import session from 'express-session'
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client";
 import { validateData } from "./util/helpers"
 import { Prisma } from './generated/prisma/client.js'
-import { empty } from "@prisma/client/runtime/client";
+import { verifyPassword, hashPassword } from "./util/auth";
 
 const app = express()
 const PORT = 5000
@@ -24,6 +25,37 @@ app.use(cors({
 // Middleware. Parses incoming JSON requests into Javascript objects.
 app.use(express.json())
 
+app.use(session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 30
+    }
+}))
+
+// LOGIN ROUTES
+app.post(`/api/auth/login`, async (req, res) => {
+    const { username, password } = req.body
+    const user = await prisma.user.findUnique({
+        where: { username: username}
+    })
+    if (user === null) {
+        return res.status(401).json({
+            'error': 'Username and/or password is incorrect.'
+        })
+    }
+    const verified = await verifyPassword(password, user.passwordHash)
+    if (!verified) {
+        return res.status(401).json({
+            'error': 'Username and/or password is incorrect.'
+        })
+    }
+    const { passwordHash, ...safeUser } = user
+    return res.json(safeUser)
+})
+
 // GET ROUTES 
 app.get('/api/users/:id', async (req, res) => {
     const id = +req.params.id
@@ -40,7 +72,8 @@ app.get('/api/users/:id', async (req, res) => {
             'error': 'User not found.'
         })
     }
-    res.json(user)
+    const { passwordHash: _, ...safeUser } = user
+    res.json(safeUser)
 })
 
 app.get('/api/users/:userId/meals', async (req, res) => {
@@ -203,7 +236,7 @@ app.get('/api/foods/:foodId/meals', async (req, res) => {
 //POST ROUTES
 app.post('/api/users', async (req, res) => {
     const userData = req.body
-    if (!validateData(userData, 'user')) {
+    if (!validateData(userData, 'signup')) {
         return res.status(400).json({
             'error': 'User data is not formatted properly.'
         })
@@ -211,10 +244,21 @@ app.post('/api/users', async (req, res) => {
     const username = userData.username.trim()
     const firstName = userData.firstName.trim()
     const lastName = userData.lastName.trim()
+    const password = userData.password
 
-    if (username === ''  || firstName === '' || lastName === '') {
+    if (username === ''  || firstName === '' || lastName === '' || password.length === 0) {
         return res.status(400).json({
-            'error': 'First, last, and user names must each contain at least 1 character.'
+            'error': 'First and last names, username, and password must each contain at least 1 character.'
+        })
+    }
+    const existingUsername = await prisma.user.findUnique({
+        where: {
+            username: username
+        }
+    })
+    if (existingUsername) {
+        return res.status(409).json({
+            'error': 'That username is already taken.'
         })
     }
     const macroValues = [
@@ -231,10 +275,12 @@ app.post('/api/users', async (req, res) => {
             })
         }
     }
+    const passwordHash = await hashPassword(password)
     const newUser = {
         username: username,
         firstName: firstName,
         lastName: lastName,
+        passwordHash: passwordHash,
         calGoal: +userData.calGoal,
         proteinGoal: +userData.proteinGoal,
         carbGoal: +userData.carbGoal,
@@ -244,7 +290,8 @@ app.post('/api/users', async (req, res) => {
     const added = await prisma.user.create({
         data: newUser
     })
-    res.status(201).json(added)
+    const { passwordHash: _, ...withoutPassword } = added
+    res.status(201).json(withoutPassword)
 })
 
 app.post('/api/meals', async (req, res) => {
@@ -500,7 +547,8 @@ app.patch('/api/users/:id', async (req, res) => {
             sodiumGoal: +sodiumGoal
         }
     })
-    res.json(updated)
+    const { passwordHash: _, ...safeUser } = updated
+    res.json(safeUser)
 })
 
 app.patch('/api/meals/:id', async (req, res) => {
