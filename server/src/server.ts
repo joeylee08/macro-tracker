@@ -541,7 +541,7 @@ app.patch('/api/meals/:id', async (req, res) => {
             'error': 'Name must be between 1 and 19 characters'
         })
     }
-    const mealIngredients = mealData.mealIngredients
+    const mealIngredients = mealData.ingredients
     if (!Array.isArray(mealIngredients) || mealIngredients.length === 0) {
         return res.status(400).json({
             'error': 'Ingredients must be an array containing at least one item.'
@@ -597,7 +597,13 @@ app.patch('/api/meals/:id', async (req, res) => {
             }
         }
     })
-    res.json(updated)
+    const formattedMeal = {
+        id: updated.id,
+        name: updated.name,
+        userId: updated.userId,
+        ingredients: updated.mealIngredients
+    }
+    res.json(formattedMeal)
 })
 
 app.patch('/api/foods/:id', async (req, res) => {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import FoodThumb from './foodthumb'
 
-const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isEditing, selectedItem}) => {
+const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
     const [meal, setMeal] = useState(
         isEditing  
             ? selectedItem
@@ -69,6 +69,34 @@ const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isE
     //submit completed meal
     function handleSubmit(event) {
         event.preventDefault()
+
+        if (isEditing) {
+            if (meal.ingredients.length === 0) {
+                handleDelete('meal', selectedItem.id)
+                handleToggleForm('meal')
+                return
+            }
+            return fetch(`http://localhost:5000/api/meals/${selectedItem.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(meal)
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json()
+                                    .then(json => {throw new Error(json.error)})
+                    }
+                    return res.json()
+                }) 
+                .then(json => {
+                    onAddMeal(json, false)
+                    console.log('Meal successfully updated.')
+                    console.log('RETURNED JSON ING', json.ingredients)
+                })
+                .catch(error => console.error(error.message))
+        }
 
         fetch('http://localhost:5000/api/meals', {
                 method: 'POST',

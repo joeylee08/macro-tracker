@@ -13,15 +13,16 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
     const { currentUser } = useContext(UserContext)
 
     const handleSetMyFoods = (chosenFood, fromCascade) => {
-        // if (isEditing) {
-        //     //replace old food with new version of that food
-        //     const editedFoods = myFoods.map(item => item.id === newFood.id ? newFood : item)
-        //     setMyFoods(editedFoods)
-        //     setIsEditing(false)
-        //     handleToggleForm('food')
-        //     setSelectedItem(null)
-        //     return
-        // }
+        if (isEditing) {
+            //replace old food with new version of that food
+            setMyFoods(previous => 
+                previous.map(food => food.id === chosenFood.id ? chosenFood : food)
+            )
+            setIsEditing(false)
+            handleToggleForm('food')
+            setSelectedItem(null)
+            return
+        }
         //cascadeDelete will pass a food to delete, not a food to add
         if (fromCascade) {
             setMyFoods(previous => (
@@ -34,16 +35,16 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
     }
    
     const handleSetMyMeals = (mealOrArray, fromCascade) => {
-        // if (isEditing) {
-        //     //replace old meal with new version of that meal
-        //     //PATCH
-        //     const editedMeals = myMeals.map(item => item.id === newMeal.id ? newMeal : item)
-        //     setMyMeals(editedMeals)
-        //     setIsEditing(false)
-        //     handleToggleForm('meal')
-        //     setSelectedItem(null)
-        //     return
-        // }
+        if (isEditing) {
+            //replace old meal with new version of that meal
+            setMyMeals(previous => 
+                previous.map(meal => meal.id === mealOrArray.id ? mealOrArray : meal)
+            )
+            setIsEditing(false)
+            handleToggleForm('meal')
+            setSelectedItem(null)
+            return
+        }
         if (fromCascade) {
             //cascadeDelete will pass a meal to remove, not a meal to add
             setMyMeals(previous =>
@@ -164,7 +165,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             <Meals myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods}/>}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} currentUser={currentUser} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods} handleDelete={handleDelete}/>}
             {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyFoods={handleSetMyFoods} handleSetMyMeals={handleSetMyMeals} handleMealUpdate={handleMealUpdate}/>}
         </div>
     )

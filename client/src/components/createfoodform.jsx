@@ -48,6 +48,28 @@ const CreateFoodForm = ({ onAddFood, currentUser, handleToggleForm, isEditing, s
 
         if(!validateData(toNumbers, 'food')) return
 
+        if (isEditing) {
+            return fetch(`http://localhost:5000/api/foods/${selectedItem.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(toNumbers)
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json()
+                                    .then(json => {throw new Error(json.error)})
+                    }
+                    return res.json()
+                }) 
+                .then(json => {
+                    handleSetMyFoods(json, false)
+                    console.log('Food successfully updated.')
+                })
+                .catch(error => console.error(error.message))
+        }
+        
         fetch('http://localhost:5000/api/foods', {
                 method: 'POST',
                 headers: {
