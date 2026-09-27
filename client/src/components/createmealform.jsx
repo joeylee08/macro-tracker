@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import FoodThumb from './foodthumb'
 
-const CreateMealForm = ({ onAddMeal, currentUser, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
+const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
     const [meal, setMeal] = useState(
         isEditing  
             ? selectedItem
             : {
                 name: '',
-                userId: currentUser.id,
                 ingredients: []
             }
         )

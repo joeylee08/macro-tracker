@@ -26,7 +26,6 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
             const macros = calculateMacros(myFoods, meal)
 
             const toNumbers = {
-                userId: +currentUser.id,
                 name: meal.name,
                 cal: +macros.cal,
                 protein: +macros.protein,
@@ -86,7 +85,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
     return (
         <div className='mainPage'>
-            {quickAddOpen && <QuickAddForm currentUser={currentUser} setMealEntries={setMealEntries} toggleQuickAdd={toggleQuickAdd} />}
+            {quickAddOpen && <QuickAddForm setMealEntries={setMealEntries} toggleQuickAdd={toggleQuickAdd} />}
             {quickAddOpen && <div className='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Daily Totals</h1>

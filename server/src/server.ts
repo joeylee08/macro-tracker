@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request, Response, NextFunction } from 'express'
 import cors from "cors"
 import "dotenv/config";
 import session from 'express-session'
@@ -37,6 +37,47 @@ app.use(session({
     }
 }))
 
+//Require Authorization. Inline check for the existence of an active userId in session
+const requireAuth = (req: Request, res: Response, next: NextFunction) => {
+    if (!req.session.userId) {
+        return res.status(401).json({
+            error: 'Not authenticated.'
+        })
+    }
+    next()
+}
+
+//Verify ownership of specific resource(s)
+type ResourceType = 'user' | 'food' | 'meal' | 'mealEntry'
+
+//Resource type dictionary
+const findResource = {
+    user: (itemId: number) => prisma.user.findUnique({ where: { id: itemId } }),
+    food: (itemId: number) => prisma.food.findUnique({ where: { id: itemId } }),
+    meal: (itemId: number) => prisma.meal.findUnique({ where: { id: itemId } }),
+    mealEntry: (itemId: number) => prisma.mealEntry.findUnique({ where: { id: itemId } })
+}
+
+const verifyById = (type: ResourceType) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        const userId = req.session.userId
+        const itemId = +req.params.id
+
+        if (type === 'user') {
+            if (itemId !== userId) {
+                return res.status(403).json({ error: 'FORBIDDEN.' })
+            }
+            return next()
+        }
+        const resource = await findResource[type](itemId)
+
+        if (userId !== resource?.userId) {
+            return res.status(403).json({ 'error': 'FORBIDDEN.'})
+        }
+        return next()
+    }
+}
+
 // LOGIN / LOGOUT ROUTES
 app.post(`/api/auth/login`, async (req, res) => {
     const { username, password } = req.body
@@ -60,7 +101,7 @@ app.post(`/api/auth/login`, async (req, res) => {
     return res.json(safeUser)
 })
 
-app.post('/api/auth/logout', (req, res) => {
+app.post('/api/auth/logout', requireAuth, (req, res) => {
     req.session.destroy((error) => {
         if (error) {
             return res.status(500).json({
@@ -94,7 +135,7 @@ app.get('/api/auth/me', async (req, res) => {
 })
 
 // GET ROUTES 
-app.get('/api/users/:id', async (req, res) => {
+app.get('/api/users/:id', requireAuth, verifyById('user'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -113,15 +154,19 @@ app.get('/api/users/:id', async (req, res) => {
     res.json(safeUser)
 })
 
-app.get('/api/users/:userId/meals', async (req, res) => {
+app.get('/api/users/:userId/meals', requireAuth, async (req, res) => {
     const id = +req.params.userId
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
             'error': 'User ID must be a positive integer.'
         })
     }
+    const userId = req.session.userId
+    if (id !== userId) {
+        return res.status(403).json({'error': 'FORBIDDEN.'})
+    }
     const user = await prisma.user.findUnique({
-        where: { id: id },
+        where: { id: userId },
         select: { id: true}
     })
     if (user === null) {
@@ -130,7 +175,7 @@ app.get('/api/users/:userId/meals', async (req, res) => {
         })
     }
     const meals = await prisma.meal.findMany({
-        where: { userId: id },
+        where: { userId: userId },
         include: {
             mealIngredients: {
                 select: { foodId: true, units: true }
@@ -146,7 +191,7 @@ app.get('/api/users/:userId/meals', async (req, res) => {
     res.json(formattedMeals)
 })
 
-app.get('/api/meals/:id', async (req, res) => {
+app.get('/api/meals/:id', requireAuth, verifyById('meal'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -169,15 +214,19 @@ app.get('/api/meals/:id', async (req, res) => {
     res.json(meal)
 })
 
-app.get('/api/users/:userId/foods', async (req, res) => {
+app.get('/api/users/:userId/foods',requireAuth, async (req, res) => {
     const id = +req.params.userId
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
             'error': 'User ID must be a positive integer.'
         })
     }
+    const userId = req.session.userId
+    if (id !== userId) {
+        return res.status(403).json({'error': 'FORBIDDEN.'})
+    }
     const user = await prisma.user.findUnique({
-        where: { id: id },
+        where: { id: userId },
         select: { id: true }
     })
     if (user === null) {
@@ -186,12 +235,12 @@ app.get('/api/users/:userId/foods', async (req, res) => {
         })
     }
     const foods = await prisma.food.findMany({
-        where: { userId: id }
+        where: { userId: userId }
     })
     res.json(foods)
 })
 
-app.get('/api/foods/:id', async (req, res) => {
+app.get('/api/foods/:id', requireAuth, verifyById('food'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -209,15 +258,19 @@ app.get('/api/foods/:id', async (req, res) => {
     res.json(food)
 })
 
-app.get('/api/users/:userId/mealEntries', async (req, res) => {
+app.get('/api/users/:userId/mealEntries', requireAuth, async (req, res) => {
     const id = +req.params.userId
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
             'error': 'User ID must be a positive integer.'
         })
     }
+    const userId = req.session.userId
+    if (id !== userId) {
+        return res.status(403).json({'error': 'FORBIDDEN.'})
+    }
     const user = await prisma.user.findUnique({
-        where: { id: id },
+        where: { id: userId },
         select: { id: true }
     })
     if (user === null) {
@@ -226,13 +279,13 @@ app.get('/api/users/:userId/mealEntries', async (req, res) => {
         })
     }
     const mealEntries = await prisma.mealEntry.findMany({
-        where: { userId: id },
+        where: { userId: userId },
         orderBy: { dateAndTime: 'asc' }
     })
     res.json(mealEntries)
 })
 
-app.get('/api/mealEntries/:id', async (req, res) => {
+app.get('/api/mealEntries/:id', requireAuth, verifyById('mealEntry'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -250,12 +303,19 @@ app.get('/api/mealEntries/:id', async (req, res) => {
     res.json(mealEntry)
 })
 
-app.get('/api/foods/:foodId/meals', async (req, res) => {
+app.get('/api/foods/:foodId/meals', requireAuth, async (req, res) => {
     const id = +req.params.foodId
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
             'error': 'Food ID must be a positive integer.'
         })
+    }
+    const food = await prisma.food.findUnique({
+        where: { id: id}
+    })
+    const userId = req.session.userId
+    if (food?.userId !== userId) {
+        return res.status(403).json({'error': 'FORBIDDEN.'})
     }
     const linkedMealIngredients = await prisma.mealIngredient.findMany({
         where: { foodId: id },
@@ -309,19 +369,15 @@ app.post('/api/users', async (req, res) => {
     res.status(201).json(withoutPassword)
 })
 
-app.post('/api/meals', async (req, res) => {
+app.post('/api/meals', requireAuth, async (req, res) => {
     const mealData = req.body
     if (!validateData(mealData, 'meal')) {
         return res.status(400).json({
             'error': 'Your meal data contains invalid properties.'
         })
     }
-    const userId = mealData.userId
-    if (!Number.isInteger(userId) || userId < 1) {
-        return res.status(400).json({
-            'error': 'User ID must be a positive integer.'
-        })
-    }
+    const userId = req.session.userId!
+
     const user = await prisma.user.findUnique({
         where: { id: userId }
     })
@@ -380,7 +436,7 @@ app.post('/api/meals', async (req, res) => {
     const added = await prisma.meal.create({
         data: {
             name: mealData.name,
-            userId: mealData.userId,
+            userId: userId,
             mealIngredients: {
                 create: mealIngredients
             }
@@ -400,19 +456,15 @@ app.post('/api/meals', async (req, res) => {
     res.status(201).json(formattedMeal)
 })
 
-app.post('/api/foods', async (req, res) => {
+app.post('/api/foods', requireAuth, async (req, res) => {
     const foodData = req.body
     if (!validateData(foodData, 'food')) {
         return res.status(400).json({
             'error': 'Your food data contains invalid properties.'
         })
     }
-    const userId = foodData.userId
-    if (!Number.isInteger(userId) || userId < 1) {
-        return res.status(400).json({
-            'error': 'User ID must be a positive integer.'
-        })
-    }
+    const userId = req.session.userId!
+    
     const user = await prisma.user.findUnique({
         where: { id: userId }
     })
@@ -468,19 +520,15 @@ app.post('/api/foods', async (req, res) => {
     res.status(201).json(added)
 })
 
-app.post('/api/mealEntries', async (req, res) => {
+app.post('/api/mealEntries', requireAuth, async (req, res) => {
     const mealEntryData = req.body
     if (!validateData(mealEntryData, 'mealEntry')) {
         return res.status(400).json({
             'error': 'Your meal entry data contains invalid properties.'
         })
     }
-    const userId = mealEntryData.userId
-    if (!Number.isInteger(userId) || userId < 1) {
-        return res.status(400).json({
-            'error': 'User ID must be a positive integer.'
-        })
-    }
+    const userId = req.session.userId!
+    
     const user = await prisma.user.findUnique({
         where: { id: userId }
     })
@@ -524,7 +572,7 @@ app.post('/api/mealEntries', async (req, res) => {
 })
 
 //PATCH ROUTES
-app.patch('/api/users/:id', async (req, res) => {
+app.patch('/api/users/:id', requireAuth, verifyById('user'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -566,7 +614,7 @@ app.patch('/api/users/:id', async (req, res) => {
     res.json(safeUser)
 })
 
-app.patch('/api/meals/:id', async (req, res) => {
+app.patch('/api/meals/:id', requireAuth, verifyById('meal'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -666,7 +714,7 @@ app.patch('/api/meals/:id', async (req, res) => {
     res.json(formattedMeal)
 })
 
-app.patch('/api/foods/:id', async (req, res) => {
+app.patch('/api/foods/:id', requireAuth, verifyById('food'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -737,7 +785,7 @@ app.patch('/api/foods/:id', async (req, res) => {
 })
 
 //DELETE ROUTES
-app.delete('/api/users/:id', async (req, res) => {
+app.delete('/api/users/:id', requireAuth, verifyById('user'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -763,7 +811,7 @@ app.delete('/api/users/:id', async (req, res) => {
     })
 })
 
-app.delete('/api/meals/:id', async (req, res) => {
+app.delete('/api/meals/:id', requireAuth, verifyById('meal'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -789,7 +837,7 @@ app.delete('/api/meals/:id', async (req, res) => {
     })
 })
 
-app.delete('/api/foods/:id', async (req, res) => {
+app.delete('/api/foods/:id', requireAuth, verifyById('food'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
@@ -858,12 +906,19 @@ app.delete('/api/foods/:id', async (req, res) => {
     }
 })
 
-app.delete('/api/foods/:foodId/meals', async (req, res) => {
+app.delete('/api/foods/:foodId/meals', requireAuth, async (req, res) => {
     const id = +req.params.foodId
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({
             'error': 'Food ID must be a positive integer.'
         })
+    }
+    const food = await prisma.food.findUnique({
+        where: { id: id}
+    })
+    const userId = req.session.userId
+    if (food?.userId !== userId) {
+        return res.status(403).json({'error': 'FORBIDDEN.'})
     }
     try {
         await prisma.$transaction(async (tx) => {
@@ -899,7 +954,7 @@ app.delete('/api/foods/:foodId/meals', async (req, res) => {
     }    
 })
 
-app.delete('/api/mealEntries/:id', async (req, res) => {
+app.delete('/api/mealEntries/:id', requireAuth, verifyById('mealEntry'), async (req, res) => {
     const id = +req.params.id
     if (!Number.isInteger(id) || id < 1) {
         return res.status(400).json({

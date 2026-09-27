@@ -1,9 +1,8 @@
 import { validateData } from "../util/helpers"
 import { useState } from 'react'
 
-const QuickAddForm = ({ currentUser, setMealEntries, toggleQuickAdd }) => {
+const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
     const [formData, setFormData] = useState({
-        userId: currentUser.id,
         name: '',
         cal: '',
         protein: '',
@@ -24,7 +23,6 @@ const QuickAddForm = ({ currentUser, setMealEntries, toggleQuickAdd }) => {
         event.preventDefault()
 
         const toNumbers = {
-            userId: +formData.userId,
             name: formData.name,
             cal: +formData.cal,
             protein: +formData.protein,

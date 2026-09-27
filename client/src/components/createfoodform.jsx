@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { validateData } from '../util/helpers'
 
-const CreateFoodForm = ({ onAddFood, currentUser, handleToggleForm, isEditing, selectedItem }) => {
+const CreateFoodForm = ({ onAddFood, handleToggleForm, isEditing, selectedItem }) => {
     const [formData, setFormData] = useState(
         isEditing 
             ? selectedItem
             : {
                 name: '',
-                userId: currentUser.id,
                 servingSize: '',
                 servingUnit: '',
                 cal: '',
@@ -36,7 +35,6 @@ const CreateFoodForm = ({ onAddFood, currentUser, handleToggleForm, isEditing, s
 
         const toNumbers = {
             name: formData.name,
-            userId: +formData.userId,
             servingSize: +formData.servingSize,
             servingUnit: formData.servingUnit,
             cal: +formData.cal,

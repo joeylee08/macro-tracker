@@ -12,13 +12,11 @@ const userModel = {
 
 const mealModel = {
     name: 'string',
-    userId: 'number',
     ingredients: 'object' //an array of objects
 }
 
 const foodModel = {
     name: 'string',
-    userId: 'number',
     servingSize: 'number',
     servingUnit: 'string',
     cal: 'number',
