@@ -1,8 +1,7 @@
-import { userSignup, userModel, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel } from './models';
+import { userSignup, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel } from './models';
 
 const modelObj = {
     'signup': userSignup,
-    'user': userModel,
     'macro': macroModel,
     'meal': mealModel,
     'food': foodModel,

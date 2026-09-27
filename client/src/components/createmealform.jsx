@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import FoodThumb from './foodthumb'
+import { validateData } from '../util/helpers'
 
 const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
     const [meal, setMeal] = useState(
@@ -68,6 +69,8 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
     //submit completed meal
     function handleSubmit(event) {
         event.preventDefault()
+
+        if (!validateData(meal,'meal')) return
 
         if (isEditing) {
             if (meal.ingredients.length === 0) {

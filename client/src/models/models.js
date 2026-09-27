@@ -1,13 +1,6 @@
 const userModel = {
     username: 'string',
-    firstName: 'string',
-    lastName: 'string',
-    dateJoined: 'string',
-    calGoal: 'number',
-    proteinGoal: 'number',
-    carbGoal: 'number',
-    fatGoal: 'number',
-    sodiumGoal: 'number'
+    password: 'string',
 }
 
 const mealModel = {

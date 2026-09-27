@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
+import { validateData } from '../util/helpers'
 
 
 const Login = () => {
@@ -38,6 +39,8 @@ const Login = () => {
 			password: formData.password
 		}
 
+		if (!validateData(userData, 'user')) return
+
 		fetch(`http://localhost:5000/api/auth/login`, {
 				method: 'POST',
 				credentials: 'include',
@@ -65,11 +68,14 @@ const Login = () => {
 		const userData = {
 			username: formData.username,
 			password: formData.password,
+			confirmPassword: formData.confirmPassword
 		}
 		if (formData.password !== formData.confirmPassword) {
 			alert('Passwords do not match.')
 			return
 		}
+		if (!validateData(userData, 'user')) return
+
 		fetch(`http://localhost:5000/api/users`, {
 				method: 'POST',
 				credentials: 'include',
