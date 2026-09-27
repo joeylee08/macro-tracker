@@ -6,12 +6,11 @@ import CascadeDeleteForm from "../components/cascadedeleteform"
 import { useState } from "react";
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
-import { MoveDiagonal2 } from "lucide-react"
-
 
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const { currentUser } = useContext(UserContext)
 
+    // React state cleanup only
     const handleSetMyFoods = (chosenFood, fromCascade) => {
         if (isEditing) {
             //replace old food with new version of that food
@@ -34,6 +33,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         handleToggleForm('food')
     }
    
+    // React state cleanup only
     const handleSetMyMeals = (mealOrArray, fromCascade) => {
         if (isEditing) {
             //replace old meal with new version of that meal
@@ -46,7 +46,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             return
         }
         if (fromCascade) {
-            //cascadeDelete will pass a meal to remove, not a meal to add
+            //cascadeDelete will pass a meal to remove rather than a meal to add
             setMyMeals(previous =>
                 Array.isArray(mealOrArray)
                     ? previous.filter(meal => !mealOrArray.includes(meal.id))
@@ -85,6 +85,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
     const [selectedItem, setSelectedItem] = useState(null)
 
+    // if 'editing' mode [user clicks card], the form populates with existing meal / food data
     const [isEditing, setIsEditing] = useState(false)
     const handleIsEditing = (formType, editState, itemId) => {
         handleToggleForm(formType)
@@ -108,6 +109,8 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                                     return res.json()
                                 })
                                 .then(json => {
+                                    //backend checks for linked meals. If none exist, continue with delete
+                                    //if linked meals do exist, open cascade delete form
                                     const linkedToFood = json
                                     if (linkedToFood.length === 0) {
                                         return fetch(`http://localhost:5000/api/foods/${itemId}`, {

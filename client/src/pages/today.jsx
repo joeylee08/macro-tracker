@@ -17,6 +17,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
         setQuickAddOpen(bool => !bool)
     }
     
+    //meals are added as entries, entries are deleted
     const handleMealEntries = (mealOrEntryId, action) => {
         if (action === 'add') {
             if (mealOrEntryId === 0) return

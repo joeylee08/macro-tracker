@@ -10,52 +10,52 @@ const QuickAddForm = ({ currentUser, setMealEntries, toggleQuickAdd }) => {
         carb: '',
         fat: '',
         sodium: ''
+    })
+    
+    const handleChange = (event) => {
+        const { name, value } = event.target
+        setFormData(previous => ({
+            ...previous,
+            [name]: value
+        }))
+    }
+    
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        const toNumbers = {
+            userId: +formData.userId,
+            name: formData.name,
+            cal: +formData.cal,
+            protein: +formData.protein,
+            carb: +formData.carb,
+            fat: +formData.fat,
+            sodium: +formData.sodium
+        }
+
+        if (!validateData(toNumbers, 'mealEntry')) return
+
+        fetch('http://localhost:5000/api/mealEntries', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(toNumbers)
         })
-    
-        const handleChange = (event) => {
-            const { name, value } = event.target
-            setFormData(previous => ({
-                ...previous,
-                [name]: value
-            }))
-        }
-    
-        const handleSubmit = (event) => {
-            event.preventDefault()
-
-            const toNumbers = {
-                userId: +formData.userId,
-                name: formData.name,
-                cal: +formData.cal,
-                protein: +formData.protein,
-                carb: +formData.carb,
-                fat: +formData.fat,
-                sodium: +formData.sodium
-            }
-
-            if (!validateData(toNumbers, 'mealEntry')) return
-
-            fetch('http://localhost:5000/api/mealEntries', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(toNumbers)
-            })
-            .then(res => {
-                if (!res.ok) {
-                    return res.json()
-                                .then(json => {throw new Error(json.error)})
-                }
+        .then(res => {
+            if (!res.ok) {
                 return res.json()
-            }) 
-            .then(json => setMealEntries(previous => [
-                ...previous,
-                json
-            ]))
-            
-            toggleQuickAdd()
-        }
+                            .then(json => {throw new Error(json.error)})
+            }
+            return res.json()
+        }) 
+        .then(json => setMealEntries(previous => [
+            ...previous,
+            json
+        ]))
+        
+        toggleQuickAdd()
+    }
 
     return (
         <form className='form quickAddForm' onSubmit={handleSubmit}>
