@@ -14,7 +14,13 @@ const MacroChart = ({ currentUser, todaysMealEntries }) => {
                                 return a
                             }, todaysMacros)
     
-    const userGoals = currentUser.macroGoals
+    const macroGoals = {
+        cal: currentUser.calGoal,
+        protein: currentUser.proteinGoal,
+        carb: currentUser.carbGoal,
+        fat: currentUser.fatGoal,
+        sodium: currentUser.sodiumGoal
+    }
 
     const labels = {
         cal: 'Calories (kcal)',
@@ -27,10 +33,10 @@ const MacroChart = ({ currentUser, todaysMealEntries }) => {
     //calculate from consolidated macros object
     const macroRows = Object.entries(macroTotals).map(([macro, value]) => {
         const roundedValue = Math.round(value)
-        const remainder = userGoals[macro] - roundedValue
-        const percentage = userGoals[macro] === 0
+        const remainder = macroGoals[macro] - roundedValue
+        const percentage = macroGoals[macro] === 0
                                         ? 0
-                                        : Math.floor((roundedValue / userGoals[macro]) * 100)
+                                        : Math.floor((roundedValue / macroGoals[macro]) * 100)
         
         let overColor = macro === 'protein' ? 'blue' : 'red'
         if (remainder === 0) overColor = 'green'
@@ -41,7 +47,7 @@ const MacroChart = ({ currentUser, todaysMealEntries }) => {
                 <div className='macroMeter'>
                     <div className='macroMeterFill' id={macro} style={{ width: `${Math.min(percentage, 100)}%`}}></div>
                 </div>
-                <h2 className='stats' style={{ color: remainder >= 0 ? 'inherit' : overColor }}>{roundedValue} / {userGoals[macro]} [{percentage}%]</h2>
+                <h2 className='stats' style={{ color: remainder >= 0 ? 'inherit' : overColor }}>{roundedValue} / {macroGoals[macro]} [{percentage}%]</h2>
                 <h3 className='remaining' style={{ color: remainder >= 0 ? 'green' : overColor }}>{remainder >= 0 ? `${Math.abs(remainder)}` : `+${Math.abs(remainder)}`}</h3>
             </div>                                                                                        
         )

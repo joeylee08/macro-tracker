@@ -135,8 +135,8 @@ body {
 }
 
 form.loginForm {
-  height: 25.6rem;
-  min-height: 25.6rem;
+  height: 22.5rem;
+  min-height: 22.5rem;
 }
 
 .loginForm h1 {
@@ -774,6 +774,7 @@ select.monthYear {
   box-sizing: border-box;
   border: 3px solid #f2e7d5;
   border-radius: 8px;
+  padding: 0.5rem 0;
 }
 
 .mySettings2 {
@@ -811,12 +812,19 @@ select.monthYear {
 h2 {
   width: 100%;
   margin: 0 auto;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 500;
   color: #362312;
 }
 
 h2.username {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #362312;
+  margin-bottom: 0.3rem;
+}
+
+h2.dateJoined {
   font-size: 1.2rem;
   font-weight: 500;
   color: #8a7b6a;

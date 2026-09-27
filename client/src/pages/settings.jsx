@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../context/usercontext'
 import { Settings as SettingsIcon } from 'lucide-react'
 import MacroGoals from '../components/macrogoals'
+import { getFormattedDate } from '../util/helpers'
 
 const Settings = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext)
@@ -12,7 +13,26 @@ const Settings = () => {
     }
 
     const handleLogout = () => {
-        setCurrentUser(null)
+        fetch('http://localhost:5000/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json()
+                        .then(json => {
+                            throw new Error(json.error)
+                        })
+                }
+
+                return res.json()
+            })
+            .then(() => {
+                setCurrentUser(null)
+            })
+            .catch(error => {
+                console.error(error.message)
+            })
     }
 
     return (
@@ -24,8 +44,8 @@ const Settings = () => {
             </div>
             <div className='mySettings'>
                 <div className='settingsField'>
-                    <h2>{currentUser.firstName} {currentUser.lastName}</h2>
                     <h2 className='username'>{currentUser.username}</h2>
+                    <h2 className='dateJoined'>Member Since: {getFormattedDate(currentUser.dateJoined)}</h2>
                 </div>
             </div>
             <div className='headerBox'>
@@ -36,11 +56,11 @@ const Settings = () => {
                     <SettingsIcon size={30}/>
                 </button>
                 <div className='settingsField'>
-                    <h2 className='macroGoalLabel'>Calories: {currentUser.macroGoals.cal}</h2>
-                    <h2 className='macroGoalLabel'>Protein: {currentUser.macroGoals.protein}g</h2>
-                    <h2 className='macroGoalLabel'>Carbs: {currentUser.macroGoals.carb}g</h2>
-                    <h2 className='macroGoalLabel'>Fat: {currentUser.macroGoals.fat}g</h2>
-                    <h2 className='macroGoalLabel'>Sodium: {currentUser.macroGoals.sodium}mg</h2>
+                    <h2 className='macroGoalLabel'>Calories: {currentUser.calGoal}</h2>
+                    <h2 className='macroGoalLabel'>Protein: {currentUser.proteinGoal}g</h2>
+                    <h2 className='macroGoalLabel'>Carbs: {currentUser.carbGoal}g</h2>
+                    <h2 className='macroGoalLabel'>Fat: {currentUser.fatGoal}g</h2>
+                    <h2 className='macroGoalLabel'>Sodium: {currentUser.sodiumGoal}mg</h2>
                 </div>
             </div>
             <div className='mySettings3'>

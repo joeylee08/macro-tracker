@@ -5,7 +5,13 @@ const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDa
     const dayCount = new Date(year, month, 0).getDate()
     const startDay = new Date(year, month - 1, 1).getDay()
 
-    const goals = currentUser.macroGoals
+    const macroGoals = {
+        cal: currentUser.calGoal,
+        protein: currentUser.proteinGoal,
+        carb: currentUser.carbGoal,
+        fat: currentUser.fatGoal,
+        sodium: currentUser.sodiumGoal
+    }
     
     const getDailyOffset = (entriesOfDay) => {
         if (entriesOfDay.length === 0) return null
@@ -28,22 +34,22 @@ const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDa
         const scoreOffsets = ['cal', 'protein', 'carb', 'fat', 'sodium'].map(item => {
             switch(item) {
                 case 'cal':
-                    const calDiff = Math.abs(dailyTotal.cal - goals.cal)
-                    return Math.min((calDiff / goals.cal), 1)
+                    const calDiff = Math.abs(dailyTotal.cal - macroGoals.cal)
+                    return Math.min((calDiff / macroGoals.cal), 1)
                 case 'protein':
-                    return dailyTotal.protein >= goals.protein 
+                    return dailyTotal.protein >= macroGoals.protein 
                                 ? 0
-                                : Math.min(((goals.protein - dailyTotal.protein) / goals.protein), 1)
+                                : Math.min(((macroGoals.protein - dailyTotal.protein) / macroGoals.protein), 1)
                 case 'carb':
-                    const carbDiff = Math.abs(dailyTotal.carb - goals.carb)
-                    return Math.min((carbDiff / goals.carb), 1)
+                    const carbDiff = Math.abs(dailyTotal.carb - macroGoals.carb)
+                    return Math.min((carbDiff / macroGoals.carb), 1)
                 case 'fat':
-                    const fatDiff = Math.abs(dailyTotal.fat - goals.fat)
-                    return Math.min((fatDiff / goals.fat), 1 )
+                    const fatDiff = Math.abs(dailyTotal.fat - macroGoals.fat)
+                    return Math.min((fatDiff / macroGoals.fat), 1 )
                 case 'sodium':
-                    return dailyTotal.sodium <= goals.sodium 
+                    return dailyTotal.sodium <= macroGoals.sodium 
                                 ? 0
-                                : Math.min(((dailyTotal.sodium - goals.sodium) / goals.sodium), 1)
+                                : Math.min(((dailyTotal.sodium - macroGoals.sodium) / macroGoals.sodium), 1)
                 default:
                     return 0
             }

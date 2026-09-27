@@ -4,7 +4,13 @@ import { UserContext } from '../context/usercontext'
 const MacroGoals = ({ handleToggleSettingsForm }) => {
     const { currentUser, setCurrentUser } = useContext(UserContext)
 
-    const [formData, setFormData] = useState(currentUser.macroGoals)
+    const [formData, setFormData] = useState({
+        cal: currentUser.calGoal,
+        protein: currentUser.proteinGoal,
+        carb: currentUser.carbGoal, 
+        fat: currentUser.fatGoal,
+        sodium: currentUser.sodiumGoal,
+    })
 
     const handleChange = (event) => {
         const { name, value } = event.target
@@ -18,12 +24,39 @@ const MacroGoals = ({ handleToggleSettingsForm }) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        setCurrentUser(previous => ({
-            ...previous,
-            macroGoals: formData
-        }))
+        const updatedGoals = {
+            calGoal: +formData.cal,
+            proteinGoal: +formData.protein,
+            carbGoal: +formData.carb,
+            fatGoal: +formData.fat,
+            sodiumGoal: +formData.sodium
+        }
 
-        handleToggleSettingsForm()
+        fetch(`http://localhost:5000/api/users/${currentUser.id}`, {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedGoals)
+        })
+        .then(res => {
+            if (!res.ok) {
+                return res.json()
+                    .then(json => {
+                        throw new Error(json.error)
+                    })
+            }
+
+            return res.json()
+        })
+        .then(updatedUser => {
+            setCurrentUser(updatedUser)
+            handleToggleSettingsForm()
+        })
+        .catch(error => {
+            console.error(error.message)
+        })
     }
     return (
         <form className='form editMacroGoals' onSubmit={handleSubmit}>

@@ -4,7 +4,7 @@ import buddy from '../assets/buddy.jpg'
 const Error = () => {
   const navigate = useNavigate()
 
-  // setTimeout(() => navigate('/'), 800)
+  setTimeout(() => navigate('/'), 800)
   
   return (
     <div className='mainPage'>
