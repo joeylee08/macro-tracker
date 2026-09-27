@@ -12,7 +12,7 @@ import NavBar from './components/navbar';
 import Footer from './components/footer';
 
 function App() {
-  const { currentUser } = useContext(UserContext)
+  const { currentUser, authLoading } = useContext(UserContext)
 
   const [myFoods, setMyFoods] = useState([])
   const [myMeals, setMyMeals] = useState([])

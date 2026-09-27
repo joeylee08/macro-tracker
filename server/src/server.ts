@@ -279,13 +279,11 @@ app.post('/api/users', async (req, res) => {
         })
     }
     const username = userData.username.trim()
-    const firstName = userData.firstName.trim()
-    const lastName = userData.lastName.trim()
     const password = userData.password
 
-    if (username === ''  || firstName === '' || lastName === '' || password.length === 0) {
+    if (username === '' || password.length === 0) {
         return res.status(400).json({
-            'error': 'First and last names, username, and password must each contain at least 1 character.'
+            'error': 'Username and password must each contain at least 1 character.'
         })
     }
     const existingUsername = await prisma.user.findUnique({
@@ -298,31 +296,10 @@ app.post('/api/users', async (req, res) => {
             'error': 'That username is already taken.'
         })
     }
-    const macroValues = [
-        userData.calGoal,
-        userData.proteinGoal,
-        userData.carbGoal,
-        userData.fatGoal,
-        userData.sodiumGoal
-    ]
-    for (const macro of macroValues) {
-        if (macro < 0 || !Number.isInteger(macro)) {
-            return res.status(400).json({
-                'error': 'All macro values must be non-negative integers.'
-            })
-        }
-    }
     const passwordHash = await hashPassword(password)
     const newUser = {
         username: username,
-        firstName: firstName,
-        lastName: lastName,
         passwordHash: passwordHash,
-        calGoal: +userData.calGoal,
-        proteinGoal: +userData.proteinGoal,
-        carbGoal: +userData.carbGoal,
-        fatGoal: +userData.fatGoal,
-        sodiumGoal: +userData.sodiumGoal
     }
     const added = await prisma.user.create({
         data: newUser
