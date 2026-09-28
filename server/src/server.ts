@@ -37,6 +37,14 @@ app.use(session({
     }
 }))
 
+// Centralized Error Handler
+const errorHandler = (error: unknown, req: Request, res: Response, next: NextFunction) => {
+    console.error(error)
+    return res.status(500).json({
+        error: 'Internal server error.'
+    })
+}
+
 //Require Authorization. Inline check for the existence of an active userId in session
 const requireAuth = (req: Request, res: Response, next: NextFunction) => {
     if (!req.session.userId) {
@@ -81,8 +89,11 @@ const verifyById = (type: ResourceType) => {
             return next()
         }
         const resource = await findResource[type](itemId)
+        if (!resource) {
+            return res.status(404).json({ 'error': 'Resource not found.'})
+        }
 
-        if (userId !== resource?.userId) {
+        if (userId !== resource.userId) {
             return res.status(403).json({ 'error': 'FORBIDDEN.'})
         }
         return next()
@@ -297,8 +308,13 @@ app.get('/api/foods/:foodId/meals', requireAuth, isParamInt, async (req, res) =>
     const food = await prisma.food.findUnique({
         where: { id: id}
     })
+    if (!food) {
+        return res.status(404).json({
+            error: 'Food not found.'
+        })
+    }
     const userId = req.session.userId
-    if (food?.userId !== userId) {
+    if (food.userId !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
     const linkedMealIngredients = await prisma.mealIngredient.findMany({
@@ -345,12 +361,22 @@ app.post('/api/users', async (req, res) => {
         username: username,
         passwordHash: passwordHash,
     }
-    const added = await prisma.user.create({
-        data: newUser
-    })
-    const { passwordHash: _, ...withoutPassword } = added
-    req.session.userId = added.id
-    res.status(201).json(withoutPassword)
+    //Race handling [if someone steals your username in the milliseconds between form submission and db update]
+    try {
+        const added = await prisma.user.create({
+            data: newUser
+        })
+        const { passwordHash: _, ...withoutPassword } = added
+        req.session.userId = added.id
+        res.status(201).json(withoutPassword)
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
+            return res.status(409).json({
+                error: 'That username is already taken.'
+            })
+        }
+        throw error
+    }
 })
 
 app.post('/api/meals', requireAuth, async (req, res) => {
@@ -767,12 +793,10 @@ app.delete('/api/users/:id', requireAuth, isParamInt, verifyById('user'), async 
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
             return res.status(404).json({
-                'error': 'User not found.'
+                error: 'User not found.'
             })
         }
-        return res.status(500).json({
-            'error': 'Unable to perform delete operation.'
-        })
+        throw error
     }
     res.json({
         'message': 'Successfully deleted user.',
@@ -792,9 +816,7 @@ app.delete('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async 
                 'error': 'Meal not found.'
             })
         }
-        return res.status(500).json({
-            'error': 'Unable to perform delete operation.'
-        })
+        throw error
     }
     res.json({
         'message': 'Successfully deleted meal.',
@@ -860,9 +882,7 @@ app.delete('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async 
                 'error': 'Food not found.'
             })
         }
-        return res.status(500).json({
-            'error': 'Unable to perform delete operation.'
-        })
+        throw error
     }
 })
 
@@ -872,8 +892,13 @@ app.delete('/api/foods/:foodId/meals', requireAuth, isParamInt, async (req, res)
     const food = await prisma.food.findUnique({
         where: { id: id}
     })
+    if (!food) {
+        return res.status(404).json({
+            error: 'Food not found.'
+        })
+    }
     const userId = req.session.userId
-    if (food?.userId !== userId) {
+    if (food.userId !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
     try {
@@ -904,9 +929,7 @@ app.delete('/api/foods/:foodId/meals', requireAuth, isParamInt, async (req, res)
                 'error': 'Food not found.'
             })
         }
-        return res.status(500).json({
-            'error': 'Unable to perform delete operation.'
-        })
+        throw error
     }    
 })
 
@@ -923,14 +946,14 @@ app.delete('/api/mealEntries/:id', requireAuth, isParamInt, verifyById('mealEntr
                 'error': 'Meal entry not found.'
             })
         }
-        return res.status(500).json({
-            'error': 'Unable to perform delete operation.'
-        })
+        throw error
     }
     res.json({
         'message': 'Successfully deleted meal entry.',
     })
 })
+
+app.use(errorHandler)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
