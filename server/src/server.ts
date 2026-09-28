@@ -606,34 +606,33 @@ app.patch('/api/users/:id', requireAuth, isParamInt, verifyById('user'), async (
         }
     }
     const { calGoal, proteinGoal, carbGoal, fatGoal, sodiumGoal } = userData
-    const updated = await prisma.user.update({
-        where: { id: id },
-        data: {
-            calGoal: +calGoal,
-            proteinGoal: +proteinGoal,
-            carbGoal: +carbGoal,
-            fatGoal: +fatGoal,
-            sodiumGoal: +sodiumGoal
+    try {
+        const updated = await prisma.user.update({
+            where: { id: id },
+            data: {
+                calGoal: +calGoal,
+                proteinGoal: +proteinGoal,
+                carbGoal: +carbGoal,
+                fatGoal: +fatGoal,
+                sodiumGoal: +sodiumGoal
+            }
+        })
+        const { passwordHash: _, ...safeUser } = updated
+        res.json(safeUser)
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'User not found.'
+            })
         }
-    })
-    const { passwordHash: _, ...safeUser } = updated
-    res.json(safeUser)
+        throw error
+    }
 })
 
 app.patch('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async (req, res) => {
     const id = +req.params.id
     
-    const meal = await prisma.meal.findUnique({
-        where : { id: id },
-        select: { id: true, userId: true }
-    })
-    if (!meal) {
-        return res.status(404).json({
-            'error': 'Meal not found.'
-        })
-    }
-    //THIS IS TEMPORARY!
-    const userId = meal.userId
+    const userId = req.session.userId
 
     const mealData = req.body
     if (typeof mealData.name !== 'string') {
@@ -672,6 +671,7 @@ app.patch('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async (
     }
     const foodIds = mealIngredients.map(item => item.foodId)
     const uniqueFoodIds = [...new Set(foodIds)]
+
     if (foodIds.length !== uniqueFoodIds.length) {
         return res.status(400).json({
                 'error': 'A food may only appear once in each meal.'
@@ -692,28 +692,37 @@ app.patch('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async (
         foodId: ingredient.foodId,
         units: ingredient.units
     }))
-    const updated = await prisma.meal.update({
-        where: { id: id },
-        data: {
-            name: trimmed,
-            mealIngredients: {
-                deleteMany: {},
-                create: formattedIngredients
+    try {
+        const updated = await prisma.meal.update({
+            where: { id: id },
+            data: {
+                name: trimmed,
+                mealIngredients: {
+                    deleteMany: {},
+                    create: formattedIngredients
+                }
+            },
+            include: {
+                mealIngredients: {
+                    include: { food: true }
+                }
             }
-        },
-        include: {
-            mealIngredients: {
-                include: { food: true }
-            }
+        })
+        const formattedMeal = {
+            id: updated.id,
+            name: updated.name,
+            userId: updated.userId,
+            ingredients: updated.mealIngredients
         }
-    })
-    const formattedMeal = {
-        id: updated.id,
-        name: updated.name,
-        userId: updated.userId,
-        ingredients: updated.mealIngredients
+        res.json(formattedMeal)
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'Meal not found.'
+            })
+        }
+        throw error
     }
-    res.json(formattedMeal)
 })
 
 app.patch('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async (req, res) => {
