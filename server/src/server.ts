@@ -180,7 +180,7 @@ app.get('/api/users/:id', requireAuth, isParamInt, verifyById('user'), async (re
 app.get('/api/users/:userId/meals', requireAuth, isParamInt, async (req, res) => {
     const id = +req.params.userId
 
-    const userId = req.session.userId
+    const userId = req.session.userId!
     if (id !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
@@ -232,7 +232,7 @@ app.get('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async (re
 app.get('/api/users/:userId/foods',requireAuth, isParamInt, async (req, res) => {
     const id = +req.params.userId
     
-    const userId = req.session.userId
+    const userId = req.session.userId!
     if (id !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
@@ -268,7 +268,7 @@ app.get('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async (re
 app.get('/api/users/:userId/mealEntries', requireAuth, isParamInt, async (req, res) => {
     const id = +req.params.userId
     
-    const userId = req.session.userId
+    const userId = req.session.userId!
     if (id !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
@@ -632,7 +632,7 @@ app.patch('/api/users/:id', requireAuth, isParamInt, verifyById('user'), async (
 app.patch('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async (req, res) => {
     const id = +req.params.id
     
-    const userId = req.session.userId
+    const userId = req.session.userId!
 
     const mealData = req.body
     if (typeof mealData.name !== 'string') {
@@ -728,15 +728,6 @@ app.patch('/api/meals/:id', requireAuth, isParamInt, verifyById('meal'), async (
 app.patch('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async (req, res) => {
     const id = +req.params.id
     
-    const food = await prisma.food.findUnique({
-        where : { id: id },
-        select: { id: true }
-    })
-    if (!food) {
-        return res.status(404).json({
-            'error': 'Food not found.'
-        })
-    }
     const foodData = req.body
     if (!validateData(foodData, 'food')) {
         return res.status(400).json({
@@ -775,20 +766,29 @@ app.patch('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async (
             })
         }
     }
-    const updated = await prisma.food.update({
-        where: { id: id },
-        data: {
-            name: trimmed,
-            servingSize: +servingSize,
-            servingUnit: servingUnit,
-            cal: +cal,
-            protein: +protein,
-            carb: +carb,
-            fat: +fat,
-            sodium: +sodium
+    try {
+        const updated = await prisma.food.update({
+            where: { id: id },
+            data: {
+                name: trimmed,
+                servingSize: +servingSize,
+                servingUnit: servingUnit,
+                cal: +cal,
+                protein: +protein,
+                carb: +carb,
+                fat: +fat,
+                sodium: +sodium
+            }
+        })
+        res.json(updated)
+    } catch(error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+            return res.status(404).json({
+                'error': 'Food not found.'
+            })
         }
-    })
-    res.json(updated)
+        throw error
+    }
 })
 
 //DELETE ROUTES
