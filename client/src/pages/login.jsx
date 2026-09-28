@@ -59,7 +59,14 @@ const Login = () => {
 			.then(json => {
 				setCurrentUser(json)
 			})
-			.catch(error => alert(error.message))
+			.catch(error => {
+				setFormData({
+						username: '',
+						password: '',
+						confirmPassword: ''
+					})
+				alert(error.message)
+			})
 	}
 
 	const handleSignUp = (event) => {
