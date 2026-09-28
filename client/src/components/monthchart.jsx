@@ -54,8 +54,18 @@ const MonthChart = ({ currentUser, currentYearMonth, selectedDay, handleSelectDa
                     return 0
             }
         })
+        
+        const scaledOffsets = scoreOffsets.map(offset => {
+            return Math.min((offset * 2) ** 1.5, 1)
+        })
 
-        return (scoreOffsets.reduce((a, b) => a + b) / scoreOffsets.length).toFixed(2)
+        const weightedOffsets = scaledOffsets.map((item, index) => {
+            return index === 0 ? item * 0.75 : item * 0.35
+        })
+
+        const totalPenalty = weightedOffsets.reduce((a, b) => a + b)
+
+        return Math.min(totalPenalty, 1)
     }
 
     const days = [...Array(startDay).fill(0), ...Array(dayCount).fill(1)]
