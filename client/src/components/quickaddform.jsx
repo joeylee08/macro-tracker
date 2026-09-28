@@ -35,6 +35,7 @@ const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
 
         fetch('http://localhost:5000/api/mealEntries', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

@@ -38,6 +38,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
             
             fetch('http://localhost:5000/api/mealEntries', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -58,6 +59,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
         } else if (action === 'delete') {
             fetch(`http://localhost:5000/api/mealEntries/${mealOrEntryId}`, {
                 method: 'DELETE',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 }

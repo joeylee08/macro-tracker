@@ -80,6 +80,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
             }
             return fetch(`http://localhost:5000/api/meals/${selectedItem.id}`, {
                 method: 'PATCH',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -94,8 +95,6 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
                 }) 
                 .then(json => {
                     onAddMeal(json, false)
-                    console.log('Meal successfully updated.')
-                    console.log('RETURNED JSON ING', json.ingredients)
                 })
                 .catch(error => console.error(error.message))
         }
