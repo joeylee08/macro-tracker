@@ -102,6 +102,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
 
         fetch('http://localhost:5000/api/meals', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },

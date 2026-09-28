@@ -49,6 +49,7 @@ const CreateFoodForm = ({ onAddFood, handleToggleForm, isEditing, selectedItem }
         if (isEditing) {
             return fetch(`http://localhost:5000/api/foods/${selectedItem.id}`, {
                 method: 'PATCH',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -70,6 +71,7 @@ const CreateFoodForm = ({ onAddFood, handleToggleForm, isEditing, selectedItem }
 
         fetch('http://localhost:5000/api/foods', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },

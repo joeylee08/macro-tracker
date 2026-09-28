@@ -1,21 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express'
+import { Prisma } from './generated/prisma/client.js'
 import cors from "cors"
 import "dotenv/config";
 import session from 'express-session'
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "./generated/prisma/client";
+import { prisma } from './db/prisma'
+import { requireAuth } from './middleware/requireauth'
+import { isParamInt } from './middleware/isparamint.js';
+import { verifyById } from './middleware/verifybyid.js';
 import { validateData } from "./util/helpers"
-import { Prisma } from './generated/prisma/client.js'
 import { verifyPassword, hashPassword } from "./util/auth";
 
 const app = express()
 const PORT = 5000
-
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL!,
-});
-
-const prisma = new PrismaClient({ adapter });
 
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
@@ -43,83 +39,6 @@ const errorHandler = (error: unknown, req: Request, res: Response, next: NextFun
     return res.status(500).json({
         error: 'Internal server error.'
     })
-}
-
-//Require Authorization. Inline check for the existence of an active userId in session
-const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
-    if (!req.session.userId) {
-        return res.status(401).json({
-            error: 'Not authenticated.'
-        })
-    }
-    const user = await prisma.user.findUnique({
-        where: {
-            id: req.session.userId
-        }
-    })
-
-    //if user stored in session does not exist in db, destroy session and logout
-    if (!user) {
-        req.session.destroy((error) => {
-            if (error) {
-                console.error(error)
-                return res.status(500).json({
-                    'error': 'Unable to end current session.'
-                })
-            }
-            res.clearCookie('macroTracker.sid')
-            return res.status(401).json({
-                error: 'Not authenticated.'
-            })
-        })
-        return
-    }
-    req.currentUser = user
-    next()
-}
-
-const isParamInt = (req: Request, res: Response, next: NextFunction) => {
-    const param = req.params.id || req.params.userId || req.params.foodId
-    const paramId = +param
-    if (Number.isNaN(paramId) || !Number.isInteger(paramId) || paramId <= 0) {
-        return res.status(400).json({
-            'error': 'Route parameter needs to be a positive integer.'
-        })
-    }
-    next()
-}
-
-//Verify ownership of specific resource(s)
-type ResourceType = 'user' | 'food' | 'meal' | 'mealEntry'
-
-//Resource type dictionary
-const findResource = {
-    food: (itemId: number) => prisma.food.findUnique({ where: { id: itemId } }),
-    meal: (itemId: number) => prisma.meal.findUnique({ where: { id: itemId } }),
-    mealEntry: (itemId: number) => prisma.mealEntry.findUnique({ where: { id: itemId } })
-}
-
-const verifyById = (type: ResourceType) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-        const userId = req.session.userId
-        const itemId = +req.params.id
-
-        if (type === 'user') {
-            if (itemId !== userId) {
-                return res.status(403).json({ error: 'FORBIDDEN.' })
-            }
-            return next()
-        }
-        const resource = await findResource[type](itemId)
-        if (!resource) {
-            return res.status(404).json({ 'error': 'Resource not found.'})
-        }
-
-        if (userId !== resource.userId) {
-            return res.status(403).json({ 'error': 'FORBIDDEN.'})
-        }
-        next()
-    }
 }
 
 // LOGIN / LOGOUT ROUTES
