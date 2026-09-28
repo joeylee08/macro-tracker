@@ -21,7 +21,9 @@ function App() {
   
   useEffect(() => {
     const getFoods = () => {
-      fetch(`http://localhost:5000/api/users/${currentUser.id}/foods`)
+      fetch(`http://localhost:5000/api/users/${currentUser.id}/foods`, {
+        credentials: 'include'
+      })
         .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -33,7 +35,9 @@ function App() {
         .catch(error => console.error(error.message))
     }
     const getMeals = () => {
-      fetch(`http://localhost:5000/api/users/${currentUser.id}/meals`)
+      fetch(`http://localhost:5000/api/users/${currentUser.id}/meals`, {
+        credentials: 'include'
+      })
         .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -45,7 +49,9 @@ function App() {
         .catch(error => console.error(error.message))
     }
     const getMealEntries = () => {
-      fetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`)
+      fetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`, {
+        credentials: 'include'
+      })
         .then(res => {
                 if (!res.ok) {
                     return res.json()

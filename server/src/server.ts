@@ -46,12 +46,35 @@ const errorHandler = (error: unknown, req: Request, res: Response, next: NextFun
 }
 
 //Require Authorization. Inline check for the existence of an active userId in session
-const requireAuth = (req: Request, res: Response, next: NextFunction) => {
+const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
     if (!req.session.userId) {
         return res.status(401).json({
             error: 'Not authenticated.'
         })
     }
+    const user = await prisma.user.findUnique({
+        where: {
+            id: req.session.userId
+        }
+    })
+
+    //if user stored in session does not exist in db, destroy session and logout
+    if (!user) {
+        req.session.destroy((error) => {
+            if (error) {
+                console.error(error)
+                return res.status(500).json({
+                    'error': 'Unable to end current session.'
+                })
+            }
+            res.clearCookie('macroTracker.sid')
+            return res.status(401).json({
+                error: 'Not authenticated.'
+            })
+        })
+        return
+    }
+    req.currentUser = user
     next()
 }
 
@@ -71,7 +94,6 @@ type ResourceType = 'user' | 'food' | 'meal' | 'mealEntry'
 
 //Resource type dictionary
 const findResource = {
-    user: (itemId: number) => prisma.user.findUnique({ where: { id: itemId } }),
     food: (itemId: number) => prisma.food.findUnique({ where: { id: itemId } }),
     meal: (itemId: number) => prisma.meal.findUnique({ where: { id: itemId } }),
     mealEntry: (itemId: number) => prisma.mealEntry.findUnique({ where: { id: itemId } })
@@ -96,7 +118,7 @@ const verifyById = (type: ResourceType) => {
         if (userId !== resource.userId) {
             return res.status(403).json({ 'error': 'FORBIDDEN.'})
         }
-        return next()
+        next()
     }
 }
 
@@ -107,7 +129,9 @@ app.post(`/api/auth/login`, async (req, res) => {
             'error': 'Username and password must be strings.'
         })
     }
-    const { username, password } = req.body
+    const username = req.body.username.trim()
+    const password = req.body.password
+
     const user = await prisma.user.findUnique({
         where: { username: username}
     })
@@ -144,22 +168,8 @@ app.post('/api/auth/logout', requireAuth, (req, res) => {
     })
 })
 
-app.get('/api/auth/me', async (req, res) => {
-    const userId = req.session.userId
-    if (!userId) {
-        return res.status(401).json({
-            'error': 'Not authenticated.'
-        })
-    }
-    const user = await prisma.user.findUnique({
-        where: { id: userId}
-    })
-    if (!user) {
-        return res.status(401).json({
-            'error': 'Not authenticated.'
-        })
-    }
-    const { passwordHash, ...safeUser } = user
+app.get('/api/auth/me', requireAuth, (req, res) => {
+    const { passwordHash: _, ...safeUser } = req.currentUser!
     return res.json(safeUser)
 })
 
@@ -181,20 +191,12 @@ app.get('/api/users/:id', requireAuth, isParamInt, verifyById('user'), async (re
 
 app.get('/api/users/:userId/meals', requireAuth, isParamInt, async (req, res) => {
     const id = +req.params.userId
-
     const userId = req.session.userId!
+
     if (id !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-        select: { id: true}
-    })
-    if (user === null) {
-        return res.status(404).json({
-            'error': 'User not found.'
-        })
-    }
+    
     const meals = await prisma.meal.findMany({
         where: { userId: userId },
         include: {
@@ -238,15 +240,7 @@ app.get('/api/users/:userId/foods',requireAuth, isParamInt, async (req, res) => 
     if (id !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-        select: { id: true }
-    })
-    if (user === null) {
-        return res.status(404).json({
-            'error': 'User not found.'
-        })
-    }
+    
     const foods = await prisma.food.findMany({
         where: { userId: userId }
     })
@@ -274,15 +268,7 @@ app.get('/api/users/:userId/mealEntries', requireAuth, isParamInt, async (req, r
     if (id !== userId) {
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
-    const user = await prisma.user.findUnique({
-        where: { id: userId },
-        select: { id: true }
-    })
-    if (user === null) {
-        return res.status(404).json({
-            'error': 'User not found.'
-        })
-    }
+    
     const mealEntries = await prisma.mealEntry.findMany({
         where: { userId: userId },
         orderBy: { dateAndTime: 'asc' }
@@ -390,14 +376,6 @@ app.post('/api/meals', requireAuth, async (req, res) => {
     }
     const userId = req.session.userId!
 
-    const user = await prisma.user.findUnique({
-        where: { id: userId }
-    })
-    if (!user) {
-        return res.status(404).json({
-            'error': 'Associated user does not exist.'
-        })
-    }
     const name = mealData.name.trim()
     if (name === '' || name.length > 19) {
         return res.status(400).json({
@@ -447,7 +425,7 @@ app.post('/api/meals', requireAuth, async (req, res) => {
     }
     const added = await prisma.meal.create({
         data: {
-            name: mealData.name,
+            name: name,
             userId: userId,
             mealIngredients: {
                 create: mealIngredients
@@ -477,14 +455,6 @@ app.post('/api/foods', requireAuth, async (req, res) => {
     }
     const userId = req.session.userId!
     
-    const user = await prisma.user.findUnique({
-        where: { id: userId }
-    })
-    if (!user) {
-        return res.status(404).json({
-            'error': 'Associated user does not exist.'
-        })
-    }
     const name = foodData.name.trim()
     if (name === '' || name.length > 19) {
         return res.status(400).json({
@@ -541,14 +511,6 @@ app.post('/api/mealEntries', requireAuth, async (req, res) => {
     }
     const userId = req.session.userId!
     
-    const user = await prisma.user.findUnique({
-        where: { id: userId }
-    })
-    if (!user) {
-        return res.status(404).json({
-            'error': 'Associated user does not exist.'
-        })
-    }
     const name = mealEntryData.name.trim()
     if (name === '' || name.length > 19) {
         return res.status(400).json({
@@ -838,7 +800,7 @@ app.delete('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async 
     const id = +req.params.id
     
     try {
-        await prisma.$transaction(async (tx) => {
+        const result = await prisma.$transaction(async (tx) => {
             //find linked meals
             const linkedMealEntries = await tx.mealIngredient.findMany({
                 where: { foodId: id },
@@ -880,12 +842,15 @@ app.delete('/api/foods/:id', requireAuth, isParamInt, verifyById('food'), async 
                 userId: meal.userId,
                 ingredients: meal.mealIngredients
             }))
-            res.json({
-                'message': 'Successfully deleted food.',
+            return {
                 'deletedFoodId': id,
                 'emptyMealIds': emptyMealIds,
                 'remainingMeals': formattedMeals
-            })
+            }
+        })
+        res.json({
+            message: 'Successfully deleted food.',
+            ...result
         })
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
@@ -913,7 +878,7 @@ app.delete('/api/foods/:foodId/meals', requireAuth, isParamInt, async (req, res)
         return res.status(403).json({'error': 'FORBIDDEN.'})
     }
     try {
-        await prisma.$transaction(async (tx) => {
+        const result = await prisma.$transaction(async (tx) => {
             const linkedMealIds = await tx.mealIngredient.findMany({
                 where: { foodId: id },
                 select: { mealId: true }
@@ -928,11 +893,14 @@ app.delete('/api/foods/:foodId/meals', requireAuth, isParamInt, async (req, res)
             await tx.food.delete({
                 where: { id: id}
             })
-            res.json({
-                'message': 'Succesfully deleted food and all associated meals.',
+            return {
                 'foodId': id,
                 'deletedMeals': idArray
-            })
+            }
+        })
+        res.json({
+            'message': 'Successfully deleted food and all associated meals.',
+            ...result
         })
     } catch(error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
