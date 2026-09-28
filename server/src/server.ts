@@ -129,8 +129,10 @@ app.post(`/api/auth/login`, async (req, res) => {
 })
 
 app.post('/api/auth/logout', requireAuth, (req, res) => {
+    //session.destroy() does not return a promise, so we format it OG Node style as a cb
     req.session.destroy((error) => {
         if (error) {
+            console.error(error)
             return res.status(500).json({
                 'error': 'Unable to end current session.'
             })
