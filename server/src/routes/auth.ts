@@ -7,7 +7,7 @@ import { requireAuth } from '../middleware/requireauth'
 const router = Router()
 
 // LOGIN / LOGOUT ROUTES
-router.post(`/api/auth/login`, async (req, res) => {
+router.post(`/login`, async (req, res) => {
     if (!validateData(req.body, 'signup')) {
         return res.status(400).json({
             'error': 'Username and password must be strings.'
@@ -36,7 +36,7 @@ router.post(`/api/auth/login`, async (req, res) => {
     return res.json(safeUser)
 })
 
-router.post('/api/auth/logout', requireAuth, (req, res) => {
+router.post('/logout', requireAuth, (req, res) => {
     //session.destroy() does not return a promise, so we format it OG Node style as a cb
     req.session.destroy((error) => {
         if (error) {
@@ -52,7 +52,7 @@ router.post('/api/auth/logout', requireAuth, (req, res) => {
     })
 })
 
-router.get('/api/auth/me', requireAuth, (req, res) => {
+router.get('/me', requireAuth, (req, res) => {
     const { passwordHash: _, ...safeUser } = req.currentUser!
     return res.json(safeUser)
 })
