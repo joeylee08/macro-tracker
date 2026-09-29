@@ -135,15 +135,15 @@ body {
 }
 
 form.loginForm {
-  height: 22.5rem;
-  min-height: 22.5rem;
+  height: 22rem;
+  min-height: 22rem;
 }
 
 .loginForm h1 {
   font-size: 1.4rem;
   font-weight: 500;
   margin-top: 0;
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.8rem;
   color: #362312;
 }
 
@@ -438,7 +438,7 @@ form.quickAddForm {
   font-size: 1rem;
   border: 2px solid #cbb59b;
   border-radius: 5px;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
   color: #362312;
 }
 
@@ -516,7 +516,7 @@ form.quickAddForm {
 .formBtnLogin {
   width: 9rem;
   height: 2rem;
-  margin: 0.5rem auto 1.5rem auto;
+  margin: 0.3rem auto 1.5rem auto;
   font-size: 0.99rem;
 }
 
