@@ -137,6 +137,7 @@ body {
 form.loginForm {
   height: 22rem;
   min-height: 22rem;
+  padding-top: 2.2rem;
 }
 
 .loginForm h1 {
