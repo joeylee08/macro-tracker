@@ -5,7 +5,7 @@ import MacroGoals from '../components/macrogoals'
 import { getFormattedDate } from '../util/helpers'
 
 const Settings = () => {
-    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { currentUser, setCurrentUser, authFetch } = useContext(UserContext)
 
     const [formOpen, setFormOpen] = useState(false)
     const handleToggleSettingsForm = () => {
@@ -13,7 +13,7 @@ const Settings = () => {
     }
 
     const handleLogout = () => {
-        fetch('http://localhost:5000/api/auth/logout', {
+        authFetch('http://localhost:5000/api/auth/logout', {
                 method: 'POST',
                 credentials: 'include'
             })

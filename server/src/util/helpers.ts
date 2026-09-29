@@ -1,4 +1,46 @@
 import { userSignup, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel } from './models';
+import { starterFoods, starterMeals } from '../data/starterfoods'
+import type { Prisma } from "../generated/prisma/client.js"
+
+async function seedStarterData(userId: number, tx: Prisma.TransactionClient) {
+    //create all the starter foods for userId
+    const createdFoods = await tx.food.createManyAndReturn({
+        data: starterFoods.map(item => ({
+            ...item,
+            userId: userId
+        }))
+    })
+    //take the returned list of starter foods, and using the starterMeals collection
+    //assemble properly formatted meals, with the nested ingredients in { foodId, units } format
+    const formattedMeals = starterMeals.map(item => ({
+        name: item.name,
+        userId: userId,
+        ingredients: item.ingredients.map(food => {
+            const createdFood = createdFoods.find(item => item.name === food.foodName)
+
+            if (!createdFood) {
+                 throw new Error(`Starter food not found: ${food.foodName}`)
+            }
+
+            return {
+                foodId: createdFood.id, 
+                units: food.units
+            }
+        })
+    }))
+    //iterate through this collection and call tx.meal.create() for each item.
+    for (const meal of formattedMeals) {
+        await tx.meal.create({
+            data: {
+                name: meal.name,
+                userId: meal.userId,
+                mealIngredients: {
+                    create: meal.ingredients
+                }
+            }
+        })
+    }
+}
 
 const modelObj = {
     'signup': userSignup,
@@ -35,4 +77,4 @@ const validateData = (data: Record <string, unknown> , modelType: ModelType) => 
     return true
 }
 
-export { validateData };
+export { validateData, seedStarterData };

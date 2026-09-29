@@ -20,7 +20,7 @@ app.use(cors({
     credentials: true
 }))
 
-// Middleware. Parses incoming JSON requests into Javascript objects.
+// Middleware. Parses incoming JSON requests into JS objects.
 app.use(express.json())
 
 app.use(session({

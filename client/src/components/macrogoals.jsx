@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import { UserContext } from '../context/usercontext'
 
 const MacroGoals = ({ handleToggleSettingsForm }) => {
-    const { currentUser, setCurrentUser } = useContext(UserContext)
+    const { currentUser, setCurrentUser, authFetch } = useContext(UserContext)
 
     const [formData, setFormData] = useState({
         cal: currentUser.calGoal,
@@ -32,9 +32,8 @@ const MacroGoals = ({ handleToggleSettingsForm }) => {
             sodiumGoal: +formData.sodium
         }
 
-        fetch(`http://localhost:5000/api/users/${currentUser.id}`, {
+        authFetch(`http://localhost:5000/api/users/${currentUser.id}`, {
             method: 'PATCH',
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

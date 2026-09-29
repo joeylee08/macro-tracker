@@ -1,7 +1,10 @@
 import { validateData } from "../util/helpers"
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContext } from '../context/usercontext'
 
 const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
+    const { authFetch } = useContext(UserContext)
+
     const [formData, setFormData] = useState({
         name: '',
         cal: '',
@@ -33,9 +36,8 @@ const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
 
         if (!validateData(toNumbers, 'mealEntry')) return
 
-        fetch('http://localhost:5000/api/mealEntries', {
+        authFetch('http://localhost:5000/api/mealEntries', {
             method: 'POST',
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

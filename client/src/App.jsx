@@ -13,7 +13,7 @@ import Footer from './components/footer';
 import Loading from './pages/loading';
 
 function App() {
-  const { currentUser, authLoading } = useContext(UserContext)
+  const { currentUser, authLoading, authFetch } = useContext(UserContext)
 
   const [myFoods, setMyFoods] = useState([])
   const [myMeals, setMyMeals] = useState([])
@@ -21,9 +21,7 @@ function App() {
   
   useEffect(() => {
     const getFoods = () => {
-      fetch(`http://localhost:5000/api/users/${currentUser.id}/foods`, {
-        credentials: 'include'
-      })
+      authFetch(`http://localhost:5000/api/users/${currentUser.id}/foods`)
         .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -35,9 +33,7 @@ function App() {
         .catch(error => console.error(error.message))
     }
     const getMeals = () => {
-      fetch(`http://localhost:5000/api/users/${currentUser.id}/meals`, {
-        credentials: 'include'
-      })
+      authFetch(`http://localhost:5000/api/users/${currentUser.id}/meals`)
         .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -49,9 +45,7 @@ function App() {
         .catch(error => console.error(error.message))
     }
     const getMealEntries = () => {
-      fetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`, {
-        credentials: 'include'
-      })
+      authFetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`)
         .then(res => {
                 if (!res.ok) {
                     return res.json()

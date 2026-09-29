@@ -8,7 +8,7 @@ import { UserContext } from '../context/usercontext'
 import { calculateMacros, validateData } from "../util/helpers";
 
 const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
-    const { currentUser } = useContext(UserContext)
+    const { currentUser, authFetch } = useContext(UserContext)
 
     const todaysDate = getFormattedDate(new Date())
 
@@ -36,9 +36,8 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
             if (!validateData(toNumbers, 'mealEntry')) return
             
-            fetch('http://localhost:5000/api/mealEntries', {
+            authFetch('http://localhost:5000/api/mealEntries', {
                 method: 'POST',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -51,15 +50,14 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                 }
                 else return res.json()
             }) 
-            .catch(error => console.error(error.message))
             .then(json => setMealEntries(previous => [
                 ...previous,
                 json
             ]))
+            .catch(error => console.error(error.message))
         } else if (action === 'delete') {
-            fetch(`http://localhost:5000/api/mealEntries/${mealOrEntryId}`, {
+            authFetch(`http://localhost:5000/api/mealEntries/${mealOrEntryId}`, {
                 method: 'DELETE',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -71,9 +69,8 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
                 }
                 else return res.json()
             }) 
-            .catch(error => console.error(error.message))
-            .then(json => console.log(json.message))
             .then(() => setMealEntries(previous => previous.filter(item => item.id !== mealOrEntryId)))
+            .catch(error => console.error(error.message))
         }
     }
 

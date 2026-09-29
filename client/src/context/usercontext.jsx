@@ -6,7 +6,7 @@ const UserProvider = ({ children }) => {
     const [authLoading, setAuthLoading] = useState(true)
     const [currentUser, setCurrentUser] = useState(null)
 
-    useEffect(() => {
+    const checkAuth = () => {
         fetch(`http://localhost:5000/api/auth/me`, {
             method: 'GET',
             credentials: 'include'
@@ -22,10 +22,36 @@ const UserProvider = ({ children }) => {
         .then(user => setCurrentUser(user))
         .catch(error => console.error(error.message))
         .finally(() => setAuthLoading(false))
+    }
+
+    const authFetch = async (url, options = {}) => {
+        const response = await fetch(url, {
+            ...options,
+            credentials: 'include'
+        })
+        if (response.status === 401) {
+            setCurrentUser(null)
+        }
+        return response
+    }
+
+    useEffect(() => {
+        checkAuth()
     }, [])
 
+    useEffect(() => {
+        const handleOnFocus = () => {
+            if (currentUser) checkAuth()
+        }
+        window.addEventListener('focus', handleOnFocus)
+
+        return () => {
+            window.removeEventListener('focus', handleOnFocus)
+        }
+    }, [currentUser])
+
     return (
-        <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+        <UserContext.Provider value={{ currentUser, setCurrentUser, authLoading, authFetch }}>
             {children}
         </UserContext.Provider>
     )

@@ -3,12 +3,11 @@ import Foods from "../components/foods"
 import CreateFoodForm from "../components/createfoodform"
 import CreateMealForm from "../components/createmealform"
 import CascadeDeleteForm from "../components/cascadedeleteform"
-import { useState } from "react";
-import { useContext } from 'react'
+import { useState, useContext } from "react";
 import { UserContext } from '../context/usercontext'
 
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
-    const { currentUser } = useContext(UserContext)
+    const { authFetch } = useContext(UserContext)
 
     // React state cleanup only
     const handleSetMyFoods = (chosenFood, fromCascade) => {
@@ -100,7 +99,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
     const handleDelete = (itemType, itemId) => {
         if (itemType === 'food') {
-            const response = fetch(`http://localhost:5000/api/foods/${itemId}/meals`)
+            const response = authFetch(`http://localhost:5000/api/foods/${itemId}/meals`)
                                 .then(res => {
                                     if (!res.ok) {
                                         return res.json()
@@ -113,7 +112,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                                     //if linked meals do exist, open cascade delete form
                                     const linkedToFood = json
                                     if (linkedToFood.length === 0) {
-                                        return fetch(`http://localhost:5000/api/foods/${itemId}`, {
+                                        return authFetch(`http://localhost:5000/api/foods/${itemId}`, {
                                             method: 'DELETE',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -126,7 +125,6 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                                             }
                                             else return res.json()
                                         }) 
-                                        .then(json => console.log(json.message))
                                         .then(() => setMyFoods(previous => previous.filter(item => item.id !== itemId)))
                                     } else {
                                         setLinkedFoodId(itemId)
@@ -136,7 +134,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                                 })
                                 .catch(error => console.error(error.message))
         } else if (itemType === 'meal') {
-            fetch(`http://localhost:5000/api/meals/${itemId}`, {
+            authFetch(`http://localhost:5000/api/meals/${itemId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -149,7 +147,6 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                 }
                 else return res.json()
             }) 
-            .then(json => console.log(json.message))
             .then(() => setMyMeals(previous => previous.filter(item => item.id !== itemId)))
             .catch(error => console.error(error.message))
         }

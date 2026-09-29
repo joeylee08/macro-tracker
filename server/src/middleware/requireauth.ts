@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from 'express'
 import { prisma } from '../db/prisma'
 
 const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
+    //if current session does not have an active userId
     if (!req.session.userId) {
         return res.status(401).json({
             error: 'Not authenticated.'

@@ -6,6 +6,7 @@ import { isParamInt } from '../middleware/isparamint.js';
 import { verifyById } from '../middleware/verifybyid.js';
 import { validateData } from "../util/helpers";
 import { hashPassword } from "../util/auth";
+import { seedStarterData } from '../util/helpers';
 
 
 const router = Router()
@@ -45,10 +46,14 @@ router.post('/', async (req, res) => {
         username: username,
         passwordHash: passwordHash,
     }
-    //Race handling [if someone steals your username in the milliseconds between form submission and db update]
+    //Race handling [if someone steals your username in the ms between form submission and db update]
     try {
-        const added = await prisma.user.create({
-            data: newUser
+        const added = await prisma.$transaction(async (tx) => {
+            const user = await tx.user.create({
+                data: newUser
+            })
+            await seedStarterData(user.id, tx)
+            return user
         })
         const { passwordHash: _, ...withoutPassword } = added
         req.session.userId = added.id
@@ -61,6 +66,7 @@ router.post('/', async (req, res) => {
         }
         throw error
     }
+    
 })
 
 router.patch('/:id', requireAuth, isParamInt, verifyById('user'), async (req, res) => {

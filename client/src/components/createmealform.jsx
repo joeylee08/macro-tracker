@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import FoodThumb from './foodthumb'
 import { validateData } from '../util/helpers'
+import { UserContext } from '../context/usercontext'
 
 const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
+    const { authFetch } = useContext(UserContext)
+    
     const [meal, setMeal] = useState(
         isEditing  
             ? selectedItem
@@ -48,7 +51,6 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
                 ...previous,
                 ingredients: adjustedForDuplicate
             }))
-            console.log('Adjusted ingredient amount.')
             //reset ingredient / units
             setIngredient({ foodId: 0, units: 1 })
             return
@@ -78,9 +80,8 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
                 handleToggleForm('meal')
                 return
             }
-            return fetch(`http://localhost:5000/api/meals/${selectedItem.id}`, {
+            return authFetch(`http://localhost:5000/api/meals/${selectedItem.id}`, {
                 method: 'PATCH',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -93,15 +94,12 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
                     }
                     return res.json()
                 }) 
-                .then(json => {
-                    onAddMeal(json, false)
-                })
+                .then(json => onAddMeal(json, false))
                 .catch(error => console.error(error.message))
         }
 
-        fetch('http://localhost:5000/api/meals', {
+        authFetch('http://localhost:5000/api/meals', {
                 method: 'POST',
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'
                 },
