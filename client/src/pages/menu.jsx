@@ -5,6 +5,7 @@ import CreateMealForm from "../components/createmealform"
 import CascadeDeleteForm from "../components/cascadedeleteform"
 import { useState, useContext } from "react";
 import { UserContext } from '../context/usercontext'
+import { API_URL } from '../util/helpers'
 
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const { authFetch } = useContext(UserContext)
@@ -99,7 +100,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
 
     const handleDelete = (itemType, itemId) => {
         if (itemType === 'food') {
-            const response = authFetch(`http://localhost:5000/api/foods/${itemId}/meals`)
+            const response = authFetch(`${API_URL}/api/foods/${itemId}/meals`)
                                 .then(res => {
                                     if (!res.ok) {
                                         return res.json()
@@ -112,7 +113,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                                     //if linked meals do exist, open cascade delete form
                                     const linkedToFood = json
                                     if (linkedToFood.length === 0) {
-                                        return authFetch(`http://localhost:5000/api/foods/${itemId}`, {
+                                        return authFetch(`${API_URL}/api/foods/${itemId}`, {
                                             method: 'DELETE',
                                             headers: {
                                                 'Content-Type': 'application/json'
@@ -134,7 +135,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
                                 })
                                 .catch(error => console.error(error.message))
         } else if (itemType === 'meal') {
-            authFetch(`http://localhost:5000/api/meals/${itemId}`, {
+            authFetch(`${API_URL}/api/meals/${itemId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

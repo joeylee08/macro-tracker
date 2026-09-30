@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
+import { API_URL } from '../util/helpers'
 
 const UserContext = createContext()
 
@@ -7,7 +8,7 @@ const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
 
     const checkAuth = () => {
-        fetch(`http://localhost:5000/api/auth/me`, {
+        fetch(`${API_URL}/api/auth/me`, {
             method: 'GET',
             credentials: 'include'
         })

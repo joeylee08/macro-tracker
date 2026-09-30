@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useContext, useEffect } from 'react'
 import { Navigate } from "react-router-dom";
 import { UserContext } from './context/usercontext'
+import { API_URL } from './util/helpers'
 import Login from './pages/login'
 import Today from './pages/today';
 import Menu from './pages/menu';
@@ -21,7 +22,7 @@ function App() {
   
   useEffect(() => {
     const getFoods = () => {
-      authFetch(`http://localhost:5000/api/users/${currentUser.id}/foods`)
+      authFetch(`${API_URL}/api/users/${currentUser.id}/foods`)
         .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -33,7 +34,7 @@ function App() {
         .catch(error => console.error(error.message))
     }
     const getMeals = () => {
-      authFetch(`http://localhost:5000/api/users/${currentUser.id}/meals`)
+      authFetch(`${API_URL}/api/users/${currentUser.id}/meals`)
         .then(res => {
                 if (!res.ok) {
                     return res.json()
@@ -45,7 +46,7 @@ function App() {
         .catch(error => console.error(error.message))
     }
     const getMealEntries = () => {
-      authFetch(`http://localhost:5000/api/users/${currentUser.id}/mealEntries`)
+      authFetch(`${API_URL}/api/users/${currentUser.id}/mealEntries`)
         .then(res => {
                 if (!res.ok) {
                     return res.json()

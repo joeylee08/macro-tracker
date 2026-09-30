@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/usercontext'
+import { API_URL } from '../util/helpers'
 
 const MacroGoals = ({ handleToggleSettingsForm }) => {
     const { currentUser, setCurrentUser, authFetch } = useContext(UserContext)
@@ -32,7 +33,7 @@ const MacroGoals = ({ handleToggleSettingsForm }) => {
             sodiumGoal: +formData.sodium
         }
 
-        authFetch(`http://localhost:5000/api/users/${currentUser.id}`, {
+        authFetch(`${API_URL}/api/users/${currentUser.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

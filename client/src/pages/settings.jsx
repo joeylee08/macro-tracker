@@ -3,6 +3,7 @@ import { UserContext } from '../context/usercontext'
 import { Settings as SettingsIcon } from 'lucide-react'
 import MacroGoals from '../components/macrogoals'
 import { getFormattedDate } from '../util/helpers'
+import { API_URL } from '../util/helpers'
 
 const Settings = () => {
     const { currentUser, setCurrentUser, authFetch } = useContext(UserContext)
@@ -13,7 +14,7 @@ const Settings = () => {
     }
 
     const handleLogout = () => {
-        authFetch('http://localhost:5000/api/auth/logout', {
+        authFetch(`${API_URL}/api/auth/logout`, {
                 method: 'POST',
                 credentials: 'include'
             })

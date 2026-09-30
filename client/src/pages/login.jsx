@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../context/usercontext'
 import { validateData } from '../util/helpers'
-
+import { API_URL } from '../util/helpers'
 
 const Login = () => {
 	const { setCurrentUser } = useContext(UserContext)
@@ -41,7 +41,7 @@ const Login = () => {
 
 		if (!validateData(userData, 'user')) return
 
-		fetch(`http://localhost:5000/api/auth/login`, {
+		fetch(`${API_URL}/api/auth/login`, {
 				method: 'POST',
 				credentials: 'include',
 				headers: {
@@ -83,7 +83,7 @@ const Login = () => {
 		}
 		if (!validateData(userData, 'user')) return
 
-		fetch(`http://localhost:5000/api/users`, {
+		fetch(`${API_URL}/api/users`, {
 				method: 'POST',
 				credentials: 'include',
 				headers: {

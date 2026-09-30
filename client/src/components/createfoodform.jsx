@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
 import { validateData } from '../util/helpers'
 import { UserContext } from '../context/usercontext'
+import { API_URL } from '../util/helpers'
 
 const CreateFoodForm = ({ onAddFood, handleToggleForm, isEditing, selectedItem }) => {
     const { authFetch } = useContext(UserContext)
@@ -50,7 +51,7 @@ const CreateFoodForm = ({ onAddFood, handleToggleForm, isEditing, selectedItem }
         if(!validateData(toNumbers, 'food')) return
 
         if (isEditing) {
-            return authFetch(`http://localhost:5000/api/foods/${selectedItem.id}`, {
+            return authFetch(`${API_URL}/api/foods/${selectedItem.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -70,7 +71,7 @@ const CreateFoodForm = ({ onAddFood, handleToggleForm, isEditing, selectedItem }
                 .catch(error => console.error(error.message))
         }
 
-        authFetch('http://localhost:5000/api/foods', {
+        authFetch(`${API_URL}/api/foods`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

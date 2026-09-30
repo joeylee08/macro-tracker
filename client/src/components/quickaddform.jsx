@@ -1,6 +1,7 @@
 import { validateData } from "../util/helpers"
 import { useState, useContext } from 'react'
 import { UserContext } from '../context/usercontext'
+import { API_URL } from '../util/helpers'
 
 const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
     const { authFetch } = useContext(UserContext)
@@ -36,7 +37,7 @@ const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
 
         if (!validateData(toNumbers, 'mealEntry')) return
 
-        authFetch('http://localhost:5000/api/mealEntries', {
+        authFetch(`${API_URL}/api/mealEntries`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

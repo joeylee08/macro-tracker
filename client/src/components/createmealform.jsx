@@ -1,7 +1,8 @@
-import { useState, useContext } from 'react'
-import FoodThumb from './foodthumb'
-import { validateData } from '../util/helpers'
-import { UserContext } from '../context/usercontext'
+import { useState, useContext } from 'react';
+import FoodThumb from './foodthumb';
+import { validateData } from '../util/helpers';
+import { UserContext } from '../context/usercontext';
+import { API_URL } from '../util/helpers';
 
 const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
     const { authFetch } = useContext(UserContext)
@@ -80,7 +81,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
                 handleToggleForm('meal')
                 return
             }
-            return authFetch(`http://localhost:5000/api/meals/${selectedItem.id}`, {
+            return authFetch(`${API_URL}/api/meals/${selectedItem.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -98,7 +99,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
                 .catch(error => console.error(error.message))
         }
 
-        authFetch('http://localhost:5000/api/meals', {
+        authFetch(`${API_URL}/api/meals`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -1,5 +1,7 @@
 import { userModel, mealModel, foodModel, ingredientModel, mealEntryModel } from '../models/models.js';
 
+const API_URL = import.meta.env.VITE_API_URL
+
 const modelObj = {
     'user': userModel,
     'meal': mealModel,
@@ -68,4 +70,4 @@ const getMonthYear = (isoFormat) => {
     return isoFormat.slice(0, 7)
 }
 
-export { validateData, calculateMacros, getFormattedDate, getMonthYear };
+export { API_URL, validateData, calculateMacros, getFormattedDate, getMonthYear };

@@ -1,5 +1,6 @@
 import { UserContext } from '../context/usercontext'
 import { useContext } from 'react'
+import { API_URL } from '../util/helpers'
 
 const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals, handleMealUpdate }) => {
     const { authFetch } = useContext(UserContext)
@@ -11,7 +12,7 @@ const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeal
     const foodName = myFoods.find(item => item.id === linkedFoodId)?.name
 
     const deleteIngredient = () => {
-        authFetch(`http://localhost:5000/api/foods/${linkedFoodId}`, {
+        authFetch(`${API_URL}/api/foods/${linkedFoodId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -40,7 +41,7 @@ const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeal
     }
 
     const deleteFoodAndMeals = () => {
-        authFetch(`http://localhost:5000/api/foods/${linkedFoodId}/meals`, {
+        authFetch(`${API_URL}/api/foods/${linkedFoodId}/meals`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

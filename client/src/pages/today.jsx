@@ -6,6 +6,7 @@ import { getFormattedDate } from "../util/helpers";
 import { useContext, useState } from 'react'
 import { UserContext } from '../context/usercontext'
 import { calculateMacros, validateData } from "../util/helpers";
+import { API_URL } from '../util/helpers'
 
 const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
     const { currentUser, authFetch } = useContext(UserContext)
@@ -36,7 +37,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
 
             if (!validateData(toNumbers, 'mealEntry')) return
             
-            authFetch('http://localhost:5000/api/mealEntries', {
+            authFetch(`${API_URL}/api/mealEntries`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,7 +57,7 @@ const Today = ({ myFoods, myMeals, myMealEntries, setMealEntries }) => {
             ]))
             .catch(error => console.error(error.message))
         } else if (action === 'delete') {
-            authFetch(`http://localhost:5000/api/mealEntries/${mealOrEntryId}`, {
+            authFetch(`${API_URL}/api/mealEntries/${mealOrEntryId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

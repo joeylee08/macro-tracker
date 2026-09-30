@@ -12,11 +12,11 @@ import { router as userResourceRouter } from './routes/userresources';
 
 
 const app = express()
-const PORT = 5000
+const PORT = process.env.PORT || 5000
 
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true
 }))
 
