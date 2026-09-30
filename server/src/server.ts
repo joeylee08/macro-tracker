@@ -17,6 +17,12 @@ const PORT = process.env.PORT || 5000
 
 const PostgresStore = pgSession(session)
 
+const isProduction = process.env.NODE_ENV === 'production'
+
+if (isProduction) {
+    app.set('trust proxy', 1)
+}
+
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
@@ -35,8 +41,10 @@ app.use(session({
     secret: process.env.SESSION_SECRET!,
     resave: false,
     saveUninitialized: false,
-    cookie: {
+        cookie: {
         httpOnly: true,
+        secure: isProduction,
+        sameSite: isProduction ? 'none' : 'lax',
         maxAge: 1000 * 60 * 60 * 24 * 30
     }
 }))
