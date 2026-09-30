@@ -1,5 +1,5 @@
-import { userSignup, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel } from './models';
-import { starterFoods, starterMeals } from '../data/starterfoods'
+import { userSignup, macroModel, mealModel, foodModel, ingredientModel, mealEntryModel } from './models.js';
+import { starterFoods, starterMeals } from '../data/starterfoods.js'
 import type { Prisma } from "../generated/prisma/client.js"
 
 async function seedStarterData(userId: number, tx: Prisma.TransactionClient) {

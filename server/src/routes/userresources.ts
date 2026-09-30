@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { prisma } from '../db/prisma';
-import { requireAuth } from '../middleware/requireauth'
+import { prisma } from '../db/prisma.js';
+import { requireAuth } from '../middleware/requireauth.js'
 import { isParamInt } from '../middleware/isparamint.js';
 
 const router = Router({ mergeParams: true })

@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { prisma } from '../db/prisma';
+import { prisma } from '../db/prisma.js';
 import { Prisma } from '../generated/prisma/client.js'
-import { requireAuth } from '../middleware/requireauth'
+import { requireAuth } from '../middleware/requireauth.js'
 import { isParamInt } from '../middleware/isparamint.js';
 import { verifyById } from '../middleware/verifybyid.js';
-import { validateData } from "../util/helpers";
+import { validateData } from "../util/helpers.js";
 
 const router = Router()
 

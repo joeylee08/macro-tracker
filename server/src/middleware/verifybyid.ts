@@ -1,4 +1,4 @@
-import { prisma } from '../db/prisma'
+import { prisma } from '../db/prisma.js'
 import type { Request, Response, NextFunction } from 'express'
 
 //Verify ownership of specific resource(s)

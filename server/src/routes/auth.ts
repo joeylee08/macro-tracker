@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { prisma } from '../db/prisma'
-import { validateData } from '../util/helpers'
-import { verifyPassword } from '../util/auth'
-import { requireAuth } from '../middleware/requireauth'
+import { prisma } from '../db/prisma.js'
+import { validateData } from '../util/helpers.js'
+import { verifyPassword } from '../util/auth.js'
+import { requireAuth } from '../middleware/requireauth.js'
 
 const router = Router()
 

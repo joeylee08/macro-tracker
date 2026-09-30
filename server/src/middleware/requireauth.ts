@@ -1,6 +1,6 @@
 //Require Authorization. Inline check for the existence of an active userId in session
 import type { Request, Response, NextFunction } from 'express'
-import { prisma } from '../db/prisma'
+import { prisma } from '../db/prisma.js'
 
 const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
     //if current session does not have an active userId

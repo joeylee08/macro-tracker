@@ -2,17 +2,20 @@ import express from 'express'
 import cors from "cors"
 import "dotenv/config";
 import session from 'express-session'
+import pgSession from 'connect-pg-simple'
 import { errorHandler } from './middleware/errorhandler.js';
-import { router as authRouter } from './routes/auth';
-import { router as usersRouter } from './routes/users';
-import { router as foodsRouter } from './routes/foods';
-import { router as mealsRouter } from './routes/meals';
-import { router as mealEntriesRouter } from './routes/mealentries';
-import { router as userResourceRouter } from './routes/userresources';
+import { router as authRouter } from './routes/auth.js';
+import { router as usersRouter } from './routes/users.js';
+import { router as foodsRouter } from './routes/foods.js';
+import { router as mealsRouter } from './routes/meals.js';
+import { router as mealEntriesRouter } from './routes/mealentries.js';
+import { router as userResourceRouter } from './routes/userresources.js';
 
 
 const app = express()
 const PORT = process.env.PORT || 5000
+
+const PostgresStore = pgSession(session)
 
 // Middleware. Allows the React client's origin to access this server.
 app.use(cors({
@@ -24,6 +27,10 @@ app.use(cors({
 app.use(express.json())
 
 app.use(session({
+    store: new PostgresStore({
+        conString: process.env.DATABASE_URL,
+        createTableIfMissing: true
+    }),
     name: 'macroTracker.sid',
     secret: process.env.SESSION_SECRET!,
     resave: false,
