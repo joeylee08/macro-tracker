@@ -929,7 +929,7 @@ h2.macroGoalLabel {
         left: 50%;
         transform: translateX(-50%);
         top: 8rem;
-        min-height: 21rem;
+        min-height: 29.4rem;
         max-height: none;
         overflow-y: visible;
         padding-bottom: 1rem;
@@ -943,10 +943,11 @@ h2.macroGoalLabel {
       margin-bottom: 0.9rem;
     }
     .cascadeDeleteBtnBox {
-      margin: 0.4rem auto 0.5rem auto;
+      margin: 0.4rem auto 0.9rem auto;
     }
     .deleteBtnX {
       opacity: 1;
+      border: 0.11rem solid #cbb59b;
     }
 }
 
