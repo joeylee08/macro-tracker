@@ -19,6 +19,8 @@ function App() {
   const [myFoods, setMyFoods] = useState([])
   const [myMeals, setMyMeals] = useState([])
   const [myMealEntries, setMealEntries] = useState([])
+
+  const [viewportDebug, setViewportDebug] = useState({})
   
   useEffect(() => {
     const getFoods = () => {
@@ -68,23 +70,34 @@ function App() {
     }
   }, [currentUser])
 
+  //in-app browser resizes the viewport when on-screen keyboard opens.
+  //pass the original viewport height to CSS so scrolling behavior is maintained
   useEffect(() => {
-      const viewport = window.visualViewport
+    const viewport = window.visualViewport
 
       if (!viewport) return
 
-      const updateViewportHeight = () => {
+      const updateViewport = () => {
           document.documentElement.style.setProperty(
               '--visual-viewport-height',
               `${viewport.height}px`
           )
-      }
-      updateViewportHeight()
 
-      viewport.addEventListener('resize', updateViewportHeight)
+          setViewportDebug({
+              height: Math.round(viewport.height),
+              offsetTop: Math.round(viewport.offsetTop),
+              innerHeight: window.innerHeight
+          })
+      }
+
+      updateViewport()
+
+      viewport.addEventListener('resize', updateViewport)
+      viewport.addEventListener('scroll', updateViewport)
 
       return () => {
-          viewport.removeEventListener('resize', updateViewportHeight)
+          viewport.removeEventListener('resize', updateViewport)
+          viewport.removeEventListener('scroll', updateViewport)
       }
   }, [])
 
@@ -112,6 +125,20 @@ function App() {
     <BrowserRouter>
       <div id='app'>
         {currentUser && <NavBar/>}
+          <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                zIndex: 99999,
+                background: 'yellow',
+                color: 'black',
+                padding: '4px',
+                fontSize: '12px'
+            }}>
+            height: {viewportDebug.height} |
+            offsetTop: {viewportDebug.offsetTop} |
+            innerHeight: {viewportDebug.innerHeight}
+        </div>
           <Routes>
             {currentUser ? authenticatedRoutes : loggedOutRoutes}
           </Routes>
