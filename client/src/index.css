@@ -878,7 +878,7 @@ h2.macroGoalLabel {
 /* mobile CSS tweaks */
 @media (hover: none) {
     .deleteBtnX {
-        opacity: 0.75;
+        opacity: 0.65;
         border: 0.12rem solid green;
     }
     .settingsBtn:active,
