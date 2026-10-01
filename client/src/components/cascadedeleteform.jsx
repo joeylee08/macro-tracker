@@ -78,10 +78,10 @@ const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeal
             </div>
             <div className='cascadeDeleteBtnBox'>
                 <button className='formBtn formBtnCD' onClick={deleteIngredient}>
-                    Remove item from all meals.
+                    Remove item everywhere.
                 </button>
                 <button className='formBtn formBtnCD' onClick={deleteFoodAndMeals}>
-                    Remove all associated meals.
+                    Remove all linked meals.
                 </button>
             </div>
         </div>
