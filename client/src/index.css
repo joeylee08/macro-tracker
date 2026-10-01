@@ -903,7 +903,7 @@ h2.macroGoalLabel {
         justify-content: center;
     }
     html {
-        font-size: 52%;
+        font-size: 60%;
     }
     .myFoodsChild,
     .myGoals,
@@ -915,5 +915,11 @@ h2.macroGoalLabel {
     .mySettings2,
     .dividerLineMeals {
       width: 36.6rem;
+    }
+}
+
+@media (max-width: 340px) {
+    html {
+        font-size: 50%;
     }
 }
