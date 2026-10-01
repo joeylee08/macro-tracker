@@ -934,6 +934,12 @@ h2.macroGoalLabel {
         overflow-y: visible;
         padding-bottom: 1rem;
     }
+    .form.editMacroGoals {
+      min-height: 21rem;
+    }
+    .form.quickAddForm {
+      min-height: 12rem;
+    }
     .form::-webkit-scrollbar {
         display: none;
     }
