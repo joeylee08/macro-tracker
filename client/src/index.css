@@ -916,13 +916,8 @@ h2.macroGoalLabel {
     .dividerLineMeals {
       width: 36.6rem;
     }
-    .mainPage {
-        position: relative;
-    }
     .form {
-        position: absolute;
         top: 50%;
-        max-height: calc(var(--visual-viewport-height, 100dvh) - 2rem);
         overflow-y: auto;
         scrollbar-width: none;
         padding-bottom: 1.5rem;
