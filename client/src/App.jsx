@@ -68,6 +68,26 @@ function App() {
     }
   }, [currentUser])
 
+  useEffect(() => {
+      const viewport = window.visualViewport
+
+      if (!viewport) return
+
+      const updateViewportHeight = () => {
+          document.documentElement.style.setProperty(
+              '--visual-viewport-height',
+              `${viewport.height}px`
+          )
+      }
+      updateViewportHeight()
+
+      viewport.addEventListener('resize', updateViewportHeight)
+
+      return () => {
+          viewport.removeEventListener('resize', updateViewportHeight)
+      }
+  }, [])
+
   const loggedOutRoutes = [
     (<>
         <Route path='/login' element={<Login/>} />

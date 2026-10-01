@@ -918,7 +918,7 @@ h2.macroGoalLabel {
     }
     .form {
         top: 50%;
-        max-height: calc(100dvh - 2rem);
+        max-height: calc(var(--visual-viewport-height, 100dvh) - 2rem);
         overflow-y: auto;
         scrollbar-width: none;
         padding-bottom: 1.5rem;
