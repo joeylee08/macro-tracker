@@ -445,7 +445,7 @@ form.quickAddForm {
   font-size: 1rem;
   border: 0.14rem solid #cbb59b;
   border-radius: 0.35rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
   color: #362312;
 }
 
@@ -925,17 +925,19 @@ h2.macroGoalLabel {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 8rem;
+        top: 7rem;
+        min-height: 21rem;
         max-height: none;
         overflow-y: visible;
-        padding-bottom: 1.5rem;
+        padding-bottom: 1rem;
     }
     .form::-webkit-scrollbar {
         display: none;
     }
     .formBtnSettings,
-    .formBtnFood {
-      margin-bottom: 0.5rem;
+    .formBtnFood,
+    .formBtnHistory {
+      margin-bottom: 0.9rem;
     }
     .cascadeDeleteBtnBox {
       margin: 0.4rem auto 0.5rem auto;
