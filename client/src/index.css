@@ -327,10 +327,6 @@ form.quickAddForm {
   transition: border-color 0.5s ease;
 }
 
-.foodCard:not(.readOnly):hover {
-    border-color: green;
-}
-
 .foodCard h3 {
   color: #362312;
   line-height: 1.5rem;
@@ -393,10 +389,6 @@ form.quickAddForm {
   margin-right: 0.5rem;
   padding: 0.05rem 0.04rem 0 0;
   flex-shrink: 0;
-}
-
-.foodCard:hover .deleteBtnX {
-  opacity: 1;
 }
 
 /* FIX CSS WHEN SCROLLBAR APPEARS ON FORM! EVERYTHING GETS FUCKED UP! */
@@ -573,14 +565,6 @@ form.quickAddForm {
   border-radius: 0.56rem;
 }
 
-.formBtn:hover {
-  border-color: green;
-}
-
-.formBtnCD:hover {
-  border-color: red;
-}
-
 /* Cascade Delete Form */
 
 .cascadeDeleteForm {
@@ -649,10 +633,6 @@ ul#linkedMealsList {
   cursor: pointer;
   color: #8a7b6a;
   transition: color 0.5s ease;
-}
-
-.calendarBtn:hover {
-  color: green;
 }
 
 .form.monthYear {
@@ -749,11 +729,6 @@ select.monthYear {
   font-optical-sizing: auto;
   transition: border-color 0.5s ease;
   padding: 0.2rem;
-}
-
-.dayTile:hover {
-  border-color: green;
-  cursor: pointer;
 }
 
 .isSelected {
@@ -901,6 +876,44 @@ h2.macroGoalLabel {
 }
 
 /* mobile CSS tweaks */
+@media (hover: none) {
+    .deleteBtnX {
+        opacity: 0.75;
+        border: 0.15rem solid green;
+    }
+    .settingsBtn:active,
+    .calendarBtn:active {
+      color: green;
+    }
+    .formBtn:active,
+    .dayTile:active,
+    .foodCard:not(.readOnly):active {
+        border-color: green;
+    }
+    .formBtnCD:active {
+      border-color: red;
+    }
+}
+
+@media (hover: hover) {
+    .settingsBtn:hover,
+    .calendarBtn:hover {
+      color: green;
+      cursor: pointer;
+    }
+    .formBtn:hover,
+    .dayTile:hover,
+    .foodCard:not(.readOnly):hover {
+        border-color: green;
+        cursor: pointer;
+    }
+    .formBtnCD:hover {
+      border-color: red;
+    }
+    .foodCard:hover .deleteBtnX {
+        opacity: 1;
+    }
+}
 
 @media (max-width: 500px) {
     .headerBox,
@@ -957,10 +970,6 @@ h2.macroGoalLabel {
     }
     .cascadeDeleteBtnBox {
       margin: 0.4rem auto 0.9rem auto;
-    }
-    .deleteBtnX {
-      opacity: 1;
-      border: 0.11rem solid #cbb59b;
     }
 }
 
