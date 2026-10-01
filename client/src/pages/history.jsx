@@ -53,7 +53,7 @@ const History = ({ myMealEntries }) => {
             </div>
             <div className='myHistory'>
                 <button className='calendarBtn' onClick={handleToggleHistoryForm} aria-label='Choose month and year' title='Choose month and year'>
-                    <Clock size={30.5}/>
+                    <Clock size="2.12rem"/>
                 </button>
                 <div className='monthChartWrapper'>
                     <MonthChart currentUser={currentUser} currentYearMonth={currentYearMonth} selectedDay={selectedDay} myMealEntries={myMealEntries} handleSelectDay={handleSelectDay}/>

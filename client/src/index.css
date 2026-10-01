@@ -81,6 +81,10 @@ body {
   margin-bottom: 2.7rem;
 }
 
+select {
+    background-color: white;
+}
+
 /* Navbar CSS */
 
 .navbar {
@@ -111,6 +115,8 @@ body {
   justify-content: space-evenly;
   width: 100%;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .linksList a {
@@ -174,8 +180,8 @@ form.loginForm {
   width: 95%;
   margin: 1.7rem auto;
   background-color: white;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
   box-sizing: border-box;
   padding: 1rem 0;
 }
@@ -201,8 +207,8 @@ form.loginForm {
   width: 100%;
   margin: 1.7rem auto;
   background-color: white;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
   box-sizing: border-box;
   padding: 1.3rem 2rem;
 }
@@ -226,9 +232,9 @@ h2.meterLabel {
 
 .macroMeter {
   height: 1.3rem;
-  border: 2px solid #cbb59b;
+  border: 0.14rem solid #cbb59b;
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: 0.35rem;
 }
 
 .macroMeterFill {
@@ -241,7 +247,7 @@ h2.meterLabel {
 .stats {
   font-size: 1rem;
   font-weight: 400;
-  border-right: 1px solid #cbb59b;
+  border-right: 0.07rem solid #cbb59b;
   color: #362312;
 }
 
@@ -262,8 +268,8 @@ h2.meterLabel {
   width: 15rem;
   font-size: 1rem;
   font-weight: 500;
-  border: 3px solid #f2e7d5;
-  border-radius: 5px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.35rem;
 }
 
 form.quickAddForm {
@@ -288,7 +294,7 @@ form.quickAddForm {
 .dividerLineMeals {
   margin: 1.7rem auto;
   width: 100%;
-  border: 2px solid #f2e7d5;
+  border: 0.14rem solid #f2e7d5;
 }
 
 .myFoods {
@@ -315,8 +321,8 @@ form.quickAddForm {
   padding: 0.4rem;
   width: 10.3125rem;
   height: 8.4375rem;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
   background-color: white;
   transition: border-color 0.5s ease;
 }
@@ -358,7 +364,7 @@ form.quickAddForm {
 
 .deleteBtnX {
   position: absolute;
-  border: 1px solid #362312;
+  border: 0.07rem solid #362312;
   border-radius: 50%;
   font-size: 1.7rem;
   top: -0.5rem;
@@ -375,7 +381,7 @@ form.quickAddForm {
   font-size: 2.1rem;
   font-weight: 700;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.35rem;
 }
 
 .thumbX {
@@ -410,8 +416,8 @@ form.quickAddForm {
   min-height: 32rem;
   max-height: 90vh;
   overflow-y: auto;
-  border: 2px solid #cbb59b;
-  border-radius: 8px;
+  border: 0.14rem solid #cbb59b;
+  border-radius: 0.56rem;
   padding: 1.9rem 0 1rem 0;
   z-index: 20;
 }
@@ -437,8 +443,8 @@ form.quickAddForm {
   height: 1.1rem;
   align-self: flex-start;
   font-size: 1rem;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
+  border: 0.14rem solid #cbb59b;
+  border-radius: 0.35rem;
   margin-bottom: 0.8rem;
   color: #362312;
 }
@@ -458,8 +464,8 @@ form.quickAddForm {
 .form select {
   width: 12.5rem;
   height: 1.7rem;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
+  border: 0.14rem solid #cbb59b;
+  border-radius: 0.35rem;
   font-size: 1rem;
   align-self: flex-start;
   color: #362312; 
@@ -478,8 +484,8 @@ form.quickAddForm {
   justify-content: space-between;
   width: 14rem;
   min-height: 2rem;
-  border: 2px solid #d9b99b;
-  border-radius: 5px;
+  border: 0.14rem solid #d9b99b;
+  border-radius: 0.35rem;
   background-color: white;
 }
 
@@ -508,9 +514,9 @@ form.quickAddForm {
   font-weight: 450;
   width: 7.5rem;
   height: 2.2rem;
-  border: 2px solid #cbb59b;
+  border: 0.14rem solid #cbb59b;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 0.35rem;
   transition: border-color 0.5s ease;
 }
 
@@ -524,16 +530,16 @@ form.quickAddForm {
 .addDailyBtn {
   width: 8rem;
   height: 2rem;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
 }
 
 .formBtnMenu {
   width: 16rem;
   height: 3.2rem;
   font-size: 1.2rem;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
 }
 
 .formBtnFood {
@@ -563,7 +569,7 @@ form.quickAddForm {
   width: 12rem;
   height: 3.2rem;
   font-size: 1.2rem;
-  border-radius: 8px;
+  border-radius: 0.56rem;
 }
 
 .formBtn:hover {
@@ -601,8 +607,8 @@ form.quickAddForm {
 
 .cascadeDeleteChild2 {
   width: 80%;
-  border: 2px solid #cbb59b;
-  border-radius: 8px;
+  border: 0.14rem solid #cbb59b;
+  border-radius: 0.56rem;
   min-height: 15rem;
   margin: 1rem auto;
 }
@@ -662,8 +668,8 @@ select.monthYear {
   height: 1.65rem;
   font-size: 1rem;
   align-self: flex-start;
-  border: 2px solid #cbb59b;
-  border-radius: 5px;
+  border: 0.14rem solid #cbb59b;
+  border-radius: 0.35rem;
   font-weight: bold;
   color: #362312;
 }
@@ -675,8 +681,8 @@ select.monthYear {
   position: relative;
   margin: 2rem auto;
   width: 95%;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
   box-sizing: border-box;
 }
 
@@ -728,8 +734,8 @@ select.monthYear {
   align-items: center;
   justify-content: center;
 
-  border: 2px solid #8a7b6a;
-  border-radius: 5px;
+  border: 0.14rem solid #8a7b6a;
+  border-radius: 0.35rem;
   background-color: white;
 
   color: #362312;
@@ -746,7 +752,7 @@ select.monthYear {
 }
 
 .isSelected {
-  border: 3.8px solid green;
+  border: 3.0.56rem solid green;
 }
 
 /* Settings Page */
@@ -773,8 +779,8 @@ select.monthYear {
   width: 95%;
   align-items: center;
   box-sizing: border-box;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
   padding: 0.5rem 0;
 }
 
@@ -786,8 +792,8 @@ select.monthYear {
   width: 95%;
   align-items: center;
   box-sizing: border-box;
-  border: 3px solid #f2e7d5;
-  border-radius: 8px;
+  border: 0.21rem solid #f2e7d5;
+  border-radius: 0.56rem;
 }
 
 .mySettings3 {
@@ -863,9 +869,9 @@ h2.macroGoalLabel {
 .errorBox {
   width: 90%;
   height: auto;
-  border: 3px solid #f2e7d5;
+  border: 0.21rem solid #f2e7d5;
   margin: auto auto;
-  border-radius: 8px;
+  border-radius: 0.56rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -882,9 +888,32 @@ h2.macroGoalLabel {
 .buddyPhoto {
   width: 18rem;
   height: auto;
-  border: 3px solid black;
-  border-radius: 8px;
+  border: 0.21rem solid black;
+  border-radius: 0.56rem;
   margin-bottom: 2rem;
   opacity: 0.8;
   filter: brightness(1.7); 
+}
+
+/* mobile CSS tweaks */
+
+@media (max-width: 500px) {
+    .headerBox,
+    .dateHeader {
+        justify-content: center;
+    }
+    html {
+        font-size: 52%;
+    }
+    .myFoodsChild,
+    .myGoals,
+    .myGoals2,
+    .myGoals3,
+    .myHistory,
+    .myHistory3,
+    .mySettings,
+    .mySettings2,
+    .dividerLineMeals {
+      width: 36.6rem;
+    }
 }

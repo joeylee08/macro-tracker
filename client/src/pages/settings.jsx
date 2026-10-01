@@ -54,7 +54,7 @@ const Settings = () => {
             </div>
             <div className='mySettings2'>
                 <button className='settingsBtn' onClick={handleToggleSettingsForm}>
-                    <SettingsIcon size={30}/>
+                    <SettingsIcon size="2.08rem"/>
                 </button>
                 <div className='settingsField'>
                     <h2 className='macroGoalLabel'>Calories: {currentUser.calGoal}</h2>
