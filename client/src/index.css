@@ -920,15 +920,10 @@ h2.macroGoalLabel {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 5rem;
+        top: 8rem;
         max-height: none;
         overflow-y: visible;
         padding-bottom: 1.5rem;
-
-        /* top: 50%;
-        overflow-y: auto;
-        scrollbar-width: none;
-        padding-bottom: 1.5rem; */
     }
     .form::-webkit-scrollbar {
         display: none;
