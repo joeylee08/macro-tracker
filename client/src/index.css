@@ -945,6 +945,9 @@ h2.macroGoalLabel {
     .cascadeDeleteBtnBox {
       margin: 0.4rem auto 0.5rem auto;
     }
+    .deleteBtnX {
+      opacity: 1;
+    }
 }
 
 @media (max-width: 340px) {
