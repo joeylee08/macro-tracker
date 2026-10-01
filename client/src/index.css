@@ -887,7 +887,7 @@ h2.macroGoalLabel {
     }
     .formBtn:active,
     .dayTile:active,
-    .foodCard:not(.readOnly):active {
+    .foodCard:not(.readOnly):active:not(:has(.deleteBtnX:active)):not(.myGoals3 .foodCard) {
         border-color: green;
     }
     .formBtnCD:active {
