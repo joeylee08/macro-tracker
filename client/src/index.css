@@ -879,7 +879,7 @@ h2.macroGoalLabel {
 @media (hover: none) {
     .deleteBtnX {
         opacity: 0.75;
-        border: 0.15rem solid green;
+        border: 0.12rem solid green;
     }
     .settingsBtn:active,
     .calendarBtn:active {
