@@ -910,6 +910,9 @@ h2.macroGoalLabel {
     html {
         font-size: 60%;
     }
+    .mainPage {
+      padding-bottom: 3.5rem;
+    }
     .myFoodsChild,
     .myGoals,
     .myGoals2,
