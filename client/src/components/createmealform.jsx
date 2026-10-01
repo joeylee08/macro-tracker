@@ -4,7 +4,7 @@ import { validateData } from '../util/helpers';
 import { UserContext } from '../context/usercontext';
 import { API_URL } from '../util/helpers';
 
-const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selectedItem, handleDelete }) => {
+const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, formTop, isEditing, selectedItem, handleDelete }) => {
     const { authFetch } = useContext(UserContext)
     
     const [meal, setMeal] = useState(
@@ -146,7 +146,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, isEditing, selec
     })
 
     return (
-        <form className='form' onSubmit={handleSubmit}>
+        <form className='form mealForm' style={{ "--form-top": `${formTop}px` }} onSubmit={handleSubmit}>
             <button type='button' className='redX closeFormX' onClick={() => handleToggleForm('meal')}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Meal Name</label>

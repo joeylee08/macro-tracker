@@ -9,6 +9,7 @@ import { API_URL } from '../util/helpers'
 
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const { authFetch } = useContext(UserContext)
+    const [formTop, setFormTop] = useState(0);
 
     // React state cleanup only
     const handleSetMyFoods = (chosenFood, fromCascade) => {
@@ -78,9 +79,18 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
     const handleToggleForm = (formType) => {
         if (isEditing) setIsEditing(false)
 
-        if (formType === 'food') setToggleFoodForm(bool => !bool)
-        else if (formType === 'meal') setToggleMealForm(bool => !bool)
-        else if (formType === 'cascadeDelete') setToggleCascadeDelete(bool => !bool)
+        if (formType === 'food') {
+            if (!toggleFoodForm) setFormTop(window.scrollY)
+            setToggleFoodForm(bool => !bool)
+        }
+        else if (formType === 'meal') {
+            if (!toggleMealForm) setFormTop(window.scrollY)
+            setToggleMealForm(bool => !bool)
+        }
+        else if (formType === 'cascadeDelete') {
+            if (!toggleCascadeDelete) setFormTop(window.scrollY)
+            setToggleCascadeDelete(bool => !bool)
+        }
     }
 
     const [selectedItem, setSelectedItem] = useState(null)
@@ -165,9 +175,9 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             </div>
             <Meals myMeals={myMeals} myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
             <Foods myFoods={myFoods} handleIsEditing={handleIsEditing} handleDelete={handleDelete}/>
-            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} isEditing={isEditing} selectedItem={selectedItem}/>}
-            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods} handleDelete={handleDelete}/>}
-            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyFoods={handleSetMyFoods} handleSetMyMeals={handleSetMyMeals} handleMealUpdate={handleMealUpdate}/>}
+            {toggleFoodForm && <CreateFoodForm onAddFood={handleSetMyFoods} handleToggleForm={handleToggleForm} formTop={formTop} isEditing={isEditing} selectedItem={selectedItem} />}
+            {toggleMealForm && <CreateMealForm onAddMeal={handleSetMyMeals} handleToggleForm={handleToggleForm} formTop={formTop} isEditing={isEditing} selectedItem={selectedItem} myFoods={myFoods} handleDelete={handleDelete} />}
+            {toggleCascadeDelete && <CascadeDeleteForm myMeals={myMeals} myFoods={myFoods} handleToggleForm={handleToggleForm} formTop={formTop} linkedFoodId={linkedFoodId} linkedMeals={linkedMeals} handleSetMyFoods={handleSetMyFoods} handleSetMyMeals={handleSetMyMeals} handleMealUpdate={handleMealUpdate} />}
         </div>
     )
 }

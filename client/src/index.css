@@ -940,6 +940,13 @@ h2.macroGoalLabel {
     .form.quickAddForm {
       min-height: 12rem;
     }
+    .foodForm,
+    .mealForm,
+    .cascadeDeleteForm {
+      position: absolute;
+      transform: translateX(-50%);
+      top: calc(var(--form-top) + 8rem);
+    }
     .form::-webkit-scrollbar {
         display: none;
     }

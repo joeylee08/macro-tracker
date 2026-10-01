@@ -2,7 +2,7 @@ import { UserContext } from '../context/usercontext'
 import { useContext } from 'react'
 import { API_URL } from '../util/helpers'
 
-const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals, handleMealUpdate }) => {
+const CascadeDeleteForm = ({ myFoods, handleToggleForm, formTop, linkedFoodId, linkedMeals, handleSetMyFoods, handleSetMyMeals, handleMealUpdate }) => {
     const { authFetch } = useContext(UserContext)
     
     const allLinkedMeals = linkedMeals.map(meal => {
@@ -65,7 +65,7 @@ const CascadeDeleteForm = ({ myFoods, handleToggleForm, linkedFoodId, linkedMeal
     }
 
     return (
-        <div className='form cascadeDeleteForm'>
+        <div className='form cascadeDeleteForm' style={{ "--form-top": `${formTop}px` }}>
             <button type='button' className='redX closeFormX cascadeDeleteX' onClick={() => handleToggleForm('cascadeDelete')}>×</button>
             <div className='cascadeDeleteChild'>
                 <h3>Warning!</h3>
