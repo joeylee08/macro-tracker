@@ -27,8 +27,7 @@ const MealSelect = ({ myMeals, handleMealEntries, toggleQuickAdd }) => {
         <div className='mealSelectBox'>
             <select className='mealSelect' value={selectedMealId} onChange={handleChange}>
                 <option value={0}>Select a Meal</option>
-                <option value={'quick'}>🐇 Quick Add Item</option>
-                <option disabled>───────────</option>
+                <option value={'quick'}>🐇 QUICK ADD</option>
                 {options}
             </select>
             <button type='button' className='formBtn addDailyBtn' onClick={() => addAndClear('add')}>Log Meal</button>
