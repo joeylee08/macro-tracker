@@ -922,13 +922,13 @@ h2.macroGoalLabel {
       width: 36.6rem;
     }
     div.mainPageMenu {
-      min-height: 65rem;
+      min-height: 62rem;
     }
     .form {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        top: 7rem;
+        top: 8rem;
         min-height: 21rem;
         max-height: none;
         overflow-y: visible;
