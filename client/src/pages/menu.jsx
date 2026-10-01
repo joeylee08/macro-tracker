@@ -154,7 +154,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
     }
 
     return (
-        <div className='mainPage'>
+        <div className='mainPage mainPageMenu'>
             {(toggleFoodForm || toggleMealForm || toggleCascadeDelete) && <div className='screenBlock'></div>}
             <div className='headerBox'>
                 <h1>Your Personalized Menu</h1>

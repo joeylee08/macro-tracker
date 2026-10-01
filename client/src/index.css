@@ -910,9 +910,6 @@ h2.macroGoalLabel {
     html {
         font-size: 60%;
     }
-    .mainPage {
-      padding-bottom: 3.5rem;
-    }
     .myFoodsChild,
     .myGoals,
     .myGoals2,
@@ -923,6 +920,9 @@ h2.macroGoalLabel {
     .mySettings2,
     .dividerLineMeals {
       width: 36.6rem;
+    }
+    div.mainPageMenu {
+      min-height: 65rem;
     }
     .form {
         position: absolute;
