@@ -32,9 +32,9 @@ router.post('/', requireAuth, async (req, res) => {
     const userId = req.session.userId!
     
     const name = mealEntryData.name.trim()
-    if (name === '' || name.length > 19) {
+    if (name === '' || name.length > 18) {
         return res.status(400).json({
-            'error': 'Meal name must contain between 1 and 19 characters.'
+            'error': 'Meal name must contain between 1 and 18 characters.'
         })
     }
     const macroValues = [

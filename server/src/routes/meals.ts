@@ -37,9 +37,9 @@ router.post('/', requireAuth, async (req, res) => {
     const userId = req.session.userId!
 
     const name = mealData.name.trim()
-    if (name === '' || name.length > 19) {
+    if (name === '' || name.length > 18) {
         return res.status(400).json({
-            'error': 'Name must contain between 1 and 19 characters.'
+            'error': 'Name must contain between 1 and 18 characters.'
         })
     }
     const mealIngredients = mealData.ingredients
@@ -118,9 +118,9 @@ router.patch('/:id', requireAuth, isParamInt, verifyById('meal'), async (req, re
         })
     }
     const trimmed = mealData.name.trim()
-    if (trimmed.length === 0 || trimmed.length > 19) {
+    if (trimmed.length === 0 || trimmed.length > 18) {
         return res.status(400).json({
-            'error': 'Name must be between 1 and 19 characters'
+            'error': 'Name must be between 1 and 18 characters'
         })
     }
     const mealIngredients = mealData.ingredients

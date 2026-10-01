@@ -94,7 +94,7 @@ const CreateFoodForm = ({ onAddFood, handleToggleForm, formTop, isEditing, selec
             <button type='button' className='redX closeFormX' onClick={() => handleToggleForm('food')}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Name</label>
-                <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required minLength='1' maxLength='19'></input>
+                <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required minLength='1' maxLength='18'></input>
                 <label htmlFor='servingSize'>Serving Size</label>
                 <input type='number' id='servingSize' name='servingSize' value={formData.servingSize} onChange={handleChange} required min='.01' step='any'></input>
                 <label htmlFor='servingUnit'>Serving Unit</label>

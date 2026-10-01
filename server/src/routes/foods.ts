@@ -32,9 +32,9 @@ router.post('/', requireAuth, async (req, res) => {
     const userId = req.session.userId!
     
     const name = foodData.name.trim()
-    if (name === '' || name.length > 19) {
+    if (name === '' || name.length > 18) {
         return res.status(400).json({
-            'error': 'Food name must contain between 1 and 19 characters.'
+            'error': 'Food name must contain between 1 and 18 characters.'
         })
     }
     const servingUnits = ['oz', 'tsp', 'tbsp', 'g', 'cup', 'piece']
@@ -89,9 +89,9 @@ router.patch('/:id', requireAuth, isParamInt, verifyById('food'), async (req, re
     }
     const { name, servingSize, servingUnit, cal, protein, carb, fat, sodium } = foodData
     const trimmed = name.trim()
-    if (trimmed.length === 0 || trimmed.length > 19) {
+    if (trimmed.length === 0 || trimmed.length > 18) {
         return res.status(400).json({
-            'error': 'Name must be between 1 and 19 characters.'
+            'error': 'Name must be between 1 and 18 characters.'
         })
     }
     const servingUnits = ['oz', 'tsp', 'tbsp', 'g', 'cup', 'piece']

@@ -150,7 +150,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, formTop, isEditi
             <button type='button' className='redX closeFormX' onClick={() => handleToggleForm('meal')}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Meal Name</label>
-                <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='19'></input>
+                <input type='text' id='name' name='name' value={meal.name} onChange={handleMealChange} required minLength='1' maxLength='18'></input>
                 <label htmlFor='ingredients'>Ingredients</label>
                 <select name='foodId' value={ingredient.foodId} onChange={handleIngredientChange}>
                     <option value='0'>Select An Ingredient</option>

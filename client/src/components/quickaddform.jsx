@@ -64,7 +64,7 @@ const QuickAddForm = ({ setMealEntries, toggleQuickAdd }) => {
             <button type='button' className='redX closeFormX quickAddX' onClick={toggleQuickAdd}>×</button>
             <div className='foodFormField'>
                 <label htmlFor='name'>Name</label>
-                <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required minLength='1' maxLength='19'></input>
+                <input type='text' id='name' name='name' value={formData.name} onChange={handleChange} required minLength='1' maxLength='18'></input>
                 <label htmlFor='cal'>Calories</label>
                 <input type='number' id='cal' name='cal' value={formData.cal} onChange={handleChange} min='0' step='any'></input>
                 <label htmlFor='protein'>Protein (g)</label>
