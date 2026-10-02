@@ -157,7 +157,7 @@ const CreateMealForm = ({ onAddMeal, myFoods, handleToggleForm, formTop, isEditi
                     {ingredients}
                 </select>
                 <label htmlFor='units'>Units</label>
-                <input type='number' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
+                <input type='number' inputMode='decimal' id='units' name='units' value={ingredient.units} onChange={handleIngredientChange} required min='0.1' step='any'></input>
             </div>
             <div className='formBtnContainer'>
                 <button type='button' className='formBtn formBtnMeal' onClick={handleAddIngredient}>Add Item</button>

@@ -414,6 +414,10 @@ form.quickAddForm {
   z-index: 20;
 }
 
+.form.mealForm {
+  min-height: 29.8rem;
+}
+
 .foodFormField {
   display: flex;
   flex-direction: column;
