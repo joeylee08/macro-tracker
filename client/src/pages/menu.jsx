@@ -1,20 +1,18 @@
-import Meals from "../components/meals"
-import Foods from "../components/foods"
-import CreateFoodForm from "../components/createfoodform"
-import CreateMealForm from "../components/createmealform"
-import CascadeDeleteForm from "../components/cascadedeleteform"
+import Meals from "../components/meals";
+import Foods from "../components/foods";
+import CreateFoodForm from "../components/createfoodform";
+import CreateMealForm from "../components/createmealform";
+import CascadeDeleteForm from "../components/cascadedeleteform";
 import { useState, useContext } from "react";
-import { UserContext } from '../context/usercontext'
-import { API_URL } from '../util/helpers'
+import { UserContext } from '../context/usercontext';
+import { API_URL } from '../util/helpers';
 
 const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {  
     const { authFetch } = useContext(UserContext)
-    const [formTop, setFormTop] = useState(0);
+    const [formTop, setFormTop] = useState(0)
 
-    // React state cleanup only
     const handleSetMyFoods = (chosenFood, fromCascade) => {
         if (isEditing) {
-            //replace old food with new version of that food
             setMyFoods(previous => 
                 previous.map(food => food.id === chosenFood.id ? chosenFood : food)
             )
@@ -23,7 +21,6 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             setSelectedItem(null)
             return
         }
-        //cascadeDelete will pass a food to delete, not a food to add
         if (fromCascade) {
             setMyFoods(previous => (
                 previous.filter(food => food.id !== chosenFood.id)
@@ -34,10 +31,8 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         handleToggleForm('food')
     }
    
-    // React state cleanup only
     const handleSetMyMeals = (mealOrArray, fromCascade) => {
         if (isEditing) {
-            //replace old meal with new version of that meal
             setMyMeals(previous => 
                 previous.map(meal => meal.id === mealOrArray.id ? mealOrArray : meal)
             )
@@ -47,7 +42,6 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
             return
         }
         if (fromCascade) {
-            //cascadeDelete will pass a meal to remove rather than a meal to add
             setMyMeals(previous =>
                 Array.isArray(mealOrArray)
                     ? previous.filter(meal => !mealOrArray.includes(meal.id))
@@ -59,7 +53,7 @@ const Menu = ({ myFoods, myMeals, setMyFoods, setMyMeals }) => {
         handleToggleForm('meal')
     }
 
-    // Updates React State with cascade-modified meals
+    
     const handleMealUpdate = (modifiedMeals) => {
         const mealIds = modifiedMeals.map(meal => meal.id)
         
