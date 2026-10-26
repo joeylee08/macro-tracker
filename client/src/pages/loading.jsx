@@ -7,7 +7,7 @@ const Loading = () => {
       <div className='errorBox'>
         <h1>Waking up the server...</h1>
         <img className='buddyPhoto' src={buddy} alt='buddy'></img>
-				<p>This might take a moment.</p>
+				<h1>This might take a moment.</h1>
       </div>
     </div>
   )
